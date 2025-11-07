@@ -8,6 +8,7 @@ public class DataTable {
 
         // 1. Acorn Woodpecker
         HashSet<String> h1 = new HashSet<String>(Set.of("forest"));
+        PowerBehavior behavior = new GainFoodBehavior(1, "wheat", true);
         addBird(new BirdInfo(
             "Acorn Woodpecker",
             h1,
@@ -22,6 +23,7 @@ public class DataTable {
 
         // 2. American Avocet
         HashSet<String> h2 = new HashSet<String>(Set.of("wetland"));
+        PowerBehavior behavior = new LayEggBehavior(1, false, "ground");
         addBird(new BirdInfo(
             "American Avocet",
             h2,
@@ -36,6 +38,7 @@ public class DataTable {
 
         // 3. American Bittern
         HashSet<String> h3 = new HashSet<String>(Set.of("wetland"));
+        PowerBehavior behavior = new DrawCardBehavior(1, 0);
         addBird(new BirdInfo(
             "American Bittern",
             h3,
@@ -50,6 +53,7 @@ public class DataTable {
 
         // 4. American Coot
         HashSet<String> h4 = new HashSet<String>(Set.of("wetland"));
+        PowerBehavior behavior = new TuckCardBehavior(1, true, DrawCardBehavior(1, 0));
         addBird(new BirdInfo(
             "American Coot",
             h4,
@@ -64,6 +68,7 @@ public class DataTable {
 
         // 5. American Crow
         HashSet<String> h5 = new HashSet<String>(Set.of("wetland", "forest", "grassland"));
+        PowerBehavior behavior = new EggForFood(1, 1, false);
         addBird(new BirdInfo(
             "American Crow",
             h5,
@@ -78,6 +83,7 @@ public class DataTable {
 
         // 6. American Goldfinch
         HashSet<String> h6 = new HashSet<String>(Set.of("grassland"));
+        PowerBehavior behavior = new GainFoodBehavior(3, "wheat");
         addBird(new BirdInfo(
             "American Goldfinch",
             h6,
@@ -92,6 +98,7 @@ public class DataTable {
 
         // 7. American Kestrel
         HashSet<String> h7 = new HashSet<String>(Set.of("grassland"));
+        PowerBehavior behavior = new
         addBird(new BirdInfo(
             "American Kestrel",
             h7,
@@ -106,6 +113,7 @@ public class DataTable {
 
         // 8. American Oystercatcher
         HashSet<String> h8 = new HashSet<String>(Set.of("wetland"));
+        PowerBehavior behavior = new
         addBird(new BirdInfo(
             "American Oystercatcher",
             h8,
@@ -120,6 +128,7 @@ public class DataTable {
 
         // 9. American Redstart
         HashSet<String> h9 = new HashSet<String>(Set.of("forest"));
+        PowerBehavior behavior = new
         addBird(new BirdInfo(
             "American Redstart",
             h9,
@@ -134,6 +143,7 @@ public class DataTable {
 
         // 10. American Robin
         HashSet<String> h10 = new HashSet<String>(Set.of("forest", "grassland"));
+        PowerBehavior behavior = new
         addBird(new BirdInfo(
             "American Robin",
             h10,
