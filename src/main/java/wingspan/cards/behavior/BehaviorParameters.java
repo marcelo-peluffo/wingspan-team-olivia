@@ -18,7 +18,7 @@ public class BehaviorParameters {
     public boolean onlyOutsideFeeder;
     public boolean fromHand;
     public String type;
-    public String secondBehavior;
+    public BehaviorParameters secondBehavior;
 
     public BehaviorParameters()
     {

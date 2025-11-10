@@ -1,4 +1,4 @@
-package test.wingspan;
+package wingspan;
 
 import wingspan.cards.behavior.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
