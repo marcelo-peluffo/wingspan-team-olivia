@@ -49,7 +49,7 @@ public class BirdInfo {
                 ", maxEggs=" + maxEggs +
                 ", wingSpan=" + wingSpan +
                 ", powerColor=" + powerColor +
-                ", behavior=" + behavior +
+                ", behavior=" + behavior.describe() +
                 '}';
     }
 }
