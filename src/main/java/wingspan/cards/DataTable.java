@@ -43,10 +43,15 @@ public class DataTable {
         return habitats; // fixed: return statement
     }
 
-    static {
+    public static void initialize() {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            BirdInfoJson[] birds = mapper.readValue(new File("wingspan/cards/birds.json"), BirdInfoJson[].class);
+            InputStream jsonStream = DataTable.class.getResourceAsStream("/wingspan/cards/birds.json");
+            if (jsonStream == null) {
+                throw new RuntimeException("Could not find birds.json in resources!");
+            }
+
+            BirdInfoJson[] birds = mapper.readValue(jsonStream, BirdInfoJson[].class);
 
             for (BirdInfoJson bj : birds) {
                 EnumSet<Habitat> habitats = getHabitatSet(bj);
@@ -65,7 +70,7 @@ public class DataTable {
                         nestType, bj.maxEggs, bj.wingSpan, color,
                         behavior
                 );
-                
+                CardManager.birdInfos.add(birdInfo);
                 CardManager.birdCards.add(new Card(birdInfo, birdImage));
             }
 

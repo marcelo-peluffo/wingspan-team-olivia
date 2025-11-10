@@ -3,11 +3,11 @@ package wingspan;
 import wingspan.cards.*;
 
 public class BehaviorFactoryTest {
-
     public static void main(String[] args) {
-        for (Card c : CardManager.birdCards)
+        DataTable.initialize();
+        for (BirdInfo birdInfo : CardManager.birdInfos)
         {
-            System.out.println(c.getBirdInfo());
+            System.out.println(birdInfo);
         }
     }
 }
