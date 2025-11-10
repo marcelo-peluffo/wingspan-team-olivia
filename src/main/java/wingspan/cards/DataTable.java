@@ -463,6 +463,147 @@ public class DataTable {
             "brown",
             behavior
         ));
+
+        // 33. Black-Crowned Night-Heron
+        HashSet<String> h33 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Black-Crowned Night-Heron",
+            h33,
+            new String[][]{{"invertebrate"}, {"fish"}, {"rodent"}},
+            9,
+            "platform",
+            2,
+            112,
+            "brown",
+            behavior
+        ));
+
+        // 34. Black-Necked Stilt
+        HashSet<String> h34 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Black-Necked Stilt",
+            h34,
+            new String[][]{{"invertebrate"}, {"invertebrate"}},
+            4,
+            "ground",
+            2,
+            74,
+            "white",
+            behavior
+        ));
+
+        // 35. Blue Grosbeak
+        HashSet<String> h35 = new HashSet<String>(Set.of("wetland", "forest", "grassland"));
+        addBird(new BirdInfo(
+            "Blue Grosbeak",
+            h35,
+            new String[][]{{"wheat"}, {"wheat"}, {"invertebrate"}},
+            4,
+            "bowl",
+            3,
+            28,
+            "brown",
+            behavior
+        ));
+
+        // 36. Blue Jay
+        HashSet<String> h36 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Blue Jay",
+            h36,
+            new String[][]{{"wheat"}, {"choice"}},
+            3,
+            "bowl",
+            2,
+            41,
+            "brown",
+            behavior
+        ));
+
+        // 37. Blue-Gray Gnatcatcher
+        HashSet<String> h37 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Blue-Gray Gnatcatcher",
+            h37,
+            new String[][]{{"invertebrate"}},
+            1,
+            "bowl",
+            3,
+            15,
+            "brown",
+            behavior
+        ));
+
+        // 38. Blue-Winged Warbler
+        HashSet<String> h38 = new HashSet<String>(Set.of("forest", "grassland"));
+        addBird(new BirdInfo(
+            "Blue-Winged Warbler",
+            h38,
+            new String[][]{{"invertebrate"}, {"invertebrate"}},
+            8,
+            "bowl",
+            2,
+            20,
+            "white",
+            behavior
+        ));
+
+        // 39. Bobolink
+        HashSet<String> h39 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Bobolink",
+            h39,
+            new String[][]{{"wheat"}, {"wheat"}, {"invertebrate"}},
+            4,
+            "ground",
+            3,
+            30,
+            "white",
+            behavior
+        ));
+
+        // 40. Brant
+        HashSet<String> h40 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Brant",
+            h40,
+            new String[][]{{"wheat"}, {"choice"}},
+            3,
+            "ground",
+            2,
+            114,
+            "white",
+            behavior
+        ));
+
+        // 41. Brewer's Blackbird
+        HashSet<String> h41 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Brewer's Blackbird",
+            h41,
+            new String[][]{{"wheat"}, {"choice"}},
+            3,
+            "bowl",
+            3,
+            41,
+            "brown",
+            behavior
+        ));
+
+        // 42. Broad-Winged Hawk
+        HashSet<String> h42 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Broad-Winged Hawk",
+            h42,
+            new String[][]{{"rodent"}},
+            4,
+            "platform",
+            2,
+            85,
+            "brown",
+            behavior
+        ));
+
     }
 
     public void addBird(BirdInfo bird) {
