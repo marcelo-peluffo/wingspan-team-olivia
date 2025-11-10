@@ -9,7 +9,7 @@ public class TuckCardBehavior implements PowerBehavior {
         this.numCards = params.numCards;
         this.fromHand = params.fromHand;
         if (params.secondBehavior != null) {
-            this.secondBehavior = BehaviorFactory.createBehavior(params);
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
     }
 
