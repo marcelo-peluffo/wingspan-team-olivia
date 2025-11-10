@@ -940,6 +940,341 @@ public class DataTable {
             behavior
         ));
 
+        // 67. Common Nighthawk
+        HashSet<String> h67 = new HashSet<String>(Set.of("grassland","forest", "wetland"));
+        addBird(new BirdInfo(
+            "Common Nighthawk",
+            h67,
+            new String[][]{{"invertebrate"}, {"invertebrate"}},
+            3,
+            "ground",
+            2,
+            56,
+            "brown",
+            behavior
+        ));
+
+        // 68. Common Raven
+        HashSet<String> h68 = new HashSet<String>(Set.of("forest","grassland","wetland"));
+        addBird(new BirdInfo(
+            "Common Raven",
+            h68,
+            new String[][]{{"rodent"}, {"choice"}, {"choice"}},
+            5,
+            "platform",
+            2,
+            135,
+            "brown",
+            behavior
+        ));
+
+        // 69. Common Yellowthroat
+        HashSet<String> h69 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Common Yellowthroat",
+            h69,
+            new String[][]{{"invertebrate"}},
+            1,
+            "bowl",
+            4,
+            18,
+            "brown",
+            behavior
+        ));
+
+        // 70. Cooper's Hawk
+        HashSet<String> h70 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Cooper's Hawk",
+            h70,
+            new String[][]{{"rodent"}},
+            3,
+            "platform",
+            2,
+            79,
+            "brown",
+            behavior
+        ));
+
+        // 71. Dark-Eyed Junco
+        HashSet<String> h71 = new HashSet<String>(Set.of("forest","grassland"));
+        addBird(new BirdInfo(
+            "Dark-Eyed Junco",
+            h71,
+            new String[][]{{"wheat"}, {"invertebrate"}},
+            3,
+            "ground",
+            3,
+            23,
+            "brown",
+            behavior
+        ));
+
+        // 72. Dickcissel
+        HashSet<String> h72 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Dickcissel",
+            h72,
+            new String[][]{{"invertebrate"}, {"wheat"}, {"wheat"}},
+            4,
+            "ground",
+            3,
+            25,
+            "brown",
+            behavior
+        ));
+
+        // 73. Double-Crested Cormorant
+        HashSet<String> h73 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Double-Crested Cormorant",
+            h73,
+            new String[][]{{"fish"}, {"choice"}},
+            3,
+            "platform",
+            3,
+            132,
+            "brown",
+            behavior
+        ));
+
+        // 74. Downy Woodpecker
+        HashSet<String> h74 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Downy Woodpecker",
+            h74,
+            new String[][]{{"invertebrate", "wheat", "berry"}},
+            3,
+            "cavity",
+            2,
+            30,
+            "white",
+            behavior
+        ));
+
+        // 75. Eastern Bluebird
+        HashSet<String> h75 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Eastern Bluebird",
+            h75,
+            new String[][]{{"invertebrate"}, {"berry"}},
+            4,
+            "cavity",
+            5,
+            33,
+            "white",
+            behavior
+        ));
+
+        // 76. Eastern Kingbird
+        HashSet<String> h76 = new HashSet<String>(Set.of("forest","grassland", "wetland"));
+        addBird(new BirdInfo(
+            "Eastern Kingbird",
+            h76,
+            new String[][]{{"invertebrate", "berry"}},
+            2,
+            "bowl",
+            2,
+            38,
+            "pink",
+            behavior
+        ));
+
+        // 77. Eastern Phoebe
+        HashSet<String> h77 = new HashSet<String>(Set.of("forest","grassland","wetland"));
+        addBird(new BirdInfo(
+            "Eastern Phoebe",
+            h77,
+            new String[][]{{"invertebrate", "berry"}},
+            3,
+            "star",
+            4,
+            28,
+            "brown",
+            behavior
+        ));
+
+        // 78. Eastern Screech-Owl
+        HashSet<String> h78 = new HashSet<String>(Set.of("forest"}));
+        addBird(new BirdInfo(
+            "Eastern Screech-Owl",
+            h78,
+            new String[][]{{"rodent", "invertebrate"}},
+            4,
+            "cavity",
+            2,
+            51,
+            "brown",
+            behavior
+        ));
+
+        // 79. Ferruginous Hawk
+        HashSet<String> h79 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Ferruginous Hawk",
+            h79,
+            new String[][]{{"rodent"}, {"rodent"}},
+            6,
+            "platform",
+            2,
+            142,
+            "brown",
+            behavior
+        ));
+
+        // 80. Fish Crow
+        HashSet<String> h80 = new HashSet<String>(Set.of("wetland","forest","grassland"));
+        addBird(new BirdInfo(
+            "Fish Crow",
+            h80,
+            new String[][]{{"fish"}, {"choice"}},
+            6,
+            "platform",
+            2,
+            91,
+            "brown",
+            behavior
+        ));
+
+        // 81. Forster's Tern
+        HashSet<String> h81 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Forster's Tern",
+            h81,
+            new String[][]{{"fish", "invertebrate"}},
+            4,
+            "star",
+            2,
+            79,
+            "brown",
+            behavior
+        ));
+
+        // 82. Franklin's Gull
+        HashSet<String> h82 = new HashSet<String>(Set.of("wetland","grassland"));
+        addBird(new BirdInfo(
+            "Franklin's Gull",
+            h82,
+            new String[][]{{"fish"}, {"choice"}},
+            3,
+            "star",
+            2,
+            91,
+            "brown",
+            behavior
+        ));
+
+        // 83. Golden Eagle
+        HashSet<String> h83 = new HashSet<String>(Set.of("grassland","wetland"));
+        addBird(new BirdInfo(
+            "Golden Eagle",
+            h83,
+            new String[][]{{"rodent"}, {"rodent"}, {"rodent"}},
+            8,
+            "platform",
+            1,
+            201,
+            "brown",
+            behavior
+        ));
+
+        // 84. Grasshopper Sparrow
+        HashSet<String> h84 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Grasshopper Sparrow",
+            h84,
+            new String[][]{{"invertebrate", "wheat"}},
+            2,
+            "ground",
+            2,
+            20,
+            "brown",
+            behavior
+        ));
+
+        // 85. Gray Catbird
+        HashSet<String> h85 = new HashSet<String>(Set.of("forest","wetland","grassland"));
+        addBird(new BirdInfo(
+            "Gray Catbird",
+            h85,
+            new String[][]{{"invertebrate"}, {"berry"}, {"berry"}},
+            5,
+            "bowl",
+            3,
+            28,
+            "brown",
+            behavior
+        ));
+
+        // 86. Great Blue Heron
+        HashSet<String> h86 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Great Blue Heron",
+            h86,
+            new String[][]{{"fish"}, {"invertebrate"}},
+            5,
+            "platform",
+            2,
+            183,
+            "white",
+            behavior
+        ));
+
+        // 87. Great Crested Flycatcher
+        HashSet<String> h87 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Great Crested Flycatcher",
+            h87,
+            new String[][]{{"invertebrate"}, {"berry"}},
+            5,
+            "cavity",
+            3,
+            33,
+            "brown",
+            behavior
+        ));
+
+        // 88. Great Egret
+        HashSet<String> h88 = new HashSet<String>(Set.of("wetland"));
+        addBird(new BirdInfo(
+            "Great Egret",
+            h88,
+            new String[][]{{"fish"}, {"fish"}, {"rodent"}},
+            7,
+            "platform",
+            3,
+            130,
+            "white",
+            behavior
+        ));
+
+        // 89. Great Horned Owl
+        HashSet<String> h89 = new HashSet<String>(Set.of("forest"));
+        addBird(new BirdInfo(
+            "Great Horned Owl",
+            h89,
+            new String[][]{{"rodent"}, {"rodent"}, {"rodent"}},
+            8,
+            "platform",
+            2,
+            112,
+            "brown",
+            behavior
+        ));
+
+        // 90. Greater Prairie-Chicken
+        HashSet<String> h90 = new HashSet<String>(Set.of("grassland"));
+        addBird(new BirdInfo(
+            "Greater Prairie-Chicken",
+            h90,
+            new String[][]{{"wheat"}, {"wheat"}, {"invertebrate"}},
+            5,
+            "ground",
+            4,
+            71,
+            "white",
+            behavior
+        ));
     }
 
     public void addBird(BirdInfo bird) {
