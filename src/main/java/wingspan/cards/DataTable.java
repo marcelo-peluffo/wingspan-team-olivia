@@ -65,7 +65,7 @@ public class DataTable {
                         nestType, bj.maxEggs, bj.wingSpan, color,
                         behavior
                 );
-
+                
                 CardManager.birdCards.add(new Card(birdInfo, birdImage));
             }
 

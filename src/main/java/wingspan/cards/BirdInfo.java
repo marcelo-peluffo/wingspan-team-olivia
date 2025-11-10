@@ -38,27 +38,18 @@ public class BirdInfo {
     public Color getPowerColor() { return powerColor; }
     public PowerBehavior getBehavior() { return behavior; }
 
+    @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("BirdInfo {")
-      .append("\n  name='").append(name).append('\'')
-      .append(",\n  habitats=").append(habitats)
-      .append(",\n  foodCost=");
-
-    for (Food[] row : foodCost) {
-        sb.append(Arrays.toString(row)).append(" ");
+        return "BirdInfo{" +
+                "name='" + name + '\'' +
+                ", habitats=" + habitats +
+                ", foodCost=" + Arrays.deepToString(foodCost) +
+                ", victoryPoints=" + victoryPoints +
+                ", nestType=" + nestType +
+                ", maxEggs=" + maxEggs +
+                ", wingSpan=" + wingSpan +
+                ", powerColor=" + powerColor +
+                ", behavior=" + behavior +
+                '}';
     }
-
-    sb.append(",\n  victoryPoints=").append(victoryPoints)
-      .append(",\n  nestType=").append(nestType)
-      .append(",\n  maxEggs=").append(maxEggs)
-      .append(",\n  wingSpan=").append(wingSpan)
-      .append(",\n  powerColor=").append(powerColor)
-      .append(",\n  behavior=").append(
-          behavior != null ? behavior.getClass().getSimpleName() : "null"
-      )
-      .append("\n}");
-
-    return sb.toString();
-}
 }

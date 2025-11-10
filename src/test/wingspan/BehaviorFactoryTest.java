@@ -1,7 +1,5 @@
 package wingspan;
 
-import wingspan.cards.behavior.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import wingspan.cards.*;
 
 public class BehaviorFactoryTest {
