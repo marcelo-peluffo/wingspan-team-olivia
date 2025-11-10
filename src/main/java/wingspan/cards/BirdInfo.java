@@ -37,4 +37,28 @@ public class BirdInfo {
     public int getWingSpan() { return wingSpan; }
     public Color getPowerColor() { return powerColor; }
     public PowerBehavior getBehavior() { return behavior; }
+
+    public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("BirdInfo {")
+      .append("\n  name='").append(name).append('\'')
+      .append(",\n  habitats=").append(habitats)
+      .append(",\n  foodCost=");
+
+    for (Food[] row : foodCost) {
+        sb.append(Arrays.toString(row)).append(" ");
+    }
+
+    sb.append(",\n  victoryPoints=").append(victoryPoints)
+      .append(",\n  nestType=").append(nestType)
+      .append(",\n  maxEggs=").append(maxEggs)
+      .append(",\n  wingSpan=").append(wingSpan)
+      .append(",\n  powerColor=").append(powerColor)
+      .append(",\n  behavior=").append(
+          behavior != null ? behavior.getClass().getSimpleName() : "null"
+      )
+      .append("\n}");
+
+    return sb.toString();
+}
 }
