@@ -10,10 +10,6 @@ import wingspan.WingspanFrame;
 import wingspan.cards.behavior.*;
 import wingspan.enums.*;
 
-interface BehaviorCreator {
-    PowerBehavior create(Object... params);
-}
-
 class BirdInfoJson {
     public String name;
     public List<Habitat> habitats;
@@ -43,7 +39,7 @@ public class DataTable {
 
     private static EnumSet<Habitat> getHabitatSet(BirdInfoJson bj) {
         EnumSet<Habitat> habitats = EnumSet.noneOf(Habitat.class);
-        for (String h : bj.habitats) habitats.add(Habitat.valueOf(h.toUpperCase()));
+        for (Habitat h : bj.habitats) habitats.add(h);
         return habitats; // fixed: return statement
     }
 
