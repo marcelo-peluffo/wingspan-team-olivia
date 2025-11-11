@@ -62,8 +62,8 @@ public class DataTable {
                 Color color = bj.color;
 
                 String imagePath = "/Images/" + bj.image;
-                InputStream imgStream = WingspanFrame.class.getResourceAsStream(imagePath);
-                BufferedImage birdImage = ImageIO.read(imgStream);
+                InputStream imgStream = bj.image != null ? WingspanFrame.class.getResourceAsStream(imagePath) : null;
+                BufferedImage birdImage = imgStream != null ? ImageIO.read(imgStream) : null;
 
                 PowerBehavior behavior = BehaviorFactory.createBehavior(bj.behavior);
 

@@ -22,6 +22,9 @@ public class BehaviorFactory {
             case "ROLL_DICE":
                 return new RollDiceBehavior(params);
 
+            case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
+                return null;
+
             default:
                 throw new IllegalArgumentException("Unknown behavior type: " + params.type);
         }
