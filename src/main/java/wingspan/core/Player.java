@@ -11,7 +11,7 @@ public class Player {
 	private ArrayList<Card> cards;
 	private Card cardToPlay;
 	private ArrayList<BonusCard> bonusCards;
-	private HashMap<Food, Integer> foodInventory;
+	private Map<Food, Integer> foodInventory;
 	private int actionsRemaining;
 	
 	public Player() throws IOException
@@ -19,7 +19,7 @@ public class Player {
 		gameBoard = new GameBoard();
 		cards = new ArrayList<>();
 		bonusCards = new ArrayList<>();
-		foodInventory = new HashMap<>();
+		foodInventory = new EnumMap<>(Food.class);
 		
 		for (Food f : Food.values())
 		{
@@ -95,7 +95,7 @@ public class Player {
 		}
 	}
 	
-	public HashMap<Food, Integer> getFood()
+	public Map<Food, Integer> getFoodInventory()
 	{
 		return foodInventory;
 	}
