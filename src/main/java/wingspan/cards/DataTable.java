@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.*;
 import javax.imageio.ImageIO;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import wingspan.WingspanFrame;
 import wingspan.cards.behavior.*;
@@ -19,6 +21,7 @@ class BirdInfoJson {
     public int wingSpan;
     public Color color;
     public BehaviorParameters behavior; // <-- Jackson will auto-fill this!
+    @JsonIgnore
     public String image;
 }
 
