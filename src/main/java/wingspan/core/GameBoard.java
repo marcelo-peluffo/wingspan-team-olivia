@@ -8,16 +8,16 @@ import java.io.*;
 
 public class GameBoard {
 	public BufferedImage gameBoardImage;
-	private ArrayList<Card> forest;
-	private ArrayList<Card> grasslands;
-	private ArrayList<Card> wetlands;
+	private List<Card> forest;
+	private List<Card> grasslands;
+	private List<Card> wetlands;
 	
 	public GameBoard() throws IOException
 	{
 		gameBoardImage = ImageIO.read(GameBoard.class.getResource("/Image/GameBoard.jpg"));
-		forest = new ArrayList<Card>();
-		grasslands = new ArrayList<Card>();
-		wetlands = new ArrayList<Card>();
+		forest = new ArrayList<>();
+		grasslands = new ArrayList<>();
+		wetlands = new ArrayList<>();
 	}
 	
 	public boolean addCard(Card c, String habitat)

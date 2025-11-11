@@ -11,7 +11,7 @@ public class BehaviorParameters {
     public Food typeOfFood;
     public boolean isCacheable;
     public boolean isFromFeeder;
-    public String nestType;
+    public NestType nestType;
     public int numPowers;
     public boolean activateAll;
     public int numDice;

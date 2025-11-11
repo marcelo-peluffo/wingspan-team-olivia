@@ -4,7 +4,7 @@ import wingspan.cards.goals.Goal;
 import java.util.*;
 
 public class GoalBoard {
-	private ArrayList<Goal> goals;
+	private List<Goal> goals;
 	private Goal round1Goal;
 	private Goal round2Goal;
 	private Goal round3Goal;
@@ -12,7 +12,7 @@ public class GoalBoard {
 	
 	public GoalBoard()
 	{
-		goals = new ArrayList<Goal>();
+		goals = new ArrayList<>();
 		addGoals();
 		round1Goal = goals.remove((int)(Math.random() * goals.size()));
 		round2Goal = goals.remove((int)(Math.random() * goals.size()));
