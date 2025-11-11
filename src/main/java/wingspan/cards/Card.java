@@ -6,8 +6,8 @@ public class Card {
     private BirdInfo birdInfo;
     private BufferedImage cardImage;
     private int currentEggs;
-    private final ArrayList<Card> tuckedCards;
-    private final ArrayList<String> foodTokens;
+    private ArrayList<Card> tuckedCards;
+    private ArrayList<Food> foodTokens;
 
     public Card(BirdInfo birdInfo, BufferedImage cardImage,int currentEggs, ArrayList<Card> tuckedCards, ArrayList<String> foodTokens)
     {
@@ -42,6 +42,11 @@ public class Card {
         {
             return false;
         }
+    }
+
+    public boolean addFoodToken(Food food)
+    {
+        this.foodTokens.add(food);
     }
 
     public ArrayList<Card> getTuckedCards() 
