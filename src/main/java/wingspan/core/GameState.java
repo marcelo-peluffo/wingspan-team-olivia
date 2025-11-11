@@ -19,4 +19,5 @@ public class GameState {
 
 	public static boolean activePlayerTuckedCard;
 	public static Card activeCard;
+	public static boolean choseToCache;
 }
