@@ -1,7 +1,8 @@
 package wingspan.cards.behavior;
 
 import wingspan.enums.*;
-import wingspan.core.GameState
+import java.util.*;
+import wingspan.core.GameState;
 
 public class GainFoodBehavior implements PowerBehavior {
     private int numFood;
@@ -21,14 +22,14 @@ public class GainFoodBehavior implements PowerBehavior {
     @Override
     public boolean executePower()
     {
-        HashMap<Food, Integer> playerFoodInventory = GameState.activePlayer.foodInventory;
+        Map<Food, Integer> playerFoodInventory = GameState.activePlayer.getFood();
         playerFoodInventory.put(typeOfFood, playerFoodInventory.get(typeOfFood) + numFood);
         if (isCacheable)
         {
             if (GameState.choseToCache)
             {
                 GameState.activeCard.addFoodToken(typeOfFood); //all the abilities that involve caching only allow caching of one food token
-                playerFoodInventory.put(typeOffood, playerFoodInventory.get(typeOfFood) - 1);
+                playerFoodInventory.put(typeOfFood, playerFoodInventory.get(typeOfFood) - 1);
             }
         }
         return true;
