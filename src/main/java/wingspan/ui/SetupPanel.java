@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import wingspan.cards.*;
 
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;

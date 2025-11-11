@@ -5,23 +5,12 @@ public class TuckCardBehavior implements PowerBehavior {
     private boolean fromHand;
     private PowerBehavior secondBehavior;
 
-    // Constructor 1: tuck X cards from hand
-    public TuckCardBehavior(int numCards) {
-        this.numCards = numCards;
-        this.fromHand = true; // default: tuck from hand
-    }
-
-    // Constructor 2: specify whether the card comes from hand or deck
-    public TuckCardBehavior(int numCards, boolean fromHand) {
-        this.numCards = numCards;
-        this.fromHand = fromHand;
-    }
-
-    // Constructor 3: specify whether the card comes from hand or deck + second behavior
-    public TuckCardBehavior(int numCards, boolean fromHand, PowerBehavior secondBehavior) {
-        this.numCards = numCards;
-        this.fromHand = fromHand;
-        this.secondBehavior = secondBehavior;
+    public TuckCardBehavior(BehaviorParameters params) {
+        this.numCards = params.numCards;
+        this.fromHand = params.fromHand;
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
     @Override
@@ -32,6 +21,11 @@ public class TuckCardBehavior implements PowerBehavior {
 
     public int getNumCards() {
         return numCards;
+    }
+
+    public PowerBehavior getSecondBehavior()
+    {
+        return secondBehavior;
     }
 
     public boolean isFromHand() {

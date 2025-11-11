@@ -1,22 +1,17 @@
 package wingspan.cards.behavior;
 
+import wingspan.enums.*;
+
 public class FoodForEggBehavior implements PowerBehavior {
     private int numFood;
-    private String typeOFFood;
+    private Food typeOfFood;
     private int numEggs;
 
     // Constructor 1
-    public FoodForEggBehavior(int numFood, String typeOFFood, int numEggs) {
-        this.numFood = numFood;
-        this.typeOFFood = typeOFFood;
-        this.numEggs = numEggs;
-    }
-
-    // Constructor 2 (no food type given)
-    public FoodForEggBehavior(int numFood, int numEggs) {
-        this.numFood = numFood;
-        this.typeOFFood = "any";
-        this.numEggs = numEggs;
+    public FoodForEggBehavior(BehaviorParameters params) {
+        this.numFood = params.numFood;
+        this.typeOfFood = params.typeOfFood;
+        this.numEggs = params.numEggs;
     }
 
     @Override
@@ -29,8 +24,8 @@ public class FoodForEggBehavior implements PowerBehavior {
         return numFood;
     }
 
-    public String getTypeOFFood() {
-        return typeOFFood;
+    public Food gettypeOfFood() {
+        return typeOfFood;
     }
 
     public int getNumEggs() {

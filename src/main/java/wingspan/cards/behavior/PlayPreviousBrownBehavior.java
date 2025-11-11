@@ -4,17 +4,11 @@ public class PlayPreviousBrownBehavior implements PowerBehavior {
     private int numPowers;
     private boolean activateAll;
 
-    // Constructor 1: default: activate 1 previous brown power
-    public PlayPreviousBrownBehavior(int numPowers) {
-        this.numPowers = numPowers;
-        this.activateAll = false;   // default: only the nearest previous brown
+    public PlayPreviousBrownBehavior(BehaviorParameters params) {
+        this.numPowers = params.numPowers;
+        this.activateAll = params.activateAll;
     }
 
-    // Constructor 2: choose whether to activate ALL previous brown powers
-    public PlayPreviousBrownBehavior(int numPowers, boolean activateAll) {
-        this.numPowers = numPowers;
-        this.activateAll = activateAll;
-    }
 
     @Override
     public boolean executePower() {

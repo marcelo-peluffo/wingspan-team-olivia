@@ -1,13 +1,13 @@
 package wingspan.cards.behavior;
 
 public class DrawCardBehavior implements PowerBehavior {
-    private final int numCards;
-    private final int cardsToTuck;
+    private int numCards;
+    private int cardsToTuck;
 
-    public DrawCardBehavior(int numCards, int cardsToTuck)
+    public DrawCardBehavior(BehaviorParameters params)
     {
-        this.numCards = numCards;
-        this.cardsToTuck = cardsToTuck;
+        this.numCards = params.numCards;
+        this.cardsToTuck = params.cardsToTuck;
     }
 
     @Override

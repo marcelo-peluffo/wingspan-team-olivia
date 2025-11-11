@@ -2,25 +2,10 @@ package wingspan.cards;
 import java.util.*;
 
 public class CardManager {
-	private HashSet<Card> birdCards = new HashSet<Card>();
-	private HashSet<BonusCard> bonusCards = new HashSet<BonusCard>();
-	private ArrayList<Card> faceUpCards = new ArrayList<Card>();
-	
-	public CardManager()
-	{
-		addBirdCards();
-		addBonusCards();
-	}
-	
-	public void addBirdCards()
-	{
-		// this method will add all unique bird cards to the birdCards HashSet once they are implemented
-	}
-	
-	public void addBonusCards()
-	{
-		// this method will add all unique bonus cards to the bonusCards HashSet once they are implemented
-	}
+	public static HashSet<Card> birdCards = new HashSet<>();
+	public static HashSet<BirdInfo> birdInfos = new HashSet<>();
+	public static HashSet<BonusCard> bonusCards = new HashSet<>();
+	public static ArrayList<Card> faceUpCards = new ArrayList<>();
 	
 	// returns and removes a random card from birdCards
 	public Card getRandomCard()

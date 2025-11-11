@@ -1,25 +1,19 @@
 package wingspan.cards.behavior;
 
+import wingspan.enums.*;
+
 public class EggForFoodBehavior implements PowerBehavior {
     private int numEggs;
     private int numFood;
     private boolean onThisBird;
-    private String typeOfFood;
+    private Food typeOfFood;
 
     // Constructor 1
-    public EggForFoodBehavior(int numEggs, int numFood, boolean onThisBird, String typeOfFood) {
-        this.numEggs = numEggs;
-        this.numFood = numFood;
-        this.onThisBird = onThisBird;
-        this.typeOfFood = typeOfFood;
-    }
-
-    // Constructor 2 (no food type given)
-    public EggForFoodBehavior(int numEggs, int numFood, boolean onThisBird) {
-        this.numEggs = numEggs;
-        this.numFood = numFood;
-        this.onThisBird = onThisBird;
-        this.typeOfFood = "any";
+    public EggForFoodBehavior(BehaviorParameters params) {
+        this.numEggs = params.numEggs;
+        this.numFood = params.numFood;
+        this.onThisBird = params.onThisBird;
+        this.typeOfFood = params.typeOfFood;
     }
 
     @Override
@@ -40,7 +34,7 @@ public class EggForFoodBehavior implements PowerBehavior {
         return onThisBird;
     }
 
-    public String getTypeOfFood() {
+    public Food getTypeOfFood() {
         return typeOfFood;
     }
 }

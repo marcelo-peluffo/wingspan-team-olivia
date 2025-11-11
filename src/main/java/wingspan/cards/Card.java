@@ -1,15 +1,25 @@
 package wingspan.cards;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.*;
+import wingspan.enums.*;
 
 public class Card {
     private BirdInfo birdInfo;
     private BufferedImage cardImage;
     private int currentEggs;
-    private ArrayList<Card> tuckedCards;
-    private ArrayList<Food> foodTokens;
+    private final List<Card> tuckedCards;
+    private final List<Food> foodTokens;
 
-    public Card(BirdInfo birdInfo, BufferedImage cardImage,int currentEggs, ArrayList<Card> tuckedCards, ArrayList<String> foodTokens)
+    public Card(BirdInfo birdInfo, BufferedImage cardImage)
+    {
+        this.birdInfo = birdInfo;
+        this.cardImage = cardImage;
+        currentEggs = 0;
+        tuckedCards = new ArrayList<>();
+        foodTokens = new ArrayList<>();
+    }
+
+    public Card(BirdInfo birdInfo, BufferedImage cardImage, int currentEggs, List<Card> tuckedCards, List<Food> foodTokens)
     {
         this.birdInfo = birdInfo;
         this.cardImage = cardImage;
@@ -44,19 +54,19 @@ public class Card {
         }
     }
 
-    public boolean addFoodToken(Food food)
-    {
-        this.foodTokens.add(food);
-    }
-
-    public ArrayList<Card> getTuckedCards() 
+    public List<Card> getTuckedCards() 
     {
         return tuckedCards;
     }
 
-    public ArrayList<String> getFoodTokens() 
+    public List<Food> getFoodTokens() 
     {
         return foodTokens;
+    }
+
+    public void addFoodToken(Food f)
+    {
+        foodTokens.add(f);
     }
 
 }

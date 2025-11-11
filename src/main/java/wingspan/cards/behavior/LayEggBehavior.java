@@ -5,23 +5,10 @@ public class LayEggBehavior implements PowerBehavior {
     private boolean onThisBird;
     private String nestType;
 
-    // Constructor 1: only number of eggs
-    public LayEggBehavior(int numEggs) {
-        this.numEggs = numEggs;
-        this.onThisBird = true;  // default: lay eggs on the same bird
-    }
-
-    // Constructor 2: number of eggs + whether it must be on this bird
-    public LayEggBehavior(int numEggs, boolean onThisBird) {
-        this.numEggs = numEggs;
-        this.onThisBird = onThisBird;
-    }
-
-    // Constructor 3: number of eggs + whether it must be on this bird + nest type
-    public LayEggBehavior(int numEggs, boolean onThisBird, String nestType) {
-        this.numEggs = numEggs;
-        this.onThisBird = onThisBird;
-        this.nestType = nestType;
+    public LayEggBehavior(BehaviorParameters params) {
+        this.numEggs = params.numEggs;
+        this.onThisBird = params.onThisBird;
+        this.nestType = params.nestType;
     }
 
     @Override

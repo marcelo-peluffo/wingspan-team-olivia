@@ -37,4 +37,20 @@ public class BirdInfo {
     public int getWingSpan() { return wingSpan; }
     public Color getPowerColor() { return powerColor; }
     public PowerBehavior getBehavior() { return behavior; }
+
+    @Override
+    public String toString() {
+        return "BirdInfo{" +
+                "name='" + name + '\'' +
+                ", habitats=" + habitats +
+                ", foodCost=" + Arrays.deepToString(foodCost) +
+                ", victoryPoints=" + victoryPoints +
+                ", nestType=" + nestType +
+                ", maxEggs=" + maxEggs +
+                ", wingSpan=" + wingSpan +
+                ", powerColor=" + powerColor +
+                ", behavior=" + (behavior != null ? behavior.describe() : "null") +
+                '}' + '\n';
+    }
+
 }
