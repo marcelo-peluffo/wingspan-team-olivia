@@ -102,7 +102,9 @@
   },
   {
     "name": "American Crow",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "ANY"
@@ -212,8 +214,12 @@
   },
   {
     "name": "American Robin",
-    "habitats": [],
-    "food": [],
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      ["INVERTEBRATE", "BERRY"]
+    ],
     "victoryPoints": 1,
     "nestType": "BOWL",
     "maxEggs": 4,
