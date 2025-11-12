@@ -12,6 +12,7 @@ import wingspan.enums.Habitat;
 
 public class GameBoard {
 	public BufferedImage gameBoardImage;
+	private Habitat activeHabitat;
 	private List<Card> forest;
 	private List<Card> grasslands;
 	private List<Card> wetlands;
@@ -57,4 +58,20 @@ public class GameBoard {
     public List<Card> getWetlands() {
         return wetlands;
     }
+
+	public List<Card> getActiveHabitat() {
+		switch (activeHabitat)
+		{
+			case FOREST -> {return forest;}
+			case GRASSLANDS -> {return grasslands;}
+			case WETLANDS -> {return wetlands;}
+		}
+
+		return null;
+	}
+
+	public void setActiveHabitat(Habitat h)
+	{
+		activeHabitat = h;
+	}
 }
