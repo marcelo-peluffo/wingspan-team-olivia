@@ -1007,7 +1007,9 @@
   },
   {
     "name": "California Condor",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [],
     "victoryPoints": 1,
     "nestType": "GROUND",
@@ -1021,7 +1023,9 @@
   },
   {
     "name": "California Quail",
-    "habitats": [],
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1045,7 +1049,9 @@
   },
   {
     "name": "Canada Goose",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1092,7 +1098,11 @@
     "habitats": [
       "FOREST"
     ],
-    "food": [],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT"
+      ]
+    ],
     "victoryPoints": 2,
     "nestType": "CAVITY",
     "maxEggs": 3,
@@ -1108,7 +1118,11 @@
     "habitats": [
       "FOREST"
     ],
-    "food": [],
+    "food": [
+      [
+        "INVERTEBRATE", "BERRY"
+      ]
+    ],
     "victoryPoints": 1,
     "nestType": "CAVITY",
     "maxEggs": 5,
@@ -1167,7 +1181,9 @@
   },
   {
     "name": "Cedar Waxwing",
-    "habitats": [],
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "BERRY"
@@ -1263,7 +1279,9 @@
   },
   {
     "name": "Chimney Swift",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1284,7 +1302,9 @@
   },
   {
     "name": "Chipping Sparrow",
-    "habitats": [],
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
     "food": [],
     "victoryPoints": 1,
     "nestType": "BOWL",
@@ -1344,7 +1364,9 @@
   },
   {
     "name": "Common Grackle",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1411,7 +1433,9 @@
   },
   {
     "name": "Common Nighthawk",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1432,7 +1456,9 @@
   },
   {
     "name": "Common Raven",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "RODENT"
@@ -1496,7 +1522,9 @@
   },
   {
     "name": "Dark-Eyed Junco",
-    "habitats": [],
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1569,7 +1597,11 @@
     "habitats": [
       "FOREST"
     ],
-    "food": [],
+    "food": [
+      [
+        "INVERTEVRATE", "WHEAT", "BERRY"
+      ]
+    ],
     "victoryPoints": 3,
     "nestType": "CAVITY",
     "maxEggs": 2,
@@ -1605,8 +1637,14 @@
   },
   {
     "name": "Eastern Kingbird",
-    "habitats": [],
-    "food": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "BERRY"
+      ]
+    ],
     "victoryPoints": 2,
     "nestType": "BOWL",
     "maxEggs": 2,
@@ -1619,8 +1657,14 @@
   },
   {
     "name": "Eastern Phoebe",
-    "habitats": [],
-    "food": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "BERRY"
+      ]
+    ],
     "victoryPoints": 3,
     "nestType": "STAR",
     "maxEggs": 4,
@@ -1633,8 +1677,14 @@
   },
   {
     "name": "Eastern Screech-Owl",
-    "habitats": [],
-    "food": [],
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "RODENT", "INVERTEBRATE"
+      ]
+    ],
     "victoryPoints": 4,
     "nestType": "CAVITY",
     "maxEggs": 2,
@@ -1670,7 +1720,9 @@
   },
   {
     "name": "Fish Crow",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "FISH"
@@ -1694,7 +1746,11 @@
     "habitats": [
       "WETLANDS"
     ],
-    "food": [],
+    "food": [
+      [
+        "FISH", "INVERTEBRATE"
+      ]
+    ],
     "victoryPoints": 4,
     "nestType": "STAR",
     "maxEggs": 2,
@@ -1707,7 +1763,9 @@
   },
   {
     "name": "Franklin's Gull",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS"
+    ],
     "food": [
       [
         "FISH"
@@ -1728,7 +1786,9 @@
   },
   {
     "name": "Golden Eagle",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS"
+    ],
     "food": [
       [
         "RODENT"
@@ -1755,7 +1815,10 @@
     "habitats": [
       "GRASSLANDS"
     ],
-    "food": [],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT"
+    ],
     "victoryPoints": 2,
     "nestType": "GROUND",
     "maxEggs": 2,
@@ -1768,7 +1831,9 @@
   },
   {
     "name": "Gray Catbird",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "INVERTEBRATE"
