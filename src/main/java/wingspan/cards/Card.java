@@ -54,9 +54,37 @@ public class Card {
         }
     }
 
+    public boolean removeEggs(int amount)
+    {
+        if (currentEggs == 0)
+        {
+            return false;
+        }
+        else
+        {
+            currentEggs -= amount;
+            return true;
+        }
+    }
+
+    public boolean isAtMaxEggs()
+    {
+        return currentEggs == birdInfo.getMaxEggs();
+    }
+
+    public boolean hasNoEggs()
+    {
+        return currentEggs == 0;
+    }
+
     public void addFoodToken(Food token)
     {
         this.foodTokens.add(token);
+    }
+
+    public void tuckCard(Card c)
+    {
+        this.tuckedCards.add(c);
     }
 
     public ArrayList<Card> getTuckedCards() 
