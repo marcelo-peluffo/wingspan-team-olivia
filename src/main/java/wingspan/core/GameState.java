@@ -22,6 +22,7 @@ public class GameState {
 	public static ArrayList<Card> cardsToDraw = new ArrayList<Card>(); //contains the cards a player chose to draw for an ability
 	public static ArrayList<Card> cardsToTuck = new ArrayList<Card>(); //contains the cards a player chose to tuck for an ability
 	//if multiple players are involved in one of these abilities, put cards in these lists in player number order (eg. player 1's cards in the list come before player 3's)
+	//exception: if the ability involves drawing cards, then rotating through each player to take them, put them in clockwise order, starting from the active player
 
 	public static Food foodChoice; //if an ability allows the player to choose any food, it will be stored here.
 
