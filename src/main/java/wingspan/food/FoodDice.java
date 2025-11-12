@@ -4,22 +4,23 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.*;
 import java.io.*;
+import wingspan.enums.Food;
 
 public class FoodDice {
         private BufferedImage diceFace;
-        private String currentFood;
+        private Food currentFood;
 
-        private ArrayList<String> foodChoices;
+        private ArrayList<Food> foodChoices;
         private ArrayList<BufferedImage> foodFaces;
 
         public FoodDice() throws IOException{
             foodChoices = new ArrayList<>();
-            foodChoices.add("choice");
-            foodChoices.add("invertebrate");
-            foodChoices.add("wheat");
-            foodChoices.add("rodent");
-            foodChoices.add("berry");
-            foodChoices.add("fish");
+            foodChoices.add(Food.ANY);
+            foodChoices.add(Food.INVERTEBRATE);
+            foodChoices.add(Food.WHEAT);
+            foodChoices.add(Food.RODENT);
+            foodChoices.add(Food.BERRY);
+            foodChoices.add(Food.FISH);
             
             BufferedImage choiceImage = ImageIO.read(FoodDice.class.getResource("/Image/MultiDice.jpg"));
             BufferedImage invertebrateImage = ImageIO.read(FoodDice.class.getResource("/Image/InvertebrateDice.jpg"));
@@ -50,7 +51,7 @@ public class FoodDice {
             return diceFace;
         }
 
-        public String getFood(){
+        public Food getFood(){
             return currentFood;
         }
 }
