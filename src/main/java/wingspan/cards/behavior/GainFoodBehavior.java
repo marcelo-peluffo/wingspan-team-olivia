@@ -22,6 +22,10 @@ public class GainFoodBehavior implements PowerBehavior {
     @Override
     public boolean executePower()
     {
+        if (typeOfFood == Food.ANY)
+        {
+            typeOfFood = GameState.foodChoice;
+        }
         Map<Food, Integer> playerFoodInventory = GameState.activePlayer.getFood();
         playerFoodInventory.put(typeOfFood, playerFoodInventory.get(typeOfFood) + numFood);
         if (isCacheable)
