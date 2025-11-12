@@ -21,7 +21,11 @@
     "wingSpan": 46,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "WHEAT",
+      "isFromFeeder": true,
+      "isCacheable": true
     },
     "image": "AcornWoodpecker.jpg"
   },
@@ -47,7 +51,10 @@
     "wingSpan": 107,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "onThisBird": false,
+      "nestType": "GROUND"
     },
     "image": "AmericanAvocet.jpg"
   },
@@ -73,7 +80,9 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 1
+      
     },
     "image": "AmericanBittern.jpg"
   },
@@ -96,7 +105,12 @@
     "wingSpan": 51,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "cardsToTuck": 1,
+      "secondbehavior"{
+        "type": "DRAW_CARD",
+        "numCards": 1
+      }
     },
     "image": "AmericanCoot.jpg"
   },
@@ -116,7 +130,11 @@
     "wingSpan": 99,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "EGG_FOR_FOOD",
+      "numEggs": 1,
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": false
     },
     "image": "AmericanCrow.jpg"
   },
@@ -139,7 +157,10 @@
     "wingSpan": 23,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD"
+      "numFood": 3
+      "typeOfFood": "WHEAT",
+      "isFromFeeder": false
     },
     "image": "AmericanGoldfinch.jpg"
   },
@@ -162,7 +183,12 @@
     "wingSpan": 56,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "typeOfFood": "RODENT",
+      "isCacheable": true,
+      "isFromFeeder": false,
+      "onThisBird": true
     },
     "image": "AmericanKestrel.jpg"
   },
