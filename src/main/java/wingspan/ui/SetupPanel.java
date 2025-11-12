@@ -63,18 +63,25 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
     public void paint(Graphics g) {
     	super.paint(g);
-
+		g.setColor(new Color(0, 255, 150));
+		
         if(!birdCardsAreSet){ //Checks if the player has selected and drawn Bird cards (and Food tokens) - if they haven't, paint the Bird cards and Food tokens.
             for(Card card: cards){
-                g.drawImage(card.getCardImage(), 210 + cards.indexOf(card) * 315, 210, 240, 360, null ); //Spacing between cards: 75 px | Horizontal Spacing on the margins: 210 px | Card Width: 240 px | Card Height: 360 px
+				if(selectedCards.contains(card)){
+                	g.fillRect(208 + cards.indexOf(card) * 315, 208, 244, 364); // If a card is selected, first paint a green rectangle underneath the card. Then put the card image. This will create the outline of the card. The ouline will be 2 px wide/tall.
+				}
+				g.drawImage(card.getCardImage(), 210 + cards.indexOf(card) * 315, 210, 240, 360, null ); //Spacing between cards: 75 px | Horizontal Spacing on the margins: 210 px | Card Width: 240 px | Card Height: 360 px
             }
-
+			
             //Draw the Text
             //Draw food token images
         }
 
         if(birdCardsAreSet && !playerIsSet){ //Checks if the player has drawn Bird Cards (and Food tokens) but hasn't completed the setup phase (Or hasn't drawn bonus cards) - if they have drawn their Bird cards but haven't completed the setup stage, paint the bonus cards.
             for(BonusCard bonusCard: bonusCards){
+				if(selectedBonusCards.contains(bonusCard)){
+					g.fillRect(358 + bonusCards.indexOf(bonusCard) * 780, 208, 424, 634) // Essentially the same thing as line 71 
+				}
                 g.drawImage(bonusCard.getImage(), 360 + bonusCards.indexOf(bonusCard) * 780, 210, 420, 630, null); // Spacing between cards: 360 px | Horizontal Spacing on the Margins: 360 px | Card Width: 420 px | Card Height: 630 px
             }
         }
