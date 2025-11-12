@@ -16,7 +16,7 @@ public class LayEggBehavior implements PowerBehavior {
     @Override
     public boolean executePower() {
         // lay egg behavior
-        if (GameState.selectedCard.getBirdInfo().getNestType() != nestType || (!onThisBird && GameState.selectedCard.equals(GameState.activeCard)))
+        if (GameState.selectedCard.getBirdInfo().getNestType() != nestType || (!onThisBird && GameState.selectedCard.equals(GameState.activeCard)) || GameState.selectedCard.isAtMaxEggs())
         {
             return false;
         }
