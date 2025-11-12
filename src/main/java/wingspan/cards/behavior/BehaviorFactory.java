@@ -21,6 +21,8 @@ public class BehaviorFactory {
                 return new PlayPreviousBrownBehavior(params);
             case "ROLL_DICE":
                 return new RollDiceBehavior(params);
+            case "DISCARD_EGGS":
+                return new DiscardEggsBehavior(params);
 
             default:
                 throw new IllegalArgumentException("Unknown behavior type: " + params.type);
