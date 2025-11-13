@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\wingspan",
+    "\\src\\main\\java\\wingspan\\cards\\behavior",
+    "\\src\\main\\java\\wingspan\\ui"
+  ],
+  "SelectedNode": "\\src\\main\\java\\wingspan\\ui\\SetupPanel.java",
+  "PreviewInSolutionExplorer": false
+}

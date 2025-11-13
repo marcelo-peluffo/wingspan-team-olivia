@@ -107,7 +107,7 @@
     "behavior": {
       "type": "TUCK_CARD",
       "cardsToTuck": 1,
-      "secondbehavior"{
+      "secondBehavior": {
         "type": "DRAW_CARD",
         "numCards": 1
       }
@@ -157,8 +157,8 @@
     "wingSpan": 23,
     "color": "WHITE",
     "behavior": {
-      "type": "GAIN_FOOD"
-      "numFood": 3
+      "type": "GAIN_FOOD",
+      "numFood": 3,
       "typeOfFood": "WHEAT",
       "isFromFeeder": false
     },
@@ -212,7 +212,7 @@
     "color": "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 5
+      "numCards": 5,
       "rotatePlayers": true
     },
     "image": "AmericanOystercatcher.jpg"
@@ -259,7 +259,7 @@
     "behavior": {
       "type": "TUCK_CARD",
       "cardsToTuck": 1,
-      "secondBehavior"{
+      "secondBehavior" : {
         "type": "DRAW_CARD",
         "numCards": 1
       }
@@ -1854,7 +1854,7 @@
     "food": [
       [
         "INVERTEBRATE", "WHEAT"
-    ],
+      ]],
     "victoryPoints": 2,
     "nestType": "GROUND",
     "maxEggs": 2,

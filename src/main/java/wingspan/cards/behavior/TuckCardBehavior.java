@@ -1,5 +1,7 @@
 package wingspan.cards.behavior;
 
+import wingspan.cards.behavior.*;
+
 public class TuckCardBehavior implements PowerBehavior {
     private int numCards;
     private boolean fromHand;
