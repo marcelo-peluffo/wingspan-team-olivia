@@ -211,7 +211,8 @@
     "wingSpan": 81,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2
     },
     "image": "AmericanOystercatcher.jpg"
   },
@@ -234,7 +235,10 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
     },
     "image": "AmericanRedstart.jpg"
   },
@@ -252,7 +256,12 @@
     "wingSpan": 43,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "cardsToTuck": 1,
+      "secondBehavior"{
+        "type": "DRAW_CARD",
+        "numCards": 1
+      }
     },
     "image": "AmericanRobin.jpg"
   },
