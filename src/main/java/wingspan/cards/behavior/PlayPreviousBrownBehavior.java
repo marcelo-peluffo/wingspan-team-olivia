@@ -31,11 +31,12 @@ public class PlayPreviousBrownBehavior implements PowerBehavior {
             if (currentCard.getBirdInfo().getPowerColor() == Color.BROWN)
             {
                 currentCard.getBirdInfo().getBehavior().executePower();
+                return true;
             }
             
         }
 
-        return true;
+        return false;
     }
 
     public int getNumPowers() {
