@@ -15,6 +15,7 @@ public class BehaviorParameters {
     public int numPowers;
     public boolean activateAll;
     public int numDice;
+    public boolean rotatePlayers;
     public boolean onlyOutsideFeeder;
     public boolean fromHand;
     public String type;
