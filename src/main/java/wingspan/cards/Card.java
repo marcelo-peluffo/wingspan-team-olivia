@@ -19,7 +19,7 @@ public class Card {
         foodTokens = new ArrayList<>();
     }
 
-    public Card(BirdInfo birdInfo, BufferedImage cardImage, int currentEggs, List<Card> tuckedCards, List<Food> foodTokens)
+    public Card(BirdInfo birdInfo, BufferedImage cardImage, int currentEggs, ArrayList<Card> tuckedCards, ArrayList<Food> foodTokens)
     {
         this.birdInfo = birdInfo;
         this.cardImage = cardImage;

@@ -1,9 +1,11 @@
 package wingspan.cards.behavior;
 
+import wingspan.enums.NestType;
+
 public class LayEggBehavior implements PowerBehavior {
     private int numEggs;
     private boolean onThisBird;
-    private String nestType;
+    private NestType nestType;
 
     public LayEggBehavior(BehaviorParameters params) {
         this.numEggs = params.numEggs;
@@ -25,7 +27,7 @@ public class LayEggBehavior implements PowerBehavior {
         return onThisBird;
     }
 
-    public String getNestType() {
+    public NestType getNestType() {
         return nestType;
     }
 }

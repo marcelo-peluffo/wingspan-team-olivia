@@ -8,9 +8,9 @@ import java.io.*;
 
 public class Player {
 	private GameBoard gameBoard;
-	private ArrayList<Card> cards;
+	private List<Card> cards;
 	private Card cardToPlay;
-	private ArrayList<BonusCard> bonusCards;
+	private List<BonusCard> bonusCards;
 	private Map<Food, Integer> foodInventory;
 	private int actionsRemaining;
 	
