@@ -1,6 +1,7 @@
 package wingspan.cards.behavior;
 
-import wingspan.cards.behavior.*;
+import wingspan.cards.*;
+import wingspan.core.*;
 
 public class TuckCardBehavior implements PowerBehavior {
     private int numCards;
@@ -18,6 +19,16 @@ public class TuckCardBehavior implements PowerBehavior {
     @Override
     public boolean executePower() {
         // tuck card behavior
+        Card activeCard = GameState.activeCard;
+        activeCard.getTuckedCards().add(activeCard);
+        Player activePlayer = GameState.activePlayer;
+
+        if (fromHand) {
+            activePlayer.removeCard(activeCard);
+        } else {
+            CardManager.birdCards.remove(activeCard);
+        }
+
         return true;
     }
 
