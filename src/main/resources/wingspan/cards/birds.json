@@ -212,7 +212,8 @@
     "color": "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 2
+      "numCards": 5
+      "rotatePlayers": true
     },
     "image": "AmericanOystercatcher.jpg"
   },
