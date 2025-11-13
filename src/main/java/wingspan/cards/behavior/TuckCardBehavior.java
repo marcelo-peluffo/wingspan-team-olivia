@@ -20,7 +20,6 @@ public class TuckCardBehavior implements PowerBehavior {
     public boolean executePower() {
         // tuck card behavior
         Card activeCard = GameState.activeCard;
-        activeCard.getTuckedCards().add(activeCard);
         Player activePlayer = GameState.activePlayer;
 
         if (fromHand) {
@@ -29,7 +28,7 @@ public class TuckCardBehavior implements PowerBehavior {
             CardManager.birdCards.remove(activeCard);
         }
 
-        return true;
+        return activeCard.getTuckedCards().add(activeCard);
     }
 
     public int getNumCards() {
