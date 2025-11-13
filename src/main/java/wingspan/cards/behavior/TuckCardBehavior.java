@@ -20,22 +20,22 @@ public class TuckCardBehavior implements PowerBehavior {
     @Override
     public boolean executePower() { // user chooses which cards to tuck and program waits on async decisions
         // tuck card behavior
-        Card activeCard;
+        Card selectedCard;
         Player activePlayer = GameState.activePlayer;
         boolean successful = false;
 
         for (int i = 0; i < numCards; i++)
         {
-            activeCard = GameState.activeCard; // update to later to reflect user choice (activeCard = user.CardSelection) as an async operation
-            if (activeCard == null) continue;
+            selectedCard = GameState.activeCard; // update to later to reflect user choice (selectedCard = user.CardSelection) as an async operation
+            if (selectedCard == null) continue;
             
             if (fromHand) {
-                activePlayer.removeCard(activeCard);
+                activePlayer.removeCard(selectedCard);
             } else {
-                CardManager.birdCards.remove(activeCard); // same here, except from deck
+                CardManager.birdCards.remove(selectedCard); // same here, except from deck
             }  
 
-            successful |= activeCard.getTuckedCards().add(activeCard); // was it successful at any point?
+            successful |= selectedCard.getTuckedCards().add(selectedCard); // was it successful at any point?
         }
 
         if (secondBehavior != null) {
