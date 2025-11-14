@@ -82,7 +82,6 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 1
-      
     },
     "image": "AmericanBittern.jpg"
   },
@@ -106,7 +105,8 @@
     "color": "BROWN",
     "behavior": {
       "type": "TUCK_CARD",
-      "cardsToTuck": 1,
+      "numCards": 1,
+      "fromHand": true,
       "secondBehavior": {
         "type": "DRAW_CARD",
         "numCards": 1
@@ -130,11 +130,14 @@
     "wingSpan": 99,
     "color": "BROWN",
     "behavior": {
-      "type": "EGG_FOR_FOOD",
-      "numEggs": 1,
-      "numFood": 1,
-      "typeOfFood": "ANY",
-      "isFromFeeder": false
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior" {
+         "type": "GAIN_FOOD",
+         "numFood": 1,
+         "typeOfFood": "ANY",
+         "isFromFeeder": false
+       }
     },
     "image": "AmericanCrow.jpg"
   },
@@ -185,10 +188,7 @@
     "behavior": {
       "type": "ROLL_DICE",
       "onlyOutsideFeeder": true,
-      "typeOfFood": "RODENT",
-      "isCacheable": true,
-      "isFromFeeder": false,
-      "onThisBird": true
+      "targetFood": "RODENT"
     },
     "image": "AmericanKestrel.jpg"
   },
@@ -258,7 +258,8 @@
     "color": "BROWN",
     "behavior": {
       "type": "TUCK_CARD",
-      "cardsToTuck": 1,
+      "fromHand": true,
+      "numCards": 1,
       "secondBehavior" : {
         "type": "DRAW_CARD",
         "numCards": 1
@@ -285,7 +286,14 @@
     "wingSpan": 274,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_FOOD",
+      "typeOfFood": "FISH",
+      "numFood": 1,
+      "secondBehavior"{
+        "type": "TUCK_CARD",
+        "numCards": 2,
+        "fromHand": false
+      }
     },
     "image": "AmericanWhitePelican.jpg"
   },
@@ -332,7 +340,9 @@
     "wingSpan": 114,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "FISH"
     },
     "image": "Anhinga.jpg"
   },
@@ -350,7 +360,11 @@
     "wingSpan": 13,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "isFromFeeder": true,
+      "typeOfFood": "ANY",
+      "rotatePlayers": true
     },
     "image": "Anna'sHummingbird.jpg"
   },
@@ -376,7 +390,9 @@
     "wingSpan": 30,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "nestType": "CAVITY"
     },
     "image": "Ash-ThroatedFlycatcher.jpg"
   },
@@ -402,7 +418,10 @@
     "wingSpan": 53,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "AtlanticPuffin.jpg"
   },
