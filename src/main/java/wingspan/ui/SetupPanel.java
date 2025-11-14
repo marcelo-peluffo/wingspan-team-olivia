@@ -1,7 +1,4 @@
 package wingspan.ui;
-import wingspan.cards.BonusCard;
-import wingspan.cards.Card;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,6 +8,7 @@ import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import wingspan.cards.*;
+import wingspan.cards.bonusCards.BonusCard;
 
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;

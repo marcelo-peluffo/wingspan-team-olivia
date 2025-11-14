@@ -42,4 +42,37 @@ public class GameBoard {
 		}
 		return true;
 	}
+
+	public ArrayList<Card> returnAllCards()
+	{
+		ArrayList<Card> list = new ArrayList<Card>();
+		for(Card c: forest)
+		{
+			list.add(c);
+		}
+		for(Card c: grasslands)
+		{
+			list.add(c);
+		}
+		for(Card c: wetlands)
+		{
+			list.add(c);
+		}
+		return list;
+	}
+
+	public List<Card> getForest()
+	{
+		return forest;
+	}
+
+	public List<Card> getGrasslands()
+	{
+		return grasslands;
+	}
+
+	public List<Card> getWetlands()
+	{
+		return wetlands;
+	}
 }
