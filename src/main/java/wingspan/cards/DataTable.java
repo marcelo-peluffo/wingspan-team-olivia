@@ -2,14 +2,21 @@ package wingspan.cards;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import wingspan.WingspanFrame;
-import wingspan.cards.behavior.*;
-import wingspan.enums.*;
+import wingspan.cards.behavior.BehaviorFactory;
+import wingspan.cards.behavior.BehaviorParameters;
+import wingspan.cards.behavior.PowerBehavior;
+import wingspan.enums.Color;
+import wingspan.enums.Food;
+import wingspan.enums.Habitat;
+import wingspan.enums.NestType;
 
 class BirdInfoJson {
     public String name;
@@ -21,7 +28,7 @@ class BirdInfoJson {
     public int wingSpan;
     public Color color;
     public BehaviorParameters behavior; // <-- Jackson will auto-fill this!
-    @JsonIgnore
+    //@JsonIgnore
     public String image;
 }
 
