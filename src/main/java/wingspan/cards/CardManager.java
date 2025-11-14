@@ -1,5 +1,9 @@
 package wingspan.cards;
 import java.util.*;
+import wingspan.cards.bonusCards.*;
+import java.io.*;
+
+import wingspan.cards.bonusCards.BonusCard;
 
 public class CardManager {
 	public static Set<Card> birdCards = new HashSet<>();
@@ -19,6 +23,37 @@ public class CardManager {
 		Card c = iter.next();
 		iter.remove();
 		return c;
+	}
+
+	public boolean initializeBonusCards() throws IOException
+	{
+		bonusCards.add(new NameBonus("Anatomist"));
+		bonusCards.add(new WildBonus("BackyardBirder"));
+		bonusCards.add(new AbilityBonus("BirdCounter"));
+		bonusCards.add(new FoodBonus("BirdFeeder"));
+		bonusCards.add(new EggBonus("BreedingManager"));
+		bonusCards.add(new NameBonus("Cartographer"));
+		bonusCards.add(new WildBonus("Ecologist"));
+		bonusCards.add(new NestBonus("EnclosureBuilder"));
+		bonusCards.add(new AbilityBonus("Falconer"));
+		bonusCards.add(new FoodBonus("FisheryManager"));
+		bonusCards.add(new FoodBonus("FoodWebExpert"));
+		bonusCards.add(new HabitatBonus("Forester"));
+		bonusCards.add(new NameBonus("Historian"));
+		bonusCards.add(new WingspanBonus("LargeBirdSpecialist"));
+		bonusCards.add(new NestBonus("NestBoxBuilder"));
+		bonusCards.add(new FoodBonus("OmnivoreSpecialist"));
+		bonusCards.add(new EggBonus("Oologist"));
+		bonusCards.add(new WingspanBonus("PasserineSpecialist"));
+		bonusCards.add(new NameBonus("Photographer"));
+		bonusCards.add(new NestBonus("PlatformBuilder"));
+		bonusCards.add(new HabitatBonus("PrarieManager"));
+		bonusCards.add(new FoodBonus("Rodentologist"));
+		bonusCards.add(new WildBonus("VisionaryLeader"));
+		bonusCards.add(new FoodBonus("Viticulturalist"));
+		bonusCards.add(new HabitatBonus("WetlandScientist"));
+		bonusCards.add(new NestBonus("WildlifeGardener"));
+		return true;
 	}
 	
 	//returns and removes a random card from bonusCards

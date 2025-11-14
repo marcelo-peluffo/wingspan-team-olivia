@@ -1,6 +1,6 @@
 package wingspan.core;
-
 import wingspan.cards.*;
+import wingspan.cards.bonusCards.BonusCard;
 import wingspan.enums.Food;
 
 import java.util.*;
@@ -52,6 +52,11 @@ public class Player {
 	public void setCardToPlay(Card c)
 	{
 		cardToPlay = c;
+	}
+
+	public List<Card> getHand()
+	{
+		return this.cards;
 	}
 	
 	public GameBoard getGameBoard()

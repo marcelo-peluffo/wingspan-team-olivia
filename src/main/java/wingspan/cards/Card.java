@@ -54,6 +54,11 @@ public class Card {
         }
     }
 
+    public int getCurrentEggs()
+    {
+        return currentEggs;
+    }
+
     public List<Card> getTuckedCards() 
     {
         return tuckedCards;
