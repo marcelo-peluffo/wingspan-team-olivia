@@ -1,8 +1,6 @@
 package wingspan.cards.behavior;
-import wingspan.enums.NestType;
+import wingspan.enums.*;
 import wingspan.core.GameState;
-
-import wingspan.enums.NestType;
 
 public class LayEggBehavior implements PowerBehavior {
     private int numEggs;
