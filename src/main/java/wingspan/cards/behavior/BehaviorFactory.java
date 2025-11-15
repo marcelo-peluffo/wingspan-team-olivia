@@ -23,6 +23,8 @@ public class BehaviorFactory {
                 return new RollDiceBehavior(params);
             case "DISCARD_EGGS":
                 return new DiscardEggsBehavior(params);
+            case "DISCARD_FOOD":
+                return null;                
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

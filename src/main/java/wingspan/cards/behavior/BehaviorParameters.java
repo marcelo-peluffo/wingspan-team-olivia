@@ -12,6 +12,9 @@ public class BehaviorParameters {
     public boolean isCacheable;
     public boolean isFromFeeder;
     public NestType nestType;
+    public Food targetFood;
+    public boolean isBonusCard;
+    public int cardsToKeep;
     public int numPowers;
     public boolean activateAll;
     public int numDice;
