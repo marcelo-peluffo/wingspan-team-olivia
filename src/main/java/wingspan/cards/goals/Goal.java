@@ -41,3 +41,10 @@ public class Goal {
     }
 
 }
+// Goals: 
+// - Egg in certain habitat
+// - Card in certain habitat
+// - Eggs on certain nests
+// - Birds with certain nests that have eggs
+// - sets of 3 eggs
+// - Total birds

@@ -10,6 +10,7 @@ public class WingspanRunner {
 	public static void main(String[]args) throws IOException
 	{
 		GameState.cardManager = new CardManager();
+		GameState.cardManager.initializeBonusCards();
 		GameState.foodManager = new FoodManager();
 		GameState.goalBoard = new GoalBoard();
 		for(int i=0; i<4; i++)
