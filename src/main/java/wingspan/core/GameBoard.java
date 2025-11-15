@@ -1,45 +1,77 @@
 package wingspan.core;
 
-import wingspan.cards.Card;
-import java.util.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
-import java.io.*;
+
+import wingspan.cards.Card;
+import wingspan.enums.Habitat;
 
 public class GameBoard {
 	public BufferedImage gameBoardImage;
+	private Habitat activeHabitat;
 	private List<Card> forest;
 	private List<Card> grasslands;
 	private List<Card> wetlands;
 	
 	public GameBoard() throws IOException
 	{
-		gameBoardImage = ImageIO.read(GameBoard.class.getResource("/Image/GameBoard.jpg"));
+		gameBoardImage = ImageIO.read(GameBoard.class.getResource("/Images/GameBoard.jpg"));
 		forest = new ArrayList<>();
 		grasslands = new ArrayList<>();
 		wetlands = new ArrayList<>();
 	}
 	
-	public boolean addCard(Card c, String habitat)
+	public boolean addCard(Card c, Habitat habitat)
 	{
-		if (habitat.equals("forest"))
-		{
-			if (forest.size() == 5)
-				return false;
-			forest.add(c);
-		}
-		else if (habitat.equals("grasslands"))
-		{
-			if (grasslands.size() == 5)
-				return false;
-			grasslands.add(c);
-		}
-		else
-		{
-			if (wetlands.size() == 5)
-				return false;
-			wetlands.add(c);
-		}
+            switch (habitat) {
+                case FOREST -> {
+                    if (forest.size() == 5)
+                        return false;
+                    forest.add(c);
+                }
+                case GRASSLANDS -> {
+                    if (grasslands.size() == 5)
+                        return false;
+                    grasslands.add(c);
+                }
+                default -> {
+                    if (wetlands.size() == 5)
+                        return false;
+                    wetlands.add(c);
+                }
+            }
 		return true;
+	}
+
+    public List<Card> getForest() {
+        return forest;
+    }
+
+    public List<Card> getGrasslands() {
+        return grasslands;
+    }
+
+    public List<Card> getWetlands() {
+        return wetlands;
+    }
+
+	public List<Card> getActiveHabitat() {
+		switch (activeHabitat)
+		{
+			case FOREST -> {return forest;}
+			case GRASSLANDS -> {return grasslands;}
+			case WETLANDS -> {return wetlands;}
+		}
+
+		return null;
+	}
+
+	public void setActiveHabitat(Habitat h)
+	{
+		activeHabitat = h;
 	}
 }

@@ -1,4 +1,6 @@
 package wingspan.cards.behavior;
+import wingspan.enums.NestType;
+import wingspan.core.GameState;
 
 import wingspan.enums.NestType;
 
@@ -16,6 +18,17 @@ public class LayEggBehavior implements PowerBehavior {
     @Override
     public boolean executePower() {
         // lay egg behavior
+        if (GameState.selectedCard.getBirdInfo().getNestType() != nestType || (!onThisBird && GameState.selectedCard.equals(GameState.activeCard)) || GameState.selectedCard.isAtMaxEggs())
+        {
+            return false;
+        }
+        else
+        {
+            if (!GameState.selectedCard.addEggs(numEggs))
+            {
+                return false;
+            }
+        }
         return true;
     }
 

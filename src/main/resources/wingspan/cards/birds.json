@@ -105,12 +105,544 @@
     "wingSpan": 51,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "cardsToTuck": 1,
-      "secondBehavior": {
-        "type": "DRAW_CARD",
-        "numCards": 1
-      }
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanCoot.jpg"
+  },
+  {
+    "name": "American Crow",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 99,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanCrow.jpg"
+  },
+  {
+    "name": "American Goldfinch",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "BOWL",
+    "maxEggs": 3,
+    "wingSpan": 23,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanGoldfinch.jpg"
+  },
+  {
+    "name": "American Kestrel",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "CAVITY",
+    "maxEggs": 3,
+    "wingSpan": 56,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanKestrel.jpg"
+  },
+  {
+    "name": "American Oystercatcher",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 81,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanOystercatcher.jpg"
+  },
+  {
+    "name": "American Redstart",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 20,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanRedstart.jpg"
+  },
+  {
+    "name": "American Robin",
+    "habitats": [
+      "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      ["INVERTEBRATE", "BERRY"]
+    ],
+    "victoryPoints": 1,
+    "nestType": "BOWL",
+    "maxEggs": 4,
+    "wingSpan": 43,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanRobin.jpg"
+  },
+  {
+    "name": "American White Pelican",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "GROUND",
+    "maxEggs": 1,
+    "wingSpan": 274,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanWhitePelican.jpg"
+  },
+  {
+    "name": "American Woodcock",
+    "habitats": [],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints": 9,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 46,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AmericanWoodcock.jpg"
+  },
+  {
+    "name": "Anhinga",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints": 6,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 114,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Anhinga.jpg"
+  },
+  {
+    "name": "Anna's Hummingbird",
+    "habitats": [],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 13,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Anna'sHummingbird.jpg"
+  },
+  {
+    "name": "Ash-Throated Flycatcher",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "CAVITY",
+    "maxEggs": 4,
+    "wingSpan": 30,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Ash-ThroatedFlycatcher.jpg"
+  },
+  {
+    "name": "Atlantic Puffin",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints": 8,
+    "nestType": "STAR",
+    "maxEggs": 1,
+    "wingSpan": 53,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "AtlanticPuffin.jpg"
+  },
+  {
+    "name": "Baird's Sparrow",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 23,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Baird'sSparrow.jpg"
+  },
+  {
+    "name": "Bald Eagle",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 9,
+    "nestType": "PLATFORM",
+    "maxEggs": 1,
+    "wingSpan": 203,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BaldEagle.jpg"
+  },
+  {
+    "name": "Baltimore Oriole",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 9,
+    "nestType": "STAR",
+    "maxEggs": 2,
+    "wingSpan": 30,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BaltimoreOriole.jpg"
+  },
+  {
+    "name": "Barn Owl",
+    "habitats": [],
+    "food": [
+      [
+        "RODENT"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "CAVITY",
+    "maxEggs": 4,
+    "wingSpan": 107,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BarnOwl.jpg"
+  },
+  {
+    "name": "Barn Swallow",
+    "habitats": [],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints": 1,
+    "nestType": "STAR",
+    "maxEggs": 3,
+    "wingSpan": 38,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BarnSwallow.jpg"
+  },
+  {
+    "name": "Barred Owl",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "CAVITY",
+    "maxEggs": 2,
+    "wingSpan": 107,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BarredOwl.jpg"
+  },
+  {
+    "name": "Barrow's Goldeneye",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "CAVITY",
+    "maxEggs": 4,
+    "wingSpan": 71,
+    "color": "PINK",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Barrow'sGoldeneye.jpg"
+  },
+  {
+    "name": "Bell's Vired",
+    "habitats": [],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "STAR",
+    "maxEggs": 2,
+    "wingSpan": 18,
+    "color": "WHITE",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Bell'sVired.jpg"
+  },
+  {
+    "name": "Belted Kingfisher",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "STAR",
+    "maxEggs": 4,
+    "wingSpan": 53,
+    "color": "PINK",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BeltedKingfisher.jpg"
+  },
+  {
+    "name": "Bewick's Wren",
+    "habitats": [],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "CAVITY",
+    "maxEggs": 3,
+    "wingSpan": 18,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "Bewick'sWren.jpg"
+  },
+  {
+    "name": "Black Skimmer",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints": 6,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 112,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image": "BlackSkimmer.jpg"
+  },
+  {
+    "name": "Black Tern",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [],
+    "victoryPoints": 4,
+    "nestType": "STAR",
+    "maxEggs": 2,
+    "wingSpan": 61,
+    "color": "BROWN",
+    "behavior": {
+      "type": "TEMPLATE_BEHAVIOR"
     },
     "image": "AmericanCoot.jpg"
   },

@@ -21,6 +21,8 @@ public class BehaviorFactory {
                 return new PlayPreviousBrownBehavior(params);
             case "ROLL_DICE":
                 return new RollDiceBehavior(params);
+            case "DISCARD_EGGS":
+                return new DiscardEggsBehavior(params);
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

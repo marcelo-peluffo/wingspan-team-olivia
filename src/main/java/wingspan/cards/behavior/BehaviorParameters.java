@@ -18,6 +18,7 @@ public class BehaviorParameters {
     public boolean rotatePlayers;
     public boolean onlyOutsideFeeder;
     public boolean fromHand;
+    public boolean rotatePlayers;
     public String type;
     public BehaviorParameters secondBehavior;
 
