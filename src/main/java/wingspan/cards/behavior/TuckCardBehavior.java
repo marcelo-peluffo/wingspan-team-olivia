@@ -1,8 +1,8 @@
 package wingspan.cards.behavior;
-import wingspan.core.GameState;
-import wingspan.cards.Card;
 
+import wingspan.cards.*;
 import wingspan.cards.behavior.*;
+import wingspan.core.*;
 
 public class TuckCardBehavior implements PowerBehavior {
     private int numCards;
@@ -18,17 +18,31 @@ public class TuckCardBehavior implements PowerBehavior {
     }
 
     @Override
-    public boolean executePower() {
-        for(Card c: GameState.cardsToTuck)
+    public boolean executePower() { // user chooses which cards to tuck and program waits on async decisions
+        // tuck card behavior
+        Card selectedCard;
+        Player activePlayer = GameState.activePlayer;
+        boolean successful = false;
+
+        for (int i = 0; i < numCards; i++)
         {
-            GameState.activeCard.tuckCard(c);
+            selectedCard = GameState.activeCard; // update to later to reflect user choice (selectedCard = user.CardSelection) as an async operation
+            if (selectedCard == null) continue;
+            
+            if (fromHand) {
+                activePlayer.removeCard(selectedCard);
+            } else {
+                CardManager.birdCards.remove(selectedCard); // same here, except from deck
+            }  
+
+            successful |= selectedCard.getTuckedCards().add(selectedCard); // was it successful at any point?
         }
-        GameState.cardsToTuck.clear();
-        if (this.secondBehavior != null)
-        {
-            secondBehavior.executePower();
+
+        if (secondBehavior != null) {
+            successful |= secondBehavior.executePower(); // same here.
         }
-        return true;
+
+        return successful;
     }
 
     public int getNumCards() {
