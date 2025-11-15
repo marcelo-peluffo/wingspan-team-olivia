@@ -663,7 +663,7 @@
     "behavior": {
       "type": "DISCARD_EGGS",
       "onThisBird": false,
-      "secondBehavior" {
+      "secondBehavior" : {
          "type": "GAIN_FOOD",
          "numFood": 1,
          "typeOfFood": "ANY",

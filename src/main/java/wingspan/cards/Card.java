@@ -67,6 +67,11 @@ public class Card {
         }
     }
 
+    public int getCurrentEggs()
+    {
+        return currentEggs;
+    }
+
     public boolean isAtMaxEggs()
     {
         return currentEggs == birdInfo.getMaxEggs();
