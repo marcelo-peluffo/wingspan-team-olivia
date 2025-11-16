@@ -1079,10 +1079,10 @@
     "wingSpan": 38,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD":
+      "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "DRAW_CARD",
         "numCards": 1
       }
@@ -1158,7 +1158,7 @@
     "wingSpan": 18,
     "color": "WHITE",
     "behavior": {
-      "type": "DARW_CARD",
+      "type": "DRAW_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -1304,7 +1304,7 @@
       "type": "DISCARD_FOOD",
       "numFood": 1,
       "typeOfFood": "WHEAT",
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "TUCK_CARD",
         "numCards": 2,
         "fromHand": false
@@ -1386,7 +1386,7 @@
     "behavior": {
       "type": "DISCARD_EGGS",
       "onThisBird": false,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "GAIN_FOOD",
         "numFood": 1,
         "typeOfFood": "ANY",
@@ -1468,7 +1468,7 @@
       "typeOfFood": "WHEAT",
       "numFood": 1,
       "isFromFeeder": true,
-      "isCatcheable": true
+      "isCacheable": true
     },
     "image": "BlueJay.jpg"
   },

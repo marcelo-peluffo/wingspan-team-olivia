@@ -13,6 +13,7 @@ public class GameState {
 	public static List<Player> players;
 	public static GoalBoard goalBoard;
 	public static Player activePlayer; //current turn's player
+	public static boolean gameStarted;
 
 	//variables used for PowerBehavior logic
 	public static ArrayList<Player> abilityPlayers = new ArrayList<Player>(); /* 
@@ -60,6 +61,8 @@ public class GameState {
 		activeCard = null;
 		selectedCard = null;
 		choseToCache = false;
+
+		gameStarted = false;
 	}
 
 
