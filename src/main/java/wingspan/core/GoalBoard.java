@@ -1,6 +1,8 @@
 package wingspan.core;
+import wingspan.cards.goals.*;
+import wingspan.enums.*;
 
-import wingspan.cards.goals.Goal;
+import java.io.IOException;
 import java.util.*;
 
 public class GoalBoard {
@@ -10,7 +12,7 @@ public class GoalBoard {
 	private Goal round3Goal;
 	private Goal round4Goal;
 	
-	public GoalBoard()
+	public GoalBoard() throws IOException
 	{
 		goals = new ArrayList<>();
 		addGoals();
@@ -20,8 +22,23 @@ public class GoalBoard {
 		round4Goal = goals.remove((int)(Math.random() * goals.size()));
 	}
 	
-	public void addGoals()
+	public void addGoals() throws IOException
 	{
-		// this method will add all unique goal classes to the goals ArrayList once they're implemented
+		goals.add(new HabitatGoal(Habitat.FOREST, false, "EggsInForestGoal"));
+		goals.add(new HabitatGoal(Habitat.GRASSLANDS, false, "EggsInGrasslandsGoal"));
+		goals.add(new HabitatGoal(Habitat.WETLANDS, false, "EggsInWetlandsGoal"));
+		goals.add(new HabitatGoal(Habitat.FOREST, true, "BirdsInForestGoal"));
+		goals.add(new HabitatGoal(Habitat.GRASSLANDS, true, "BirdsInGrasslandsGoal"));
+		goals.add(new HabitatGoal(Habitat.WETLANDS, true, "BirdsInWetlandsGoal"));
+		goals.add(new EggsNestGoal(NestType.BOWL, false, "BowlCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.CAVITY, false, "CavityCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.PLATFORM, false, "PlatformCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.GROUND, false, "GroundCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.BOWL, true, "EggsInBowlGoal"));
+		goals.add(new EggsNestGoal(NestType.CAVITY, true, "EggsInCavityGoal"));
+		goals.add(new EggsNestGoal(NestType.PLATFORM, true, "EggsInPlatformGoal"));
+		goals.add(new EggsNestGoal(NestType.GROUND, true, "EggsInGroundGoal"));
+		goals.add(new WildGoal(true, "TotalCardsGoal"));
+		goals.add(new WildGoal(false, "SetsOfEggsGoal"));
 	}
 }
