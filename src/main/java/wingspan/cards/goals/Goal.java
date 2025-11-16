@@ -71,12 +71,12 @@ public class Goal {
             }
             Player[] highestPlayers = new Player[playersWithMaxScore];
             int index = 0;
-            for(Player p: tempPlayerList)
-            {
-                if (evaluatePlayer(p) == maxScore)
-                {
+            Iterator<Player> iter = tempPlayerList.iterator();
+            while(iter.hasNext()) {
+                Player p = iter.next();
+                if (evaluatePlayer(p) == maxScore) {
                     highestPlayers[index] = p;
-                    tempPlayerList.remove(p);
+                    iter.remove();  // safe removal
                     index++;
                 }
             }
