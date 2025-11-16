@@ -16,7 +16,11 @@ public class Player {
 	
 	public Player() throws IOException
 	{
-		gameBoard = new GameBoard();
+		try {
+			gameBoard = new GameBoard();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		cards = new ArrayList<>();
 		bonusCards = new ArrayList<>();
 		foodInventory = new EnumMap<>(Food.class);
