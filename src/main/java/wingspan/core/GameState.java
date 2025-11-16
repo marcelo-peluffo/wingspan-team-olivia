@@ -1,5 +1,6 @@
 package wingspan.core;
 
+import java.io.IOException;
 import java.util.*;
 import wingspan.food.*;
 import wingspan.cards.*;
@@ -30,5 +31,36 @@ public class GameState {
 	public static Card activeCard; // contains the card whose power is currently being executed
 	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
 	public static boolean choseToCache;
+
+	public static void initialize() {
+		// Core managers
+		try {
+			foodManager = new FoodManager();
+			cardManager = new CardManager();
+			cardManager.initializeBonusCards();
+			goalBoard = new GoalBoard();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// Players
+		players = new ArrayList<>();  // empty list, ready to be filled externally
+
+		// Active player starts as null until game sets it
+		activePlayer = null;
+
+		// Ability-related lists
+		abilityPlayers.clear();
+		cardsToDraw.clear();
+		cardsToTuck.clear();
+
+		// Misc. state
+		foodChoice = null;
+		activePlayerTuckedCard = false;
+		activeCard = null;
+		selectedCard = null;
+		choseToCache = false;
+	}
+
 
 }

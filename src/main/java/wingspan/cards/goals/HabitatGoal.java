@@ -12,7 +12,7 @@ public class HabitatGoal extends Goal //this class will handle 2 types of goals:
 
     public HabitatGoal(Habitat habitat, boolean isCardGoal, String goalPath) throws IOException
     {
-        super(goalPath);
+        super(goalPath + ".jpg");
         this.habitat = habitat;
         this.isCardGoal = isCardGoal;
     }

@@ -12,7 +12,7 @@ public class EggsNestGoal extends Goal //this class will handle the goals that i
 
     public EggsNestGoal(NestType nestType, boolean countMultiple, String goalPath) throws IOException
     {
-        super(goalPath);
+        super(goalPath + ".jpg");
         this.nestType = nestType;
         this.countMultiple = countMultiple;
     }

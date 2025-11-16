@@ -22,12 +22,12 @@ public class FoodDice {
             foodChoices.add(Food.BERRY);
             foodChoices.add(Food.FISH);
             
-            BufferedImage choiceImage = ImageIO.read(FoodDice.class.getResource("/Image/MultiDice.jpg"));
-            BufferedImage invertebrateImage = ImageIO.read(FoodDice.class.getResource("/Image/InvertebrateDice.jpg"));
-            BufferedImage wheatImage = ImageIO.read(FoodDice.class.getResource("/Image/WheatDice.jpg"));
-            BufferedImage rodentImage = ImageIO.read(FoodDice.class.getResource("/Image/RodentDice.jpg"));
-            BufferedImage berryImage = ImageIO.read(FoodDice.class.getResource("/Image/BerryDice.jpg"));
-            BufferedImage fishImage = ImageIO.read(FoodDice.class.getResource("/Image/FishDice.jpg"));
+            BufferedImage choiceImage = ImageIO.read(FoodDice.class.getResource("/Images/MultiDice.jpg"));
+            BufferedImage invertebrateImage = ImageIO.read(FoodDice.class.getResource("/Images/InvertebrateDice.jpg"));
+            BufferedImage wheatImage = ImageIO.read(FoodDice.class.getResource("/Images/WheatDice.jpg"));
+            BufferedImage rodentImage = ImageIO.read(FoodDice.class.getResource("/Images/RodentDice.jpg"));
+            BufferedImage berryImage = ImageIO.read(FoodDice.class.getResource("/Images/BerryDice.jpg"));
+            BufferedImage fishImage = ImageIO.read(FoodDice.class.getResource("/Images/FishDice.jpg"));
 
             foodFaces = new ArrayList<>();
             foodFaces.add(choiceImage);
