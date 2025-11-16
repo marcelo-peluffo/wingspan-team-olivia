@@ -12,8 +12,7 @@ public class Goal {
 
     public Goal(String imagePath) throws IOException
     {
-        InputStream inputStream = Goal.class.getResourceAsStream("/Images/" + imagePath);
-        this.goalImage = ImageIO.read(inputStream);
+        this.goalImage = ImageIO.read(Goal.class.getResource("/Images/" + imagePath));
         System.out.println("The Goal " + imagePath + " was created.");
     }
 

@@ -26,19 +26,19 @@ public class GoalBoard {
 	{
 		goals.add(new HabitatGoal(Habitat.FOREST, false, "EggsInForestGoal"));
 		goals.add(new HabitatGoal(Habitat.GRASSLANDS, false, "EggsInGrasslandsGoal"));
-		goals.add(new HabitatGoal(Habitat.WETLANDS, false, "EggsInWetlandsGoal"));
+		goals.add(new HabitatGoal(Habitat.WETLANDS, false, "EggsInWetlandGoal"));
 		goals.add(new HabitatGoal(Habitat.FOREST, true, "BirdsInForestGoal"));
-		goals.add(new HabitatGoal(Habitat.GRASSLANDS, true, "BirdsInGrasslandsGoal"));
+		goals.add(new HabitatGoal(Habitat.GRASSLANDS, true, "BirdsInGrasslandGoal"));
 		goals.add(new HabitatGoal(Habitat.WETLANDS, true, "BirdsInWetlandsGoal"));
-		goals.add(new EggsNestGoal(NestType.BOWL, false, "BowlCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.BOWL, false, "BowlCardsWithEggGoal"));
 		goals.add(new EggsNestGoal(NestType.CAVITY, false, "CavityCardsWithEggsGoal"));
-		goals.add(new EggsNestGoal(NestType.PLATFORM, false, "PlatformCardsWithEggsGoal"));
+		goals.add(new EggsNestGoal(NestType.PLATFORM, false, "PlatformCardsWithEggGoal"));
 		goals.add(new EggsNestGoal(NestType.GROUND, false, "GroundCardsWithEggsGoal"));
 		goals.add(new EggsNestGoal(NestType.BOWL, true, "EggsInBowlGoal"));
 		goals.add(new EggsNestGoal(NestType.CAVITY, true, "EggsInCavityGoal"));
 		goals.add(new EggsNestGoal(NestType.PLATFORM, true, "EggsInPlatformGoal"));
 		goals.add(new EggsNestGoal(NestType.GROUND, true, "EggsInGroundGoal"));
 		goals.add(new WildGoal(true, "TotalCardsGoal"));
-		goals.add(new WildGoal(false, "SetsOfEggsGoal"));
+		goals.add(new WildGoal(false, "SetOfEggsGoal"));
 	}
 }

@@ -82,7 +82,7 @@ public class DataTable {
                 CardManager.birdInfos.add(birdInfo);
                 CardManager.birdCards.add(new Card(birdInfo, birdImage));
             }
-
+            System.out.println("All cards successfully initialized");
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to load birds JSON", e);

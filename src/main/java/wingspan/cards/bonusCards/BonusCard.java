@@ -14,6 +14,7 @@ public class BonusCard {
 	{
 		InputStream inputStream = BonusCard.class.getResourceAsStream("/Images/" + imagePath);
         this.cardImage = ImageIO.read(inputStream);
+		System.out.println("The BonusCard " + imagePath + " was created");
 	}
 	
 	public BufferedImage getImage()
