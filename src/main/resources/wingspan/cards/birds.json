@@ -1414,13 +1414,16 @@
     "wingSpan": 74,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2
     },
     "image": "Black-NeckedStilt.jpg"
   },
   {
     "name": "Blue Grosbeak",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS", "FOREST"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1461,7 +1464,11 @@
     "wingSpan": 41,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "typeOfFood": "WHEAT",
+      "numFood": 1,
+      "isFromFeeder": true,
+      "isCatcheable": true
     },
     "image": "BlueJay.jpg"
   },
