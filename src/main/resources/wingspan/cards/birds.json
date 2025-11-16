@@ -975,7 +975,8 @@
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1
     },
     "image": "Baird'sSparrow.jpg"
   },
@@ -1001,7 +1002,9 @@
     "wingSpan": 203,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "typeOfFood": "FISH",
+      "isFromFeeder": true
     },
     "image": "BaldEagle.jpg"
   },
@@ -1027,13 +1030,19 @@
     "wingSpan": 30,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "BERRY",
+      "rotatePlayers": true,
+      "isFromFeeder": false
     },
     "image": "BaltimoreOriole.jpg"
   },
   {
     "name": "Barn Owl",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS", "FOREST"
+    ],
     "food": [
       [
         "RODENT"
@@ -1048,13 +1057,17 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "RODENT"
     },
     "image": "BarnOwl.jpg"
   },
   {
     "name": "Barn Swallow",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "GRASSLANDS"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1066,7 +1079,13 @@
     "wingSpan": 38,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD":
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior"{
+        "type": "DRAW_CARD",
+        "numCards": 1
+      }
     },
     "image": "BarnSwallow.jpg"
   },
@@ -1086,7 +1105,8 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCk_CARD",
+      "fromHand": false
     },
     "image": "BarredOwl.jpg"
   },
@@ -1112,13 +1132,18 @@
     "wingSpan": 71,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "onThisBird": false,
+      "nestType": "CAVITY"
     },
     "image": "Barrow'sGoldeneye.jpg"
   },
   {
     "name": "Bell's Vired",
-    "habitats": [],
+    "habitats": [
+      "GRASSLANDS", "FOREST"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1133,7 +1158,10 @@
     "wingSpan": 18,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DARW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "Bell'sVired.jpg"
   },
@@ -1156,13 +1184,18 @@
     "wingSpan": 53,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "FISH",
+      "isFromFeeder": false
     },
     "image": "BeltedKingfisher.jpg"
   },
   {
     "name": "Bewick's Wren",
-    "habitats": [],
+    "habitats": [
+      "GRASSLANDS", "WETLANDS", "FOREST"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1203,7 +1236,9 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "FISH"
     },
     "image": "BlackSkimmer.jpg"
   },
@@ -1212,14 +1247,19 @@
     "habitats": [
       "WETLANDS"
     ],
-    "food": [],
+    "food": [
+      [
+        "FISH", "INVERTEBRATE"
+      ]
+    ],
     "victoryPoints": 4,
     "nestType": "STAR",
     "maxEggs": 2,
     "wingSpan": 61,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 1
     },
     "image": "BlackTern.jpg"
   },
@@ -1235,7 +1275,10 @@
     "wingSpan": 150,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
     },
     "image": "BlackVulture.jpg"
   },
@@ -1258,7 +1301,14 @@
     "wingSpan": 76,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_FOOD",
+      "numFood": 1,
+      "typeOfFood": "WHEAT",
+      "secondBehavior"{
+        "type": "TUCK_CARD",
+        "numCards": 2,
+        "fromHand": false
+      }
     },
     "image": "Black-BelliedWhistling-Duck.jpg"
   },
@@ -1281,13 +1331,18 @@
     "wingSpan": 64,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
     },
     "image": "Black-BilledMagpie.jpg"
   },
   {
     "name": "Black-Chinned Hummingbird",
-    "habitats": [],
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
     "food": [
       [
         "ANY"
@@ -1299,7 +1354,11 @@
     "wingSpan": 8,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "typeOfFood": "BERRY",
+      "numFood": 1,
+      "isFromFeeder": false,
+      "rotatePlayers": true
     },
     "image": "Black-ChinnedHummingbird.jpg"
   },
@@ -1325,7 +1384,14 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior"{
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
     },
     "image": "Black-CrownedNight-Heron.jpg"
   },
