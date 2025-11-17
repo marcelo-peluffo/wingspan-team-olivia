@@ -1592,7 +1592,7 @@
       "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "LAY_EGG",
         "numEggs": 1,
         "onThisBird": true
@@ -1742,7 +1742,7 @@
       "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "LAY_EGG",
         "numEggs": 1,
         "onThisBird": true
@@ -1818,7 +1818,7 @@
       "type": "DISCARD_FOOD",
       "typeOfFood": "WHEAT",
       "numFood": 1,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "TUCK_CARD",
         "numCards": 2,
         "fromHand": false
