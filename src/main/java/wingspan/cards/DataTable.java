@@ -28,7 +28,6 @@ class BirdInfoJson {
     public int wingSpan;
     public Color color;
     public BehaviorParameters behavior; // <-- Jackson will auto-fill this!
-    //@JsonIgnore
     public String image;
 }
 
