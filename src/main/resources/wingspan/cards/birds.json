@@ -1973,7 +1973,10 @@
     "wingSpan": 38,
     "color": "PINK",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": false
     },
     "image": "EasternKingbird.jpg"
   },
@@ -1993,7 +1996,11 @@
     "wingSpan": 28,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": false,
+      "rotatePlayers": true
     },
     "image": "EasternPhoebe.jpg"
   },
@@ -2013,7 +2020,9 @@
     "wingSpan": 51,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "RODENT"
     },
     "image": "EasternScreech-Owl.jpg"
   },
