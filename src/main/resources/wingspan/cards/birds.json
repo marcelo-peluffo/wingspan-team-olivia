@@ -1488,13 +1488,18 @@
     "wingSpan": 15,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": false
     },
     "image": "Blue-GrayGnatcatcher.jpg"
   },
   {
     "name": "Blue-Winged Warbler",
-    "habitats": [],
+    "habitats": [
+      "GRASSLANDS", "FOREST"
+    ],
     "food": [
       [
         "INVERTEBRATE"
@@ -1535,7 +1540,9 @@
     "wingSpan": 30,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "nestType": "GROUND"
     },
     "image": "Bobolink.jpg"
   },
@@ -1558,7 +1565,8 @@
     "wingSpan": 114,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 3
     },
     "image": "Brant.jpg"
   },
@@ -1581,7 +1589,14 @@
     "wingSpan": 41,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior"{
+        "type": "LAY_EGG",
+        "numEggs": 1,
+        "onThisBird": true
+      }
     },
     "image": "Brewer'sBlackbird.jpg"
   },
@@ -1601,13 +1616,17 @@
     "wingSpan": 85,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "RODENT"
     },
     "image": "Broad-WingedHawk.jpg"
   },
   {
     "name": "Bronzed Cowbird",
-    "habitats": [],
+    "habitats": [
+      "GRASSLANDS"
+    ],
     "food": [
       [
         "WHEAT"
@@ -1615,6 +1634,25 @@
       [
         "INVERTEBRATE"
       ],
+    ],
+    "victoryPoints": 5,
+    "nestType": "",
+    "maxEggs": 0,
+    "wingSpan": 36,
+    "color": "PINK",
+    "behavior": {
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "nestType": "BOWL"
+    },
+    "image": "BronzedCowbird.jpg"
+  },
+  {
+    "name": "Brown Pelican",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
       [
         "FISH"
       ],
@@ -1628,9 +1666,12 @@
     "wingSpan": 201,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 3,
+      "typeOfFood": "FISH",
+      "isFromFeeder": false
     },
-    "image": "BronzedCowbird.jpg"
+    "image": "BrownPelican.jpg"
   },
   {
     "name": "Brown-Headed Cowbird",
@@ -1641,12 +1682,50 @@
       [
         "WHEAT"
       ],
+    ],
+    "victoryPoints": 3,
+    "nestType": "",
+    "maxEggs": 0,
+    "wingSpan": 30,
+    "color": "PINK",
+    "behavior": {
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "nestType": "BOWL"
+    },
+    "image": "Brown-HeadedCowbird.jpg"
+  },
+  {
+    "name": "Burrowing Owl",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
       [
         "RODENT"
       ],
       [
         "INVERTEBRATE"
       ],
+    ],
+    "victoryPoints": 5,
+    "nestType": "STAR",
+    "maxEggs": 4,
+    "wingSpan": 53,
+    "color": "BROWN",
+    "behavior": {
+      "type": "ROLL_DICE",
+      "onlyOutsideFeeder": true,
+      "targetFood": "RODENT"
+    },
+    "image": "BurrowingOwl.jpg"
+  },
+  {
+    "name": "Bushtit",
+    "habitats": [
+      "GRASSLANDS", "WETLANDS", "FOREST"
+    ],
+    "food": [
       [
         "INVERTEBRATE"
       ],
@@ -1660,9 +1739,16 @@
     "wingSpan": 15,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior"{
+        "type": "LAY_EGG",
+        "numEggs": 1,
+        "onThisBird": true
+      }
     },
-    "image": "Brown-HeadedCowbird.jpg"
+    "image": "Bushtit.jpg"
   },
   {
     "name": "California Condor",
