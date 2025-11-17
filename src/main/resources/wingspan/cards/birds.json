@@ -1633,7 +1633,7 @@
       ],
       [
         "INVERTEBRATE"
-      ],
+      ]
     ],
     "victoryPoints": 5,
     "nestType": "",
@@ -1681,7 +1681,7 @@
     "food": [
       [
         "WHEAT"
-      ],
+      ]
     ],
     "victoryPoints": 3,
     "nestType": "",
@@ -1706,7 +1706,7 @@
       ],
       [
         "INVERTEBRATE"
-      ],
+      ]
     ],
     "victoryPoints": 5,
     "nestType": "STAR",
