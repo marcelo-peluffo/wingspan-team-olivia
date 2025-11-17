@@ -2154,7 +2154,12 @@
     "wingSpan": 201,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": false,
+      "secondBehavior": {
+        "type": "TEMPLATE_BEHAVIOR"
+      }
     },
     "image": "GoldenEagle.jpg"
   },
@@ -2173,7 +2178,8 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1
     },
     "image": "GrasshopperSparrow.jpg"
   },
@@ -2199,7 +2205,8 @@
     "wingSpan": 28,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_PREV_BROWN",
+      "numPowers": 1
     },
     "image": "GrayCatbird.jpg"
   },
@@ -2245,7 +2252,10 @@
     "wingSpan": 33,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": true
     },
     "image": "GreatCrestedFlycatcher.jpg"
   },
@@ -2297,7 +2307,12 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": false,
+      "secondBehavior": {
+        "type": "TEMPLATE_BEHAVIOR"
+      }
     },
     "image": "GreatHornedOwl.jpg"
   },
@@ -2323,7 +2338,10 @@
     "wingSpan": 71,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "GreaterPrairie-Chicken.jpg"
   }
