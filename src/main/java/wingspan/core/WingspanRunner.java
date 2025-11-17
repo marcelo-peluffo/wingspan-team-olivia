@@ -17,7 +17,7 @@ public class WingspanRunner {
 		{
 			GameState.players.add(new Player());
 		}
-		
+		GameState.activePlayer = GameState.players.get(0);
 
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

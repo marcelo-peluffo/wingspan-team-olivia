@@ -1592,7 +1592,7 @@
       "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "LAY_EGG",
         "numEggs": 1,
         "onThisBird": true
@@ -1633,10 +1633,10 @@
       ],
       [
         "INVERTEBRATE"
-      ],
+      ]
     ],
     "victoryPoints": 5,
-    "nestType": "",
+    "nestType": "NONE",
     "maxEggs": 0,
     "wingSpan": 36,
     "color": "PINK",
@@ -1681,10 +1681,10 @@
     "food": [
       [
         "WHEAT"
-      ],
+      ]
     ],
     "victoryPoints": 3,
-    "nestType": "",
+    "nestType": "NONE",
     "maxEggs": 0,
     "wingSpan": 30,
     "color": "PINK",
@@ -1706,7 +1706,7 @@
       ],
       [
         "INVERTEBRATE"
-      ],
+      ]
     ],
     "victoryPoints": 5,
     "nestType": "STAR",
@@ -1742,7 +1742,7 @@
       "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "LAY_EGG",
         "numEggs": 1,
         "onThisBird": true

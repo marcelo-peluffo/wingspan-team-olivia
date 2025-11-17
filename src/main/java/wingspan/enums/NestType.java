@@ -5,5 +5,6 @@ public enum NestType {
     GROUND,
     PLATFORM,
     BOWL,
-    STAR
+    STAR,
+    NONE
 }
