@@ -1839,7 +1839,15 @@
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "WHEAT",
+        "isFromFeeder": false
+      }
     },
     "image": "Dark-EyedJunco.jpg"
   },
@@ -1865,7 +1873,14 @@
     "wingSpan": 25,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior": {
+        "type": "LAY_EGG",
+        "numEggs": 1,
+        "onThisBird": true
+      }
     },
     "image": "Dickcissel.jpg"
   },
@@ -1888,7 +1903,14 @@
     "wingSpan": 132,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_FOOD",
+      "typeOfFood": "FISH",
+      "numFood": 1,
+      "secondBehavior": {
+        "type": "TUCK_CARD",
+        "numCards": 2,
+        "fromHand": false
+      }
     },
     "image": "Double-CrestedCormorant.jpg"
   },
