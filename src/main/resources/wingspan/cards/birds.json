@@ -1891,7 +1891,8 @@
     "wingSpan": 20,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2
     },
     "image": "CarolinaWren.jpg"
   },
@@ -1914,7 +1915,10 @@
     "wingSpan": 30,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBounusCard": true,
+      "cardsToKeep": 1
     },
     "image": "Cassin'sFinch.jpg"
   },
@@ -1937,7 +1941,8 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1
     },
     "image": "Cassin'sSparrow.jpg"
   },
@@ -1960,7 +1965,15 @@
     "wingSpan": 25,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior"{
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "BERRY",
+        "isFromFeeder": false
+      }
     },
     "image": "CedarWaxwing.jpg"
   },
@@ -1983,7 +1996,10 @@
     "wingSpan": 20,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "CeruleanWarbler.jpg"
   },
@@ -2009,7 +2025,10 @@
     "wingSpan": 25,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "Chestnut-CollaredLongspur.jpg"
   },
@@ -2035,7 +2054,14 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior"{
+        "type": "GAIN_FOOD",
+        "numFood": 2,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
     },
     "image": "ChihuahuanRaven.jpg"
   },
@@ -2067,14 +2093,19 @@
     "habitats": [
       "FOREST", "GRASSLANDS"
     ],
-    "food": [],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT"
+      ]
+    ],
     "victoryPoints": 1,
     "nestType": "BOWL",
     "maxEggs": 3,
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1
     },
     "image": "ChippingSparrow.jpg"
   },
@@ -2094,7 +2125,11 @@
     "wingSpan": 61,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 1,
+      "secondBehavior": {
+        "type": "TEMPLATE_BEHAVIOR"
+      }
     },
     "image": "Clark'sGrebe.jpg"
   },
