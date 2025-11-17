@@ -1762,7 +1762,10 @@
     "wingSpan": 277,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "isBonusCard": true,
+      "cardsToKeep": 1
     },
     "image": "CaliforniaCondor.jpg"
   },
@@ -1788,7 +1791,8 @@
     "wingSpan": 36,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "LAY_EGG",
+      "numEggs": 1
     },
     "image": "CaliforniaQuail.jpg"
   },
@@ -1811,7 +1815,14 @@
     "wingSpan": 132,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DISCARD_FOOD",
+      "typeOfFood": "WHEAT",
+      "numFood": 1,
+      "secondBehavior"{
+        "type": "TUCK_CARD",
+        "numCards": 2,
+        "fromHand": false
+      }
     },
     "image": "CanadaGoose.jpg"
   },
@@ -1834,7 +1845,9 @@
     "wingSpan": 82,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "DRAW_CARD",
+      "numCards": 1,
+      "rotatePlayers": true
     },
     "image": "Canvasback.jpg"
   },
@@ -1854,7 +1867,11 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "WHEAT",
+      "isCacheable": true,
+      "isFromFeeder": false
     },
     "image": "CarolinaChickadee.jpg"
   },
