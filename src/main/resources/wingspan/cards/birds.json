@@ -663,7 +663,7 @@
     "behavior": {
       "type": "DISCARD_EGGS",
       "onThisBird": false,
-      "secondBehavior" : {
+      "secondBehavior": {
          "type": "GAIN_FOOD",
          "numFood": 1,
          "typeOfFood": "ANY",
@@ -791,7 +791,7 @@
       "type": "TUCK_CARD",
       "fromHand": true,
       "numCards": 1,
-      "secondBehavior" : {
+      "secondBehavior": {
         "type": "DRAW_CARD",
         "numCards": 1
       }
@@ -820,7 +820,7 @@
       "type": "DISCARD_FOOD",
       "typeOfFood": "FISH",
       "numFood": 1,
-      "secondBehavior" : {
+      "secondBehavior": {
         "type": "TUCK_CARD",
         "numCards": 2,
         "fromHand": false
@@ -1968,7 +1968,7 @@
       "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "GAIN_FOOD",
         "numFood": 1,
         "typeOfFood": "BERRY",
@@ -2056,7 +2056,7 @@
     "behavior": {
       "type": "DISCARD_EGGS",
       "onThisBird": false,
-      "secondBehavior"{
+      "secondBehavior": {
         "type": "GAIN_FOOD",
         "numFood": 2,
         "typeOfFood": "ANY",
