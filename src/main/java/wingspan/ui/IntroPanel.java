@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 //import java.io.IOException;
@@ -10,7 +12,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class IntroPanel extends JPanel{
+public class IntroPanel extends JPanel implements MouseListener{
     
 	private BufferedImage intro, playButton, WingspanImage;
 
@@ -27,6 +29,8 @@ public class IntroPanel extends JPanel{
     		System.out.println("Exception error");
     		return;
     	}
+    	
+    	addMouseListener(this);
     }
 
     public void paint(Graphics g)
@@ -43,7 +47,9 @@ public class IntroPanel extends JPanel{
         g2d.setStroke(stroke);
         //dg2d.drawRect(0, 0, 1920, 1080);
         g2d.drawImage(intro, 0, 0, 1920, 1080,null);
-        g2d.drawImage(playButton, getWidth()/2-200, getHeight()/2+300, 300,100, null);
+        
+        g2d.drawImage(playButton, getWidth()/2-200, getHeight()/2+300, 300,100, null); // button to be clicked
+        
         g2d.setColor(Color.BLACK);	
         g2d.drawString("PLAY!", getWidth()/2-110, getHeight()/2+60+300);
         g2d.drawImage(WingspanImage, getWidth()/2-200, 400, null);
@@ -53,4 +59,38 @@ public class IntroPanel extends JPanel{
             
         }*/
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		int x = e.getX();
+		int y = e.getY();
+		
+		if((x >= getWidth()/2-200 && x <= getWidth()/2+100) && (y >=getHeight()/2+300 && y <= getHeight()/2+400)) {
+			System.out.println("works");
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
