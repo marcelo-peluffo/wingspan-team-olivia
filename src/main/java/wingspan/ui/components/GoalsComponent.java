@@ -23,7 +23,7 @@ public class GoalsComponent extends JPanel
             goalXPos += 100;
         }
         int arrowXPos = getWidth() - 450 + GameState.roundNum * 100;
-        int[] xPoints = {arrowXPos - 50, arrowXPos, arrowXPos + 50};
+        int[] xPoints = {arrowXPos - 25, arrowXPos, arrowXPos + 25};
         int[] yPoints = {getHeight() - 155, getHeight() - 110, getHeight() - 155};
         g.fillPolygon(xPoints, yPoints, 3);
         g.setFont(new Font("Arial", Font.BOLD, 30));
