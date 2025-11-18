@@ -351,7 +351,7 @@
   {
     "name": "Anna's Hummingbird",
     "habitats": [
-      "GRASSLANDS", "WERLANDS", "FOREST"
+      "GRASSLANDS", "WETLANDS", "FOREST"
     ],
     "food": [
       [
@@ -423,7 +423,7 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
-      "isBunusCard": true,
+      "isBonusCard": true,
       "cardsToKeep": 1
     },
     "image": "AtlanticPuffin.jpg"
@@ -551,7 +551,7 @@
     "wingSpan": 38,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD":
+      "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
       "secondBehavior": {
@@ -630,7 +630,7 @@
     "wingSpan": 18,
     "color": "WHITE",
     "behavior": {
-      "type": "DARW_CARD",
+      "type": "DRAW_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -940,7 +940,7 @@
       "typeOfFood": "WHEAT",
       "numFood": 1,
       "isFromFeeder": true,
-      "isCatcheable": true
+      "isCacheable": true
     },
     "image": "BlueJay.jpg"
   },
@@ -1108,7 +1108,7 @@
       ]
     ],
     "victoryPoints": 5,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 36,
     "color": "PINK",
@@ -1156,7 +1156,7 @@
       ]
     ],
     "victoryPoints": 3,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 30,
     "color": "PINK",
@@ -1389,7 +1389,7 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
-      "isBounusCard": true,
+      "isBonusCard": true,
       "cardsToKeep": 1
     },
     "image": "Cassin'sFinch.jpg"
@@ -2098,7 +2098,7 @@
     "color": "BROWN",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 1
+      "numCards": 1,
       "secondBehavior": {
         "type": "TEMPLATE_BEHAVIOR"
       }
