@@ -1636,7 +1636,7 @@
       ]
     ],
     "victoryPoints": 5,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 36,
     "color": "PINK",
@@ -1684,7 +1684,7 @@
       ]
     ],
     "victoryPoints": 3,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 30,
     "color": "PINK",
@@ -1917,7 +1917,6 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
-      "isBounusCard": true,
       "cardsToKeep": 1
     },
     "image": "Cassin'sFinch.jpg"
