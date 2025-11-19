@@ -14,6 +14,7 @@ public class GameState {
 	public static GoalBoard goalBoard;
 	public static Player activePlayer; //current turn's player
 	public static boolean gameStarted;
+	public static boolean isSetup;
 	public static int roundNum; // current round number
 
 	//variables used for PowerBehavior logic
@@ -33,7 +34,6 @@ public class GameState {
 	public static Card activeCard; // contains the card whose power is currently being executed
 	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
 	public static boolean choseToCache;
-	public static int roundNum;
 
 	public static void initialize() {
 		// Core managers
@@ -64,8 +64,6 @@ public class GameState {
 		activeCard = null;
 		selectedCard = null;
 		choseToCache = false;
-
-		gameStarted = false;
 		roundNum = 1;
 	}
 

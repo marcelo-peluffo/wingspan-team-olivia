@@ -20,6 +20,7 @@ import wingspan.enums.Food;
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;
 import static wingspan.enums.Food.*;
+import wingspan.core.*;
 
 public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
@@ -109,7 +110,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
     public void paint(Graphics g) {
     	super.paint(g);
-
+        if (GameState.isSetup)
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
 		g.setColor(new Color(0, 255, 150));
@@ -294,6 +295,10 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
     public static void drawFiveBirds(List<Card> list){ //Draws 5 bird cards from the deck -- This isn't planned to be reused after the setup stage
         for(int i = 0; i < 5; i++)
             list.add(cardManager.getRandomCard());
+        for(Card c: list)
+        {
+            System.out.println(c.getBirdInfo().getName());
+        }
     }
 
     public static void drawTwoBonuses(List<BonusCard> list){ //Draws 2 Bonus cards from the deck -- This isn't planned to be reused after the setup stage

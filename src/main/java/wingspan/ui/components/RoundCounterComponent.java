@@ -1,4 +1,4 @@
-package wingspan.ui;
+package wingspan.ui.components;
 import java.awt.*;
 import javax.swing.*;
 import wingspan.core.GameState;
