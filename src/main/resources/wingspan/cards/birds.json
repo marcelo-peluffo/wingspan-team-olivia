@@ -351,7 +351,7 @@
   {
     "name": "Anna's Hummingbird",
     "habitats": [
-      "GRASSLANDS", "WERLANDS", "FOREST"
+      "GRASSLANDS", "WETLANDS", "FOREST"
     ],
     "food": [
       [
@@ -369,7 +369,7 @@
       "typeOfFood": "ANY",
       "rotatePlayers": true
     },
-    "image": "Anna'sHummingbird.jpg"
+    "image": "AnnasHummingbird.jpg"
   },
   {
     "name": "Ash-Throated Flycatcher",
@@ -423,7 +423,7 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
-      "isBunusCard": true,
+      "isBonusCard": true,
       "cardsToKeep": 1
     },
     "image": "AtlanticPuffin.jpg"
@@ -450,7 +450,7 @@
       "type": "LAY_EGG",
       "numEggs": 1
     },
-    "image": "Baird'sSparrow.jpg"
+    "image": "BairdsSparrow.jpg"
   },
   {
     "name": "Bald Eagle",
@@ -551,7 +551,7 @@
     "wingSpan": 38,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD":
+      "type": "TUCK_CARD",
       "numCards": 1,
       "fromHand": true,
       "secondBehavior": {
@@ -609,7 +609,7 @@
       "onThisBird": false,
       "nestType": "CAVITY"
     },
-    "image": "Barrow'sGoldeneye.jpg"
+    "image": "BarrowsGoldeneye.jpg"
   },
   {
     "name": "Bell's Vired",
@@ -630,12 +630,12 @@
     "wingSpan": 18,
     "color": "WHITE",
     "behavior": {
-      "type": "DARW_CARD",
+      "type": "DRAW_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
     },
-    "image": "Bell'sVired.jpg"
+    "image": "BellsVired.jpg"
   },
   {
     "name": "Belted Kingfisher",
@@ -687,7 +687,7 @@
     "behavior": {
       "type": "TEMPLATE_BEHAVIOR"
     },
-    "image": "Bewick'sWren.jpg"
+    "image": "BewicksWren.jpg"
   },
   {
     "name": "Black Skimmer",
@@ -940,7 +940,7 @@
       "typeOfFood": "WHEAT",
       "numFood": 1,
       "isFromFeeder": true,
-      "isCatcheable": true
+      "isCacheable": true
     },
     "image": "BlueJay.jpg"
   },
@@ -1070,7 +1070,7 @@
         "onThisBird": true
       }
     },
-    "image": "Brewer'sBlackbird.jpg"
+    "image": "BrewersBlackbird.jpg"
   },
   {
     "name": "Broad-Winged Hawk",
@@ -1108,7 +1108,7 @@
       ]
     ],
     "victoryPoints": 5,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 36,
     "color": "PINK",
@@ -1156,7 +1156,7 @@
       ]
     ],
     "victoryPoints": 3,
-    "nestType": "",
+    "nestType": "STAR",
     "maxEggs": 0,
     "wingSpan": 30,
     "color": "PINK",
@@ -1389,10 +1389,10 @@
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
-      "isBounusCard": true,
+      "isBonusCard": true,
       "cardsToKeep": 1
     },
-    "image": "Cassin'sFinch.jpg"
+    "image": "CassinsFinch.jpg"
   },
   {
     "name": "Cassin's Sparrow",
@@ -1416,7 +1416,7 @@
       "type": "LAY_EGG",
       "numEggs": 1
     },
-    "image": "Cassin'sSparrow.jpg"
+    "image": "CassinsSparrow.jpg"
   },
   {
     "name": "Cedar Waxwing",
@@ -1607,7 +1607,7 @@
         }
       }
     },
-    "image": "Clark'sGrebe.jpg"
+    "image": "ClarksGrebe.jpg"
   },
   {
     "name": "Clark's Nutcracker",
@@ -1637,7 +1637,7 @@
       "isFromFeeder": true,
       "isCacheable": true
     },
-    "image": "Clark'sNutcracker.jpg"
+    "image": "ClarksNutcracker.jpg"
   },
   {
     "name": "Common Grackle",
@@ -1818,7 +1818,7 @@
       "numCards": 1,
       "fromHand": false
     },
-    "image": "Cooper'sHawk.jpg"
+    "image": "CoopersHawk.jpg"
   },
   {
     "name": "Dark-Eyed Junco",
@@ -2098,12 +2098,12 @@
     "color": "BROWN",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 1
+      "numCards": 1,
       "secondBehavior": {
         "type": "TEMPLATE_BEHAVIOR"
       }
     },
-    "image": "Forster'sTern.jpg"
+    "image": "ForstersTern.jpg"
   },
   {
     "name": "Franklin's Gull",
@@ -2130,7 +2130,7 @@
         "numCards": 2
       }
     },
-    "image": "Franklin'sGull.jpg"
+    "image": "FranklinsGull.jpg"
   },
   {
     "name": "Golden Eagle",
