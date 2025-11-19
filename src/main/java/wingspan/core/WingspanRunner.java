@@ -9,6 +9,7 @@ import wingspan.cards.DataTable;
 
 
 public class WingspanRunner {
+
 	public static void main(String[]args) throws IOException
 	{
 		GameState.initialize();

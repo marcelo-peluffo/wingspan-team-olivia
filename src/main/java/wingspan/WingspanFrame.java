@@ -11,14 +11,13 @@ public class WingspanFrame extends JFrame{
         super(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
-        setVisible(true);
         setResizable(false);
 
         //Display panels based on conditionals checking which state of the game is in. Ex: isSetup = true, display the SetupPanel
         // add(new IntroPanel());
-        add(new RoundCounterComponent());
+
         add(new IntroPanel());
-        add(new GoalsComponent());
+        setVisible(true);
     }
 }
 
