@@ -33,6 +33,7 @@ public class GameState {
 	public static Card activeCard; // contains the card whose power is currently being executed
 	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
 	public static boolean choseToCache;
+	public static int roundNum;
 
 	public static void initialize() {
 		// Core managers
@@ -41,6 +42,7 @@ public class GameState {
 			cardManager = new CardManager();
 			cardManager.initializeBonusCards();
 			goalBoard = new GoalBoard();
+			roundNum = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
