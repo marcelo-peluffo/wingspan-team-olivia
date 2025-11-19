@@ -111,7 +111,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
     public void paint(Graphics g) {
     	super.paint(g);
         if (GameState.isSetup)
-        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+        	g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
 		g.setColor(new Color(0, 255, 150));
 
@@ -171,6 +171,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
                     birdCardsAreSet = true; //Switch the player's state of having selected their bird/food items
                     numSelected = 0; //Reset the number of items selected
+					selectionNotMet = false;
                     repaint(); // Redraw the panel/screen
                 }
                 if(numSelected != 5){ //Check if the player is trying to confirm their selection when they don't meet the requirements
@@ -201,7 +202,8 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                         
                         drawFiveBirds(cards); //Add 5 new Bird Cards
                         drawTwoBonuses(bonusCards); //Add 2 new Bonus Cards
-                        
+
+						birdCardsAreSet = false;
                         playerIsSet = false;
                     }
                     
