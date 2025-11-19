@@ -14,6 +14,8 @@ public class GameState {
 	public static GoalBoard goalBoard;
 	public static Player activePlayer; //current turn's player
 	public static boolean gameStarted;
+	public static boolean isSetup;
+	public static int roundNum; // current round number
 
 	//variables used for PowerBehavior logic
 	public static ArrayList<Player> abilityPlayers = new ArrayList<Player>(); /* 
@@ -43,6 +45,7 @@ public class GameState {
 			cardManager = new CardManager();
 			cardManager.initializeBonusCards();
 			goalBoard = new GoalBoard();
+			roundNum = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,6 +70,7 @@ public class GameState {
 
 		gameStarted = false;
 		chosenView = "GameBoard";
+		roundNum = 1;
 	}
 
 
