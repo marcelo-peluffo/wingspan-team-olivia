@@ -58,7 +58,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 		foodImages = new ArrayList<>();
 
         try {
-            background = ImageIO.read(SetupPanel.class.getResource("/Images/ForestBackground.jpg"));
+            background = ImageIO.read(SetupPanel.class.getResource("/Images/backgroundImage2.jpeg"));
 
             img = ImageIO.read(SetupPanel.class.getResource("/Images/InvertebrateToken.png"));
             foodImages.add(img);
