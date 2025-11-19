@@ -14,6 +14,7 @@ public class GameState {
 	public static GoalBoard goalBoard;
 	public static Player activePlayer; //current turn's player
 	public static boolean gameStarted;
+	public static int roundNum; // current round number
 
 	//variables used for PowerBehavior logic
 	public static ArrayList<Player> abilityPlayers = new ArrayList<Player>(); /* 
@@ -65,6 +66,7 @@ public class GameState {
 		choseToCache = false;
 
 		gameStarted = false;
+		roundNum = 1;
 	}
 
 
