@@ -41,4 +41,10 @@ public class GoalBoard {
 		goals.add(new WildGoal(true, "TotalCardsGoal"));
 		goals.add(new WildGoal(false, "SetOfEggsGoal"));
 	}
+
+	public Goal[] getGoals()
+	{
+		Goal[] goals = {round1Goal, round2Goal, round3Goal, round4Goal};
+		return goals;
+	}
 }
