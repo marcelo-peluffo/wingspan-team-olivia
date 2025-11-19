@@ -238,7 +238,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                             repaint(); //Redraw
                         }
 
-                        if(selectedCards.contains(cards.get(i))){ //If the selected card is in the selected cards list i.e. the player wants to deselect
+                        else if(selectedCards.contains(cards.get(i))){ //If the selected card is in the selected cards list i.e. the player wants to deselect
                             selectedCards.remove(cards.get(i)); //Remove the selected card from the selected cards list
                             numSelected -= 1; //Decrease the number of items selected
                             repaint(); //Redraw
@@ -255,7 +255,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                             repaint();
                         }
 
-                        if(selectedFoods.contains(foods.get(i))){
+                        else if(selectedFoods.contains(foods.get(i))){
                             selectedFoods.remove(foods.get(i));
                             numSelected -= 1;
                             repaint();
@@ -276,7 +276,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                             repaint(); //Redraw
                         }
                         
-                        if(selectedBonusCards.contains(bonusCards.get(i))){ //If the Bonus card is already selected i.e. the player wants to deselect
+                        else if(selectedBonusCards.contains(bonusCards.get(i))){ //If the Bonus card is already selected i.e. the player wants to deselect
                             selectedBonusCards.remove(bonusCards.get(i)); //Remove it from the selected Bonus Cards list
                             numSelected -= 1; //Decrease the number of items selected by 1
                             repaint(); //Redraw
