@@ -34,6 +34,9 @@ public class GameState {
 	public static Card activeCard; // contains the card whose power is currently being executed
 	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
 	public static boolean choseToCache;
+	
+	//variable determining what the player is viewing in the main window
+	public static String chosenView;
 
 	public static void initialize() {
 		// Core managers
@@ -64,6 +67,9 @@ public class GameState {
 		activeCard = null;
 		selectedCard = null;
 		choseToCache = false;
+
+		gameStarted = false;
+		chosenView = "GameBoard";
 		roundNum = 1;
 	}
 
