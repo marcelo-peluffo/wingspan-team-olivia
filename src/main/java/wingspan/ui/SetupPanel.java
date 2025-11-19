@@ -1,17 +1,25 @@
 package wingspan.ui;
-import java.awt.*;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import java.awt.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
+import java.util.List;
+
 import wingspan.cards.*;
 import wingspan.cards.bonusCards.BonusCard;
 
+import wingspan.enums.Food;
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;
+import static wingspan.enums.Food.*;
 
 public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
@@ -21,25 +29,65 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
     private int numSelected; //Total number of items (Bird/Bonus cards / Food Tokens) selected
     private int currentPlayer; // The current player selecting their cards (1, 2, 3, 4)
 
-    private ArrayList<Card> cards; //Collection used to store the Bird cards drawn from the deck
-    private ArrayList<Card> selectedCards; // Collection used to store the Bird cards selected by the player
+    private List<Card> cards; //Collection used to store the Bird cards drawn from the deck
+    private List<Card> selectedCards; // Collection used to store the Bird cards selected by the player
 
-    private ArrayList<BonusCard> bonusCards; // Collection used to store the Bonus cards drawn from the deck
-    private ArrayList<BonusCard> selectedBonusCards; // Collection used to store the Bonus cards selected by the player
+    private List<BonusCard> bonusCards; // Collection used to store the Bonus cards drawn from the deck
+    private List<BonusCard> selectedBonusCards; // Collection used to store the Bonus cards selected by the player
 
-    //create a collection for the Food tokens
-    //create a collection for the selected Food tokens
+    private List<Food> foods; //Collection used to store Food tokens
+    private List<Food> selectedFoods; // Collection used to store selected food tokens
+
+    private List<BufferedImage> foodImages;
+    BufferedImage img;
+    BufferedImage background;
+
+    private boolean selectionNotMet; //Boolean for determining whether the player has confirmed their selection without meeting the requirements
 
     public SetupPanel() {
-
         //This is mostly just initialization, nothing of interest here
 
+		foods = new ArrayList<>();
+        foods.add(INVERTEBRATE);
+        foods.add(BERRY);
+        foods.add(WHEAT);
+        foods.add(FISH);
+        foods.add(RODENT);
+
+		foodImages = new ArrayList<>();
+
+        try {
+            background = ImageIO.read(SetupPanel.class.getResource("/Images/ForestBackground.jpg"));
+
+            img = ImageIO.read(SetupPanel.class.getResource("/Images/InvertebrateToken.png"));
+            foodImages.add(img);
+
+            img = ImageIO.read(SetupPanel.class.getResource("/Images/BerryToken.png"));
+            foodImages.add(img);
+
+            img = ImageIO.read(SetupPanel.class.getResource("/Images/WheatToken.png"));
+            foodImages.add(img);
+
+            img = ImageIO.read(SetupPanel.class.getResource("/Images/FishToken.png"));
+            foodImages.add(img);
+
+            img = ImageIO.read(SetupPanel.class.getResource("/Images/RodentToken.png"));
+            foodImages.add(img);
+        } //At the moment accessing the images of a food token using a method isn't exactly possible so this will be a placeholder
+
+		catch(Exception e){
+            System.out.println("Image import error");
+            return;
+        }
+		
+        selectionNotMet = false;
         birdCardsAreSet = false;
         playerIsSet = false;
 
         currentPlayer = 1;
         numSelected = 0;
 
+		selectedFoods = new ArrayList<>();
         selectedCards = new ArrayList<>();
         selectedBonusCards = new ArrayList<>();
 
@@ -61,8 +109,28 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
     public void paint(Graphics g) {
     	super.paint(g);
+
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+
 		g.setColor(new Color(0, 255, 150));
-		
+
+        Font playerTitle = new Font("SANS_SERIF", Font.PLAIN, 40); // Font for showing which player in selecting
+        Font standard = new Font("SANS_SERIF", Font.PLAIN, 13); //Font for other actions
+
+        g.setFont(playerTitle);
+        g.drawString("Player " + currentPlayer, getX() - 75, 40); //Show which player is selecting
+
+        g.setFont(standard);
+        if(selectionNotMet){
+            g.setColor(new Color(250, 60, 60));
+            if(!birdCardsAreSet)
+                g.drawString("Please select a total of 5 Food tokens or Bird Cards", getX() - 170, 80);
+            if(birdCardsAreSet && !playerIsSet)
+                g.drawString("Please select only 1 Bonus Card", getX() - 110, 80);
+        }
+        else
+            g.drawString("Press 'c' to confirm your selection", getX() - 110, 80);
+
         if(!birdCardsAreSet){ //Checks if the player has selected and drawn Bird cards (and Food tokens) - if they haven't, paint the Bird cards and Food tokens.
             for(Card card: cards){
 				if(selectedCards.contains(card)){
@@ -70,9 +138,12 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 				}
 				g.drawImage(card.getCardImage(), 210 + cards.indexOf(card) * 315, 210, 240, 360, null ); //Spacing between cards: 75 px | Horizontal Spacing on the margins: 210 px | Card Width: 240 px | Card Height: 360 px
             }
-			
-            //Draw the Text
-            //Draw food token images
+            for(Food food: foods){
+                if(selectedFoods.contains(food)){
+                    g.fillOval(207 + foods.indexOf(food) * 315, 697, 246, 246);
+                }
+                g.drawImage(foodImages.get(foods.indexOf(food)), 210 + foods.indexOf(food) * 315, 700, 240, 240, null);
+            }
         }
 
         if(birdCardsAreSet && !playerIsSet){ //Checks if the player has drawn Bird Cards (and Food tokens) but hasn't completed the setup phase (Or hasn't drawn bonus cards) - if they have drawn their Bird cards but haven't completed the setup stage, paint the bonus cards.
@@ -83,10 +154,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                 g.drawImage(bonusCard.getImage(), 360 + bonusCards.indexOf(bonusCard) * 780, 210, 420, 630, null); // Spacing between cards: 360 px | Horizontal Spacing on the Margins: 360 px | Card Width: 420 px | Card Height: 630 px
             }
         }
-        
-        //Implement a way to show which card/food token the player is selecting (a green outline is a bit complicated so I'll simply do a green circle underneath the selected item(s))
     }
-
 
     public void keyPressed(KeyEvent e){
         char c = e.getKeyChar();
@@ -97,14 +165,16 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                     for(Card card: selectedCards) //Give all selected cards to the player
                         players.get(currentPlayer-1).addCard(card);
 
-                    //Add code to add food items to the player, this hasn't been implemented because I don't know how enums work :/
+                    for(Food food: selectedFoods)
+                        players.get(currentPlayer-1).addFood(food, 1);
 
                     birdCardsAreSet = true; //Switch the player's state of having selected their bird/food items
                     numSelected = 0; //Reset the number of items selected
                     repaint(); // Redraw the panel/screen
                 }
-                if(numSelected != 5){ //This code is yet to be completed, but it will check if the player is trying to confirm their selection when they don't meet the requirements
-                   
+                if(numSelected != 5){ //Check if the player is trying to confirm their selection when they don't meet the requirements
+                   selectionNotMet = true;
+                   repaint();
                 }
             }
             if(birdCardsAreSet && !playerIsSet) { //Checks if the player is selecting Bird Cards and Food tokens but hasn't completed the setup phase (Or hasn't drawn bonus cards)
@@ -123,7 +193,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
                         selectedCards = new ArrayList<>(); //Reset selected Bird cards
                         selectedBonusCards = new ArrayList<>(); //Reset selected Bonus Cards
-                        //Add code to reset the Food collection
+                        selectedFoods = new ArrayList<>(); // Reset selected Food tokens
                         
                         cards = new ArrayList<>(); //Reset the drawn Bird Cards
                         bonusCards = new ArrayList<>(); //Reset the draw Bonus Cards
@@ -136,8 +206,9 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                     
                     repaint();
                 }
-                if(numSelected != 1){ //This code is yet to be completed, but it will check if the player is trying to confirm their selection when they don't meet the requirements
-                    
+                if(numSelected != 1){ //Check if the player is trying to confirm their selection when they don't meet the requirements
+                    selectionNotMet = true;
+                    repaint();
                 }
             }
         }
@@ -149,6 +220,11 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
   	public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
+
+        if(selectionNotMet){
+            selectionNotMet = false;
+            repaint();
+        }
 
         if(!birdCardsAreSet){ //Check if the player is selecting Bird/Food tokens
             if(y <= 570 && y >= 210){ //This Y-Level represents the Bird Cards - The conditional checks whether the player is selecting from here
@@ -169,8 +245,23 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
                     }
                 }
             }
+            if( y <= 940 && y >= 700){
+                for(int i = 0; i < foods.size(); i++){
+                    if(x >= 210 + i * 315 && x <= 450 + i * 315){
+                        if(!selectedFoods.contains(foods.get(i))){
+                            selectedFoods.add(foods.get(i));
+                            numSelected += 1;
+                            repaint();
+                        }
 
-            //Add code here to determine whether the player is selecting from the Y-Level of the food tokens and add/deselect appropriately
+                        if(selectedFoods.contains(foods.get(i))){
+                            selectedFoods.remove(foods.get(i));
+                            numSelected -= 1;
+                            repaint();
+                        }
+                    }
+                }
+            }
         }
 
         if(birdCardsAreSet && !playerIsSet){ //Checks if the player has drawn Bird Cards and Food tokens but hasn't completed the setup phase (Or hasn't drawn bonus cards)
@@ -200,12 +291,12 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 	public void mouseExited(MouseEvent e) {}
 
 
-    public static void drawFiveBirds(ArrayList<Card> list){ //Draws 5 bird cards from the deck -- This isn't planned to be reused after the setup stage
+    public static void drawFiveBirds(List<Card> list){ //Draws 5 bird cards from the deck -- This isn't planned to be reused after the setup stage
         for(int i = 0; i < 5; i++)
             list.add(cardManager.getRandomCard());
     }
 
-    public static void drawTwoBonuses(ArrayList<BonusCard> list){ //Draws 2 Bonus cards from the deck -- This isn't planned to be reused after the setup stage
+    public static void drawTwoBonuses(List<BonusCard> list){ //Draws 2 Bonus cards from the deck -- This isn't planned to be reused after the setup stage
         for(int i = 0; i < 2; i++)
             list.add(cardManager.getRandomBonusCard());
     }
