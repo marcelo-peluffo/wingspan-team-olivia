@@ -22,6 +22,7 @@ public class perRoundPanel extends JPanel implements MouseListener {
 			System.out.println("Error");
 			return;
 		}
+		addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -33,18 +34,24 @@ public class perRoundPanel extends JPanel implements MouseListener {
 		Font newFont = current.deriveFont(70F);
 		g2d.setFont(newFont);
 		g2d.drawString("Round N results", 600, 100);
-		g2d.setColor(new Color(197,235,8));
-		g2d.fillRect(400, 875, 900, 50);
-		newFont = current.deriveFont(40F);
-		g2d.setColor(Color.black);
+		g2d.setColor(new Color(19,175,87));
+		g2d.fillRect(400, 875, 900, 50); //
+		newFont = current.deriveFont(30F);
+		g2d.setColor(Color.white);
 		g2d.setFont(newFont);
-		g2d.drawString("Click here to proceed to the next round", 420, 919);
+		g2d.drawString("Click here to proceed to the next round", 605, 915);
 	}
 	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		int x = e.getX();
+		int y = e.getY();
+		
+		if((x >= 400 && x <= 1300) && (y >= 875 && y<= 925)) {
+			System.out.println("Proceeded");
+		}
 		
 	}
 
