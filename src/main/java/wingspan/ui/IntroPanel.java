@@ -63,7 +63,14 @@ public class IntroPanel extends JPanel implements MouseListener{
 		
 		if((x >= getWidth()/2-200 && x <= getWidth()/2+100) && (y >=getHeight()/2+300 && y <= getHeight()/2+400)) {
 			setVisible(false);
-			getParent().add(new SetupPanel());
+			try
+			{
+				getParent().add(new SetupPanel());
+			}
+			catch (Exception ex)
+			{
+				System.out.println("Failed to switch to SetupPanel");
+			}
 			getParent().repaint();
 			getParent().remove(this);
 			System.out.println("Successfully transitioned from IntroPanel to SetupPanel");

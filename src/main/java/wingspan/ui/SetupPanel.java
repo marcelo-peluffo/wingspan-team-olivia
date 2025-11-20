@@ -49,7 +49,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
     private boolean selectionNotMet; //Boolean for determining whether the player has confirmed their selection without meeting the requirements
 
-    public SetupPanel() {
+    public SetupPanel() throws IOException{
         //This is mostly just initialization, nothing of interest here
 
 		foods = new ArrayList<>();
@@ -234,7 +234,14 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
             if (currentPlayer == 5)
             {
                 setVisible(false);
-                getParent().add(new MainPanel());
+                try
+                {
+                    getParent().add(new MainPanel());
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Failed to load MainPanel");
+                }
                 getParent().repaint();
                 getParent().remove(this);
             }
