@@ -143,17 +143,17 @@ public class MainPanel extends JPanel implements MouseListener{
         int lineX = x + imgSize + 10; 
         
         // --- Draw the Black Lines (The Bracket) ---
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.LIGHT_GRAY);
         g2.setStroke(new BasicStroke(2)); // Make the line 2px thick for visibility
 
         // 1. Vertical Line
-        g2.drawLine(lineX, startY, lineX, endY);
+        g2.drawLine(lineX, startY, lineX, endY - 50);
         
         // 2. Top Horizontal Cap (from left of image to the vertical line)
-        g2.drawLine(x, startY, lineX + 20, startY);
+        g2.drawLine(x, startY, lineX + 40, startY);
         
         // 3. Bottom Horizontal Cap
-        g2.drawLine(x, endY, lineX + 20, endY);
+        g2.drawLine(x, endY - 50, lineX + 40, endY - 50);
 
         // --- Draw Items ---
         int y = startY + 5;
@@ -178,7 +178,7 @@ public class MainPanel extends JPanel implements MouseListener{
                 // Center text vertically relative to the image
                 // (y + imgSize/2) is center, + (fontSize/3) roughly centers the text baseline
                 int textY = y + (imgSize / 2) + (fontSize / 3);
-                
+                g2.setColor(Color.ORANGE);
                 g2.drawString(String.valueOf(count), textX, textY);
 
                 y += slotHeight + padding;
