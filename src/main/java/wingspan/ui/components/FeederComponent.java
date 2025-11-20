@@ -1,4 +1,4 @@
-package wingspan.ui;
+package wingspan.ui.components;
 import wingspan.food.*;
 import wingspan.enums.Food;
 import javax.imageio.ImageIO;
