@@ -1,4 +1,6 @@
 package wingspan;
+import java.io.IOException;
+
 import javax.swing.*;
 import wingspan.ui.*;
 import wingspan.ui.components.*;
@@ -7,7 +9,7 @@ public class WingspanFrame extends JFrame{
     private static final int WIDTH = 1920;
     private static final int HEIGHT = 1080;
 
-    public WingspanFrame(String name){
+    public WingspanFrame(String name) throws IOException{
         super(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
