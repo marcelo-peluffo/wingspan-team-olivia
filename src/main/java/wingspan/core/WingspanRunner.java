@@ -13,8 +13,8 @@ public class WingspanRunner {
 
 	public static void main(String[]args) throws IOException
 	{
-		GameState.initialize();
 		DataTable.initialize();
+		GameState.initialize();
 		for(int i=0; i<4; i++)
 		{
 			GameState.players.add(new Player());
