@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 
 public class NavigatorComponent extends JPanel implements MouseListener
 {
+    private String navigatorChoice;
+
     public NavigatorComponent()
     {
         addMouseListener(this);
@@ -23,11 +25,11 @@ public class NavigatorComponent extends JPanel implements MouseListener
         g2d.setColor(Color.LIGHT_GRAY);
         g2d.fillRect(-10, getHeight() - 350, 250, 355);
         g2d.setColor(new Color(26, 176, 0));
-        if (GameState.chosenView.equals("GameBoard"))
+        if (navigatorChoice.equals("GameBoard"))
         {
             g2d.fillRect(-10, getHeight()-350, 250, 116);
         }
-        else if (GameState.chosenView.equals("BirdFeeder"))
+        else if (navigatorChoice.equals("BirdFeeder"))
         {
             g2d.fillRect(-10, getHeight()-233, 250, 116);
         }
@@ -55,15 +57,15 @@ public class NavigatorComponent extends JPanel implements MouseListener
             {
                 if (y < getHeight() - 233)
                 {
-                    GameState.chosenView = "GameBoard";
+                    navigatorChoice = "GameBoard";
                 }
                 else if (y < getHeight() - 116)
                 {
-                    GameState.chosenView = "BirdFeeder";
+                    navigatorChoice = "BirdFeeder";
                 }
                 else
                 {
-                    GameState.chosenView = "AvaliableCards";
+                    navigatorChoice = "AvaliableCards";
                 }
             }
         }
