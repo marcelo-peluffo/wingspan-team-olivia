@@ -9,8 +9,8 @@ public class CardManager {
 	public static Set<Card> birdCards = new HashSet<>();
 	public static Set<BirdInfo> birdInfos = new HashSet<>();
 	public static Set<BonusCard> bonusCards = new HashSet<>();
-	public static List<Card> faceUpCards = new ArrayList<>();
-	
+	public List<Card> faceUpCards = new ArrayList<>();
+
 	// returns and removes a random card from birdCards
 	public Card getRandomCard()
 	{
@@ -23,6 +23,11 @@ public class CardManager {
 		Card c = iter.next();
 		iter.remove();
 		return c;
+	}
+
+	public List<Card> getFaceUpCards()
+	{
+		return faceUpCards;
 	}
 
 	public boolean initializeBonusCards() throws IOException
