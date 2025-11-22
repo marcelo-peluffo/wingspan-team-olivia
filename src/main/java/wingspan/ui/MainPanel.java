@@ -26,6 +26,7 @@ public class MainPanel extends JPanel implements MouseListener{
     private Map<Food, Integer> foodInventory;
     private Map<Food, BufferedImage> foodToImage;
     private BufferedImage boardImage;
+    private BufferedImage background;
     private List<Card> forestCards;
     private List<Card> grasslandsCards;
     private List<Card> wetlandsCards;
@@ -34,12 +35,15 @@ public class MainPanel extends JPanel implements MouseListener{
     private final int CARD_WIDTH = 125;
     private final int CARD_HEIGHT = 200;
     private int playerIndex;
+    private String navigatorOption;
+    private List<Card> faceUpCards;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
         activePlayer = GameState.activePlayer;
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
+        background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));
 
         setPreferredSize(new Dimension(150, 300));
 
@@ -58,12 +62,15 @@ public class MainPanel extends JPanel implements MouseListener{
         displayedCard = null;
         getPlayerCards(GameState.activePlayer);
         playerIndex = GameState.players.indexOf(GameState.activePlayer);
+        navigatorOption = "GameBoard";
+        faceUpCards = GameState.cardManager.getFaceUpCards();
     	addMouseListener(this);
     }
 
     public void paint(Graphics g)
     {
 		super.paint(g);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         //draw the goals
         int goalXPos = getWidth() - 400;
         for(Goal goal: goals)
@@ -71,6 +78,7 @@ public class MainPanel extends JPanel implements MouseListener{
             g.drawImage(goal.getImage(), goalXPos, getHeight() - 100, 100, 100, null);
             goalXPos += 100;
         }
+        g.setColor(Color.WHITE);
         int arrowXPos = getWidth() - 450 + GameState.roundNum * 100;
         int[] xPoints = {arrowXPos - 25, arrowXPos, arrowXPos + 25};
         int[] yPoints = {getHeight() - 155, getHeight() - 110, getHeight() - 155};
@@ -84,11 +92,11 @@ public class MainPanel extends JPanel implements MouseListener{
         g2d.setColor(Color.LIGHT_GRAY);
         g2d.fillRect(-10, getHeight() - 350, 250, 355);
         g2d.setColor(new Color(26, 176, 0));
-        if (GameState.chosenView.equals("GameBoard"))
+        if (navigatorOption.equals("GameBoard"))
         {
             g2d.fillRect(-10, getHeight()-350, 250, 116);
         }
-        else if (GameState.chosenView.equals("BirdFeeder"))
+        else if (navigatorOption.equals("BirdFeeder"))
         {
             g2d.fillRect(-10, getHeight()-233, 250, 116);
         }
@@ -186,7 +194,6 @@ public class MainPanel extends JPanel implements MouseListener{
         }
 
         //draw the game board
-        cardPositions.clear();
         g.setFont(new Font("Arial", Font.BOLD, 30));
         g.setColor(Color.BLACK);
         String playerString = "Player " + (playerIndex + 1);
@@ -195,45 +202,65 @@ public class MainPanel extends JPanel implements MouseListener{
             playerString += " (Viewing)";
         }
         g.drawString(playerString, getWidth() / 2 - 100, 50);
-        g.drawImage(boardImage, 350, 175, (int)(getWidth() * 0.6), (int)(getHeight() * 0.65), null);
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(7));
-        g2d.drawRect(getWidth() / 2 - 255, 120, 409, 50);
-        g2d.setColor(Color.LIGHT_GRAY);
-        g2d.fillRect(getWidth() / 2 - 251, 124, 402, 51);
-        g2d.setColor(Color.BLACK);
-        g2d.drawLine(getWidth() / 2 - 200, 127, getWidth() / 2 - 200, 172);
-        g2d.drawLine(getWidth() / 2 + 100, 127, getWidth() / 2 + 100, 172);
-        int[] xPoints2 = {getWidth() / 2 - 240, getWidth() / 2 - 220, getWidth() / 2 - 220};
-        int[] yPoints2 = {150, 135, 165};
-        g2d.fillPolygon(xPoints2, yPoints2, 3);
-        int[] xPoints3 = {getWidth() / 2 + 140, getWidth() / 2 + 120, getWidth() / 2 + 120};
-        int[] yPoints3 = {150, 135, 165};
-        g2d.fillPolygon(xPoints3, yPoints3, 3);
-        g.setFont(new Font("Arial", Font.BOLD, 20));
-        g.drawString("Change board to view", getWidth() / 2 - 150, 155);
-        int xPos = 610;
-        for(Card c: forestCards)
+        if (navigatorOption.equals("GameBoard"))
         {
-            g.drawImage(c.getCardImage(), xPos, 210, CARD_WIDTH, CARD_HEIGHT, null);
-            cardPositions.put(c, new Pair(xPos, 210));
-            xPos += 175;
+            cardPositions.clear();
+            g.drawImage(boardImage, 350, 175, (int)(getWidth() * 0.6), (int)(getHeight() * 0.65), null);
+            g2d.setColor(Color.BLACK);
+            g2d.setStroke(new BasicStroke(7));
+            g2d.drawRect(getWidth() / 2 - 255, 120, 409, 50);
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fillRect(getWidth() / 2 - 251, 124, 402, 51);
+            g2d.setColor(Color.BLACK);
+            g2d.drawLine(getWidth() / 2 - 200, 127, getWidth() / 2 - 200, 172);
+            g2d.drawLine(getWidth() / 2 + 100, 127, getWidth() / 2 + 100, 172);
+            int[] xPoints2 = {getWidth() / 2 - 240, getWidth() / 2 - 220, getWidth() / 2 - 220};
+            int[] yPoints2 = {150, 135, 165};
+            g2d.fillPolygon(xPoints2, yPoints2, 3);
+            int[] xPoints3 = {getWidth() / 2 + 140, getWidth() / 2 + 120, getWidth() / 2 + 120};
+            int[] yPoints3 = {150, 135, 165};
+            g2d.fillPolygon(xPoints3, yPoints3, 3);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString("Change board to view", getWidth() / 2 - 150, 155);
+            int xPos = 610;
+            for(Card c: forestCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 210, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 210));
+                xPos += 175;
+            }
+            xPos = 610;
+            for(Card c: grasslandsCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 425, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 425));
+                xPos += 175;
+            }
+            xPos = 610;
+            for(Card c: wetlandsCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 640, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 640));
+                xPos += 175;
+            }
+            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
-        xPos = 610;
-        for(Card c: grasslandsCards)
+        // draw the face up cards
+        else if (navigatorOption.equals("FaceUpCards"))
         {
-            g.drawImage(c.getCardImage(), xPos, 425, CARD_WIDTH, CARD_HEIGHT, null);
-            cardPositions.put(c, new Pair(xPos, 425));
-            xPos += 175;
+            g2d.setStroke(new BasicStroke(4));
+            g2d.setColor(Color.BLACK);
+            g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 350);
+            g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 - 400, getHeight() / 2 - 250);
+            g2d.drawLine(getWidth() / 2, getHeight() / 2 - 350, getWidth() / 2, getHeight() / 2 - 250);
+            g2d.drawLine(getWidth() / 2 + 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 250);
+            int xPos = getWidth() / 2 - 550;
+            for(Card c: faceUpCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, getHeight() / 2 - 250, 300, 450, null);
+                xPos += 400;
+            }
         }
-        xPos = 610;
-        for(Card c: wetlandsCards)
-        {
-            g.drawImage(c.getCardImage(), xPos, 640, CARD_WIDTH, CARD_HEIGHT, null);
-            cardPositions.put(c, new Pair(xPos, 640));
-            xPos += 175;
-        }
-        g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
     }
 
 	@Override
@@ -245,15 +272,19 @@ public class MainPanel extends JPanel implements MouseListener{
             {
                 if (y < getHeight() - 233)
                 {
-                    GameState.chosenView = "GameBoard";
+                    navigatorOption = "GameBoard";
                 }
                 else if (y < getHeight() - 116)
                 {
-                    GameState.chosenView = "BirdFeeder";
+                    navigatorOption = "BirdFeeder";
+                    playerIndex = GameState.players.indexOf(GameState.activePlayer);
+                    getPlayerCards(GameState.activePlayer);
                 }
                 else
                 {
-                    GameState.chosenView = "AvaliableCards";
+                    navigatorOption = "FaceUpCards";
+                    playerIndex = GameState.players.indexOf(GameState.activePlayer);
+                    getPlayerCards(GameState.activePlayer);
                 }
             }
         }
