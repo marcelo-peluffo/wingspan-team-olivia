@@ -17,8 +17,6 @@ import wingspan.cards.*;
 import wingspan.cards.bonusCards.BonusCard;
 
 import wingspan.enums.Food;
-import wingspan.ui.components.GoalsComponent;
-import wingspan.ui.components.NavigatorComponent;
 
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;
@@ -115,10 +113,7 @@ public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 
     public void paint(Graphics g) {
     	super.paint(g);
-        if (GameState.isSetup)
-        	g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
-
-		
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         
         Font playerTitle = new Font("SANS_SERIF", Font.PLAIN, 40); // Font for showing which player in selecting
         Font standard = new Font("SANS_SERIF", Font.PLAIN, 13); //Font for other actions
