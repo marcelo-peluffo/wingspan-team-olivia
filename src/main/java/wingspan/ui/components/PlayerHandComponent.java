@@ -30,19 +30,18 @@ public class PlayerHandComponent extends JPanel implements MouseListener{
         int leftEnd;
         int x;
         if(GameState.activePlayer.getHand().size() % 2 == 0){
-            leftEnd = getWidth()/2 - (5 + CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (CARD_WIDTH + 10));
+            leftEnd = Math.max(getWidth()/2 - (5 + CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (CARD_WIDTH + 10)), 350);
         }
         else {
-            leftEnd = getWidth()/2 - CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (CARD_WIDTH + 10));
+            leftEnd = Math.max(getWidth()/2 - CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (CARD_WIDTH + 10)), 350);
         }
 
         x = leftEnd;
         for(Card c: GameState.activePlayer.getHand()){
             g.drawImage(c.getCardImage(), x, 890, CARD_WIDTH, CARD_HEIGHT, null);
             cardPositions.put(c, new Pair(x, 890));
-            x += 10 + CARD_WIDTH;
+            x += (10 + CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
         }
-
         g.drawImage(displayedCard, 1600, 300, 250, 400, null);
     }
 
@@ -52,13 +51,25 @@ public class PlayerHandComponent extends JPanel implements MouseListener{
 
         for(Card c: cardPositions.keySet()){
             Pair p = cardPositions.get(c);
-
-            if (x >= p.getX() && x <= p.getX() + CARD_WIDTH && y >= p.getY() && y <= p.getY() + CARD_HEIGHT)
+            if (GameState.activePlayer.getHand().size() < 8)
             {
-                displayedCard = c.getCardImage();
-                break;
+                if (x >= p.getX() && x <= p.getX() + CARD_WIDTH && y >= p.getY() && y <= p.getY() + CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
             }
         }
+        repaint();
     }
     public void mousePressed(MouseEvent e) {}
     public void mouseReleased(MouseEvent e) {}

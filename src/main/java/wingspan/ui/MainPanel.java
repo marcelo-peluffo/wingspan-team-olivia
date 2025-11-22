@@ -37,6 +37,9 @@ public class MainPanel extends JPanel implements MouseListener{
     private int playerIndex;
     private String navigatorOption;
     private List<Card> faceUpCards;
+    private HashMap<Card, Pair> playerHandCardPositions;
+    private final int HAND_CARD_HEIGHT = 180;
+    private final int HAND_CARD_WIDTH = 120;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -64,6 +67,7 @@ public class MainPanel extends JPanel implements MouseListener{
         playerIndex = GameState.players.indexOf(GameState.activePlayer);
         navigatorOption = "GameBoard";
         faceUpCards = GameState.cardManager.getFaceUpCards();
+        playerHandCardPositions = new HashMap<>();
     	addMouseListener(this);
     }
 
@@ -261,6 +265,23 @@ public class MainPanel extends JPanel implements MouseListener{
                 xPos += 400;
             }
         }
+
+        //draw the player's cards (also side note: this component doesn't draw the player's bonus cards. In the future, we could add an option panel to the side where the player can toggle between either showing their bird cards or bonus cards)
+        int leftEnd;
+        int x1;
+        if(GameState.activePlayer.getHand().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+        }
+        else {
+            leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+        }
+
+        x1 = leftEnd;
+        for(Card c: GameState.activePlayer.getHand()){
+            g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+            playerHandCardPositions.put(c, new Pair(x1, 890));
+            x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+        }
     }
 
 	@Override
@@ -316,6 +337,26 @@ public class MainPanel extends JPanel implements MouseListener{
                 playerIndex = 3;
             }
             getPlayerCards(GameState.players.get(playerIndex));
+        }
+        for(Card c: playerHandCardPositions.keySet()){
+            Pair p = playerHandCardPositions.get(c);
+            if (GameState.activePlayer.getHand().size() < 8)
+            {
+                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
         }
         repaint();
 	}
