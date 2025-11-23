@@ -11,6 +11,14 @@ public class CardManager {
 	public static Set<BonusCard> bonusCards = new HashSet<>();
 	public List<Card> faceUpCards = new ArrayList<>();
 
+	public CardManager()
+	{
+		for(int i=0; i<3; i++)
+		{
+			faceUpCards.add(null);
+		}
+	}
+
 	// returns and removes a random card from birdCards
 	public Card getRandomCard()
 	{
@@ -85,9 +93,12 @@ public class CardManager {
 	//refills faceUpCards with randomly selected bird cards until there are 3 in the list
 	public void refillVisibleCards()
 	{
-		while (faceUpCards.size() < 3)
+		for(int i=0; i<faceUpCards.size(); i++)
 		{
-			faceUpCards.add(getRandomCard());
+			if (faceUpCards.get(i) == null)
+			{
+				faceUpCards.set(i, getRandomCard());
+			}
 		}
 	}
 }

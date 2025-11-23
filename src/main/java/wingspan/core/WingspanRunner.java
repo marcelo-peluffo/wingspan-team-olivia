@@ -20,10 +20,6 @@ public class WingspanRunner {
 			GameState.players.add(new Player());
 		}
 		GameState.activePlayer = GameState.players.get(0);
-		for(int i=0; i<3; i++)
-		{
-			// GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
-		}
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }

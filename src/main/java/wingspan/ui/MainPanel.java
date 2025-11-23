@@ -218,7 +218,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
 
         //draw the game board
         g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.setColor(actionCubeColors.get(GameState.activePlayer));
+        g.setColor(actionCubeColors.get(GameState.players.get(playerIndex)));
         String playerString = "Player " + (playerIndex + 1);
         if (GameState.players.get(playerIndex) != GameState.activePlayer)
         {
@@ -567,7 +567,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             }
             else if (playerAction == 'd')
             {
-                //add DrawCardPanel when that's implemented
+                getParent().add(new DrawCardsPanel());
             }
             getParent().repaint();
             getParent().remove(this);

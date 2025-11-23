@@ -1,0 +1,342 @@
+package wingspan.ui;
+
+import java.awt.*;
+import java.util.Random;
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+import java.awt.image.*;
+import java.awt.event.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import wingspan.cards.*;
+import wingspan.cards.goals.Goal;
+import wingspan.core.GameState;
+import wingspan.core.Player;
+import wingspan.enums.Food;
+import wingspan.food.*;
+import wingspan.utils.Pair;
+
+public class DrawCardsPanel extends JPanel implements MouseListener{
+
+	private BufferedImage background;
+    private List<Card> faceUpCards;
+    private HashMap<Player, Color> actionCubeColors;
+    private Map<Food, Integer> foodInventory;
+    private Map<Food, BufferedImage> foodToImage;
+    private Player activePlayer;
+    private boolean hasChoice;
+    private int numChoices;
+    private Goal[] goals;
+    private Card chosenCard;
+    private Map<Card, Pair> faceUpCardPositions;
+    private final int FACE_UP_CARD_WIDTH = 300;
+    private final int FACE_UP_CARD_HEIGHT = 450;
+	
+	public DrawCardsPanel() {
+		try {
+			
+			background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg"));
+			
+		}catch(Exception e) {
+			System.out.println("Error");
+			return;
+		}
+        faceUpCards = GameState.cardManager.getFaceUpCards();
+        actionCubeColors = new HashMap<>();
+        actionCubeColors.put(GameState.players.get(0), Color.RED);
+        actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
+        actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
+        actionCubeColors.put(GameState.players.get(3), Color.BLUE);
+        activePlayer = GameState.activePlayer;
+        foodInventory = activePlayer.getFoodInventory();
+        foodToImage = new HashMap<>();
+        goals = GameState.goalBoard.getGoals();
+
+        setPreferredSize(new Dimension(150, 300));
+
+        try {
+            // Ensure these paths match your project structure
+            foodToImage.put(Food.BERRY, ImageIO.read(getClass().getResourceAsStream("/Images/BerryToken.png")));
+            foodToImage.put(Food.FISH, ImageIO.read(getClass().getResourceAsStream("/Images/FishToken.png")));
+            foodToImage.put(Food.INVERTEBRATE, ImageIO.read(getClass().getResourceAsStream("/Images/InvertebrateToken.png")));
+            foodToImage.put(Food.RODENT, ImageIO.read(getClass().getResourceAsStream("/Images/RodentToken.png")));
+            foodToImage.put(Food.WHEAT, ImageIO.read(getClass().getResourceAsStream("/Images/WheatToken.png")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        int numCards = GameState.activePlayer.getGameBoard().getWetlands().size();
+        hasChoice = (numCards % 2 != 0);
+        numChoices = numCards / 2 + 1;
+        chosenCard = null;
+        faceUpCardPositions = new HashMap<>();
+
+		addMouseListener(this);
+	}
+	
+	public void paint(Graphics g) {
+		super.paint(g);
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+
+        //draw the text at the top
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.setColor(actionCubeColors.get(GameState.activePlayer));
+        String playerString = "Player " + (GameState.players.indexOf(GameState.activePlayer) + 1);
+        g.drawString(playerString, getWidth() / 2 - 100, 50);
+        g.setColor(Color.BLACK);
+        g.setFont(new Font("Arial", Font.PLAIN, 15));
+        g.drawString("Click on one of the three face up cards, or draw a random card", getWidth() / 2 - 250, 80);
+
+        //draw the 3 face up cards
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(4));
+        g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 350);
+        g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 - 400, getHeight() / 2 - 250);
+        g2d.drawLine(getWidth() / 2, getHeight() / 2 - 350, getWidth() / 2, getHeight() / 2 - 250);
+        g2d.drawLine(getWidth() / 2 + 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 250);
+        int xPos = getWidth() / 2 - 550;
+        for(Card c: faceUpCards)
+        {
+            if (c != null)
+            {
+                g.drawImage(c.getCardImage(), xPos, getHeight() / 2 - 250, FACE_UP_CARD_WIDTH, FACE_UP_CARD_HEIGHT, null);
+                faceUpCardPositions.put(c, new Pair(xPos, getHeight() / 2 - 250));
+            }
+            xPos += 400;
+        }
+
+        //draw the round counter
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(0, 0, 290, 140);
+        BasicStroke stroke = new BasicStroke(5);
+        g2d.setStroke(stroke);
+        g2d.setColor(Color.BLACK);
+        g2d.drawRect(-10, -10, 300, 150);
+        g2d.drawLine(-10, 80, 290, 80);
+        g2d.setFont(new Font("Arial", Font.BOLD, 50));
+        g2d.drawString("Round " + GameState.roundNum + "/4", 20, 50);
+        g2d.setFont(new Font("Arial", Font.BOLD, 23));
+        g2d.drawString("Action Tokens Left: " + GameState.activePlayer.getActionsRemaining(), 20, 115);
+
+        //draw the food inventory
+        Graphics2D g2 = (Graphics2D)g;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        int numItems = foodInventory.size();
+        if (numItems == 0) return;
+
+        int padding = 10;
+        int x = padding;
+        int panelWidth = getWidth();
+        
+        // Calculate heights
+        int slotHeight = (getHeight() - 600 - padding * (numItems + 1)) / numItems;
+        int imgSize = Math.min(slotHeight, panelWidth / 2);
+
+        // --- Calculate Coordinates for Lines ---
+        int startY = padding + 200;
+        // The bottom Y is the top padding + the space taken by (N-1) items + the height of the last image
+        int endY = startY + ((numItems - 1) * (slotHeight + padding)) + imgSize;
+        
+        // Place the vertical line to the right of the images
+        int lineX = x + imgSize + 10; 
+        
+        // --- Draw the Black Lines (The Bracket) ---
+        g2.setColor(Color.LIGHT_GRAY);
+        g2.setStroke(new BasicStroke(2)); // Make the line 2px thick for visibility
+
+        // 1. Vertical Line
+        g2.drawLine(lineX, startY, lineX, endY - 50);
+        
+        // 2. Top Horizontal Cap (from left of image to the vertical line)
+        g2.drawLine(x, startY, lineX + 40, startY);
+        
+        // 3. Bottom Horizontal Cap
+        g2.drawLine(x, endY - 50, lineX + 40, endY - 50);
+
+        // --- Draw Items ---
+        int y = startY + 5;
+        for (Food food : Food.values()) {
+            if (!foodInventory.containsKey(food)) continue;
+
+            BufferedImage img = foodToImage.get(food);
+            int count = foodInventory.get(food);
+
+            if (img != null) {
+                // Draw Image
+                g2.drawImage(img, x, y, imgSize, imgSize, null);
+
+                // Draw Count Number
+                // Calculate a font size relative to the image
+                int fontSize = imgSize / 2;
+                g2.setFont(new Font("Arial", Font.BOLD, fontSize));
+                
+                // Position text to the right of the vertical line
+                int textX = lineX + 15; 
+                
+                // Center text vertically relative to the image
+                // (y + imgSize/2) is center, + (fontSize/3) roughly centers the text baseline
+                int textY = y + (imgSize / 2) + (fontSize / 3);
+                g2.setColor(Color.ORANGE);
+                g2.drawString(String.valueOf(count), textX, textY);
+
+                y += slotHeight + padding;
+            }
+        }
+
+        //draw the goals
+        g.setColor(Color.WHITE);
+        int goalXPos = getWidth() - 400;
+        for(Goal goal: goals)
+        {
+            g.drawImage(goal.getImage(), goalXPos, getHeight() - 100, 100, 100, null);
+            goalXPos += 100;
+        }
+        int arrowXPos = getWidth() - 450 + GameState.roundNum * 100;
+        int[] xPoints = {arrowXPos - 25, arrowXPos, arrowXPos + 25};
+        int[] yPoints = {getHeight() - 155, getHeight() - 110, getHeight() - 155};
+        g.fillPolygon(xPoints, yPoints, 3);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Goals", getWidth() - 250, getHeight() - 160);
+        
+        //draw the upper right text
+        g2d.setColor(Color.LIGHT_GRAY);
+		g2d.fillRect(1670, 0, 250, 75);
+		g2d.setColor(Color.black);
+        Font currentfont = g2d.getFont();
+		Font newFont = currentfont.deriveFont(30F);
+		g2d.setFont(newFont);
+		g2d.drawString("Drawing cards", 1690, 50);
+
+        //draw the random card button
+		g2d.setColor(new Color(197,235,8));
+		g2d.fillRect((1920/2)-250, 800, 400, 50); 
+		g2d.setColor(Color.black);
+		g2d.drawString("Draw a random card", (1920/2)-200, 840);
+
+		//draw the confirm card interface
+        if (chosenCard != null)
+        {
+            g.drawImage(chosenCard.getCardImage(), 1600, 300, 250, 400, null);
+            g2d.setColor(new Color(19,175,87));
+		    g2d.fillRect(1620, 720, 200, 50); //
+		    g2d.setColor(Color.black);
+		    g2d.drawString("Confirm", 1665, 755);
+        }
+
+        //draw the bottom left interface
+        g2d.setColor(Color.WHITE);
+        if (!hasChoice)
+        {
+            g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 25);
+        }
+        else
+        {
+            g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 110);
+            g2d.setColor(Color.ORANGE);
+            g2d.fillRect(30, getHeight() - 90, 500, 75);
+            g2d.setColor(Color.BLACK);
+            g2d.setFont(new Font("Arial", Font.PLAIN, 20));
+            g2d.drawString("Click here to exchange an egg for an extra card choice", 40, getHeight() - 50);
+        }
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent e){
+		int x = e.getX();
+		int y = e.getY();
+		if (chosenCard == null)
+        {
+            for(Card c: faceUpCardPositions.keySet())
+            {
+                Pair pos = faceUpCardPositions.get(c);
+                if (x > pos.getX() && y > pos.getY() && x < pos.getX() + FACE_UP_CARD_WIDTH && y < pos.getY() + FACE_UP_CARD_HEIGHT)
+                {
+                    chosenCard = c;
+                    break;
+                }
+            }
+            if (x > (1920/2)-250 && y > 800 && x < ((1920 / 2) - 250 + 840) && y < 850)
+            {
+                chosenCard = GameState.cardManager.getRandomCard();
+            }
+        }
+        else
+        {
+            if (x > 1620 && y > 720 && x < 1820 && y < 770)
+            {
+                numChoices--;
+                GameState.activePlayer.addCard(chosenCard);
+                if (faceUpCards.contains(chosenCard))
+                {
+                    faceUpCards.set(faceUpCards.indexOf(chosenCard), null);
+                }
+                chosenCard = null;
+                if (numChoices == 0)
+                {
+                    GameState.cardManager.refillVisibleCards();
+                    GameState.activePlayer.decreaseActionsRemaining();
+                    int playerIndex = GameState.players.indexOf(activePlayer);
+                    if (playerIndex < 3)
+                    {
+                        if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                        {
+                            GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                        }
+                        else
+                        {
+                            //load the round end / game end panel
+                        }
+                    }
+                    else
+                    {
+                        if (GameState.players.get(0).getActionsRemaining() > 0)
+                        {
+                            GameState.activePlayer = GameState.players.get(0);
+                        }
+                        else
+                        {
+                            //load the round end / game end panel
+                        }
+                    }
+                    setVisible(false);
+                    try
+                    {
+                        getParent().add(new MainPanel());
+                    }
+                    catch (Exception ex)
+                    {
+                        System.out.println("Failed to load MainPanel");
+                    }
+                    getParent().repaint();
+                    getParent().remove(this);
+                }
+            }
+        }
+        repaint();
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}
