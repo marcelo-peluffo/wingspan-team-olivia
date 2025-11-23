@@ -40,6 +40,7 @@ public class GoalBoard {
 		goals.add(new EggsNestGoal(NestType.GROUND, true, "EggsInGroundGoal"));
 		goals.add(new WildGoal(true, "TotalCardsGoal"));
 		goals.add(new WildGoal(false, "SetOfEggsGoal"));
+		System.out.println("All goals successfully initialized");
 	}
 
 	public Goal[] getGoals()

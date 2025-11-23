@@ -13,7 +13,6 @@ public class Goal {
     public Goal(String imagePath) throws IOException
     {
         this.goalImage = ImageIO.read(Goal.class.getResource("/Images/" + imagePath));
-        System.out.println("The Goal " + imagePath + " was created.");
     }
 
     public int evaluatePlayer(Player p)
