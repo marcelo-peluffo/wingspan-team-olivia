@@ -58,6 +58,7 @@ public class CardManager {
 		bonusCards.add(new FoodBonus("Viticulturalist"));
 		bonusCards.add(new HabitatBonus("WetlandScientist"));
 		bonusCards.add(new NestBonus("WildlifeGardener"));
+		System.out.println("All bonus cards successfully initialized");
 		return true;
 	}
 	

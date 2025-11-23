@@ -20,17 +20,9 @@ public class WingspanRunner {
 			GameState.players.add(new Player());
 		}
 		GameState.activePlayer = GameState.players.get(0);
-		for(int i=0; i<4; i++)
-		{
-			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST); //remove this later, this is for testing
-		}
-		for(int i=0; i<2; i++)
-		{
-			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.GRASSLANDS); //remove this later, this is for testing
-		}
 		for(int i=0; i<3; i++)
 		{
-			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS); //remove this later, this is for testing
+			// GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
 		}
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

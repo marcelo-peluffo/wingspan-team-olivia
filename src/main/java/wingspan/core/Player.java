@@ -109,4 +109,9 @@ public class Player {
 	{
 		return foodInventory;
 	}
+
+	public List<BonusCard> getBonusCards()
+	{
+		return bonusCards;
+	}
 }
