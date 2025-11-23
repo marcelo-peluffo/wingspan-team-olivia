@@ -70,6 +70,5 @@ public class GameState {
 		gameStarted = false;
 		roundNum = 1;
 	}
-
-
+	
 }
