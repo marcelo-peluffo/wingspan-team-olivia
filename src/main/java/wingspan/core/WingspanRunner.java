@@ -7,6 +7,7 @@ import wingspan.food.FoodManager;
 import wingspan.WingspanFrame;
 import wingspan.cards.DataTable;
 import wingspan.enums.*;
+import java.awt.Color;
 
 
 public class WingspanRunner {
@@ -19,6 +20,11 @@ public class WingspanRunner {
 		{
 			GameState.players.add(new Player());
 		}
+		GameState.actionCubeColors = new HashMap<>();
+        GameState.actionCubeColors.put(GameState.players.get(0), Color.RED);
+        GameState.actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
+        GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
+        GameState.actionCubeColors.put(GameState.players.get(3), Color.BLUE);
 		GameState.activePlayer = GameState.players.get(0);
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

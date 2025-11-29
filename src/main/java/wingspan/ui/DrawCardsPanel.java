@@ -21,7 +21,6 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
 
 	private BufferedImage background;
     private List<Card> faceUpCards;
-    private HashMap<Player, Color> actionCubeColors;
     private Map<Food, Integer> foodInventory;
     private Map<Food, BufferedImage> foodToImage;
     private Player activePlayer;
@@ -43,11 +42,6 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
 			return;
 		}
         faceUpCards = GameState.cardManager.getFaceUpCards();
-        actionCubeColors = new HashMap<>();
-        actionCubeColors.put(GameState.players.get(0), Color.RED);
-        actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
-        actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
-        actionCubeColors.put(GameState.players.get(3), Color.BLUE);
         activePlayer = GameState.activePlayer;
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
@@ -81,7 +75,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
 
         //draw the text at the top
         g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.setColor(actionCubeColors.get(GameState.activePlayer));
+        g.setColor(GameState.actionCubeColors.get(GameState.activePlayer));
         String playerString = "Player " + (GameState.players.indexOf(GameState.activePlayer) + 1);
         g.drawString(playerString, getWidth() / 2 - 100, 50);
         g.setColor(Color.BLACK);

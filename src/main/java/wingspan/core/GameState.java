@@ -5,6 +5,7 @@ import java.util.*;
 import wingspan.food.*;
 import wingspan.cards.*;
 import wingspan.enums.Food;
+import java.awt.Color;
 
 public class GameState {
 	//these are initialized in WingspanRunner's main method
@@ -35,6 +36,8 @@ public class GameState {
 	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
 	public static boolean choseToCache;
 
+	public static HashMap<Player, Color> actionCubeColors;
+
 	public static void initialize() {
 		// Core managers
 		try {
@@ -59,6 +62,8 @@ public class GameState {
 		abilityPlayers.clear();
 		cardsToDraw.clear();
 		cardsToTuck.clear();
+
+		//action cube colors
 
 		// Misc. state
 		foodChoice = null;

@@ -48,7 +48,6 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
     private final int HAND_CARD_WIDTH = 120;
     private char playerAction;
     private boolean displayBonus;
-    private HashMap<Player, Color> actionCubeColors;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -79,11 +78,6 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         faceUpCards = GameState.cardManager.getFaceUpCards();
         playerHandCardPositions = new HashMap<>();
         playerAction = '0';
-        actionCubeColors = new HashMap<>();
-        actionCubeColors.put(GameState.players.get(0), Color.RED);
-        actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
-        actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
-        actionCubeColors.put(GameState.players.get(3), Color.BLUE);
         displayBonus = false;
         playerBonusCardPositions = new HashMap<>();
     	addMouseListener(this);
@@ -218,7 +212,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
 
         //draw the game board
         g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.setColor(actionCubeColors.get(GameState.players.get(playerIndex)));
+        g.setColor(GameState.actionCubeColors.get(GameState.players.get(playerIndex)));
         String playerString = "Player " + (playerIndex + 1);
         if (GameState.players.get(playerIndex) != GameState.activePlayer)
         {
@@ -356,7 +350,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         g.drawString("screen to zoom in on it", getWidth() - 200, 190);
 
         //draw the action cube when the player plays an action
-        g.setColor(actionCubeColors.get(activePlayer));
+        g.setColor(GameState.actionCubeColors.get(activePlayer));
         if (playerAction == 'p')
         {
             g.fillRect(655, 175, 25, 25);
