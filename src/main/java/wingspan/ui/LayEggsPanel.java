@@ -35,7 +35,9 @@ public class LayEggsPanel implements KeyListener {
 
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
-            g.drawImage(plus, tempX, tempY, null);
+            if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
+                g.drawImage(plus, tempX, tempY, null);
+            }
             g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), tempX, tempY);
 
             if (i == selectedCardIndex) {
