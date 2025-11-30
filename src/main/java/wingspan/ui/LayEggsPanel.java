@@ -42,7 +42,21 @@ public class LayEggsPanel implements KeyListener {
     public void keyTyped(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                System.out.println("Up arrow");
+                boolean canGoUpOne = (selectedHabitat == Habitat.GRASSLANDS);
+                boolean canGoUpTwo = (selectedHabitat == Habitat.WETLANDS);
+
+                if (!canGoUpTwo || !canGoUpOne) {
+                    break; // can't go up or down
+                }
+
+                if (canGoUpTwo) {
+                    selectedHabitat = Habitat.GRASSLANDS;
+                }
+
+                if (canGoUpOne) {
+                    selectedHabitat = Habitat.FOREST;
+                }
+
                 break;
 
             case KeyEvent.VK_DOWN:
