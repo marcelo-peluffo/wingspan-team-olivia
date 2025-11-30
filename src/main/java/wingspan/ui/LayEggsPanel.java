@@ -19,7 +19,7 @@ public class LayEggsPanel implements KeyListener {
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
-        selectedHabitat = null;
+        selectedHabitat = Habitat.GRASSLANDS;
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.jpg")); // plus image for clicking
         } catch (IOException e) {
