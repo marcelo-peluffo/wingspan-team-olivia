@@ -28,7 +28,7 @@ public class LayEggsPanel implements KeyListener {
     }
 
     public void paint(Graphics g) {
-        int tempX = 0; 
+        int tempX = 0; // fix to actual coordinates later
         int tempY = 0;
 
         List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
