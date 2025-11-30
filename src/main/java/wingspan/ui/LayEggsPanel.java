@@ -73,12 +73,7 @@ public class LayEggsPanel implements KeyListener {
                 if (selectedCardIndex < cards.size() - 1) selectedCardIndex++;
                 break;
         }
-        repaintPanel();
-    }
-
-    private void repaintPanel() {
-        // replace with whatever triggers repaint in your UI
-        // e.g., if this is a JPanel: this.repaint();
+        repaint();
     }
 
     @Override
