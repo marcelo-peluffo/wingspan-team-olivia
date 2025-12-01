@@ -19,4 +19,8 @@ public class Pair {
     {
         return y;
     }
+
+    public String toString() {
+        return String.format("(%d, %d)", x, y);
+    }
 }
