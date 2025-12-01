@@ -40,11 +40,20 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
     private boolean displayBonus;
     private BufferedImage displayedCard;
     private boolean exchanging;
+    private BufferedImage boardImage;
+    private List<Card> forestCards;
+    private List<Card> grasslandsCards;
+    private List<Card> wetlandsCards;
+    private final int CARD_WIDTH = 125;
+    private final int CARD_HEIGHT = 200;
+    private Card displayedCardInfo;
+    private String headingText;
 	
 	public DrawCardsPanel() {
 		try {
 			
 			background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg"));
+            boardImage = ImageIO.read(DrawCardsPanel.class.getResource("/Images/GameBoard.jpg"));
 			
 		}catch(Exception e) {
 			System.out.println("Error");
@@ -80,6 +89,8 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         displayedCard = null;
         displayBonus = false;
         exchanging = false;
+        displayedCardInfo = null;
+        headingText = "Click on one of the three face up cards, or draw a random card";
 		addMouseListener(this);
         addKeyListener(this);
 	}
@@ -95,14 +106,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         g.drawString(playerString, getWidth() / 2 - 100, 50);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 15));
-        if (!exchanging)
-        {
-            g.drawString("Click on one of the three face up cards, or draw a random card", getWidth() / 2 - 250, 80);
-        }
-        else
-        {
-            g.drawString("Click on any card to exchange one of its eggs for an extra choice", getWidth() / 2 - 250, 80);
-        }
+        g.drawString(headingText, getWidth() / 2 - 250, 80);
 
         //draw the 3 face up cards
         Graphics2D g2d = (Graphics2D)g;
@@ -125,7 +129,6 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                 xPos += 400;
             }
         }
-        
 
         //draw the round counter
         g.setColor(Color.LIGHT_GRAY);
@@ -260,8 +263,12 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
             }
             else
             {
+                boolean canExchange = GameState.activePlayer.getTotalEggsAmount() > 0;
                 g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 110);
-                g2d.setColor(Color.ORANGE);
+                if (canExchange)
+                    g2d.setColor(Color.ORANGE);
+                else
+                    g2d.setColor(Color.GRAY);
                 g2d.fillRect(30, getHeight() - 90, 300, 75);
                 g2d.setColor(Color.BLACK);
                 g2d.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -309,127 +316,209 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
             }
         }
         g.drawImage(displayedCard, 1600, 300, 250, 400, null);
+
+        if (exchanging)
+        {
+            cardPositions.clear();
+            g.drawImage(boardImage, 350, 175, (int)(getWidth() * 0.6), (int)(getHeight() * 0.65), null);
+            g2d.setColor(Color.BLACK);
+            g2d.setStroke(new BasicStroke(7));
+            g2d.drawRect(getWidth() / 2 - 255, 120, 409, 50);
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fillRect(getWidth() / 2 - 251, 124, 402, 51);
+            g2d.setColor(Color.BLACK);
+            g2d.drawLine(getWidth() / 2 - 200, 127, getWidth() / 2 - 200, 172);
+            g2d.drawLine(getWidth() / 2 + 100, 127, getWidth() / 2 + 100, 172);
+            int[] xPoints2 = {getWidth() / 2 - 240, getWidth() / 2 - 220, getWidth() / 2 - 220};
+            int[] yPoints2 = {150, 135, 165};
+            g2d.fillPolygon(xPoints2, yPoints2, 3);
+            int[] xPoints3 = {getWidth() / 2 + 140, getWidth() / 2 + 120, getWidth() / 2 + 120};
+            int[] yPoints3 = {150, 135, 165};
+            g2d.fillPolygon(xPoints3, yPoints3, 3);
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.drawString("Change board to view", getWidth() / 2 - 150, 155);
+            int xPos = 610;
+            for(Card c: forestCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 210, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 210));
+                xPos += 175;
+            }
+            xPos = 610;
+            for(Card c: grasslandsCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 425, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 425));
+                xPos += 175;
+            }
+            xPos = 610;
+            for(Card c: wetlandsCards)
+            {
+                g.drawImage(c.getCardImage(), xPos, 640, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(xPos, 640));
+                xPos += 175;
+            }
+            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+            if (displayedCardInfo != null)
+            {
+                g.setColor(Color.WHITE);
+                g.drawString("Eggs: " + displayedCardInfo.getCurrentEggs() + "/" + displayedCardInfo.getBirdInfo().getMaxEggs(), 1600, 720);
+                if (displayedCardInfo.getCurrentEggs() > 0)
+                {
+                    g.setFont(new Font("Arial", Font.PLAIN, 20));
+                    g.drawString("Exchange using this card?", 1625, 750);
+                    g.drawString("(Press 'y' or 'n')", 1625, 770);
+                }
+                
+            }
+            
+        }
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e){
 		int x = e.getX();
 		int y = e.getY();
-		if (chosenCard == null)
+        if (!exchanging)
         {
-            for(Card c: faceUpCardPositions.keySet())
+            if (chosenCard == null)
             {
-                Pair pos = faceUpCardPositions.get(c);
-                if (x > pos.getX() && y > pos.getY() && x < pos.getX() + FACE_UP_CARD_WIDTH && y < pos.getY() + FACE_UP_CARD_HEIGHT)
+                for(Card c: faceUpCardPositions.keySet())
                 {
-                    chosenCard = c;
-                    break;
+                    Pair pos = faceUpCardPositions.get(c);
+                    if (x > pos.getX() && y > pos.getY() && x < pos.getX() + FACE_UP_CARD_WIDTH && y < pos.getY() + FACE_UP_CARD_HEIGHT)
+                    {
+                        chosenCard = c;
+                        break;
+                    }
                 }
-            }
-            if (x > (1920/2)-250 && y > 800 && x < ((1920 / 2) - 250 + 840) && y < 850)
-            {
-                chosenCard = GameState.cardManager.getRandomCard();
-            }
+                if (x > (1920/2)-250 && y > 800 && x < ((1920 / 2) - 250 + 840) && y < 850)
+                {
+                    chosenCard = GameState.cardManager.getRandomCard();
+                }
             if (!displayBonus)
-            {
-            for(Card c: playerHandCardPositions.keySet()){
-            Pair p = playerHandCardPositions.get(c);
-            if (GameState.activePlayer.getHand().size() < 8)
-            {
-                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
                 {
-                    displayedCard = c.getCardImage();
-                    break;
+                for(Card c: playerHandCardPositions.keySet()){
+                Pair p = playerHandCardPositions.get(c);
+                if (GameState.activePlayer.getHand().size() < 8)
+                {
+                    if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        displayedCard = c.getCardImage();
+                        break;
+                    }
                 }
+                else
+                {
+                    double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                    if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        displayedCard = c.getCardImage();
+                        break;
+                    }
+                }
+                }
+                }
+            else
+            {
+                for(BonusCard c: playerBonusCardPositions.keySet()){
+                Pair p = playerBonusCardPositions.get(c);
+                if (GameState.activePlayer.getBonusCards().size() < 8)
+                {
+                    if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        displayedCard = c.getImage();
+                        break;
+                    }
+                }
+                else
+                {
+                    double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+                    if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        displayedCard = c.getImage();
+                        break;
+                    }
+                }
+            }
+            }
+            if (x > 30 && x < 330 && y > getHeight() - 90 && y < getHeight() - 15)
+            {
+                if (GameState.activePlayer.getTotalEggsAmount() > 0)
+                {
+                    exchanging = true;
+                    forestCards = GameState.activePlayer.getGameBoard().getForest();
+                    grasslandsCards = GameState.activePlayer.getGameBoard().getGrasslands();
+                    wetlandsCards = GameState.activePlayer.getGameBoard().getWetlands();
+                    hasChoice = false;
+                    numChoices++;
+                    headingText = "Click on any card to exchange one of its eggs for an extra choice";
+                }
+            }
             }
             else
             {
-                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
-                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                if (x > 1620 && y > 720 && x < 1820 && y < 770)
+                {
+                    numChoices--;
+                    GameState.activePlayer.addCard(chosenCard);
+                    if (faceUpCards.contains(chosenCard))
+                    {
+                        faceUpCards.set(faceUpCards.indexOf(chosenCard), null);
+                    }
+                    chosenCard = null;
+                    if (numChoices == 0)
+                    {
+                        GameState.cardManager.refillVisibleCards();
+                        GameState.activePlayer.decreaseActionsRemaining();
+                        int playerIndex = GameState.players.indexOf(activePlayer);
+                        if (playerIndex < 3)
+                        {
+                            if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                            {
+                                GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                            }
+                            else
+                            {
+                                //load the round end / game end panel
+                            }
+                        }
+                        else
+                        {
+                            if (GameState.players.get(0).getActionsRemaining() > 0)
+                            {
+                                GameState.activePlayer = GameState.players.get(0);
+                            }
+                            else
+                            {
+                                //load the round end / game end panel
+                            }
+                        }
+                        setVisible(false);
+                        try
+                        {
+                            getParent().add(new MainPanel());
+                        }
+                        catch (Exception ex)
+                        {
+                            System.out.println("Failed to load MainPanel");
+                        }
+                        getParent().repaint();
+                        getParent().remove(this);
+                    }
+                }
+            }
+        }
+		else
+        {
+            for(Card c: cardPositions.keySet())
+            {
+                Pair pos = cardPositions.get(c);
+                if (x > pos.getX() && x < pos.getX() + CARD_WIDTH && y > pos.getY() && y < pos.getY() + CARD_HEIGHT)
                 {
                     displayedCard = c.getCardImage();
+                    displayedCardInfo = c;
                     break;
-                }
-            }
-            }
-            }
-        else
-        {
-            for(BonusCard c: playerBonusCardPositions.keySet()){
-            Pair p = playerBonusCardPositions.get(c);
-            if (GameState.activePlayer.getBonusCards().size() < 8)
-            {
-                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
-                {
-                    displayedCard = c.getImage();
-                    break;
-                }
-            }
-            else
-            {
-                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
-                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
-                {
-                    displayedCard = c.getImage();
-                    break;
-                }
-            }
-        }
-        }
-        if (x > 30 && x < 330 && y > getHeight() - 90 && y < getHeight() - 15)
-        {
-            exchanging = true;
-        }
-        }
-        else
-        {
-            if (x > 1620 && y > 720 && x < 1820 && y < 770)
-            {
-                numChoices--;
-                GameState.activePlayer.addCard(chosenCard);
-                if (faceUpCards.contains(chosenCard))
-                {
-                    faceUpCards.set(faceUpCards.indexOf(chosenCard), null);
-                }
-                chosenCard = null;
-                if (numChoices == 0)
-                {
-                    GameState.cardManager.refillVisibleCards();
-                    GameState.activePlayer.decreaseActionsRemaining();
-                    int playerIndex = GameState.players.indexOf(activePlayer);
-                    if (playerIndex < 3)
-                    {
-                        if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
-                        {
-                            GameState.activePlayer = GameState.players.get(playerIndex + 1);
-                        }
-                        else
-                        {
-                            //load the round end / game end panel
-                        }
-                    }
-                    else
-                    {
-                        if (GameState.players.get(0).getActionsRemaining() > 0)
-                        {
-                            GameState.activePlayer = GameState.players.get(0);
-                        }
-                        else
-                        {
-                            //load the round end / game end panel
-                        }
-                    }
-                    setVisible(false);
-                    try
-                    {
-                        getParent().add(new MainPanel());
-                    }
-                    catch (Exception ex)
-                    {
-                        System.out.println("Failed to load MainPanel");
-                    }
-                    getParent().repaint();
-                    getParent().remove(this);
                 }
             }
         }
@@ -471,6 +560,25 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         if (c == 't')
         {
             displayBonus = !displayBonus;
+        }
+        if (exchanging)
+        {
+            if (displayedCardInfo != null && displayedCardInfo.getCurrentEggs() > 0)
+            {
+                if (c == 'y')
+                {
+                    displayedCardInfo.removeEggs(1);
+                    exchanging = false;
+                    displayedCard = null;
+                    displayedCardInfo = null;
+                    headingText = "Click on one of the three face up cards, or draw a random card";
+                }
+                else if (c == 'n')
+                {
+                    displayedCard = null;
+                    displayedCardInfo = null;
+                }
+            }
         }
         repaint();
     }

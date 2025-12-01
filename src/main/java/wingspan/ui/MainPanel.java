@@ -268,7 +268,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 g.setColor(Color.WHITE);
                 g.drawString("Eggs: " + displayedCardInfo.getCurrentEggs() + "/" + displayedCardInfo.getBirdInfo().getMaxEggs(), 1600, 720);
                 g.drawString("Cached Food Tokens: " + displayedCardInfo.getFoodTokens().size(), 1600, 740);
-                g.drawString("Tucked Cards" + displayedCardInfo.getTuckedCards().size(), 1600, 760);
+                g.drawString("Tucked Cards: " + displayedCardInfo.getTuckedCards().size(), 1600, 760);
                 g.setColor(Color.BLACK);
             }
         }

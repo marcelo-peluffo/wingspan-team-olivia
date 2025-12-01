@@ -114,4 +114,22 @@ public class Player {
 	{
 		return bonusCards;
 	}
+
+	public int getTotalEggsAmount()
+	{
+		int total = 0;
+		for(Card c: gameBoard.getForest())
+		{
+			total += c.getCurrentEggs();
+		}
+		for(Card c: gameBoard.getGrasslands())
+		{
+			total += c.getCurrentEggs();
+		}
+		for(Card c: gameBoard.getWetlands())
+		{
+			total += c.getCurrentEggs();
+		}
+		return total;
+	}
 }
