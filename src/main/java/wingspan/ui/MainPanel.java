@@ -435,6 +435,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 playerIndex = 0;
             }
             getPlayerCards(GameState.players.get(playerIndex));
+            foodInventory = GameState.players.get(playerIndex).getFoodInventory();
         }
         if (mouseX > 705 && mouseX < getWidth() / 2 - 200 && mouseY > 127 && mouseY < 172)
         {
@@ -444,6 +445,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 playerIndex = 3;
             }
             getPlayerCards(GameState.players.get(playerIndex));
+            foodInventory = GameState.players.get(playerIndex).getFoodInventory();
         }
         if (!displayBonus)
         {
