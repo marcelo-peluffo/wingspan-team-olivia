@@ -536,6 +536,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         {
             if (c == character && playerAction == '0')
             {
+                playerIndex = GameState.players.indexOf(activePlayer);
                 playerAction = c;
                 break;
             }

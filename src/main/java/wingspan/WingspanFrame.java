@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.swing.*;
 import wingspan.ui.*;
 import wingspan.ui.components.*;
+import wingspan.core.*;
 
 public class WingspanFrame extends JFrame{
     private static final int WIDTH = 1920;
@@ -17,7 +18,7 @@ public class WingspanFrame extends JFrame{
 
         //Display panels based on conditionals checking which state of the game is in. Ex: isSetup = true, display the SetupPanel
         // add(new IntroPanel());
-        add(new MainPanel());
+        add(new IntroPanel());
         setVisible(true);
     }
 }

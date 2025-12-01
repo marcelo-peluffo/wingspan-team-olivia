@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import wingspan.cards.*;
+import wingspan.cards.bonusCards.BonusCard;
 import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
@@ -17,7 +18,7 @@ import wingspan.enums.Food;
 import wingspan.food.*;
 import wingspan.utils.Pair;
 
-public class DrawCardsPanel extends JPanel implements MouseListener{
+public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener{
 
 	private BufferedImage background;
     private List<Card> faceUpCards;
@@ -28,9 +29,16 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
     private int numChoices;
     private Goal[] goals;
     private Card chosenCard;
+    private Map<Card, Pair> playerHandCardPositions;
+    private Map<BonusCard, Pair> playerBonusCardPositions;
     private Map<Card, Pair> faceUpCardPositions;
     private final int FACE_UP_CARD_WIDTH = 300;
     private final int FACE_UP_CARD_HEIGHT = 450;
+    private HashMap<Card, Pair> cardPositions;
+    private final int HAND_CARD_HEIGHT = 180;
+    private final int HAND_CARD_WIDTH = 120;
+    private boolean displayBonus;
+    private BufferedImage displayedCard;
 	
 	public DrawCardsPanel() {
 		try {
@@ -65,8 +73,13 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
         numChoices = numCards / 2 + 1;
         chosenCard = null;
         faceUpCardPositions = new HashMap<>();
-
+        playerHandCardPositions = new HashMap<>();
+        playerBonusCardPositions = new HashMap<>();
+        cardPositions = new HashMap<>();
+        displayedCard = null;
+        displayBonus = false;
 		addMouseListener(this);
+        addKeyListener(this);
 	}
 	
 	public void paint(Graphics g) {
@@ -235,6 +248,46 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
             g2d.setFont(new Font("Arial", Font.PLAIN, 20));
             g2d.drawString("Click here to exchange an egg for an extra card choice", 40, getHeight() - 50);
         }
+        
+        //draw the player's cards
+        int leftEnd;
+        int x1;
+        if (!displayBonus)
+        {
+            if(GameState.activePlayer.getHand().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+        else
+        {
+            if(GameState.activePlayer.getBonusCards().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getBonusCards().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getBonusCards().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+
+        x1 = leftEnd;
+        if (!displayBonus)
+        {
+            for(Card c: GameState.activePlayer.getHand()){
+                g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerHandCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+            }
+        }
+        else
+        {
+            for(BonusCard c: GameState.activePlayer.getBonusCards()){
+                g.drawImage(c.getImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerBonusCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+            }
+        }
 	}
 	
 	@Override
@@ -256,6 +309,26 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
             {
                 chosenCard = GameState.cardManager.getRandomCard();
             }
+            for(Card c: cardPositions.keySet()){
+            Pair p = cardPositions.get(c);
+            if (GameState.activePlayer.getHand().size() < 8)
+            {
+                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+        }
         }
         else
         {
@@ -331,6 +404,31 @@ public class DrawCardsPanel extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+        char c = e.getKeyChar();
+        if (c == 't')
+        {
+            displayBonus = !displayBonus;
+        }
+        repaint();
+    }
 	
+    public void addNotify()
+    {
+        super.addNotify();
+        requestFocus();
+    }
 	
 }
