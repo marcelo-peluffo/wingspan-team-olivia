@@ -5,19 +5,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import wingspan.cards.Card;
+import wingspan.cards.goals.Goal;
 import wingspan.core.GameBoard;
 import wingspan.core.GameState;
+import wingspan.enums.Food;
 import wingspan.enums.Habitat;
 import wingspan.utils.Pair;
 
@@ -29,6 +33,10 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     private HashMap<Card, Pair> cardPositions;
     private final int CARD_WIDTH = 125;
     private final int CARD_HEIGHT = 200;
+    private BufferedImage boardImage;
+    private BufferedImage background;
+    private Map<Food, BufferedImage> foodToImage;
+     private Map<Food, Integer> foodInventory;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -36,6 +44,15 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         this.cardPositions = GameState.cardPositions;
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
+            boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
+            background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg")); 
+            foodToImage.put(Food.BERRY, ImageIO.read(getClass().getResourceAsStream("/Images/BerryToken.png")));
+            foodToImage.put(Food.FISH, ImageIO.read(getClass().getResourceAsStream("/Images/FishToken.png")));
+            foodToImage.put(Food.INVERTEBRATE, ImageIO.read(getClass().getResourceAsStream("/Images/InvertebrateToken.png")));
+            foodToImage.put(Food.RODENT, ImageIO.read(getClass().getResourceAsStream("/Images/RodentToken.png")));
+            foodToImage.put(Food.WHEAT, ImageIO.read(getClass().getResourceAsStream("/Images/WheatToken.png")));
+
+            foodInventory = GameState.activePlayer.getFoodInventory();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,18 +60,18 @@ public class LayEggsPanel extends JPanel implements KeyListener {
 
     public void paint(Graphics g) {
         try {
-            // int tempX = 0; // fix to actual coordinates later
-            // int tempY = 0;
+    
             super.paint(g);
+            g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             int playerIndex = GameState.players.indexOf(GameState.activePlayer);
             Graphics2D g2d = (Graphics2D)g;
-            BufferedImage boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
+            
             BufferedImage displayedCard = null;
             List<Card> forestCards = gameBoard.getForest();
             List<Card> grasslandsCards = gameBoard.getGrasslands();
             List<Card> wetlandsCards = gameBoard.getWetlands();
 
-
+            //draw board
             g.drawImage(boardImage, 350, 175, (int)(getWidth() * 0.6), (int)(getHeight() * 0.65), null);
             g2d.setColor(Color.BLACK);
             g2d.setStroke(new BasicStroke(7));
@@ -95,7 +112,102 @@ public class LayEggsPanel extends JPanel implements KeyListener {
             }
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
             
-            
+            //draw goals
+            g.setColor(Color.WHITE);
+            int goalXPos = getWidth() - 400;
+            for(Goal goal: GameState.goalBoard.getGoals())
+            {
+                g.drawImage(goal.getImage(), goalXPos, getHeight() - 100, 100, 100, null);
+                goalXPos += 100;
+            }
+            int arrowXPos = getWidth() - 450 + GameState.roundNum * 100;
+            int[] xPoints = {arrowXPos - 25, arrowXPos, arrowXPos + 25};
+            int[] yPoints = {getHeight() - 155, getHeight() - 110, getHeight() - 155};
+            g.fillPolygon(xPoints, yPoints, 3);
+            g.setFont(new Font("Arial", Font.BOLD, 30));
+            g.drawString("Goals", getWidth() - 250, getHeight() - 160);
+
+            //draw food token
+                    // Use Graphics2D for better line control (thickness)
+        Graphics2D g2 = (Graphics2D) g;
+        
+        // smooth out shapes and text
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        
+        int numItems = foodInventory.size();
+        if (numItems == 0) return;
+
+        int padding = 10;
+        int x = padding;
+        int panelWidth = getWidth();
+        
+        // Calculate heights
+        int slotHeight = (getHeight() - padding * (numItems + 1)) / numItems;
+        int imgSize = Math.min(slotHeight, panelWidth / 2);
+
+        // --- Calculate Coordinates for Lines ---
+        int startY = padding;
+        // The bottom Y is the top padding + the space taken by (N-1) items + the height of the last image
+        int endY = startY + ((numItems - 1) * (slotHeight + padding)) + imgSize;
+        
+        // Place the vertical line to the right of the images
+        int lineX = x + imgSize + 10; 
+        
+        // --- Draw the Black Lines (The Bracket) ---
+        g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(2)); // Make the line 2px thick for visibility
+
+        // 1. Vertical Line
+        g2.drawLine(lineX, startY, lineX, endY);
+        
+        // 2. Top Horizontal Cap (from left of image to the vertical line)
+        g2.drawLine(x, startY, lineX + 20, startY);
+        
+        // 3. Bottom Horizontal Cap
+        g2.drawLine(x, endY, lineX + 20, endY);
+
+        // --- Draw Items ---
+        int y = startY + 20;
+        for (Food food : Food.values()) {
+            if (!foodInventory.containsKey(food)) continue;
+
+            BufferedImage img = foodToImage.get(food);
+            int count = foodInventory.get(food);
+
+            if (img != null) {
+                // Draw Image
+                g2.drawImage(img, x, y, imgSize, imgSize, null);
+
+                // Draw Count Number
+                // Calculate a font size relative to the image
+                int fontSize = imgSize / 2;
+                g2.setFont(new Font("Arial", Font.BOLD, fontSize));
+                
+                // Position text to the right of the vertical line
+                int textX = lineX + 15; 
+                
+                // Center text vertically relative to the image
+                // (y + imgSize/2) is center, + (fontSize/3) roughly centers the text baseline
+                int textY = y + (imgSize / 2) + (fontSize / 3);
+                
+                g2.drawString(String.valueOf(count), textX, textY);
+
+                y += slotHeight + padding;
+            }
+        }
+
+
+
+            //draw top right text
+
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fillRect(1670, 0, 250, 75);
+            g2d.setColor(Color.black);
+            Font currentfont = g2d.getFont();
+            Font newFont = currentfont.deriveFont(30F);
+            g2d.setFont(newFont);
+            g2d.drawString("Laying eggs", 1690, 50);
+
             // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
             System.out.println(cardPositions);
@@ -116,9 +228,9 @@ public class LayEggsPanel extends JPanel implements KeyListener {
                     g.setColor(Color.BLACK);
                 }
                 
-                //tempX += plus.getWidth() + 10; // move to next card
+
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
         }
     }
 
