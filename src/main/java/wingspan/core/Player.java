@@ -73,6 +73,11 @@ public class Player {
 	{
 		foodInventory.put(food, foodInventory.get(food) + amount);
 	}
+
+	public void removeFood(Food food, int amount)
+	{
+		foodInventory.put(food, foodInventory.get(food) - amount);
+	}
 	
 	public int getActionsRemaining()
 	{
