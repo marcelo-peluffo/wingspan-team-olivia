@@ -92,11 +92,13 @@ public class GameBoard {
 		return list;
 	}
 
-	public Habitat getCardsInHabitat(Habitat h) {
+	public List<Card> getCardsInHabitat(Habitat h) {
 		switch (h) {
 			case FOREST -> {return forest;}
 			case GRASSLANDS -> {return grasslands;}
 			case WETLANDS -> {return wetlands;}
 		}
+
+		return null;
 	}
 }

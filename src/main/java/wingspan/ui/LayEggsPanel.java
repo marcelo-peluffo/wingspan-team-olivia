@@ -1,14 +1,19 @@
 package wingspan.ui;
 
-import wingspan.cards.*;
-import wingspan.enums.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
+
 import javax.imageio.ImageIO;
-import wingspan.core.*;
+
+import wingspan.cards.Card;
+import wingspan.core.GameBoard;
+import wingspan.core.GameState;
+import wingspan.enums.Habitat;
 
 public class LayEggsPanel implements KeyListener {
     private GameBoard gameBoard;
@@ -75,7 +80,7 @@ public class LayEggsPanel implements KeyListener {
                 if (selectedCardIndex < cards.size() - 1) selectedCardIndex++;
                 break;
         }
-        repaint();
+        //repaint();
     }
 
     @Override
