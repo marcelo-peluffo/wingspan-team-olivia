@@ -25,10 +25,10 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     private int selectedCardIndex = 0; // index of card within the habitat
     private HashMap<Card, Pair> cardPositions;
 
-    public LayEggsPanel(HashMap<Card, Pair> cardPositions) {
+    public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
         selectedHabitat = Habitat.GRASSLANDS;
-        this.cardPositions = cardPositions;
+        this.cardPositions = GameState.cardPositions;
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
         } catch (IOException e) {
@@ -39,10 +39,15 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     public void paint(Graphics g) {
         // int tempX = 0; // fix to actual coordinates later
         // int tempY = 0;
+        super.paint(g);
 
+
+
+        // begin drawing the plus
         List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
-
+        System.out.println(cardPositions);
         for (int i = 0; i < cards.size(); i++) {
+
             Card card = cards.get(i);
             Pair pair = cardPositions.get(card);
 

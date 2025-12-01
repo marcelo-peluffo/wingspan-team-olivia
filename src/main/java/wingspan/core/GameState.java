@@ -3,6 +3,7 @@ package wingspan.core;
 import java.io.IOException;
 import java.util.*;
 import wingspan.food.*;
+import wingspan.utils.Pair;
 import wingspan.cards.*;
 import wingspan.enums.Food;
 import java.awt.Color;
@@ -37,6 +38,7 @@ public class GameState {
 	public static boolean choseToCache;
 
 	public static HashMap<Player, Color> actionCubeColors;
+	public static HashMap<Card, Pair> cardPositions;
 
 	public static void initialize() {
 		// Core managers
