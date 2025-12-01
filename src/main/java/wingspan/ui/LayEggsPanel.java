@@ -6,25 +6,29 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import wingspan.cards.Card;
 import wingspan.core.GameBoard;
 import wingspan.core.GameState;
 import wingspan.enums.Habitat;
+import wingspan.utils.Pair;
 
-public class LayEggsPanel implements KeyListener {
+public class LayEggsPanel extends JPanel implements KeyListener {
     private GameBoard gameBoard;
     private BufferedImage plus;
     private Habitat selectedHabitat;
     private int selectedCardIndex = 0; // index of card within the habitat
+    private HashMap<Card, Pair> cardPositions;
 
-    public LayEggsPanel() {
+    public LayEggsPanel(HashMap<Card, Pair> cardPositions) {
         gameBoard = GameState.activePlayer.getGameBoard();
         selectedHabitat = Habitat.GRASSLANDS;
-
+        this.cardPositions = cardPositions;
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.jpg"));
         } catch (IOException e) {
@@ -33,26 +37,28 @@ public class LayEggsPanel implements KeyListener {
     }
 
     public void paint(Graphics g) {
-        int tempX = 0; // fix to actual coordinates later
-        int tempY = 0;
+        // int tempX = 0; // fix to actual coordinates later
+        // int tempY = 0;
 
         List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
 
         for (int i = 0; i < cards.size(); i++) {
             Card card = cards.get(i);
+            Pair pair = cardPositions.get(card);
+
             if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
-                g.drawImage(plus, tempX, tempY, null);
+                g.drawImage(plus, pair.getX(), pair.getY(), null);
             }
-            g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), tempX, tempY);
+            g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), pair.getX(), pair.getY());
 
             if (i == selectedCardIndex) {
                 // highlight selected card
                 g.setColor(Color.RED);
-                g.drawRect(tempX - 2, tempY - 2, plus.getWidth() + 4, plus.getHeight() + 4);
+                g.drawRect(pair.getX() - 2, pair.getY() - 2, plus.getWidth() + 4, plus.getHeight() + 4);
                 g.setColor(Color.BLACK);
             }
 
-            tempX += plus.getWidth() + 10; // move to next card
+            //tempX += plus.getWidth() + 10; // move to next card
         }
     }
 
