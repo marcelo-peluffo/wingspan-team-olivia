@@ -39,6 +39,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
     private final int HAND_CARD_WIDTH = 120;
     private boolean displayBonus;
     private BufferedImage displayedCard;
+    private boolean exchanging;
 	
 	public DrawCardsPanel() {
 		try {
@@ -78,6 +79,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         cardPositions = new HashMap<>();
         displayedCard = null;
         displayBonus = false;
+        exchanging = false;
 		addMouseListener(this);
         addKeyListener(this);
 	}
@@ -93,26 +95,37 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         g.drawString(playerString, getWidth() / 2 - 100, 50);
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 15));
-        g.drawString("Click on one of the three face up cards, or draw a random card", getWidth() / 2 - 250, 80);
+        if (!exchanging)
+        {
+            g.drawString("Click on one of the three face up cards, or draw a random card", getWidth() / 2 - 250, 80);
+        }
+        else
+        {
+            g.drawString("Click on any card to exchange one of its eggs for an extra choice", getWidth() / 2 - 250, 80);
+        }
 
         //draw the 3 face up cards
         Graphics2D g2d = (Graphics2D)g;
-        g2d.setColor(Color.BLACK);
-        g2d.setStroke(new BasicStroke(4));
-        g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 350);
-        g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 - 400, getHeight() / 2 - 250);
-        g2d.drawLine(getWidth() / 2, getHeight() / 2 - 350, getWidth() / 2, getHeight() / 2 - 250);
-        g2d.drawLine(getWidth() / 2 + 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 250);
-        int xPos = getWidth() / 2 - 550;
-        for(Card c: faceUpCards)
+        if (!exchanging)
         {
-            if (c != null)
+            g2d.setColor(Color.BLACK);
+            g2d.setStroke(new BasicStroke(4));
+            g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 350);
+            g2d.drawLine(getWidth() / 2 - 400, getHeight() / 2 - 350, getWidth() / 2 - 400, getHeight() / 2 - 250);
+            g2d.drawLine(getWidth() / 2, getHeight() / 2 - 350, getWidth() / 2, getHeight() / 2 - 250);
+            g2d.drawLine(getWidth() / 2 + 400, getHeight() / 2 - 350, getWidth() / 2 + 400, getHeight() / 2 - 250);
+            int xPos = getWidth() / 2 - 550;
+            for(Card c: faceUpCards)
             {
-                g.drawImage(c.getCardImage(), xPos, getHeight() / 2 - 250, FACE_UP_CARD_WIDTH, FACE_UP_CARD_HEIGHT, null);
-                faceUpCardPositions.put(c, new Pair(xPos, getHeight() / 2 - 250));
+                if (c != null)
+                {
+                    g.drawImage(c.getCardImage(), xPos, getHeight() / 2 - 250, FACE_UP_CARD_WIDTH, FACE_UP_CARD_HEIGHT, null);
+                    faceUpCardPositions.put(c, new Pair(xPos, getHeight() / 2 - 250));
+                }
+                xPos += 400;
             }
-            xPos += 400;
         }
+        
 
         //draw the round counter
         g.setColor(Color.LIGHT_GRAY);
@@ -218,10 +231,14 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
 		g2d.drawString("Drawing cards", 1690, 50);
 
         //draw the random card button
-		g2d.setColor(new Color(197,235,8));
-		g2d.fillRect((1920/2)-250, 800, 400, 50); 
-		g2d.setColor(Color.black);
-		g2d.drawString("Draw a random card", (1920/2)-200, 840);
+        if (!exchanging)
+        {
+            g2d.setColor(new Color(197,235,8));
+            g2d.fillRect((1920/2)-250, 800, 400, 50); 
+            g2d.setColor(Color.black);
+            g2d.drawString("Draw a random card", (1920/2)-200, 840);
+        }
+		
 
 		//draw the confirm card interface
         if (chosenCard != null)
@@ -234,19 +251,22 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         }
 
         //draw the bottom left interface
-        g2d.setColor(Color.WHITE);
-        if (!hasChoice)
+        if (!exchanging)
         {
-            g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 25);
-        }
-        else
-        {
-            g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 110);
-            g2d.setColor(Color.ORANGE);
-            g2d.fillRect(30, getHeight() - 90, 300, 75);
-            g2d.setColor(Color.BLACK);
-            g2d.setFont(new Font("Arial", Font.PLAIN, 20));
-            g2d.drawString("Exchange egg -> extra choice", 40, getHeight() - 50);
+            g2d.setColor(Color.WHITE);
+            if (!hasChoice)
+            {
+                g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 25);
+            }
+            else
+            {
+                g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 110);
+                g2d.setColor(Color.ORANGE);
+                g2d.fillRect(30, getHeight() - 90, 300, 75);
+                g2d.setColor(Color.BLACK);
+                g2d.setFont(new Font("Arial", Font.PLAIN, 20));
+                g2d.drawString("Exchange egg -> extra choice", 40, getHeight() - 50);
+            }
         }
         
         //draw the player's cards
@@ -311,7 +331,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                 chosenCard = GameState.cardManager.getRandomCard();
             }
             if (!displayBonus)
-        {
+            {
             for(Card c: playerHandCardPositions.keySet()){
             Pair p = playerHandCardPositions.get(c);
             if (GameState.activePlayer.getHand().size() < 8)
@@ -331,8 +351,8 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                     break;
                 }
             }
-        }
-        }
+            }
+            }
         else
         {
             for(BonusCard c: playerBonusCardPositions.keySet()){
@@ -355,6 +375,10 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                 }
             }
         }
+        }
+        if (x > 30 && x < 330 && y > getHeight() - 90 && y < getHeight() - 15)
+        {
+            exchanging = true;
         }
         }
         else
@@ -413,28 +437,28 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -443,7 +467,6 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
         char c = e.getKeyChar();
         if (c == 't')
         {

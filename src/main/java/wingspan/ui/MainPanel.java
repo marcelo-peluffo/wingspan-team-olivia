@@ -48,6 +48,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
     private final int HAND_CARD_WIDTH = 120;
     private char playerAction;
     private boolean displayBonus;
+    private Card displayedCardInfo;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -80,6 +81,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         playerAction = '0';
         displayBonus = false;
         playerBonusCardPositions = new HashMap<>();
+        displayedCardInfo = null;
     	addMouseListener(this);
         addKeyListener(this);
     }
@@ -261,6 +263,14 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 xPos += 175;
             }
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+            if (displayedCardInfo != null)
+            {
+                g.setColor(Color.WHITE);
+                g.drawString("Eggs: " + displayedCardInfo.getCurrentEggs() + "/" + displayedCardInfo.getBirdInfo().getMaxEggs(), 1600, 720);
+                g.drawString("Cached Food Tokens: " + displayedCardInfo.getFoodTokens().size(), 1600, 740);
+                g.drawString("Tucked Cards" + displayedCardInfo.getTuckedCards().size(), 1600, 760);
+                g.setColor(Color.BLACK);
+            }
         }
         // draw the face up cards
         else if (navigatorOption.equals("FaceUpCards"))
@@ -413,6 +423,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             if (mouseX > position.getX() && mouseY > position.getY() && mouseX < position.getX() + CARD_WIDTH && mouseY < position.getY() + CARD_HEIGHT)
             {
                 displayedCard = c.getCardImage();
+                displayedCardInfo = c;
                 break;
             }
         }
@@ -443,6 +454,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getCardImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -452,6 +464,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getCardImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -466,6 +479,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -475,6 +489,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
