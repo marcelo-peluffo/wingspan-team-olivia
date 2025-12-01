@@ -243,10 +243,10 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         {
             g2d.drawString("Remaining choices: " + numChoices, 30, getHeight() - 110);
             g2d.setColor(Color.ORANGE);
-            g2d.fillRect(30, getHeight() - 90, 500, 75);
+            g2d.fillRect(30, getHeight() - 90, 300, 75);
             g2d.setColor(Color.BLACK);
             g2d.setFont(new Font("Arial", Font.PLAIN, 20));
-            g2d.drawString("Click here to exchange an egg for an extra card choice", 40, getHeight() - 50);
+            g2d.drawString("Exchange egg -> extra choice", 40, getHeight() - 50);
         }
         
         //draw the player's cards
@@ -288,6 +288,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                 x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
             }
         }
+        g.drawImage(displayedCard, 1600, 300, 250, 400, null);
 	}
 	
 	@Override
@@ -309,8 +310,10 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
             {
                 chosenCard = GameState.cardManager.getRandomCard();
             }
-            for(Card c: cardPositions.keySet()){
-            Pair p = cardPositions.get(c);
+            if (!displayBonus)
+        {
+            for(Card c: playerHandCardPositions.keySet()){
+            Pair p = playerHandCardPositions.get(c);
             if (GameState.activePlayer.getHand().size() < 8)
             {
                 if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
@@ -328,6 +331,30 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                     break;
                 }
             }
+        }
+        }
+        else
+        {
+            for(BonusCard c: playerBonusCardPositions.keySet()){
+            Pair p = playerBonusCardPositions.get(c);
+            if (GameState.activePlayer.getBonusCards().size() < 8)
+            {
+                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    break;
+                }
+            }
+        }
         }
         }
         else
