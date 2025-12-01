@@ -30,7 +30,7 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         selectedHabitat = Habitat.GRASSLANDS;
         this.cardPositions = cardPositions;
         try {
-            plus = ImageIO.read(getClass().getResource("/Images/Plus.jpg"));
+            plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
