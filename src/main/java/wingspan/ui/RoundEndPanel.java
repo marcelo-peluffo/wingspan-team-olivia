@@ -4,7 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
@@ -188,6 +187,8 @@ public class RoundEndPanel extends JPanel implements MouseListener, KeyListener 
             if((x >= 400 && x <= 1300) && (y >= 875 && y<= 925)) {
                 GameState.roundNum++;
                 GameState.goalBoardPositions.add(actionCubePos);
+                GameState.cardManager.faceUpCards.clear();
+                GameState.cardManager.refillVisibleCards();
                 for(Player p: GameState.players)
                 {
                     p.resetActionsRemaining(GameState.roundNum);

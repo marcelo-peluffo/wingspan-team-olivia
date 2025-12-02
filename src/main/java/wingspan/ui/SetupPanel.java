@@ -21,7 +21,6 @@ import wingspan.enums.Food;
 import static wingspan.core.GameState.cardManager;
 import static wingspan.core.GameState.players;
 import static wingspan.enums.Food.*;
-import wingspan.core.*;
 
 public class SetupPanel extends JPanel implements KeyListener, MouseListener{
 

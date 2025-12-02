@@ -1,7 +1,6 @@
 package wingspan.ui;
 
 import java.awt.*;
-import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.image.*;
@@ -15,7 +14,6 @@ import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.Food;
-import wingspan.food.*;
 import wingspan.utils.Pair;
 
 public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener{
@@ -49,7 +47,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
     private Card displayedCardInfo;
     private String headingText;
 	
-	public DrawCardsPanel() {
+	public DrawCardsPanel(int numChoices, boolean hasChoice) {
 		try {
 			
 			background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg"));
@@ -77,10 +75,8 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        int numCards = GameState.activePlayer.getGameBoard().getWetlands().size();
-        hasChoice = (numCards % 2 != 0);
-        numChoices = numCards / 2 + 1;
+        this.numChoices = numChoices;
+        this.hasChoice = hasChoice;
         chosenCard = null;
         faceUpCardPositions = new HashMap<>();
         playerHandCardPositions = new HashMap<>();

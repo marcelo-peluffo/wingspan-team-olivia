@@ -13,7 +13,6 @@ public class Player {
 	private List<BonusCard> bonusCards;
 	private Map<Food, Integer> foodInventory;
 	private int actionsRemaining;
-	private int playerNum;
 	private int goalScore;
 	
 	public Player() throws IOException

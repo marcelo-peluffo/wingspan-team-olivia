@@ -2,8 +2,6 @@ package wingspan.core;
 
 import java.io.*;
 import java.util.*;
-import wingspan.cards.CardManager;
-import wingspan.food.FoodManager;
 import wingspan.WingspanFrame;
 import wingspan.cards.DataTable;
 import wingspan.enums.*;
@@ -41,6 +39,9 @@ public class WingspanRunner {
 		}
 		GameState.players.get(0).getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
 		GameState.players.get(0).getGameBoard().getWetlands().get(0).addEggs(1);
+		for(int i=0; i<5; i++)
+		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(0).addBonusCard(GameState.cardManager.getRandomBonusCard());
 		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

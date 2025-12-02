@@ -2,14 +2,12 @@ package wingspan.ui;
 import wingspan.cards.goals.Goal;
 import wingspan.core.*;
 import wingspan.enums.Food;
-import wingspan.ui.components.*;
 import wingspan.utils.Pair;
 import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 //import java.io.IOException;
@@ -571,7 +569,10 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             }
             else if (playerAction == 'f')
             {
-                //add GainFoodPanel when that's implemented
+                int numCards = GameState.activePlayer.getGameBoard().getForest().size();
+                boolean hasChoice = (numCards % 2 != 0);
+                int numChoices = numCards / 2 + 1;
+                getParent().add(new GainFoodPanel(numChoices, hasChoice));
             }
             else if (playerAction == 'e')
             {
@@ -579,7 +580,10 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             }
             else if (playerAction == 'd')
             {
-                getParent().add(new DrawCardsPanel());
+                int numCards = GameState.activePlayer.getGameBoard().getWetlands().size();
+                boolean hasChoice = (numCards % 2 != 0);
+                int numChoices = numCards / 2 + 1;
+                getParent().add(new DrawCardsPanel(numChoices, hasChoice));
             }
             getParent().repaint();
             getParent().remove(this);
