@@ -148,4 +148,23 @@ public class Player {
 		}
 		return total;
 	}
+
+	public int[] getAllScores() // returns an array of scores used to determine final score in the following order: Birds, Bonus Cards, Goals, Eggs, Cached food, tucked cards, total score
+	{
+		int[] scores = new int[7];
+		for (Card c: gameBoard.returnAllCards())
+		{
+			scores[0] += c.getBirdInfo().getVictoryPoints();
+			scores[3] += c.getCurrentEggs();
+			scores[4] += c.getFoodTokens().size();
+			scores[5] += c.getTuckedCards().size();
+		}
+		for(BonusCard c: bonusCards)
+		{
+			scores[1] += c.calculateScore(this);
+		}
+		scores[2] = goalScore;
+		scores[6] = scores[0] + scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
+		return scores;
+	}
 }
