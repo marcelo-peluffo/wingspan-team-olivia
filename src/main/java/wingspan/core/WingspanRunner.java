@@ -24,7 +24,7 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(0), Color.RED);
         GameState.actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
         GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
-        GameState.actionCubeColors.put(GameState.players.get(3), Color.BLUE);
+        GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
 		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
 		for(Player p: GameState.players)
