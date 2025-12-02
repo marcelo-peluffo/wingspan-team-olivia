@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,7 +28,7 @@ import wingspan.enums.Food;
 import wingspan.enums.Habitat;
 import wingspan.utils.Pair;
 
-public class LayEggsPanel extends JPanel implements KeyListener {
+public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private GameBoard gameBoard;
     private BufferedImage plus;
     private Habitat selectedHabitat;
@@ -44,8 +46,17 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     private final int HAND_CARD_WIDTH = 120;
     private HashMap<Card, Pair> playerHandCardPositions;
     private HashMap<BonusCard, Pair> playerBonusCardPositions;
-            int TOKEN_WIDTH = 80;
-        int TOKEN_HEIGHT = 80;
+    private int TOKEN_WIDTH = 80;
+    private int TOKEN_HEIGHT = 80;
+    private Food selectedToken = null;
+    private Food[] foods = {Food.BERRY, Food.WHEAT, Food.FISH, Food.RODENT, Food.INVERTEBRATE};
+    private Pair[] tokenPositions = {
+        new Pair(getWidth() - 350, getHeight() - 800),
+        new Pair(getWidth() - 250, getHeight() - 800),
+        new Pair(getWidth() - 150, getHeight() - 800),
+        new Pair(getWidth() - 300, getHeight() - 700),
+        new Pair(getWidth() - 200, getHeight() - 700)
+    };
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -237,66 +248,87 @@ public class LayEggsPanel extends JPanel implements KeyListener {
             g.drawString("Remaining Choices: " + remainingChoices, 50, getHeight() - 50);
 
             //draw hand
-                    int leftEnd;
-        int x1;
-        if (!displayBonus)
-        {
-            if(GameState.activePlayer.getHand().size() % 2 == 0){
-            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            int leftEnd;
+            int x1;
+            if (!displayBonus)
+            {
+                if(GameState.activePlayer.getHand().size() % 2 == 0){
+                leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+                }
+                else {
+                    leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+                }
             }
-            else {
-                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            else
+            {
+                if(GameState.activePlayer.getBonusCards().size() % 2 == 0){
+                leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getBonusCards().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+                }
+                else {
+                    leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getBonusCards().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+                }
             }
-        }
-        else
-        {
-            if(GameState.activePlayer.getBonusCards().size() % 2 == 0){
-            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getBonusCards().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+
+            x1 = leftEnd;
+            if (!displayBonus)
+            {
+                for(Card c: GameState.activePlayer.getHand()){
+                    g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                    playerHandCardPositions.put(c, new Pair(x1, 890));
+                    x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                }
             }
-            else {
-                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getBonusCards().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            else
+            {
+                for(BonusCard c: GameState.activePlayer.getBonusCards()){
+                    g.drawImage(c.getImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                    playerBonusCardPositions.put(c, new Pair(x1, 890));
+                    x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+                }
             }
-        }
 
-        x1 = leftEnd;
-        if (!displayBonus)
-        {
-            for(Card c: GameState.activePlayer.getHand()){
-                g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
-                playerHandCardPositions.put(c, new Pair(x1, 890));
-                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+            //draw tokens
+
+            for (int i = 0; i < foods.length; i++) {
+                Food f = foods[i];
+                Pair p = tokenPositions[i];
+                g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
             }
-        }
-        else
-        {
-            for(BonusCard c: GameState.activePlayer.getBonusCards()){
-                g.drawImage(c.getImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
-                playerBonusCardPositions.put(c, new Pair(x1, 890));
-                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+
+            // draw text to exchange
+            g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
+            g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
+            
+            if (selectedToken != null) {
+                Pair p = null;
+                switch (selectedToken) {
+                    
+                    case BERRY: {
+                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    } break;
+
+                    case WHEAT: {
+                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    } break;
+
+                    case FISH: {
+                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    } break;
+
+                    case INVERTEBRATE: {
+                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    } break;
+
+                    case RODENT: {
+                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    } break;
+                }
             }
-        }
 
-        //draw tokens -> egg exchange on right
-
-
-        g.drawImage(foodToImage.get(Food.BERRY), getWidth() - 350, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
-        g.drawImage(foodToImage.get(Food.WHEAT), getWidth() - 250, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
-        g.drawImage(foodToImage.get(Food.FISH), getWidth() - 150, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
-        g.drawImage(foodToImage.get(Food.RODENT), getWidth() - 300, getHeight() - 700, TOKEN_HEIGHT, TOKEN_WIDTH, null);
-        g.drawImage(foodToImage.get(Food.INVERTEBRATE), getWidth() - 200, getHeight() - 700, TOKEN_HEIGHT, TOKEN_WIDTH, null);
-
-        // draw text to exchange
-        g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
-        g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
-        
-        // draw JButton here, where the user can confirm their choice. Then, the JButton class can handle logic
-
-
-            // begin drawing the plus
+                // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
             System.out.println(cardPositions);
-            for (int i = 0; i < cards.size(); i++) {
-                
+            for (int i = 0; i < cards.size(); i++) {                
                 Card card = cards.get(i);
                 Pair pair = cardPositions.get(card);
                 
@@ -311,15 +343,20 @@ public class LayEggsPanel extends JPanel implements KeyListener {
                     g.drawRect(pair.getX() - 2, pair.getY() - 2, plus.getWidth() + 4, plus.getHeight() + 4);
                     g.setColor(Color.BLACK);
                 }
-                
-
+                    
             }
+
+
         } catch (Exception ex) {
         }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyChar() == 'c') {
+
+        }
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 if (selectedHabitat == Habitat.GRASSLANDS) selectedHabitat = Habitat.FOREST;
@@ -350,4 +387,54 @@ public class LayEggsPanel extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) { }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
+        int clickX = e.getX();
+        int clickY = e.getY();
+
+        for (int i = 0; i < foods.length; i++) {
+            Food food = foods[i];
+            Pair tokenPosition = tokenPositions[i];
+            int tokenX = tokenPosition.getX();
+            int tokenY = tokenPosition.getY();
+
+            boolean withinX = clickX >= tokenX && clickX <= tokenX + TOKEN_WIDTH;
+            boolean withinY = clickY >= tokenY && clickY <= tokenY + TOKEN_HEIGHT;
+            boolean withinBounds = withinX && withinY;
+
+            if (withinBounds) {
+                selectedToken = food;
+            }
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+    }
+
+    public void requestFocus() {
+        addNotify();
+    }
 }
