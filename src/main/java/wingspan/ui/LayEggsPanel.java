@@ -50,13 +50,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private int TOKEN_HEIGHT = 80;
     private Food selectedToken = null;
     private Food[] foods = {Food.BERRY, Food.WHEAT, Food.FISH, Food.RODENT, Food.INVERTEBRATE};
-    private Pair[] tokenPositions = {
-        new Pair(getWidth() - 350, getHeight() - 800),
-        new Pair(getWidth() - 250, getHeight() - 800),
-        new Pair(getWidth() - 150, getHeight() - 800),
-        new Pair(getWidth() - 300, getHeight() - 700),
-        new Pair(getWidth() - 200, getHeight() - 700)
-    };
+    private Pair[] tokenPositions;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -87,6 +81,13 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         try {
     
             super.paint(g);
+            tokenPositions = new Pair[] {
+                new Pair(getWidth() - 350, getHeight() - 800),
+                new Pair(getWidth() - 250, getHeight() - 800),
+                new Pair(getWidth() - 150, getHeight() - 800),
+                new Pair(getWidth() - 300, getHeight() - 700),
+                new Pair(getWidth() - 200, getHeight() - 700)
+            };
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             int playerIndex = GameState.players.indexOf(GameState.activePlayer);
             Graphics2D g2d = (Graphics2D)g;
@@ -327,7 +328,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
                 // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
-            System.out.println(cardPositions);
+            //System.out.println(cardPositions);
             for (int i = 0; i < cards.size(); i++) {                
                 Card card = cards.get(i);
                 Pair pair = cardPositions.get(card);
@@ -407,6 +408,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             if (withinBounds) {
                 selectedToken = food;
             }
+            System.out.println(withinBounds);
         }
     }
 
@@ -434,7 +436,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
     }
 
-    public void requestFocus() {
-        addNotify();
+    public void addNotify() {
+
+        super.addNotify();
+        requestFocus();
     }
 }
