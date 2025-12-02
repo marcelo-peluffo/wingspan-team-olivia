@@ -196,13 +196,13 @@ public class RoundEndPanel extends JPanel implements MouseListener, KeyListener 
                 setVisible(false);
                 try
                 {
-                    if (GameState.roundNum < 4)
+                    if (GameState.roundNum <= 4)
                     {
                         getParent().add(new MainPanel());
                     }
                     else
                     {
-                        // getParent().add(new GameEndPanel());
+                        getParent().add(new GameEndPanel());
                     }
                 }
                 catch (Exception ex)
