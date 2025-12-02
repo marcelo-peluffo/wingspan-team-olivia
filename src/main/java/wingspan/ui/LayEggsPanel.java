@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import wingspan.cards.Card;
+import wingspan.cards.bonusCards.BonusCard;
 import wingspan.cards.goals.Goal;
 import wingspan.core.GameBoard;
 import wingspan.core.GameState;
@@ -36,7 +37,13 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     private BufferedImage boardImage;
     private BufferedImage background;
     private Map<Food, BufferedImage> foodToImage;
-     private Map<Food, Integer> foodInventory;
+    private Map<Food, Integer> foodInventory;
+    private int remainingChoices = 0;
+    private boolean displayBonus = false;
+    private final int HAND_CARD_HEIGHT = 180;
+    private final int HAND_CARD_WIDTH = 120;
+    private HashMap<Card, Pair> playerHandCardPositions;
+    private HashMap<BonusCard, Pair> playerBonusCardPositions;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -44,6 +51,8 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         this.cardPositions = GameState.cardPositions;
         foodToImage = new HashMap<>();
         foodInventory = new HashMap<>();
+        playerHandCardPositions = new HashMap<>();
+        playerBonusCardPositions = new HashMap<>();
 
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
@@ -129,14 +138,10 @@ public class LayEggsPanel extends JPanel implements KeyListener {
             g.fillPolygon(xPoints, yPoints, 3);
             g.setFont(new Font("Arial", Font.BOLD, 30));
             g.drawString("Goals", getWidth() - 250, getHeight() - 160);
-
-            //draw food token
-                    // Use Graphics2D for better line control (thickness)
-        Graphics2D g2 = (Graphics2D) g;
         
-        // smooth out shapes and text
+        Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        
+
         int numItems = foodInventory.size();
         if (numItems == 0) return;
 
@@ -145,11 +150,11 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         int panelWidth = getWidth();
         
         // Calculate heights
-        int slotHeight = (getHeight() - padding * (numItems + 1)) / numItems;
+        int slotHeight = (getHeight() - 600 - padding * (numItems + 1)) / numItems;
         int imgSize = Math.min(slotHeight, panelWidth / 2);
 
         // --- Calculate Coordinates for Lines ---
-        int startY = padding;
+        int startY = padding + 200;
         // The bottom Y is the top padding + the space taken by (N-1) items + the height of the last image
         int endY = startY + ((numItems - 1) * (slotHeight + padding)) + imgSize;
         
@@ -157,20 +162,20 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         int lineX = x + imgSize + 10; 
         
         // --- Draw the Black Lines (The Bracket) ---
-        g2.setColor(Color.BLACK);
+        g2.setColor(Color.LIGHT_GRAY);
         g2.setStroke(new BasicStroke(2)); // Make the line 2px thick for visibility
 
         // 1. Vertical Line
-        g2.drawLine(lineX, startY, lineX, endY);
+        g2.drawLine(lineX, startY, lineX, endY - 50);
         
         // 2. Top Horizontal Cap (from left of image to the vertical line)
-        g2.drawLine(x, startY, lineX + 20, startY);
+        g2.drawLine(x, startY, lineX + 40, startY);
         
         // 3. Bottom Horizontal Cap
-        g2.drawLine(x, endY, lineX + 20, endY);
+        g2.drawLine(x, endY - 50, lineX + 40, endY - 50);
 
         // --- Draw Items ---
-        int y = startY + 20;
+        int y = startY + 5;
         for (Food food : Food.values()) {
             if (!foodInventory.containsKey(food)) continue;
 
@@ -192,7 +197,7 @@ public class LayEggsPanel extends JPanel implements KeyListener {
                 // Center text vertically relative to the image
                 // (y + imgSize/2) is center, + (fontSize/3) roughly centers the text baseline
                 int textY = y + (imgSize / 2) + (fontSize / 3);
-                
+                g2.setColor(Color.ORANGE);
                 g2.drawString(String.valueOf(count), textX, textY);
 
                 y += slotHeight + padding;
@@ -210,6 +215,64 @@ public class LayEggsPanel extends JPanel implements KeyListener {
             Font newFont = currentfont.deriveFont(30F);
             g2d.setFont(newFont);
             g2d.drawString("Laying eggs", 1690, 50);
+
+
+            //draw round counter
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillRect(0, 0, 290, 140);
+            BasicStroke stroke = new BasicStroke(5);
+            g2.setStroke(stroke);
+            g2.setColor(Color.BLACK);
+            g2.drawRect(-10, -10, 300, 150);
+            g2.drawLine(-10, 80, 290, 80);
+            g2.setFont(new Font("Arial", Font.BOLD, 50));
+            g2.drawString("Round " + GameState.roundNum + "/4", 20, 50);
+            g2.setFont(new Font("Arial", Font.BOLD, 23));
+            g2.drawString("Action Tokens Left: " + GameState.activePlayer.getActionsRemaining(), 20, 115);
+
+            //draw remaining choices
+            g.setColor(Color.WHITE);
+            g.drawString("Remaining Choices: " + remainingChoices, 50, getHeight() - 50);
+
+            //draw hand
+                    int leftEnd;
+        int x1;
+        if (!displayBonus)
+        {
+            if(GameState.activePlayer.getHand().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+        else
+        {
+            if(GameState.activePlayer.getBonusCards().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getBonusCards().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getBonusCards().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+
+        x1 = leftEnd;
+        if (!displayBonus)
+        {
+            for(Card c: GameState.activePlayer.getHand()){
+                g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerHandCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+            }
+        }
+        else
+        {
+            for(BonusCard c: GameState.activePlayer.getBonusCards()){
+                g.drawImage(c.getImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerBonusCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+            }
+        }
 
             // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
