@@ -20,6 +20,9 @@ import java.util.Map;
 
 public class FeederComponent extends JPanel implements MouseListener {
 
+    // Background
+    private BufferedImage background;
+
     // GoalsComponent
     private Goal[] goals;
 
@@ -61,6 +64,8 @@ public class FeederComponent extends JPanel implements MouseListener {
         this.remainingChoices = choicesAllowed;
 
         try {
+            background = ImageIO.read(FeederComponent.class.getResource("/Images/backgroundImage2.jpeg"));
+            
             feederImage = ImageIO.read(FeederComponent.class.getResource("/Images/BirdFeederImage.png"));
 
             diceMulti = ImageIO.read(FeederComponent.class.getResource("/Images/MultiDice.jpg"));
@@ -106,6 +111,9 @@ public class FeederComponent extends JPanel implements MouseListener {
     public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2 = (Graphics2D) g;
+
+        // Background
+        g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 
         // Left Bird Feeder Image
         g.drawImage(feederImage, 300, 315, 350, 460, null);
@@ -168,8 +176,8 @@ public class FeederComponent extends JPanel implements MouseListener {
         // Place the vertical line to the right of the images
         int lineX = x + imgSize + 10;
 
-        // --- Draw the Black Lines (The Bracket) ---
-        g2.setColor(Color.BLACK);
+        // --- Draw the Light Green Lines (The Bracket) ---
+        g2.setColor(new Color(144, 238, 144));
         g2.setStroke(new BasicStroke(2)); // Make the line 2px thick for visibility
 
         // 1. Vertical Line
@@ -211,6 +219,7 @@ public class FeederComponent extends JPanel implements MouseListener {
         }
 
         // GoalsComponent
+        g2.setColor(Color.WHITE);
         int goalXPos = getWidth() - 400;
         for (Goal goal : goals) {
             g.drawImage(goal.getImage(), goalXPos, getHeight() - 100, 100, 100, null);
@@ -242,7 +251,7 @@ public class FeederComponent extends JPanel implements MouseListener {
         int bx = 3, by = 905, bw = 240, bh = 130;
 
         g.setStroke(new BasicStroke(5));
-        g.setColor(Color.BLACK);
+        g.setColor(new Color(144, 238, 144));
         g.drawRect(bx, by, bw, bh);
 
         multiInvRect = new Rectangle(bx + 20, by + 25, 80, 80);
