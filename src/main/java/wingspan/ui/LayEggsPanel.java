@@ -42,6 +42,9 @@ public class LayEggsPanel extends JPanel implements KeyListener {
         gameBoard = GameState.activePlayer.getGameBoard();
         selectedHabitat = Habitat.GRASSLANDS;
         this.cardPositions = GameState.cardPositions;
+        foodToImage = new HashMap<>();
+        foodInventory = new HashMap<>();
+
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
             boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
