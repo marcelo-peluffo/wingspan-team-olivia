@@ -44,6 +44,8 @@ public class LayEggsPanel extends JPanel implements KeyListener {
     private final int HAND_CARD_WIDTH = 120;
     private HashMap<Card, Pair> playerHandCardPositions;
     private HashMap<BonusCard, Pair> playerBonusCardPositions;
+            int TOKEN_WIDTH = 80;
+        int TOKEN_HEIGHT = 80;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -273,6 +275,22 @@ public class LayEggsPanel extends JPanel implements KeyListener {
                 x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
             }
         }
+
+        //draw tokens -> egg exchange on right
+
+
+        g.drawImage(foodToImage.get(Food.BERRY), getWidth() - 350, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
+        g.drawImage(foodToImage.get(Food.WHEAT), getWidth() - 250, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
+        g.drawImage(foodToImage.get(Food.FISH), getWidth() - 150, getHeight() - 800, TOKEN_HEIGHT, TOKEN_WIDTH, null);
+        g.drawImage(foodToImage.get(Food.RODENT), getWidth() - 300, getHeight() - 700, TOKEN_HEIGHT, TOKEN_WIDTH, null);
+        g.drawImage(foodToImage.get(Food.INVERTEBRATE), getWidth() - 200, getHeight() - 700, TOKEN_HEIGHT, TOKEN_WIDTH, null);
+
+        // draw text to exchange
+        g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
+        g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
+        
+        // draw JButton here, where the user can confirm their choice. Then, the JButton class can handle logic
+
 
             // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
