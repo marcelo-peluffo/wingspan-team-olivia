@@ -34,6 +34,10 @@ public class WingspanRunner {
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
 			}
+			for(int i=0; i<r; i++)
+			{
+				p.addBonusCard(GameState.cardManager.getRandomBonusCard());
+			}
 		}
 		GameState.players.get(0).getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
 		GameState.players.get(0).getGameBoard().getWetlands().get(0).addEggs(1);
