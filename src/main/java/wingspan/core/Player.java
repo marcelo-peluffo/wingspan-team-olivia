@@ -14,6 +14,7 @@ public class Player {
 	private Map<Food, Integer> foodInventory;
 	private int actionsRemaining;
 	private int playerNum;
+	private int goalScore;
 	
 	public Player() throws IOException
 	{
@@ -30,10 +31,20 @@ public class Player {
 		{
 			foodInventory.put(f, 0);
 		}
-		
+		goalScore = 0;
 		resetActionsRemaining(1);
 	}
 	
+	public void addGoalScore(int amount)
+	{
+		goalScore += amount;
+	}
+
+	public int getGoalScore()
+	{
+		return goalScore;
+	}
+
 	public void addCard(Card c)
 	{
 		cards.add(c);

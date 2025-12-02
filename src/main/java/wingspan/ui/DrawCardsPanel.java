@@ -321,22 +321,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         {
             cardPositions.clear();
             g.drawImage(boardImage, 350, 175, (int)(getWidth() * 0.6), (int)(getHeight() * 0.65), null);
-            g2d.setColor(Color.BLACK);
-            g2d.setStroke(new BasicStroke(7));
-            g2d.drawRect(getWidth() / 2 - 255, 120, 409, 50);
-            g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fillRect(getWidth() / 2 - 251, 124, 402, 51);
-            g2d.setColor(Color.BLACK);
-            g2d.drawLine(getWidth() / 2 - 200, 127, getWidth() / 2 - 200, 172);
-            g2d.drawLine(getWidth() / 2 + 100, 127, getWidth() / 2 + 100, 172);
-            int[] xPoints2 = {getWidth() / 2 - 240, getWidth() / 2 - 220, getWidth() / 2 - 220};
-            int[] yPoints2 = {150, 135, 165};
-            g2d.fillPolygon(xPoints2, yPoints2, 3);
-            int[] xPoints3 = {getWidth() / 2 + 140, getWidth() / 2 + 120, getWidth() / 2 + 120};
-            int[] yPoints3 = {150, 135, 165};
-            g2d.fillPolygon(xPoints3, yPoints3, 3);
             g.setFont(new Font("Arial", Font.BOLD, 20));
-            g.drawString("Change board to view", getWidth() / 2 - 150, 155);
             int xPos = 610;
             for(Card c: forestCards)
             {
@@ -469,6 +454,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                     chosenCard = null;
                     if (numChoices == 0)
                     {
+                        boolean roundEnd = false;
                         GameState.cardManager.refillVisibleCards();
                         GameState.activePlayer.decreaseActionsRemaining();
                         int playerIndex = GameState.players.indexOf(activePlayer);
@@ -480,7 +466,7 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                             }
                             else
                             {
-                                //load the round end / game end panel
+                                roundEnd = true;
                             }
                         }
                         else
@@ -491,13 +477,16 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                             }
                             else
                             {
-                                //load the round end / game end panel
+                                roundEnd = true;
                             }
                         }
                         setVisible(false);
                         try
                         {
-                            getParent().add(new MainPanel());
+                            if (!roundEnd)
+                                getParent().add(new MainPanel());
+                            else
+                                getParent().add(new RoundEndPanel());
                         }
                         catch (Exception ex)
                         {
