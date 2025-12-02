@@ -75,6 +75,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        addMouseListener(this);
+        addKeyListener(this);
     }
 
     public void paint(Graphics g) {
@@ -300,6 +303,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
             g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
             
+            g.setColor(Color.GREEN); // change later to the intro panel green / red
             if (selectedToken != null) {
                 Pair p = null;
                 switch (selectedToken) {
@@ -309,19 +313,19 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                     } break;
 
                     case WHEAT: {
-                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                        p = tokenPositions[1]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
 
                     case FISH: {
-                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                        p = tokenPositions[2]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
 
                     case INVERTEBRATE: {
-                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                        p = tokenPositions[3]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
 
                     case RODENT: {
-                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                        p = tokenPositions[4]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
                 }
             }
@@ -395,6 +399,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         int clickX = e.getX();
         int clickY = e.getY();
 
+        System.out.println("test");
         for (int i = 0; i < foods.length; i++) {
             Food food = foods[i];
             Pair tokenPosition = tokenPositions[i];
@@ -415,25 +420,25 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mousePressed'");
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseReleased'");
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+        
     }
 
     public void addNotify() {
