@@ -16,8 +16,7 @@ public class GoalBoard {
 	{
 		goals = new ArrayList<>();
 		addGoals();
-		round1Goal = new HabitatGoal(Habitat.FOREST, true, "BirdsInForestGoal");
-		// round1Goal = goals.remove((int)(Math.random() * goals.size()));
+		round1Goal = goals.remove((int)(Math.random() * goals.size()));
 		round2Goal = goals.remove((int)(Math.random() * goals.size()));
 		round3Goal = goals.remove((int)(Math.random() * goals.size()));
 		round4Goal = goals.remove((int)(Math.random() * goals.size()));
