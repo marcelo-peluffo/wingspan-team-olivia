@@ -26,6 +26,12 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
         GameState.actionCubeColors.put(GameState.players.get(3), Color.BLUE);
 		GameState.activePlayer = GameState.players.get(0);
+		
+		// Lay Eggs testing purposes
+		CardManager cm = new CardManager();
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
+		GameState.activePlayer.addFood(Food.BERRY, 1);
+
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }

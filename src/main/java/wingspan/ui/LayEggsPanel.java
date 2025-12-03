@@ -345,13 +345,13 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
                 // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
-            //System.out.println(cardPositions);
+
             for (int i = 0; i < cards.size(); i++) {                
                 Card card = cards.get(i);
                 Pair pair = cardPositions.get(card);
                 
                 if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
-                    g.drawImage(plus, pair.getX(), pair.getY(), null);
+                    g.drawImage(plus, pair.getX(), pair.getY(), CARD_WIDTH, CARD_HEIGHT, null);
                 }
                 g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), pair.getX(), pair.getY());
                 
@@ -412,7 +412,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         int clickX = e.getX();
         int clickY = e.getY();
 
-        System.out.println("test");
         for (int i = 0; i < foods.length; i++) {
             Food food = foods[i];
             Pair tokenPosition = tokenPositions[i];
@@ -426,7 +425,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             if (withinBounds) {
                 selectedToken = food;
             }
-            System.out.println(withinBounds);
+
         }
     }
 

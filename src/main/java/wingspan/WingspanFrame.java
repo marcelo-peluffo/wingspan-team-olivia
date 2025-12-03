@@ -3,7 +3,7 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import wingspan.ui.MainPanel;
+import wingspan.ui.*;
 
 public class WingspanFrame extends JFrame{
     private static final int WIDTH = 1920;
