@@ -13,7 +13,7 @@ import wingspan.WingspanFrame;
 import wingspan.cards.behavior.BehaviorFactory;
 import wingspan.cards.behavior.BehaviorParameters;
 import wingspan.cards.behavior.PowerBehavior;
-import wingspan.enums.Color;
+import wingspan.enums.PowerColor;
 import wingspan.enums.Food;
 import wingspan.enums.Habitat;
 import wingspan.enums.NestType;
@@ -26,7 +26,7 @@ class BirdInfoJson {
     public NestType nestType;
     public int maxEggs;
     public int wingSpan;
-    public Color color;
+    public PowerColor color;
     public BehaviorParameters behavior; // <-- Jackson will auto-fill this!
     public String image;
 }
@@ -65,7 +65,7 @@ public class DataTable {
                 EnumSet<Habitat> habitats = getHabitatSet(bj);
                 Food[][] foodArray = getFoodArray(bj);
                 NestType nestType = bj.nestType;
-                Color color = bj.color;
+                PowerColor color = bj.color;
 
                 String imagePath = "/Images/" + bj.image;
                 InputStream imgStream = bj.image != null ? WingspanFrame.class.getResourceAsStream(imagePath) : null;

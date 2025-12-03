@@ -7,6 +7,7 @@ import wingspan.utils.Pair;
 import wingspan.cards.*;
 import wingspan.enums.Food;
 import java.awt.Color;
+import wingspan.utils.Pair;
 
 public class GameState {
 	//these are initialized in WingspanRunner's main method
@@ -39,6 +40,7 @@ public class GameState {
 
 	public static HashMap<Player, Color> actionCubeColors;
 	public static HashMap<Card, Pair> cardPositions;
+	public static ArrayList<HashMap<Player, Pair>> goalBoardPositions; // stores the positions of the player's action cubes on the goalboard so they can be redrawn for future rounds
 
 	public static void initialize() {
 		// Core managers
@@ -76,6 +78,8 @@ public class GameState {
 
 		gameStarted = false;
 		roundNum = 1;
+
+		goalBoardPositions = new ArrayList<>();
 	}
 	
 }

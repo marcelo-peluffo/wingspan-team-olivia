@@ -31,6 +31,11 @@ public class FoodManager {
 		return die;
 	}
 
+	public FoodDice seeDie(int index)
+	{
+		return birdFeeder.get(index);
+	}
+
 	public ArrayList<FoodDice> getUsedDice()
 	{
 		return usedDice;

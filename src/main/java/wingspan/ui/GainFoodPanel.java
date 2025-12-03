@@ -1,7 +1,8 @@
-package wingspan.ui.components;
+package wingspan.ui;
 
 import wingspan.food.*;
-import wingspan.ui.MainPanel;
+import wingspan.utils.Pair;
+import wingspan.cards.bonusCards.BonusCard;
 import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
@@ -10,6 +11,8 @@ import wingspan.enums.Food;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -17,8 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import wingspan.cards.*;
 
-public class FeederComponent extends JPanel implements MouseListener {
+public class GainFoodPanel extends JPanel implements MouseListener, KeyListener {
 
     // Background
     private BufferedImage background;
@@ -32,7 +36,6 @@ public class FeederComponent extends JPanel implements MouseListener {
     private Map<Food, BufferedImage> foodToImage;
 
     // Backend
-    private FoodManager foodManager;
     private int remainingChoices;
 
     // Bird Feeder
@@ -59,21 +62,33 @@ public class FeederComponent extends JPanel implements MouseListener {
     private boolean choosingMulti = false;
     private FoodDice multiDice;
 
-    public FeederComponent(FoodManager manager, int choicesAllowed) {
-        this.foodManager = manager;
-        this.remainingChoices = choicesAllowed;
+    private boolean hasChoice;
 
+    //player hand
+    private final int HAND_CARD_HEIGHT = 180;
+    private final int HAND_CARD_WIDTH = 120;
+    private final int CARD_WIDTH = 125;
+    private final int CARD_HEIGHT = 200;
+    private boolean displayBonus;
+    private HashMap<Card, Pair> playerHandCardPositions;
+    private HashMap<BonusCard, Pair> playerBonusCardPositions;
+    private BufferedImage displayedCard;
+    private Card displayedCardInfo;
+
+    public GainFoodPanel(int numChoices, boolean hasChoice) {
+        remainingChoices = numChoices;
+        this.hasChoice = hasChoice;
         try {
-            background = ImageIO.read(FeederComponent.class.getResource("/Images/backgroundImage2.jpeg"));
+            background = ImageIO.read(GainFoodPanel.class.getResource("/Images/backgroundImage2.jpeg"));
             
-            feederImage = ImageIO.read(FeederComponent.class.getResource("/Images/BirdFeederImage.png"));
+            feederImage = ImageIO.read(GainFoodPanel.class.getResource("/Images/BirdFeederImage.png"));
 
-            diceMulti = ImageIO.read(FeederComponent.class.getResource("/Images/MultiDice.jpg"));
-            diceInv = ImageIO.read(FeederComponent.class.getResource("/Images/InvertebrateDice.jpg"));
-            diceWheat = ImageIO.read(FeederComponent.class.getResource("/Images/WheatDice.jpg"));
-            diceRodent = ImageIO.read(FeederComponent.class.getResource("/Images/RodentDice.jpg"));
-            diceBerry = ImageIO.read(FeederComponent.class.getResource("/Images/BerryDice.jpg"));
-            diceFish = ImageIO.read(FeederComponent.class.getResource("/Images/FishDice.jpg"));
+            diceMulti = ImageIO.read(GainFoodPanel.class.getResource("/Images/MultiDice.jpg"));
+            diceInv = ImageIO.read(GainFoodPanel.class.getResource("/Images/InvertebrateDice.jpg"));
+            diceWheat = ImageIO.read(GainFoodPanel.class.getResource("/Images/WheatDice.jpg"));
+            diceRodent = ImageIO.read(GainFoodPanel.class.getResource("/Images/RodentDice.jpg"));
+            diceBerry = ImageIO.read(GainFoodPanel.class.getResource("/Images/BerryDice.jpg"));
+            diceFish = ImageIO.read(GainFoodPanel.class.getResource("/Images/FishDice.jpg"));
 
             tokenInv   = ImageIO.read(getClass().getResource("/Images/InvertebrateToken.png"));
             tokenWheat = ImageIO.read(getClass().getResource("/Images/WheatToken.png"));
@@ -84,6 +99,7 @@ public class FeederComponent extends JPanel implements MouseListener {
         }
 
         addMouseListener(this);
+        addKeyListener(this);
 
         // FoodInventoryComponent
         activePlayer = GameState.activePlayer;
@@ -105,6 +121,13 @@ public class FeederComponent extends JPanel implements MouseListener {
 
         // GoalsComponent
         goals = GameState.goalBoard.getGoals();
+
+        //player's hand
+        playerHandCardPositions = new HashMap<>();
+        playerBonusCardPositions = new HashMap<>();
+        displayBonus = false;
+        displayedCard = null;
+        displayedCardInfo = null;
     }
 
     @Override
@@ -129,8 +152,8 @@ public class FeederComponent extends JPanel implements MouseListener {
         g.setColor(Color.BLACK);
         g.drawRect(boxX, boxY, boxW, boxH);
 
-        // Draw Dice from FoodManager
-        ArrayList<FoodDice> diceList = foodManager.getBirdFeeder();
+        // Draw Dice from GameState.foodManager
+        ArrayList<FoodDice> diceList = GameState.foodManager.getBirdFeeder();
         for (int i = 0; i < diceList.size(); i++) {
             FoodDice die = diceList.get(i);
             BufferedImage face = getDiceImage(die);
@@ -244,6 +267,86 @@ public class FeederComponent extends JPanel implements MouseListener {
         g2.drawString("Round " + GameState.roundNum + "/4", 20, 50);
         g2.setFont(new Font("Arial", Font.BOLD, 23));
         g2.drawString("Action Tokens Left: " + GameState.activePlayer.getActionsRemaining(), 20, 115);
+
+        //draw prompt when player runs out of choices
+        if (remainingChoices == 0)
+        {
+            String s = "Click anywhere to proceed";
+            if (choosingMulti)
+                s = "Finish your selection for the choice die, then click anywhere to proceed";
+            g2.drawString(s, getWidth() / 2 - 160, getHeight() / 3);
+        }
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.setColor(GameState.actionCubeColors.get(activePlayer));
+        String playerString = "Player " + (GameState.players.indexOf(activePlayer) + 1);
+        g.drawString(playerString, getWidth() / 2 - 100, 50);
+
+        //draw player's cards
+        int leftEnd;
+        int x1;
+        if (!displayBonus)
+        {
+            if(GameState.activePlayer.getHand().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getHand().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getHand().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+        else
+        {
+            if(GameState.activePlayer.getBonusCards().size() % 2 == 0){
+            leftEnd = Math.max(getWidth()/2 - (5 + HAND_CARD_WIDTH) - ((GameState.activePlayer.getBonusCards().size()/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - HAND_CARD_WIDTH/2 - (((GameState.activePlayer.getBonusCards().size() + 1)/2 - 1) * (HAND_CARD_WIDTH + 10)), 350);
+            }
+        }
+
+        x1 = leftEnd;
+        if (!displayBonus)
+        {
+            for(Card c: GameState.activePlayer.getHand()){
+                g.drawImage(c.getCardImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerHandCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+            }
+        }
+        else
+        {
+            for(BonusCard c: GameState.activePlayer.getBonusCards()){
+                g.drawImage(c.getImage(), x1, 890, HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                playerBonusCardPositions.put(c, new Pair(x1, 890));
+                x1 += (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+            }
+        }
+        g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+
+        //exchanging card for extra choice info
+        if (hasChoice && GameState.activePlayer.getHand().size() > 0)
+        {
+            g.setColor(Color.ORANGE);
+            g.fillRect(30, getHeight() - 90, 300, 75);
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Arial", Font.PLAIN, 20));
+            g.drawString("Exchange card -> extra choice", 40, getHeight() - 60);
+            g.drawString("by clicking a card in your hand", 40, getHeight() - 40);
+        }
+        if (displayedCardInfo != null && hasChoice)
+        {
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.PLAIN, 20));
+            g.drawString("Exchange this card?", 1625, 720);
+            g.drawString("(Press 'y' or 'n')", 1625, 740);
+        }
+
+        g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(1670, 0, 250, 75);
+		g.setColor(Color.black);
+        Font currentfont = g.getFont();
+		Font newFont = currentfont.deriveFont(30F);
+		g.setFont(newFont);
+		g.drawString("Drawing cards", 1690, 50);
     }
 
     // Draw bottom-left multi-choice box
@@ -287,8 +390,8 @@ public class FeederComponent extends JPanel implements MouseListener {
         // Can only reroll if the player still has choices left
         if (remainingChoices <= 0) return false;
 
-        ArrayList<FoodDice> dice = foodManager.getBirdFeeder();
-        if (dice.isEmpty()) return false;
+        ArrayList<FoodDice> dice = GameState.foodManager.getBirdFeeder();
+        if (dice.isEmpty()) return true;
 
         Food first = dice.get(0).getFood();
         for (FoodDice d : dice) {
@@ -301,6 +404,57 @@ public class FeederComponent extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         int x = e.getX(), y = e.getY();
+
+        if (!displayBonus)
+        {
+            for(Card c: playerHandCardPositions.keySet()){
+            Pair p = playerHandCardPositions.get(c);
+            if (GameState.activePlayer.getHand().size() < 8)
+            {
+                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    displayedCardInfo = c;
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    displayedCardInfo = c;
+                    break;
+                }
+            }
+        }
+        }
+        else
+        {
+            for(BonusCard c: playerBonusCardPositions.keySet()){
+            Pair p = playerBonusCardPositions.get(c);
+            if (GameState.activePlayer.getBonusCards().size() < 8)
+            {
+                if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    displayedCardInfo = null;
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+                if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    displayedCardInfo = null;
+                    break;
+                }
+            }
+        }
+        }
 
         // Multi-choice clicking
         if (choosingMulti) {
@@ -316,14 +470,55 @@ public class FeederComponent extends JPanel implements MouseListener {
 
         // Check if the player has exhausted their choices
         if (remainingChoices <= 0) {
-            System.out.println("No more food choices remaining this turn.");
+            if (!choosingMulti)
+            {
+            boolean roundEnd = false;
+            GameState.activePlayer.decreaseActionsRemaining();
+            int playerIndex = GameState.players.indexOf(activePlayer);
+            if (playerIndex < 3)
+            {
+                if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                {
+                    GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                }
+                else
+                {
+                    roundEnd = true;
+                }
+            }
+            else
+            {
+                if (GameState.players.get(0).getActionsRemaining() > 0)
+                {
+                    GameState.activePlayer = GameState.players.get(0);
+                }
+                else
+                {
+                    roundEnd = true;
+                }
+            }
+            setVisible(false);
+            try
+            {
+                if (!roundEnd)
+                    getParent().add(new MainPanel());
+                else
+                    getParent().add(new RoundEndPanel());
+            }
+            catch (Exception ex)
+            {
+                System.out.println("Failed to load MainPanel");
+            }
+            getParent().repaint();
+            getParent().remove(this);
+            }
             return;
         }
 
         // Reroll
         if (rerollButtonRect != null && rerollButtonRect.contains(x, y) && canRerollNow()) {
             try {
-                foodManager.reroll();
+                GameState.foodManager.reroll();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -332,30 +527,36 @@ public class FeederComponent extends JPanel implements MouseListener {
         }
 
         // Dice Selection
-        ArrayList<FoodDice> diceList = foodManager.getBirdFeeder();
+        ArrayList<FoodDice> diceList = GameState.foodManager.getBirdFeeder();
         int boxX = 660, boxY = 415;
 
         for (int i = 0; i < diceList.size(); i++) {
             Rectangle dRect = new Rectangle(boxX + 30 + i * 110, boxY + 30, 100, 100);
 
             if (dRect.contains(x, y)) {
-                FoodDice chosen = foodManager.getDie(i);
-
-                remainingChoices--;
+                if (GameState.foodManager.seeDie(i).getFood() == Food.ANY && choosingMulti)
+                    return;
+                FoodDice chosen = GameState.foodManager.getDie(i);
 
                 if (chosen.getFood() == Food.ANY) {
                     // Multi-dice add to food inventory
-                    choosingMulti = true;
-                    multiDice = chosen;
+                    if (!choosingMulti)
+                    {
+                        choosingMulti = true;
+                        multiDice = chosen;
+                        remainingChoices--;
+                    }
                 } else {
                     // Normal dice add to food inventory
                     addFoodToInventory(chosen.getFood());
+                    remainingChoices--;
                 }
 
                 repaint();
                 return;
             }
         }
+        repaint();
     }
 
     // after multi-dice choice
@@ -370,4 +571,47 @@ public class FeederComponent extends JPanel implements MouseListener {
     @Override public void mouseReleased(MouseEvent e) {}
     @Override public void mouseEntered(MouseEvent e) {}
     @Override public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        char c = e.getKeyChar();
+        System.out.println(c);
+        if (c == 't')
+        {
+            displayBonus = !displayBonus;
+        }
+        if (displayedCardInfo != null)
+        {
+            if (c == 'y')
+            {
+                remainingChoices++;
+                GameState.activePlayer.removeCard(displayedCardInfo);
+                displayedCardInfo = null;
+                displayedCard = null;
+                hasChoice = false;
+            }
+            else if (c == 'n')
+            {
+                displayedCardInfo = null;
+                displayedCard = null;
+            }
+        }
+        repaint();
+    }
+
+    public void addNotify()
+    {
+        super.addNotify();
+        requestFocus();
+    }
 }

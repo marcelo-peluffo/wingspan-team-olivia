@@ -12,11 +12,11 @@ public class BirdInfo {
     private final NestType nestType; // Nest type: bowl, cavity, platform, ground, star, none
     private final int maxEggs; // Maximum number of eggs
     private final int wingSpan; // Wingspan in cm
-    private final Color powerColor; // Power color: brown, pink, white, none
+    private final PowerColor powerColor; // Power color: brown, pink, white, none
     private final PowerBehavior behavior;
 
     public BirdInfo(String name, EnumSet<Habitat> habitats, Food[][] foodCost, int victoryPoints,
-                    NestType nestType, int maxEggs, int wingSpan, Color powerColor, PowerBehavior behavior) {
+                    NestType nestType, int maxEggs, int wingSpan, PowerColor powerColor, PowerBehavior behavior) {
         this.name = name;
         this.habitats = habitats;
         this.foodCost = foodCost;
@@ -35,7 +35,7 @@ public class BirdInfo {
     public NestType getNestType() { return nestType; }
     public int getMaxEggs() { return maxEggs; }
     public int getWingSpan() { return wingSpan; }
-    public Color getPowerColor() { return powerColor; }
+    public PowerColor getPowerColor() { return powerColor; }
     public PowerBehavior getBehavior() { return behavior; }
 
     @Override

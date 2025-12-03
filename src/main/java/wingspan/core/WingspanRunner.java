@@ -2,8 +2,6 @@ package wingspan.core;
 
 import java.io.*;
 import java.util.*;
-import wingspan.cards.CardManager;
-import wingspan.food.FoodManager;
 import wingspan.WingspanFrame;
 import wingspan.cards.DataTable;
 import wingspan.enums.*;
@@ -24,21 +22,28 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(0), Color.RED);
         GameState.actionCubeColors.put(GameState.players.get(1), new Color(71, 0, 201));
         GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
-        GameState.actionCubeColors.put(GameState.players.get(3), Color.BLUE);
+        GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
-		
-		// Lay Eggs testing purposes
-		CardManager cm = new CardManager();
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
-		//GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.WETLANDS);
-		
-		GameState.activePlayer.addFood(Food.BERRY, 1);
-		GameState.activePlayer.addFood(Food.WHEAT, 1);
-
+		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
+		for(Player p: GameState.players)
+		{
+			int r = (int)(Math.random() * 6);
+			for(int i=0; i<r; i++)
+			{
+				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
+			}
+			for(int i=0; i<r; i++)
+			{
+				p.addBonusCard(GameState.cardManager.getRandomBonusCard());
+			}
+		}
+		for(int i=0;i<5;i++)
+		GameState.players.get(0).getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
+		GameState.players.get(0).getGameBoard().getWetlands().get(0).addEggs(1);
+		for(int i=0; i<5; i++)
+		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(0).addBonusCard(GameState.cardManager.getRandomBonusCard());
+		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }

@@ -1,6 +1,6 @@
 package wingspan.enums;
 
-public enum Color {
+public enum PowerColor {
     BROWN,
     PINK,
     WHITE

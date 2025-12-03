@@ -13,7 +13,7 @@ public class Player {
 	private List<BonusCard> bonusCards;
 	private Map<Food, Integer> foodInventory;
 	private int actionsRemaining;
-	private int playerNum;
+	private int goalScore;
 	
 	public Player() throws IOException
 	{
@@ -30,10 +30,20 @@ public class Player {
 		{
 			foodInventory.put(f, 0);
 		}
-		
+		goalScore = 0;
 		resetActionsRemaining(1);
 	}
 	
+	public void addGoalScore(int amount)
+	{
+		goalScore += amount;
+	}
+
+	public int getGoalScore()
+	{
+		return goalScore;
+	}
+
 	public void addCard(Card c)
 	{
 		cards.add(c);
@@ -72,6 +82,11 @@ public class Player {
 	public void addFood(Food food, int amount)
 	{
 		foodInventory.put(food, foodInventory.get(food) + amount);
+	}
+
+	public void removeFood(Food food, int amount)
+	{
+		foodInventory.put(food, foodInventory.get(food) - amount);
 	}
 	
 	public int getActionsRemaining()
@@ -113,5 +128,42 @@ public class Player {
 	public List<BonusCard> getBonusCards()
 	{
 		return bonusCards;
+	}
+
+	public int getTotalEggsAmount()
+	{
+		int total = 0;
+		for(Card c: gameBoard.getForest())
+		{
+			total += c.getCurrentEggs();
+		}
+		for(Card c: gameBoard.getGrasslands())
+		{
+			total += c.getCurrentEggs();
+		}
+		for(Card c: gameBoard.getWetlands())
+		{
+			total += c.getCurrentEggs();
+		}
+		return total;
+	}
+
+	public int[] getAllScores() // returns an array of scores used to determine final score in the following order: Birds, Bonus Cards, Goals, Eggs, Cached food, tucked cards, total score
+	{
+		int[] scores = new int[7];
+		for (Card c: gameBoard.returnAllCards())
+		{
+			scores[0] += c.getBirdInfo().getVictoryPoints();
+			scores[3] += c.getCurrentEggs();
+			scores[4] += c.getFoodTokens().size();
+			scores[5] += c.getTuckedCards().size();
+		}
+		for(BonusCard c: bonusCards)
+		{
+			scores[1] += c.calculateScore(this);
+		}
+		scores[2] = goalScore;
+		scores[6] = scores[0] + scores[1] + scores[2] + scores[3] + scores[4] + scores[5];
+		return scores;
 	}
 }

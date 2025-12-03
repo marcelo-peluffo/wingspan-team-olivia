@@ -2,14 +2,12 @@ package wingspan.ui;
 import wingspan.cards.goals.Goal;
 import wingspan.core.*;
 import wingspan.enums.Food;
-import wingspan.ui.components.*;
 import wingspan.utils.Pair;
 import java.util.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 //import java.io.IOException;
@@ -48,6 +46,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
     private final int HAND_CARD_WIDTH = 120;
     private char playerAction;
     private boolean displayBonus;
+    private Card displayedCardInfo;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -80,6 +79,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         playerAction = '0';
         displayBonus = false;
         playerBonusCardPositions = new HashMap<>();
+        displayedCardInfo = null;
     	addMouseListener(this);
         addKeyListener(this);
     }
@@ -261,6 +261,14 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 xPos += 175;
             }
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+            if (displayedCardInfo != null)
+            {
+                g.setColor(Color.WHITE);
+                g.drawString("Eggs: " + displayedCardInfo.getCurrentEggs() + "/" + displayedCardInfo.getBirdInfo().getMaxEggs(), 1600, 720);
+                g.drawString("Cached Food Tokens: " + displayedCardInfo.getFoodTokens().size(), 1600, 740);
+                g.drawString("Tucked Cards: " + displayedCardInfo.getTuckedCards().size(), 1600, 760);
+                g.setColor(Color.BLACK);
+            }
         }
         // draw the face up cards
         else if (navigatorOption.equals("FaceUpCards"))
@@ -413,6 +421,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             if (mouseX > position.getX() && mouseY > position.getY() && mouseX < position.getX() + CARD_WIDTH && mouseY < position.getY() + CARD_HEIGHT)
             {
                 displayedCard = c.getCardImage();
+                displayedCardInfo = c;
                 break;
             }
         }
@@ -424,6 +433,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 playerIndex = 0;
             }
             getPlayerCards(GameState.players.get(playerIndex));
+            foodInventory = GameState.players.get(playerIndex).getFoodInventory();
         }
         if (mouseX > 705 && mouseX < getWidth() / 2 - 200 && mouseY > 127 && mouseY < 172)
         {
@@ -433,6 +443,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 playerIndex = 3;
             }
             getPlayerCards(GameState.players.get(playerIndex));
+            foodInventory = GameState.players.get(playerIndex).getFoodInventory();
         }
         if (!displayBonus)
         {
@@ -443,6 +454,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getCardImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -452,6 +464,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getCardImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -466,6 +479,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x <= p.getX() + HAND_CARD_WIDTH && y >= p.getY() && y <= p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -475,6 +489,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                 if (x >= p.getX() && x < p.getX() + spaceBetweenCards && y >= p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
                 {
                     displayedCard = c.getImage();
+                    displayedCardInfo = null;
                     break;
                 }
             }
@@ -536,6 +551,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         {
             if (c == character && playerAction == '0')
             {
+                playerIndex = GameState.players.indexOf(activePlayer);
                 playerAction = c;
                 break;
             }
@@ -553,7 +569,10 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             }
             else if (playerAction == 'f')
             {
-                //add GainFoodPanel when that's implemented
+                int numCards = GameState.activePlayer.getGameBoard().getForest().size();
+                boolean hasChoice = (numCards % 2 != 0);
+                int numChoices = numCards / 2 + 1;
+                getParent().add(new GainFoodPanel(numChoices, hasChoice));
             }
             else if (playerAction == 'e')
             {
@@ -563,7 +582,10 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             }
             else if (playerAction == 'd')
             {
-                getParent().add(new DrawCardsPanel());
+                int numCards = GameState.activePlayer.getGameBoard().getWetlands().size();
+                boolean hasChoice = (numCards % 2 != 0);
+                int numChoices = numCards / 2 + 1;
+                getParent().add(new DrawCardsPanel(numChoices, hasChoice));
             }
             getParent().repaint();
             getParent().remove(this);
