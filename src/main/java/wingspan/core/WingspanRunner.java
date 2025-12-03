@@ -33,7 +33,7 @@ public class WingspanRunner {
 		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
 		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
 		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
-		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
+		//GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
 		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.WETLANDS);
 		
 		GameState.activePlayer.addFood(Food.BERRY, 1);

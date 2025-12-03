@@ -55,6 +55,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private Food lastToken = null;
     private int rectX, rectY, RECT_WIDTH, RECT_HEIGHT;
     private boolean confirmed = false;
+    private int cubeIndex;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -65,7 +66,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         playerHandCardPositions = new HashMap<>();
         playerBonusCardPositions = new HashMap<>();
         int grasslandsSize = gameBoard.getCardsInHabitat(selectedHabitat).size();
-        int cubeIndex = grasslandsSize < 5 ? grasslandsSize : 4;
+        cubeIndex = grasslandsSize < 5 ? grasslandsSize : 4;
         remainingChoices = gameBoard.numEggsAt(cubeIndex);
         rectX = 0;
         rectY = 0;
@@ -96,6 +97,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         try {
     
             super.paint(g);
+
             tokenPositions = new Pair[] {
                 new Pair(getWidth() - 350, getHeight() - 800),
                 new Pair(getWidth() - 250, getHeight() - 800),
@@ -304,23 +306,27 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 }
             }
 
-            //draw tokens
-            Map<Food, Integer> foodInventory = GameState.activePlayer.getFoodInventory();
             boolean hadTokensForExchange = false;
-            int j = 0;
-            if (!confirmed) {
-                for (int i = 0; i < foods.length; i++) {
-                    Food f = foods[i];
-                    int count = foodInventory.get(f);
-                    
+            //draw tokens
+            if (cubeIndex == 1 || cubeIndex == 3) {
+                Map<Food, Integer> foodInventory = GameState.activePlayer.getFoodInventory();
+                
+                int j = 0;
+                if (!confirmed) {
+                    for (int i = 0; i < foods.length; i++) {
+                        Food f = foods[i];
+                        int count = foodInventory.get(f);
+                        
 
-                    if (count > 0) { // only display token exchange for eggs if player actually has food tokens
-                        Pair p = tokenPositions[j++];
-                        g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
-                        hadTokensForExchange = true;
+                        if (count > 0) { // only display token exchange for eggs if player actually has food tokens
+                            Pair p = tokenPositions[j++];
+                            g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
+                            hadTokensForExchange = true;
+                        }
                     }
                 }
             }
+
             // draw text to exchange
             if (hadTokensForExchange) {
                 g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
@@ -395,8 +401,19 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                     }
                 
             }
-         
+            Pair topTextPair = null;
+            if (remainingChoices == 0) {
+                topTextPair = new Pair(getWidth() / 2 - 40, 60);
+                g.setColor(Color.GREEN);
+                g.drawString("Press 'c' to continue the round", topTextPair.getX(), topTextPair.getY());
+            } else {
+                topTextPair = new Pair(500, 60);
+                String instructions = "Use the arrow keys to navigate your game board, and press ENTER to add one egg.";
+                String instructions2 = "The action ends after your remaining choices are 0.";
 
+                g.drawString(instructions, topTextPair.getX(), topTextPair.getY());
+                g.drawString(instructions2, topTextPair.getX() + 40, topTextPair.getY() + 30);
+            }
 
 
         } catch (Exception ex) {
@@ -405,8 +422,17 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyChar() == 'c') {
-
+        if (e.getKeyChar() == 'c' && remainingChoices == 0) {
+            setVisible(false);
+            try {
+                getParent().add(new MainPanel());
+               
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            getParent().repaint();
+            getParent().remove(this);
         }
 
         switch (e.getKeyCode()) {
@@ -438,11 +464,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                     selectedCard.addEggs(1);
                     remainingChoices--;
                 }
-                
-
                 break;
         }
-        //repaint();
+
     }
 
     @Override
