@@ -426,7 +426,32 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             setVisible(false);
             try {
                 getParent().add(new MainPanel());
-               
+                GameState.cardManager.refillVisibleCards();
+                    GameState.activePlayer.decreaseActionsRemaining();
+                    int playerIndex = GameState.players.indexOf(GameState.activePlayer);
+                    if (playerIndex < 3)
+                    {
+                        if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                        {
+                            GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                        }
+                        else
+                        {
+                            //load the round end / game end panel
+                        }
+                    }
+                    else
+                    {
+                        if (GameState.players.get(0).getActionsRemaining() > 0)
+                        {
+                            GameState.activePlayer = GameState.players.get(0);
+                        }
+                        else
+                        {
+                            //load the round end / game end panel
+                        }
+                    }
+
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
