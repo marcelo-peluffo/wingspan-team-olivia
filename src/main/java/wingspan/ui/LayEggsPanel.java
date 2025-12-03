@@ -61,6 +61,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         foodInventory = new HashMap<>();
         playerHandCardPositions = new HashMap<>();
         playerBonusCardPositions = new HashMap<>();
+        int grasslandsSize = gameBoard.getCardsInHabitat(selectedHabitat).size();
+        int cubeIndex = grasslandsSize < 5 ? grasslandsSize : 4;
+        remainingChoices = gameBoard.numEggsAt(cubeIndex);
 
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
@@ -251,7 +254,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             //draw remaining choices
             g.setColor(Color.WHITE);
-            remainingChoices = gameBoard.numEggsAt(selectedCardIndex);
             g.drawString("Remaining Choices: " + remainingChoices, 50, getHeight() - 50);
 
             //draw hand
@@ -343,31 +345,43 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                     } break;
 
                 }
+                p = tokenPositions[tokenPositions.length - 2];
+                int rectX = p.getX() - 50;
+                int rectY = p.getY() + 250;
+                g.setColor(Color.GREEN);
+                g.fillRoundRect(rectX, rectY, 300, 100, 10, 10);
+                g.setColor(Color.WHITE);
+                g.drawString("Confirm", rectX + 100, rectY + 50);
             }
             repaint();
 
                 // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
-
+         
             for (int i = 0; i < cards.size(); i++) {                
                 Card card = cards.get(i);
                 Pair pair = cardPositions.get(card);
                 
-                if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
-                    g.drawImage(plus, pair.getX(), pair.getY() + 10, CARD_WIDTH, CARD_HEIGHT - 50, null);
-                }
-
                 g.setColor(Color.BLACK);
                 g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), pair.getX(), pair.getY() + 20);
-                
-                if (i == selectedCardIndex) {
-                    // highlight selected card
-                    g.setColor(Color.RED);
-                    g.drawRect(pair.getX() - 2, pair.getY() - 2, CARD_WIDTH, CARD_HEIGHT);
-                    g.setColor(Color.BLACK);
+
+                if (remainingChoices > 0) {
+                    if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
+                        g.drawImage(plus, pair.getX(), pair.getY() + 10, CARD_WIDTH, CARD_HEIGHT - 50, null);
+                    }
                 }
                     
+                    
+                    if (i == selectedCardIndex) {
+                        // highlight selected card
+                        g.setColor(Color.RED);
+                        g.drawRect(pair.getX() - 2, pair.getY() - 2, CARD_WIDTH, CARD_HEIGHT);
+                        g.setColor(Color.BLACK);
+                    }
+                
             }
+         
+
 
 
         } catch (Exception ex) {
@@ -404,8 +418,11 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             
             case KeyEvent.VK_ENTER:
                 Card selectedCard = gameBoard.getCardsInHabitat(selectedHabitat).get(selectedCardIndex);
-                
 
+                if (remainingChoices > 0) {
+                    selectedCard.addEggs(1);
+                    remainingChoices--;
+                }
                 
 
                 break;
