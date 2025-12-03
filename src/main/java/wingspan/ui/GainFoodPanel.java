@@ -7,6 +7,8 @@ import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.Food;
+import wingspan.enums.Habitat;
+import wingspan.enums.PowerColor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import wingspan.cards.*;
+import java.util.List;
 
 public class GainFoodPanel extends JPanel implements MouseListener, KeyListener {
 
@@ -472,45 +475,57 @@ public class GainFoodPanel extends JPanel implements MouseListener, KeyListener 
         if (remainingChoices <= 0) {
             if (!choosingMulti)
             {
-            boolean roundEnd = false;
-            GameState.activePlayer.decreaseActionsRemaining();
-            int playerIndex = GameState.players.indexOf(activePlayer);
-            if (playerIndex < 3)
-            {
-                if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                List<Card> forestCards = GameState.activePlayer.getGameBoard().getForest();
+                for(int i=forestCards.size()-1; i>=0; i--)
                 {
-                    GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                    if (forestCards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
+                    {
+                        setVisible(false);
+                        getParent().add(new AbilityPanel(GameState.activePlayer, forestCards.get(i), Habitat.FOREST));
+                        getParent().repaint();
+                        getParent().remove(this);
+                        return;
+                    }
+                }
+                boolean roundEnd = false;
+                GameState.activePlayer.decreaseActionsRemaining();
+                int playerIndex = GameState.players.indexOf(activePlayer);
+                if (playerIndex < 3)
+                {
+                    if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                    {
+                        GameState.activePlayer = GameState.players.get(playerIndex + 1);
+                    }
+                    else
+                    {
+                        roundEnd = true;
+                    }
                 }
                 else
                 {
-                    roundEnd = true;
+                    if (GameState.players.get(0).getActionsRemaining() > 0)
+                    {
+                        GameState.activePlayer = GameState.players.get(0);
+                    }
+                    else
+                    {
+                        roundEnd = true;
+                    }
                 }
-            }
-            else
-            {
-                if (GameState.players.get(0).getActionsRemaining() > 0)
+                setVisible(false);
+                try
                 {
-                    GameState.activePlayer = GameState.players.get(0);
+                    if (!roundEnd)
+                        getParent().add(new MainPanel());
+                    else
+                        getParent().add(new RoundEndPanel());
                 }
-                else
+                catch (Exception ex)
                 {
-                    roundEnd = true;
+                    System.out.println("Failed to load MainPanel");
                 }
-            }
-            setVisible(false);
-            try
-            {
-                if (!roundEnd)
-                    getParent().add(new MainPanel());
-                else
-                    getParent().add(new RoundEndPanel());
-            }
-            catch (Exception ex)
-            {
-                System.out.println("Failed to load MainPanel");
-            }
-            getParent().repaint();
-            getParent().remove(this);
+                getParent().repaint();
+                getParent().remove(this);
             }
             return;
         }
