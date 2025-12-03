@@ -353,12 +353,14 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
                     g.drawImage(plus, pair.getX(), pair.getY(), CARD_WIDTH, CARD_HEIGHT, null);
                 }
-                g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), pair.getX(), pair.getY());
+
+                g.setColor(Color.BLACK);
+                g.drawString(card.getCurrentEggs() + " / " + card.getBirdInfo().getMaxEggs(), pair.getX(), pair.getY() + 20);
                 
                 if (i == selectedCardIndex) {
                     // highlight selected card
                     g.setColor(Color.RED);
-                    g.drawRect(pair.getX() - 2, pair.getY() - 2, plus.getWidth() + 4, plus.getHeight() + 4);
+                    g.drawRect(pair.getX() - 2, pair.getY() - 2, CARD_WIDTH, CARD_HEIGHT);
                     g.setColor(Color.BLACK);
                 }
                     
