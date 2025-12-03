@@ -24,6 +24,7 @@ import wingspan.cards.bonusCards.BonusCard;
 import wingspan.cards.goals.Goal;
 import wingspan.core.GameBoard;
 import wingspan.core.GameState;
+import wingspan.core.Player;
 import wingspan.enums.Food;
 import wingspan.enums.Habitat;
 import wingspan.utils.Pair;
@@ -91,6 +92,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 new Pair(getWidth() - 300, getHeight() - 700),
                 new Pair(getWidth() - 200, getHeight() - 700)
             };
+
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             int playerIndex = GameState.players.indexOf(GameState.activePlayer);
             Graphics2D g2d = (Graphics2D)g;
@@ -249,6 +251,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             //draw remaining choices
             g.setColor(Color.WHITE);
+            remainingChoices = gameBoard.numEggsAt(selectedCardIndex);
             g.drawString("Remaining Choices: " + remainingChoices, 50, getHeight() - 50);
 
             //draw hand
@@ -351,7 +354,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 Pair pair = cardPositions.get(card);
                 
                 if (card.getCurrentEggs() < card.getBirdInfo().getMaxEggs()) { // only draw (+) if more eggs can be added to bird
-                    g.drawImage(plus, pair.getX(), pair.getY(), CARD_WIDTH, CARD_HEIGHT, null);
+                    g.drawImage(plus, pair.getX(), pair.getY() + 10, CARD_WIDTH, CARD_HEIGHT - 50, null);
                 }
 
                 g.setColor(Color.BLACK);
@@ -397,6 +400,14 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             case KeyEvent.VK_RIGHT:
                 List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
                 if (selectedCardIndex < cards.size() - 1) selectedCardIndex++;
+                break;
+            
+            case KeyEvent.VK_ENTER:
+                Card selectedCard = gameBoard.getCardsInHabitat(selectedHabitat).get(selectedCardIndex);
+                
+
+                
+
                 break;
         }
         //repaint();
