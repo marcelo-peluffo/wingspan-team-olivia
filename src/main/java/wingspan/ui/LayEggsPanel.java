@@ -52,6 +52,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private Food selectedToken = null;
     private Food[] foods = {Food.BERRY, Food.WHEAT, Food.FISH, Food.RODENT, Food.INVERTEBRATE};
     private Pair[] tokenPositions;
+    private Food lastToken = null;
+    private int rectX, rectY, RECT_WIDTH, RECT_HEIGHT;
+    private boolean confirmed = false;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -64,6 +67,11 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         int grasslandsSize = gameBoard.getCardsInHabitat(selectedHabitat).size();
         int cubeIndex = grasslandsSize < 5 ? grasslandsSize : 4;
         remainingChoices = gameBoard.numEggsAt(cubeIndex);
+        rectX = 0;
+        rectY = 0;
+        RECT_WIDTH = 300;
+        RECT_HEIGHT = 100;
+
 
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
@@ -300,19 +308,19 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             Map<Food, Integer> foodInventory = GameState.activePlayer.getFoodInventory();
             boolean hadTokensForExchange = false;
             int j = 0;
+            if (!confirmed) {
+                for (int i = 0; i < foods.length; i++) {
+                    Food f = foods[i];
+                    int count = foodInventory.get(f);
+                    
 
-            for (int i = 0; i < foods.length; i++) {
-                Food f = foods[i];
-                int count = foodInventory.get(f);
-                
-
-                if (count > 0) { // only display token exchange for eggs if player actually has food tokens
-                    Pair p = tokenPositions[j++];
-                    g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
-                    hadTokensForExchange = true;
+                    if (count > 0) { // only display token exchange for eggs if player actually has food tokens
+                        Pair p = tokenPositions[j++];
+                        g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
+                        hadTokensForExchange = true;
+                    }
                 }
             }
-
             // draw text to exchange
             if (hadTokensForExchange) {
                 g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
@@ -345,13 +353,20 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                     } break;
 
                 }
+                // draw confirm button
                 p = tokenPositions[tokenPositions.length - 2];
-                int rectX = p.getX() - 50;
-                int rectY = p.getY() + 250;
+                rectX = p.getX() - 50;
+                rectY = p.getY() + 250;
                 g.setColor(Color.GREEN);
-                g.fillRoundRect(rectX, rectY, 300, 100, 10, 10);
+                g.fillRoundRect(rectX, rectY, RECT_WIDTH, RECT_HEIGHT, 10, 10);
                 g.setColor(Color.WHITE);
                 g.drawString("Confirm", rectX + 100, rectY + 50);
+
+                if (confirmed) {
+                    selectedToken = null;
+                    repaint();
+                }
+                
             }
             repaint();
 
@@ -419,7 +434,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             case KeyEvent.VK_ENTER:
                 Card selectedCard = gameBoard.getCardsInHabitat(selectedHabitat).get(selectedCardIndex);
 
-                if (remainingChoices > 0) {
+                if (remainingChoices > 0 && !selectedCard.isAtMaxEggs()) {
                     selectedCard.addEggs(1);
                     remainingChoices--;
                 }
@@ -454,9 +469,23 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             if (withinBounds) {
                 selectedToken = food;
+                if (lastToken != null && selectedToken == lastToken) {
+                    selectedToken = null;
+                }
+                lastToken = selectedToken;
             }
-
         }
+        boolean withinX = (clickX >= rectX && clickX <= rectX + RECT_WIDTH); 
+        boolean withinY = (clickY >= rectY && clickY <= rectY + RECT_HEIGHT); 
+        boolean clickedConfirm = withinX && withinY;
+
+        if (clickedConfirm) {
+            confirmed = true;
+            remainingChoices++;
+            Integer selectedTokenCount = foodInventory.get(selectedToken);
+            foodInventory.replace(selectedToken, selectedTokenCount - 1);
+        }
+
     }
 
     @Override
