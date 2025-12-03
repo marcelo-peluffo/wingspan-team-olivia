@@ -42,7 +42,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private Map<Food, BufferedImage> foodToImage;
     private Map<Food, Integer> foodInventory;
     private int remainingChoices = 0;
-    private boolean displayBonus = false;
+    private boolean displayBonus = true;
     private final int HAND_CARD_HEIGHT = 180;
     private final int HAND_CARD_WIDTH = 120;
     private HashMap<Card, Pair> playerHandCardPositions;
@@ -56,6 +56,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private int rectX, rectY, RECT_WIDTH, RECT_HEIGHT;
     private boolean confirmed = false;
     private int cubeIndex;
+    private BufferedImage displayedCard;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -72,6 +73,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         rectY = 0;
         RECT_WIDTH = 300;
         RECT_HEIGHT = 100;
+        displayedCard = null;
 
 
         try {
@@ -97,7 +99,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         try {
     
             super.paint(g);
-
             tokenPositions = new Pair[] {
                 new Pair(getWidth() - 350, getHeight() - 800),
                 new Pair(getWidth() - 250, getHeight() - 800),
@@ -109,8 +110,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             int playerIndex = GameState.players.indexOf(GameState.activePlayer);
             Graphics2D g2d = (Graphics2D)g;
-            
-            BufferedImage displayedCard = null;
             List<Card> forestCards = gameBoard.getForest();
             List<Card> grasslandsCards = gameBoard.getGrasslands();
             List<Card> wetlandsCards = gameBoard.getWetlands();
@@ -154,7 +153,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 cardPositions.put(c, new Pair(xPos, 640));
                 xPos += 175;
             }
-            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+            g.drawImage(displayedCard, 20, 600, (int)(CARD_WIDTH * 1.7), (int)(CARD_HEIGHT * 1.7), null);
             
             //draw goals
             g.setColor(Color.WHITE);
@@ -425,8 +424,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         if (e.getKeyChar() == 'c' && remainingChoices == 0) {
             setVisible(false);
             try {
-                getParent().add(new MainPanel());
-                GameState.cardManager.refillVisibleCards();
                     GameState.activePlayer.decreaseActionsRemaining();
                     int playerIndex = GameState.players.indexOf(GameState.activePlayer);
                     if (playerIndex < 3)
@@ -451,6 +448,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                             //load the round end / game end panel
                         }
                     }
+                    getParent().add(new MainPanel());
 
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
@@ -498,13 +496,67 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     public void keyReleased(KeyEvent e) { }
 
     @Override
-    public void keyTyped(KeyEvent e) { }
+    public void keyTyped(KeyEvent e) { 
+        char c = e.getKeyChar();
+        if (c == 't')
+        {
+            displayBonus = !displayBonus;
+        }
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
         int clickX = e.getX();
         int clickY = e.getY();
+
+        if (!displayBonus)
+        {
+            for(Card c: playerHandCardPositions.keySet()){
+            Pair p = playerHandCardPositions.get(c);
+            if (GameState.activePlayer.getHand().size() < 8)
+            {
+                if (clickX >= p.getX() && clickX <= p.getX() + HAND_CARD_WIDTH && clickY >= p.getY() && clickY <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getHand().size()) / (50.0 - (20 - GameState.activePlayer.getHand().size())));
+                if (clickX >= p.getX() && clickX < p.getX() + spaceBetweenCards && clickY >= p.getY() && clickY < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getCardImage();
+                    break;
+                }
+            }
+        }
+        }
+        else
+        {
+            for(BonusCard c: playerBonusCardPositions.keySet()){
+            Pair p = playerBonusCardPositions.get(c);
+            if (GameState.activePlayer.getBonusCards().size() < 8)
+            {
+                if (clickX >= p.getX() && clickX <= p.getX() + HAND_CARD_WIDTH && clickY >= p.getY() && clickY <= p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    break;
+                }
+            }
+            else
+            {
+                double spaceBetweenCards = (10 + HAND_CARD_WIDTH) * ((40 - GameState.activePlayer.getBonusCards().size()) / (50.0 - (20 - GameState.activePlayer.getBonusCards().size())));
+                if (clickX >= p.getX() && clickX < p.getX() + spaceBetweenCards && clickY >= p.getY() && clickY < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    displayedCard = c.getImage();
+                    break;
+                }
+            }
+        }
+        }
+        repaint();
 
         for (int i = 0; i < foods.length; i++) {
             Food food = foods[i];
