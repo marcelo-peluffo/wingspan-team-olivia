@@ -30,7 +30,14 @@ public class WingspanRunner {
 		// Lay Eggs testing purposes
 		CardManager cm = new CardManager();
 		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.FOREST);
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.GRASSLANDS);
+		GameState.activePlayer.getGameBoard().addCard(cm.getRandomCard(), Habitat.WETLANDS);
+		
 		GameState.activePlayer.addFood(Food.BERRY, 1);
+		GameState.activePlayer.addFood(Food.WHEAT, 1);
 
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
