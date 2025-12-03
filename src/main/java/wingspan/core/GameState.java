@@ -3,6 +3,7 @@ package wingspan.core;
 import java.io.IOException;
 import java.util.*;
 import wingspan.food.*;
+import wingspan.utils.Pair;
 import wingspan.cards.*;
 import wingspan.enums.Food;
 import java.awt.Color;
@@ -38,6 +39,7 @@ public class GameState {
 	public static boolean choseToCache;
 
 	public static HashMap<Player, Color> actionCubeColors;
+	public static HashMap<Card, Pair> cardPositions;
 	public static ArrayList<HashMap<Player, Pair>> goalBoardPositions; // stores the positions of the player's action cubes on the goalboard so they can be redrawn for future rounds
 
 	public static void initialize() {

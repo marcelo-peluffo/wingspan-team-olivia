@@ -92,4 +92,25 @@ public class GameBoard {
 		return list;
 	}
 
+	public List<Card> getCardsInHabitat(Habitat h) {
+		switch (h) {
+			case FOREST -> {return forest;}
+			case GRASSLANDS -> {return grasslands;}
+			case WETLANDS -> {return wetlands;}
+		}
+
+		return null;
+	}
+
+	public int numEggsAt(int indexOfGrasslands) {
+		switch (indexOfGrasslands) {
+			case 0: return 2;
+			case 1: return 2;
+			case 2: return 3;
+			case 3: return 3;
+			case 4: return 4;
+		}
+
+		return 0;
+	}
 }

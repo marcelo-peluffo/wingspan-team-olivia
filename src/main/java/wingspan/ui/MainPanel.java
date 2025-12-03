@@ -577,6 +577,8 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             else if (playerAction == 'e')
             {
                 //add LayEggsPanel when that's implemented
+                GameState.cardPositions = cardPositions;
+                getParent().add(new LayEggsPanel());
             }
             else if (playerAction == 'd')
             {
