@@ -292,19 +292,30 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             }
 
             //draw tokens
+            Map<Food, Integer> foodInventory = GameState.activePlayer.getFoodInventory();
+            boolean hadTokensForExchange = false;
+            int j = 0;
 
             for (int i = 0; i < foods.length; i++) {
                 Food f = foods[i];
-                Pair p = tokenPositions[i];
-                g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
+                int count = foodInventory.get(f);
+                
+
+                if (count > 0) { // only display token exchange for eggs if player actually has food tokens
+                    Pair p = tokenPositions[j++];
+                    g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
+                    hadTokensForExchange = true;
+                }
             }
 
             // draw text to exchange
-            g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
-            g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
-            
-            g.setColor(Color.GREEN); // change later to the intro panel green / red
-            if (selectedToken != null) {
+            if (hadTokensForExchange) {
+                g.drawString("Choose a food token to", getWidth() - 400, getHeight() - 550);
+                g.drawString("exchange for an extra egg (optional)", getWidth() - 400, getHeight() - 500);
+            }
+
+            g.setColor(Color.GREEN);
+            if (selectedToken != null) { // highlight selection. later add the 'c' to confirm
                 Pair p = null;
                 switch (selectedToken) {
                     
@@ -320,15 +331,17 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                         p = tokenPositions[2]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
 
-                    case INVERTEBRATE: {
+                    case RODENT: {
                         p = tokenPositions[3]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
 
-                    case RODENT: {
+                    case INVERTEBRATE: {
                         p = tokenPositions[4]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
                     } break;
+
                 }
             }
+            repaint();
 
                 // begin drawing the plus
             List<Card> cards = gameBoard.getCardsInHabitat(selectedHabitat);
