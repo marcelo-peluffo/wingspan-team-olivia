@@ -13,7 +13,7 @@ import wingspan.cards.bonusCards.BonusCard;
 import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
-import wingspan.enums.Food;
+import wingspan.enums.*;
 import wingspan.utils.Pair;
 
 public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener{
@@ -450,8 +450,20 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
                     chosenCard = null;
                     if (numChoices == 0)
                     {
-                        boolean roundEnd = false;
                         GameState.cardManager.refillVisibleCards();
+                        wetlandsCards = GameState.activePlayer.getGameBoard().getWetlands();
+                        for(int i=wetlandsCards.size()-1; i>=0; i--)
+                        {
+                            if (wetlandsCards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
+                            {
+                                setVisible(false);
+                                getParent().add(new AbilityPanel(GameState.activePlayer, wetlandsCards.get(i), Habitat.WETLANDS));
+                                getParent().repaint();
+                                getParent().remove(this);
+                                return;
+                            }
+                        }
+                        boolean roundEnd = false;
                         GameState.activePlayer.decreaseActionsRemaining();
                         int playerIndex = GameState.players.indexOf(activePlayer);
                         if (playerIndex < 3)

@@ -5,7 +5,7 @@ import java.util.List;
 import wingspan.cards.Card;
 import wingspan.core.GameState;
 import wingspan.core.Player;
-import wingspan.enums.Color;
+import wingspan.enums.PowerColor;
 
 public class PlayPreviousBrownBehavior implements PowerBehavior {
     private int numPowers;
@@ -28,7 +28,7 @@ public class PlayPreviousBrownBehavior implements PowerBehavior {
         for (int i = activeHabitatCards.indexOf(activeCard) + 1; i < activeHabitatCards.size(); i++)
         {
             Card currentCard = activeHabitatCards.get(i);
-            if (currentCard.getBirdInfo().getPowerColor() == Color.BROWN)
+            if (currentCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
             {
                 currentCard.getBirdInfo().getBehavior().executePower();
                 return true;
