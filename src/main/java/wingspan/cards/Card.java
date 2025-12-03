@@ -2,6 +2,7 @@ package wingspan.cards;
 import java.awt.image.BufferedImage;
 import java.util.*;
 import wingspan.enums.*;
+import wingspan.core.*;
 
 public class Card {
     private BirdInfo birdInfo;
@@ -30,6 +31,104 @@ public class Card {
 
     public BirdInfo getBirdInfo() { return birdInfo; }
     public BufferedImage getCardImage() { return cardImage; }
+
+    public boolean canPayFoodCost(Player p) //returns true if player has all food tokens required to play this card
+    {
+        Food[][] foodCost = this.getBirdInfo().getFoodCost();
+        HashMap<Food, Integer> playerInventory = new HashMap<Food, Integer>();
+        for(Food f: p.getFoodInventory().keySet())
+        {
+            playerInventory.put(f, p.getFoodInventory().get(f));
+        }
+        if (foodCost.length == 0)
+        {
+            return true;
+        }
+        if (foodCost.length == 1 && foodCost[0].length > 1)
+        {
+            for(int j=0; j<foodCost[0].length; j++)
+            {
+                if (playerInventory.get(foodCost[0][j]) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        int numAny = 0;
+        for(int i=0; i<foodCost.length; i++)
+        {
+            if (foodCost[i][0] == Food.ANY)
+            {
+                numAny++;
+            }
+            else
+            {
+                if (playerInventory.get(foodCost[i][0]) == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    playerInventory.put(foodCost[i][0], playerInventory.get(foodCost[i][0]) - 1);
+                }
+            }
+        }
+        int numRemainingFood = 0;
+        for(Food f: playerInventory.keySet())
+        {
+            numRemainingFood += playerInventory.get(f);
+        }
+        return numRemainingFood >= numAny;
+    }
+
+    public boolean couldPayFoodCost(Player p) //returns true if player could theoretically play this card through the exchange rule when playing a bird
+    {
+        Food[][] foodCost = this.getBirdInfo().getFoodCost();
+        HashMap<Food, Integer> playerInventory = new HashMap<Food, Integer>();
+        for(Food f: p.getFoodInventory().keySet())
+        {
+            playerInventory.put(f, p.getFoodInventory().get(f));
+        }
+        if (foodCost.length == 0)
+        {
+            return true;
+        }
+        if (foodCost.length == 1 && foodCost[0].length > 1)
+        {
+            for(int j=0; j<foodCost[0].length; j++)
+            {
+                if (playerInventory.get(foodCost[0][j]) > 0)
+                {
+                    return true;
+                }
+            }
+        }
+        int numAny = 0;
+        for(int i=0; i<foodCost.length; i++)
+        {
+            if (foodCost[i][0] == Food.ANY)
+            {
+                numAny++;
+            }
+            else
+            {
+                if (playerInventory.get(foodCost[i][0]) == 0)
+                {
+                    numAny += 2;
+                }
+                else
+                {
+                    playerInventory.put(foodCost[i][0], playerInventory.get(foodCost[i][0]) - 1);
+                }
+            }
+        }
+        int numRemainingFood = 0;
+        for(Food f: playerInventory.keySet())
+        {
+            numRemainingFood += playerInventory.get(f);
+        }
+        return numRemainingFood >= numAny;
+    }
 
     public void setBirdInfo(BirdInfo newBirdInfo)
     {

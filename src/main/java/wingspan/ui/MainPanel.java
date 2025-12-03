@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import wingspan.cards.bonusCards.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import wingspan.enums.*;
 
 public class MainPanel extends JPanel implements MouseListener, KeyListener{
 
@@ -47,6 +48,10 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
     private char playerAction;
     private boolean displayBonus;
     private Card displayedCardInfo;
+    private boolean canPlayForestCard;
+    private boolean canPlayGrasslandsCard;
+    private boolean canPlayWetlandsCard;
+    private boolean drawWarningText;
 
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -54,6 +59,45 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
         background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));
+        //check if player can play cards
+        int totalEggs = GameState.activePlayer.getTotalEggsAmount();
+        int forestEggCost;
+        int grasslandsEggCost;
+        int wetlandsEggCost;
+        if (GameState.activePlayer.getGameBoard().getForest().size() == 0)
+            forestEggCost = 0;
+        else if (GameState.activePlayer.getGameBoard().getForest().size() <= 2)
+            forestEggCost = 1;
+        else if (GameState.activePlayer.getGameBoard().getForest().size() <= 4)
+            forestEggCost = 2;
+        else
+            forestEggCost = 999999;
+        if (GameState.activePlayer.getGameBoard().getGrasslands().size() == 0)
+            grasslandsEggCost = 0;
+        else if (GameState.activePlayer.getGameBoard().getGrasslands().size() <= 2)
+            grasslandsEggCost = 1;
+        else if (GameState.activePlayer.getGameBoard().getGrasslands().size() <= 4)
+            grasslandsEggCost = 2;
+        else
+            grasslandsEggCost = 999999;
+        if (GameState.activePlayer.getGameBoard().getWetlands().size() == 0)
+            wetlandsEggCost = 0;
+        else if (GameState.activePlayer.getGameBoard().getWetlands().size() <= 2)
+            wetlandsEggCost = 1;
+        else if (GameState.activePlayer.getGameBoard().getWetlands().size() <= 4)
+            wetlandsEggCost = 2;
+        else
+            wetlandsEggCost = 999999;
+        for(Card c: GameState.activePlayer.getHand())
+        {
+            if (c.getBirdInfo().getHabitats().contains(Habitat.FOREST) && totalEggs >= forestEggCost && c.couldPayFoodCost(GameState.activePlayer))
+                canPlayForestCard = true;
+            if (c.getBirdInfo().getHabitats().contains(Habitat.GRASSLANDS) && totalEggs >= grasslandsEggCost && c.couldPayFoodCost(GameState.activePlayer))
+                canPlayGrasslandsCard = true;
+            if (c.getBirdInfo().getHabitats().contains(Habitat.WETLANDS) && totalEggs >= wetlandsEggCost && c.couldPayFoodCost(GameState.activePlayer))
+                canPlayWetlandsCard = true;
+        }
+        drawWarningText = false;
 
         setPreferredSize(new Dimension(150, 300));
 
@@ -219,6 +263,17 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             playerString += " (Viewing)";
         }
         g.drawString(playerString, getWidth() / 2 - 100, 50);
+        if (drawWarningText)
+        {
+            g.setFont(new Font("Arial", Font.PLAIN, 15));
+            g.setColor(Color.RED);
+            String s = "You do not have enough resources to play a card";
+            if (GameState.activePlayer.getHand().size() == 0)
+                s = "You do not have any cards to play";
+            if (GameState.activePlayer.getGameBoard().returnAllCards().size() == 15)
+                s = "You cannot play any more cards";
+            g.drawString(s, getWidth() / 2 - 200, 90);
+        }
         if (navigatorOption.equals("GameBoard"))
         {
             cardPositions.clear();
@@ -551,6 +606,16 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         {
             if (c == character && playerAction == '0')
             {
+                if (c == 'p')
+                {
+                    if (!canPlayForestCard && !canPlayGrasslandsCard && !canPlayWetlandsCard)
+                    {
+                        drawWarningText = true;
+                        repaint();
+                        return;
+                    }
+                }
+                drawWarningText = false;
                 playerIndex = GameState.players.indexOf(activePlayer);
                 playerAction = c;
                 break;
