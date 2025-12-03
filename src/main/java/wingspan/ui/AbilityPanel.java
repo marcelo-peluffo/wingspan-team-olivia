@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.util.*;
 import wingspan.utils.Pair;
 import wingspan.cards.*;
+import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.*;
@@ -31,6 +32,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
     private Card activationCard;
     private boolean hasActivated;
     private Habitat cardHabitat;
+    private Goal[] goals;
 
     public AbilityPanel(Player p, Card activationCard, Habitat cardHabitat)
     {
@@ -52,6 +54,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
         this.activationCard = activationCard;
         hasActivated = false;
         this.cardHabitat = cardHabitat;
+        goals = GameState.goalBoard.getGoals();
 
         try {
             // Ensure these paths match your project structure
@@ -207,15 +210,36 @@ public class AbilityPanel extends JPanel implements KeyListener{
         if (!hasActivated)
         {
             g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
-            g2d.setColor(new Color(0, 170, 150));
             Pair pos = cardPositions.get(activationCard);
-            g2d.setStroke(new BasicStroke(5));
-            g2d.drawRect(pos.getX(), pos.getY(), CARD_WIDTH, CARD_HEIGHT);
+            if (activationCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
+            {
+                g2d.setColor(GameState.actionCubeColors.get(GameState.activePlayer));
+                g2d.fillRect(pos.getX() + 50, pos.getY() + 50, 25, 25);
+            }
+            else
+            {
+                g2d.setStroke(new BasicStroke(5));
+                g2d.setColor(new Color(0, 170, 150));
+                g2d.drawRect(pos.getX(), pos.getY(), CARD_WIDTH, CARD_HEIGHT);
+            }
             g2d.setFont(new Font("Arial", Font.PLAIN, 20));
             g2d.setColor(Color.WHITE);
             g2d.drawString("Activate this card's ability?", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g2d.drawString("(Press 'y' or 'n')", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
+
+        int goalXPos = getWidth() - 400;
+        for(Goal goal: goals)
+        {
+            g.drawImage(goal.getImage(), goalXPos, getHeight() - 100, 100, 100, null);
+            goalXPos += 100;
+        }
+        int arrowXPos = getWidth() - 450 + GameState.roundNum * 100;
+        int[] xPoints = {arrowXPos - 25, arrowXPos, arrowXPos + 25};
+        int[] yPoints = {getHeight() - 155, getHeight() - 110, getHeight() - 155};
+        g.fillPolygon(xPoints, yPoints, 3);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Goals", getWidth() - 250, getHeight() - 160);
     }
 
     public void getPlayerCards(Player p)

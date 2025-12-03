@@ -28,19 +28,22 @@ public class WingspanRunner {
 		for(Player p: GameState.players)
 		{
 			int r = (int)(Math.random() * 6);
-			for(int i=0; i<r; i++)
+			for(int i=0; i<0; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
+				
+			}
+			r = (int)(Math.random() * 6);
+			for(int i=0; i<4; i++)
+			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.GRASSLANDS);
 			}
-			for(int i=0; i<r; i++)
+			r = (int)(Math.random() * 6);
+			for(int i=0; i<0; i++)
 			{
-				p.addBonusCard(GameState.cardManager.getRandomBonusCard());
+				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
 			}
 		}
-		for(int i=0;i<5;i++)
-		GameState.players.get(0).getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
-		GameState.players.get(0).getGameBoard().getWetlands().get(0).addEggs(1);
 		for(int i=0; i<5; i++)
 		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
 		GameState.players.get(0).addBonusCard(GameState.cardManager.getRandomBonusCard());

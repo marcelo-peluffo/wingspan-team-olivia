@@ -33,6 +33,22 @@ public class Player {
 		goalScore = 0;
 		resetActionsRemaining(1);
 	}
+
+	public boolean isAtMaxEggs()
+	{
+		int currentEggs = 0;
+		int maxEggs = 0;
+		for(Card c: gameBoard.returnAllCards())
+		{
+			currentEggs += c.getCurrentEggs();
+			maxEggs += c.getBirdInfo().getMaxEggs();
+		}
+		if (currentEggs == maxEggs)
+		{
+			return true;
+		}
+		return false;
+	}
 	
 	public void addGoalScore(int amount)
 	{

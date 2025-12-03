@@ -27,6 +27,7 @@ import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.Food;
 import wingspan.enums.Habitat;
+import wingspan.enums.PowerColor;
 import wingspan.utils.Pair;
 
 public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
@@ -57,6 +58,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private boolean confirmed = false;
     private int cubeIndex;
     private BufferedImage displayedCard;
+    private boolean atMaxCapacity;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -74,7 +76,15 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         RECT_WIDTH = 300;
         RECT_HEIGHT = 100;
         displayedCard = null;
-
+        if (GameState.activePlayer.isAtMaxEggs())
+        {
+            atMaxCapacity = true;
+            remainingChoices = 0;
+        }
+        else
+        {
+            atMaxCapacity = false;
+        }
 
         try {
             plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
@@ -263,7 +273,10 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             //draw remaining choices
             g.setColor(Color.WHITE);
-            g.drawString("Remaining Choices: " + remainingChoices, 50, getHeight() - 50);
+            String s = "Remaining Choices: " + remainingChoices;
+            if (atMaxCapacity)
+                s += " (All cards are at max capacity)";
+            g.drawString(s, 50, getHeight() - 50);
 
             //draw hand
             int leftEnd;
@@ -422,40 +435,57 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyChar() == 'c' && remainingChoices == 0) {
-            setVisible(false);
-            try {
-                    GameState.activePlayer.decreaseActionsRemaining();
-                    int playerIndex = GameState.players.indexOf(GameState.activePlayer);
-                    if (playerIndex < 3)
+            List<Card> grasslandsCards = GameState.activePlayer.getGameBoard().getGrasslands();
+                for(int i=grasslandsCards.size()-1; i>=0; i--)
+                {
+                    if (grasslandsCards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
                     {
-                        if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
-                        {
-                            GameState.activePlayer = GameState.players.get(playerIndex + 1);
-                        }
-                        else
-                        {
-                            //load the round end / game end panel
-                        }
+                        setVisible(false);
+                        getParent().add(new AbilityPanel(GameState.activePlayer, grasslandsCards.get(i), Habitat.GRASSLANDS));
+                        getParent().repaint();
+                        getParent().remove(this);
+                        return;
+                    }
+                }
+                boolean roundEnd = false;
+                GameState.activePlayer.decreaseActionsRemaining();
+                int playerIndex = GameState.players.indexOf(GameState.activePlayer);
+                if (playerIndex < 3)
+                {
+                    if (GameState.players.get(playerIndex + 1).getActionsRemaining() > 0)
+                    {
+                        GameState.activePlayer = GameState.players.get(playerIndex + 1);
                     }
                     else
                     {
-                        if (GameState.players.get(0).getActionsRemaining() > 0)
-                        {
-                            GameState.activePlayer = GameState.players.get(0);
-                        }
-                        else
-                        {
-                            //load the round end / game end panel
-                        }
+                        roundEnd = true;
                     }
-                    getParent().add(new MainPanel());
-
-            } catch (IOException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-            getParent().repaint();
-            getParent().remove(this);
+                }
+                else
+                {
+                    if (GameState.players.get(0).getActionsRemaining() > 0)
+                    {
+                        GameState.activePlayer = GameState.players.get(0);
+                    }
+                    else
+                    {
+                        roundEnd = true;
+                    }
+                }
+                setVisible(false);
+                try
+                {
+                    if (!roundEnd)
+                        getParent().add(new MainPanel());
+                    else
+                        getParent().add(new RoundEndPanel());
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Failed to load MainPanel");
+                }
+                getParent().repaint();
+                getParent().remove(this);
         }
 
         switch (e.getKeyCode()) {
@@ -486,6 +516,11 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 if (remainingChoices > 0 && !selectedCard.isAtMaxEggs()) {
                     selectedCard.addEggs(1);
                     remainingChoices--;
+                }
+                if (GameState.activePlayer.isAtMaxEggs())
+                {
+                    atMaxCapacity = true;
+                    remainingChoices = 0;
                 }
                 break;
         }
