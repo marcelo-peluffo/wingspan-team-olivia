@@ -46,7 +46,24 @@ public class Card {
                 }
             }
         }
+        if (foodCost.length == 1 && foodCost[0].length > 1)
+        {
+            return 1;
+        }
         return count;
+    }
+
+    public boolean hasAnyFood()
+    {
+        Food[][] foodCost = this.getBirdInfo().getFoodCost();
+        for(int i=0; i<foodCost.length; i++)
+        {
+            if (foodCost[i][0] == Food.ANY)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean canPayFoodCost(Player p) //returns true if player has all food tokens required to play this card
@@ -145,6 +162,19 @@ public class Card {
             numRemainingFood += playerInventory.get(f);
         }
         return numRemainingFood >= numAny;
+    }
+
+    public void payFood(Player p)
+    {
+        Food[][] foodCost = this.getBirdInfo().getFoodCost();
+        Map<Food, Integer> foodInventory = p.getFoodInventory();
+        for(int i=0; i<foodCost.length; i++)
+        {
+            if (foodCost[i].length == 1 && foodCost[i][0] != Food.ANY)
+            {
+                foodInventory.put(foodCost[i][0], foodInventory.get(foodCost[i][0]) - 1);
+            }
+        }
     }
 
     public void setBirdInfo(BirdInfo newBirdInfo)

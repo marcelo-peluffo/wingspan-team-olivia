@@ -67,6 +67,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
     private int eggsPaid;
     private Card passIntoAbilityPanel;
     private Habitat habitatPlacedInto;
+    private ArrayList<Food> foodChoices;
 
     public PlayCardPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -122,6 +123,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         finished = false;
         tokenExchangeLimit = 2;
         eggsPaid = 0;
+        foodChoices = new ArrayList<>();
         initializeEmptyTilesPos();
     	addMouseListener(this);
         addKeyListener(this);
@@ -177,12 +179,12 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
             g2d.setFont(new Font("Arial", Font.PLAIN, 15));
             g2d.drawString("- Use left and right arrow keys to decide", 30, getHeight() - 410);
             g2d.drawString("which token to exchange", 30, getHeight() - 390);
-            g2d.drawString("- Use up and down arrow keys to add a", 30, getHeight() - 370);
-            g2d.drawString("token to exchange", 30, getHeight() - 350);
+            g2d.drawString("- Use up and down arrow keys to add or", 30, getHeight() - 370);
+            g2d.drawString("remove a token to exchange", 30, getHeight() - 350);
             if (!payAnyFood)
             {
                 g2d.drawString("- Click on one of the token images on", 30, getHeight() - 330);
-                g2d.drawString("the middle left interface to choose", 30, getHeight() - 310);
+                g2d.drawString("the interface above to choose", 30, getHeight() - 310);
                 g2d.drawString("which token you want to trade for", 30, getHeight() - 290);
                 g2d.drawString("- Once you have chosen " + tokenExchangeLimit + " tokens to trade", 30, getHeight() - 270);
                 g2d.drawString("and the token you want to receive,", 30, getHeight() - 250);
@@ -301,7 +303,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         if (choosingCard)
             s = "Click on a card in your hand to play it, must have sufficient food to do so";
         else if (payAnyFood)
-            s = "Use the token exchange interface to pay the 'any' food tokens the bird takes";
+            s = "Use the token exchange interface to choose which food tokens you want to pay";
         else if (placingBird)
             s = "Place the chosen bird card by clicking a valid tile";
         else if (payingEggs)
@@ -544,10 +546,24 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         {
             if (x > 1600 && x < 1850 && y > 720 && y < 770)
             {
-                
+                selectedCard.payFood(GameState.activePlayer);
                 if (selectedCard.countAnyFood() > 0)
                 {
                     tokenExchangeLimit = selectedCard.countAnyFood();
+                    if (selectedCard.hasAnyFood())
+                    {
+                        for(Food f: foodToImage.keySet())
+                        {
+                            foodChoices.add(f);
+                        }
+                    }
+                    else
+                    {
+                        for (Food f: selectedCard.getBirdInfo().getFoodCost()[0])
+                        {
+                            foodChoices.add(f);
+                        }
+                    }
                     foodToGain = null;
                     payAnyFood = true;
                     choosingCard = false;
@@ -672,7 +688,12 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
                 if (selectedFoodXPos < 227) {selectedFoodXPos += 53; selectedFoodIndex++; selectColor = new Color(0, 170, 150);} break;
             case KeyEvent.VK_UP:
                 if (GameState.activePlayer.getFoodInventory().get(foodList.get(selectedFoodIndex)) >= foodToExchange.get(foodList.get(selectedFoodIndex)) + 1 && numToExchange < tokenExchangeLimit)
-                { 
+                {
+                    if (payAnyFood && !foodChoices.contains(foodList.get(selectedFoodIndex)))
+                    {
+                        selectColor = Color.RED;
+                        break;
+                    }
                     foodToExchange.put(foodList.get(selectedFoodIndex), foodToExchange.get(foodList.get(selectedFoodIndex)) + 1);
                     numToExchange++;
                     selectColor = new Color(0, 170, 150);
