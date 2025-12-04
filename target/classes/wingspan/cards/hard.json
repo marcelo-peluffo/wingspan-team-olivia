@@ -1,0 +1,77 @@
+[
+  {
+    "name": "American Oystercatcher",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 81,
+    "color": "WHITE",
+    "behavior": {
+      "type": "DRAW_CARD",
+      "numCards": 5,
+      "rotatePlayers": true
+    },
+    "image": "AmericanOystercatcher.jpg"
+  },
+  {
+    "name": "Anna's Hummingbird",
+    "habitats": [
+      "GRASSLANDS", "WETLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 13,
+    "color": "BROWN",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "rotatePlayers": true
+    },
+    "image": "AnnasHummingbird.jpg"
+  },
+  {
+    "name": "Gray Catbird",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "BOWL",
+    "maxEggs": 3,
+    "wingSpan": 28,
+    "color": "BROWN",
+    "behavior": {
+      "type": "PLAY_PREV_BROWN",
+      "numPowers": 1
+    },
+    "image": "GrayCatbird.jpg"
+  }
+]
