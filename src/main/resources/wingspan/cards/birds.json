@@ -454,7 +454,7 @@
     "wingSpan": 30,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "ALL_GAIN_FOOD",
       "numFood": 1,
       "typeOfFood": "BERRY",
       "rotatePlayers": true,
@@ -778,7 +778,7 @@
     "wingSpan": 8,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "ALL_GAIN_FOOD",
       "typeOfFood": "BERRY",
       "numFood": 1,
       "isFromFeeder": false,
@@ -1291,7 +1291,7 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "CACHE",
       "numFood": 1,
       "typeOfFood": "WHEAT",
       "isCacheable": true,
@@ -1948,7 +1948,7 @@
     "wingSpan": 28,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "ALL_GAIN_FOOD",
       "numFood": 1,
       "typeOfFood": "INVERTEBRATE",
       "isFromFeeder": false,

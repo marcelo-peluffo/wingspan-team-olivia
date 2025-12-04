@@ -3,7 +3,6 @@ package wingspan.core;
 import java.io.*;
 import java.util.*;
 import wingspan.WingspanFrame;
-import wingspan.cards.DataTable;
 import wingspan.enums.*;
 import java.awt.Color;
 import wingspan.cards.*;
@@ -26,7 +25,7 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
 		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
-		Card testCard = GameState.cardManager.getSpecifiedCard("Acorn Woodpecker");
+		Card testCard = GameState.cardManager.getSpecifiedCard("Carolina Chickadee");
 		GameState.activePlayer.getGameBoard().getForest().add(testCard);
 		System.out.println(testCard.getBirdInfo().getBehavior().describe());
 		//----------------------------------------------------------------------------------------------------------------------------

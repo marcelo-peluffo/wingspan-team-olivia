@@ -74,7 +74,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
         addKeyListener(this);
     }
 
-    public void drawAbilityUI(Graphics g)
+    public void drawAbilityUI(Graphics g) // draw UI prompting the player for input if needed for the ability. If no input is needed, directly use executePower here
     {
         if (abilityType.equals("FoodCacheBehavior"))
         {
@@ -82,6 +82,12 @@ public class AbilityPanel extends JPanel implements KeyListener{
             g.setColor(Color.WHITE);
             g.drawString("Cache the food if avaliable?", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g.drawString("(Press 'y' or 'n')", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
+        {
+            activationCard.getBirdInfo().getBehavior().executePower();
+            hasExecuted = true;
+            repaint();
         }
     }
 
@@ -99,6 +105,27 @@ public class AbilityPanel extends JPanel implements KeyListener{
             else
                 s = "Gained 1 wheat token";
             g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("GainFoodAllBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            g.drawString("All players gained 1 food", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("GainFoodBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            g.drawString("You gained 1 food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("CacheBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            g.drawString("Successfully cached 1 wheat token", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
     }
