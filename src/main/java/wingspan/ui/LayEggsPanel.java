@@ -87,9 +87,9 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         }
 
         try {
-            plus = ImageIO.read(getClass().getResource("/Images/Plus.png"));
-            boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
-            background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg")); 
+            plus = ImageIO.read(getClass().getResourceAsStream("/Images/Plus.png"));
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
+            background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg")); 
             foodToImage.put(Food.BERRY, ImageIO.read(getClass().getResourceAsStream("/Images/BerryToken.png")));
             foodToImage.put(Food.FISH, ImageIO.read(getClass().getResourceAsStream("/Images/FishToken.png")));
             foodToImage.put(Food.INVERTEBRATE, ImageIO.read(getClass().getResourceAsStream("/Images/InvertebrateToken.png")));

@@ -1,6 +1,5 @@
 # Java
 *.class
 /out/
-target/
 .idea/
 *.iml
