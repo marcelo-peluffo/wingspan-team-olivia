@@ -1,7 +1,6 @@
 package wingspan.ui;
 import wingspan.cards.goals.Goal;
 import wingspan.core.*;
-import wingspan.enums.Food;
 import wingspan.utils.Pair;
 import java.util.List;
 import java.awt.event.MouseEvent;
@@ -630,7 +629,14 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             setVisible(false);
             if (playerAction == 'p')
             {
-                //add PlayCardPanel when that's implemented
+                try
+                {
+                    getParent().add(new PlayCardPanel());
+                }
+                catch (Exception ex)
+                {
+                    System.out.println("Failed to load play card panel");
+                }
             }
             else if (playerAction == 'f')
             {

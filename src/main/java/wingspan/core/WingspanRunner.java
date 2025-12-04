@@ -28,25 +28,35 @@ public class WingspanRunner {
 		for(Player p: GameState.players)
 		{
 			int r = (int)(Math.random() * 6);
-			for(int i=0; i<0; i++)
+			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
-				
+				p.getGameBoard().getForest().get(i).addEggs(1);
 			}
 			r = (int)(Math.random() * 6);
-			for(int i=0; i<4; i++)
+			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.GRASSLANDS);
+				p.getGameBoard().getGrasslands().get(i).addEggs(1);
 			}
 			r = (int)(Math.random() * 6);
-			for(int i=0; i<0; i++)
+			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
+				p.getGameBoard().getWetlands().get(i).addEggs(1);
 			}
 		}
-		for(int i=0; i<5; i++)
+		for(int i=0; i<5; i++) {
 		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(0).addFood(Food.FISH, 5);
 		GameState.players.get(0).addBonusCard(GameState.cardManager.getRandomBonusCard());
+		GameState.players.get(1).addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(1).addFood(Food.FISH, 5);
+		GameState.players.get(1).addBonusCard(GameState.cardManager.getRandomBonusCard());
+		GameState.players.get(2).addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(2).addFood(Food.FISH, 5);
+		GameState.players.get(2).addBonusCard(GameState.cardManager.getRandomBonusCard()); }
+		
 		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

@@ -32,6 +32,23 @@ public class Card {
     public BirdInfo getBirdInfo() { return birdInfo; }
     public BufferedImage getCardImage() { return cardImage; }
 
+    public int countAnyFood() //returns how many tokens of any food type this bird costs
+    {
+        Food[][] foodCost = this.getBirdInfo().getFoodCost();
+        int count = 0;
+        for(int i=0; i<foodCost.length; i++)
+        {
+            for(int j=0; j<foodCost[i].length; j++)
+            {
+                if (foodCost[i][j] == Food.ANY)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public boolean canPayFoodCost(Player p) //returns true if player has all food tokens required to play this card
     {
         Food[][] foodCost = this.getBirdInfo().getFoodCost();
