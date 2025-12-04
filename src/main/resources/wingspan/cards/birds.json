@@ -19,7 +19,7 @@
     "nestType": "CAVITY",
     "maxEggs": 4,
     "wingSpan": 46,
-    "color": "BROWN",
+    "color": "WHITE",
     "behavior": {
       "type": "GAIN_FOOD",
       "numFood": 1,
