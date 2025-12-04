@@ -33,6 +33,9 @@ public class AbilityPanel extends JPanel implements KeyListener{
     private boolean hasActivated;
     private Habitat cardHabitat;
     private Goal[] goals;
+    private boolean hasExecuted;
+    private String abilityType;
+    private boolean actionWasSuccessful;
 
     public AbilityPanel(Player p, Card activationCard, Habitat cardHabitat)
     {
@@ -45,6 +48,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
         {
             System.out.println("Error loading board image");
         }
+        GameState.activeCard = activationCard;
         cardPositions = new HashMap<Card, Pair>();
         displayedCard = null;
         getPlayerCards(GameState.activePlayer);
@@ -66,7 +70,37 @@ public class AbilityPanel extends JPanel implements KeyListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        abilityType = activationCard.getBirdInfo().getBehavior().describe();
         addKeyListener(this);
+    }
+
+    public void drawAbilityUI(Graphics g)
+    {
+        if (abilityType.equals("FoodCacheBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.setColor(Color.WHITE);
+            g.drawString("Cache the food if avaliable?", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("(Press 'y' or 'n')", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+    }
+
+    public void drawAbilityEndUI(Graphics g)
+    {
+        if (abilityType.equals("FoodCacheBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            String s = "";
+            if (!actionWasSuccessful)
+                s = "Bird feeder didn't have any wheat";
+            else if (actionWasSuccessful && GameState.choseToCache)
+                s = "Successfully cached 1 wheat token";
+            else
+                s = "Gained 1 wheat token";
+            g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
     }
 
     public void paint(Graphics g)
@@ -206,26 +240,35 @@ public class AbilityPanel extends JPanel implements KeyListener{
 		g2d.setFont(newFont);
 		g2d.drawString("Activating Power", 1690, 50);
 
+        g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        Pair pos = cardPositions.get(activationCard);
+        if (activationCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
+        {
+            g2d.setColor(GameState.actionCubeColors.get(GameState.activePlayer));
+            g2d.fillRect(pos.getX() + 50, pos.getY() + 50, 25, 25);
+        }
+        else
+        {
+            g2d.setStroke(new BasicStroke(5));
+            g2d.setColor(new Color(0, 170, 150));
+            g2d.drawRect(pos.getX(), pos.getY(), CARD_WIDTH, CARD_HEIGHT);
+        }
+
         //draw activation prompt
         if (!hasActivated)
         {
-            g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
-            Pair pos = cardPositions.get(activationCard);
-            if (activationCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
-            {
-                g2d.setColor(GameState.actionCubeColors.get(GameState.activePlayer));
-                g2d.fillRect(pos.getX() + 50, pos.getY() + 50, 25, 25);
-            }
-            else
-            {
-                g2d.setStroke(new BasicStroke(5));
-                g2d.setColor(new Color(0, 170, 150));
-                g2d.drawRect(pos.getX(), pos.getY(), CARD_WIDTH, CARD_HEIGHT);
-            }
             g2d.setFont(new Font("Arial", Font.PLAIN, 20));
             g2d.setColor(Color.WHITE);
             g2d.drawString("Activate this card's ability?", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g2d.drawString("(Press 'y' or 'n')", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (!hasExecuted)
+        {
+            drawAbilityUI(g);
+        }
+        else
+        {
+            drawAbilityEndUI(g);
         }
 
         int goalXPos = getWidth() - 400;
@@ -251,7 +294,37 @@ public class AbilityPanel extends JPanel implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            if (hasExecuted)
+            {
+                boolean end = false;
+                if (activationCard.getBirdInfo().getPowerColor() == PowerColor.WHITE || activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
+                {
+                    end = true;
+                }
+                else
+                {
+                    player.getGameBoard().setActiveHabitat(cardHabitat);
+                    List<Card> cards = player.getGameBoard().getActiveHabitat();
+                    int index = cards.indexOf(activationCard) - 1;
+                    for(int i=index; i>=0; i--)
+                    {
+                        if (cards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
+                        {
+                            activationCard = cards.get(i);
+                            repaint();
+                            return;
+                        }
+                    }
+                    end = true;
+                }
+                if (end)
+                {
+                    endAbilityPanel();
+                }
+            }
+        }
     }
 
     @Override
@@ -294,9 +367,29 @@ public class AbilityPanel extends JPanel implements KeyListener{
             }
             else if (c == 'y')
             {
-                //implement this later
+                hasActivated = true;
+                hasExecuted = false;
             }
         }
+        else if (hasActivated && !hasExecuted)
+        {
+            if (abilityType.equals("FoodCacheBehavior"))
+            {
+                if (c == 'y')
+                {
+                    GameState.choseToCache = true;
+                    actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+                    hasExecuted = true;
+                }
+                else if (c == 'n')
+                {
+                    GameState.choseToCache = false;
+                    actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+                    hasExecuted = true;
+                }
+            }
+        }
+        repaint();
     }
     public void addNotify()
     {

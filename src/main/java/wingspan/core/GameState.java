@@ -21,23 +21,18 @@ public class GameState {
 	public static int roundNum; // current round number
 
 	//variables used for PowerBehavior logic
-	public static ArrayList<Player> abilityPlayers = new ArrayList<Player>(); /* 
-		when an ability is activated, this ArrayList will contain all players that are involved in that ability.
-		e.g., if the ability is "player with least wetland cards draw a card", this ArrayList would contain all players that have the least amount of wetland cards
-		put players in this list based on player number order
-	*/
-	public static ArrayList<Card> cardsToDraw = new ArrayList<Card>(); //contains the cards a player chose to draw for an ability
-	public static ArrayList<Card> cardsToTuck = new ArrayList<Card>(); //contains the cards a player chose to tuck for an ability
-	//if multiple players are involved in one of these abilities, put cards in these lists in player number order (eg. player 1's cards in the list come before player 3's)
-	//exception: if the ability involves drawing cards, then rotating through each player to take them, put them in clockwise order, starting from the active player
+	public static Card activeCard; // contains the card whose power is currently being executed
+	public static ArrayList<Player> abilityPlayers = new ArrayList<Player>();
+	public static ArrayList<Card> cardsToDraw = new ArrayList<Card>();
+	public static ArrayList<Card> cardsToTuck = new ArrayList<Card>();
 
-	public static Food foodChoice; //if an ability allows the player to choose any food, it will be stored here.
+	public static Food foodChoice; 
 
 	public static boolean activePlayerTuckedCard;
-	public static Card activeCard; // contains the card whose power is currently being executed
-	public static Card selectedCard; // contains the card the user selects for caching food, laying eggs, or tucking cards
-	public static boolean choseToCache;
+	public static Card selectedCard; 
+	public static boolean choseToCache; //Used for: FoodCacheBehavior
 
+	//variables used for paint method
 	public static HashMap<Player, Color> actionCubeColors;
 	public static HashMap<Card, Pair> cardPositions;
 	public static ArrayList<HashMap<Player, Pair>> goalBoardPositions; // stores the positions of the player's action cubes on the goalboard so they can be redrawn for future rounds

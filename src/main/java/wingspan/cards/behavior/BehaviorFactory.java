@@ -24,7 +24,9 @@ public class BehaviorFactory {
             case "DISCARD_EGGS":
                 return new DiscardEggsBehavior(params);
             case "DISCARD_FOOD":
-                return null;                
+                return null;
+            case "FOOD_CACHE":
+                return new FoodCacheBehavior(params);     
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

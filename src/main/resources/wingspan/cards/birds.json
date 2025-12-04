@@ -19,9 +19,9 @@
     "nestType": "CAVITY",
     "maxEggs": 4,
     "wingSpan": 46,
-    "color": "WHITE",
+    "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "FOOD_CACHE",
       "numFood": 1,
       "typeOfFood": "WHEAT",
       "isFromFeeder": true,
@@ -888,7 +888,7 @@
     "wingSpan": 41,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "FOOD_CACHE",
       "typeOfFood": "WHEAT",
       "numFood": 1,
       "isFromFeeder": true,
@@ -1583,7 +1583,7 @@
     "wingSpan": 61,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "FOOD_CACHE",
       "typeOfFood": "WHEAT",
       "numFood": 1,
       "isFromFeeder": true,

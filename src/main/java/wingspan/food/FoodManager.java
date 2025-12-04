@@ -1,6 +1,7 @@
 package wingspan.food;
 import java.util.*;
 import java.io.*;
+import wingspan.enums.*;
 
 public class FoodManager {
 	private ArrayList<FoodDice> birdFeeder;
@@ -44,5 +45,17 @@ public class FoodManager {
 	public ArrayList<FoodDice> getBirdFeeder()
 	{
 		return birdFeeder;
+	}
+
+	public boolean hasFood(Food f)
+	{
+		for(FoodDice fd: birdFeeder)
+		{
+			if (fd.getFood() == f)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

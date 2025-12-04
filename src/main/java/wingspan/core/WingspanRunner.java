@@ -6,6 +6,7 @@ import wingspan.WingspanFrame;
 import wingspan.cards.DataTable;
 import wingspan.enums.*;
 import java.awt.Color;
+import wingspan.cards.*;
 
 
 public class WingspanRunner {
@@ -25,39 +26,9 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
 		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
-		for(Player p: GameState.players)
-		{
-			int r = (int)(Math.random() * 6);
-			for(int i=0; i<r; i++)
-			{
-				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
-
-			}
-			r = (int)(Math.random() * 6);
-			for(int i=0; i<r; i++)
-			{
-				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.GRASSLANDS);
-
-			}
-			r = (int)(Math.random() * 6);
-			for(int i=0; i<r; i++)
-			{
-				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
-				
-			}
-		}
-		GameState.activePlayer.getGameBoard().getWetlands().get(0).addEggs(1);
-		for(int i=0; i<5; i++) {
-		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
-		GameState.players.get(0).addFood(Food.FISH, 5);
-		GameState.players.get(0).addBonusCard(GameState.cardManager.getRandomBonusCard());
-		GameState.players.get(1).addCard(GameState.cardManager.getRandomCard());
-		GameState.players.get(1).addFood(Food.FISH, 5);
-		GameState.players.get(1).addBonusCard(GameState.cardManager.getRandomBonusCard());
-		GameState.players.get(2).addCard(GameState.cardManager.getRandomCard());
-		GameState.players.get(2).addFood(Food.FISH, 5);
-		GameState.players.get(2).addBonusCard(GameState.cardManager.getRandomBonusCard()); }
-		
+		Card testCard = GameState.cardManager.getSpecifiedCard("Acorn Woodpecker");
+		GameState.activePlayer.getGameBoard().getForest().add(testCard);
+		System.out.println(testCard.getBirdInfo().getBehavior().describe());
 		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}

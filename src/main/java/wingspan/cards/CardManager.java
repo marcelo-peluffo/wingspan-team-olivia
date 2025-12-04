@@ -33,6 +33,19 @@ public class CardManager {
 		return c;
 	}
 
+	//returns the specified card, this will only be used for testing
+	public Card getSpecifiedCard(String name)
+	{
+		for(Card c: birdCards)
+		{
+			if (c.getBirdInfo().getName().equals(name))
+			{
+				return c;
+			}
+		}
+		return null;
+	}
+
 	public List<Card> getFaceUpCards()
 	{
 		return faceUpCards;
