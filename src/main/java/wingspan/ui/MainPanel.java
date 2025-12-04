@@ -266,7 +266,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         {
             g.setFont(new Font("Arial", Font.PLAIN, 15));
             g.setColor(Color.RED);
-            String s = "You do not have enough resources to play a card";
+            String s = "You do not have enough food or eggs to play a card";
             if (GameState.activePlayer.getHand().size() == 0)
                 s = "You do not have any cards to play";
             if (GameState.activePlayer.getGameBoard().returnAllCards().size() == 15)

@@ -301,7 +301,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         g.setFont(new Font("Arial", Font.PLAIN, 15));
         String s = "";
         if (choosingCard)
-            s = "Click on a card in your hand to play it, must have sufficient food to do so";
+            s = "Click on a card in your hand to play it, must have sufficient food, eggs, and space to do so";
         else if (payAnyFood)
             s = "Use the token exchange interface to choose which food tokens you want to pay";
         else if (placingBird)
@@ -407,7 +407,8 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         if (selectedCard != null && choosingCard)
         {
             g.setColor(Color.GRAY);
-            if (selectedCard.canPayFoodCost(GameState.activePlayer))
+            System.out.println(canPlaceInHabitat(selectedCard));
+            if (selectedCard.canPayFoodCost(GameState.activePlayer) && canPlaceInHabitat(selectedCard))
                 g2d.setColor(new Color(19,175,87));
             g.fillRect(1600, 720, 250, 50);
             g.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -542,7 +543,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
                 }
             }
         }
-        if (selectedCard != null && selectedCard.canPayFoodCost(GameState.activePlayer) && choosingCard)
+        if (selectedCard != null && selectedCard.canPayFoodCost(GameState.activePlayer) && choosingCard && canPlaceInHabitat(selectedCard))
         {
             if (x > 1600 && x < 1850 && y > 720 && y < 770)
             {
@@ -853,5 +854,21 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         }
         getParent().repaint();
         getParent().remove(this);
+    }
+
+    public boolean canPlaceInHabitat(Card c)
+    {
+        GameBoard gameBoard = GameState.activePlayer.getGameBoard();
+        for(Habitat h: c.getBirdInfo().getHabitats())
+        {
+            if (gameBoard.getCardsInHabitat(h).size() < 5)
+            {
+                if (hasEnoughEggs(h, GameState.activePlayer.getTotalEggsAmount()))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

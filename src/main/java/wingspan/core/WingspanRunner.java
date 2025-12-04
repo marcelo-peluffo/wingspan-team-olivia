@@ -31,21 +31,22 @@ public class WingspanRunner {
 			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
-				p.getGameBoard().getForest().get(i).addEggs(1);
+
 			}
 			r = (int)(Math.random() * 6);
 			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.GRASSLANDS);
-				p.getGameBoard().getGrasslands().get(i).addEggs(1);
+
 			}
 			r = (int)(Math.random() * 6);
 			for(int i=0; i<r; i++)
 			{
 				p.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.WETLANDS);
-				p.getGameBoard().getWetlands().get(i).addEggs(1);
+				
 			}
 		}
+		GameState.activePlayer.getGameBoard().getWetlands().get(0).addEggs(1);
 		for(int i=0; i<5; i++) {
 		GameState.players.get(0).addCard(GameState.cardManager.getRandomCard());
 		GameState.players.get(0).addFood(Food.FISH, 5);
