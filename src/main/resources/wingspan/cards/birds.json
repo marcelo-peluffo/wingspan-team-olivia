@@ -373,7 +373,7 @@
     "wingSpan": 53,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -582,7 +582,7 @@
     "wingSpan": 18,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -1186,7 +1186,7 @@
     "wingSpan": 277,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -1339,7 +1339,7 @@
     "wingSpan": 30,
     "color": "BROWN",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -1420,7 +1420,7 @@
     "wingSpan": 20,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -1449,7 +1449,7 @@
     "wingSpan": 25,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1
@@ -2263,7 +2263,7 @@
     "wingSpan": 71,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "BONUS_CARD",
       "numCards": 2,
       "isBonusCard": true,
       "cardsToKeep": 1

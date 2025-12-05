@@ -31,6 +31,8 @@ public class BehaviorFactory {
                 return new GainFoodAllBehavior(params);
             case "CACHE":
                 return new CacheBehavior(params);
+            case "BONUS_CARD":
+                return new BonusCardBehavior(params);
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

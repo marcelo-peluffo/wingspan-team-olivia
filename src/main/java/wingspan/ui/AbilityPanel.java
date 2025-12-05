@@ -2,9 +2,11 @@ package wingspan.ui;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.awt.image.BufferedImage;
-
+import wingspan.cards.bonusCards.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.*;
@@ -14,9 +16,8 @@ import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.*;
-import wingspan.ui.components.GameBoardComponent;
 
-public class AbilityPanel extends JPanel implements KeyListener{
+public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private BufferedImage boardImage;
     private List<Card> forestCards;
     private List<Card> grasslandsCards;
@@ -25,6 +26,8 @@ public class AbilityPanel extends JPanel implements KeyListener{
     private HashMap<Card, Pair> cardPositions; // this map will store all positions of the cards, and the card they're associated with
     private final int CARD_WIDTH = 125;
     private final int CARD_HEIGHT = 200;
+    private final int HAND_CARD_HEIGHT = 180;
+    private final int HAND_CARD_WIDTH = 120;
     private Player player;
     private Map<Food, Integer> foodInventory;
     private Map<Food, BufferedImage> foodToImage;
@@ -36,6 +39,9 @@ public class AbilityPanel extends JPanel implements KeyListener{
     private boolean hasExecuted;
     private String abilityType;
     private boolean actionWasSuccessful;
+    private HashMap<BonusCard, Pair> bonusCardsPos;
+    private boolean hasSelectedBonus;
+    private BonusCard chosenBonusCard;
 
     public AbilityPanel(Player p, Card activationCard, Habitat cardHabitat)
     {
@@ -59,6 +65,8 @@ public class AbilityPanel extends JPanel implements KeyListener{
         hasActivated = false;
         this.cardHabitat = cardHabitat;
         goals = GameState.goalBoard.getGoals();
+        bonusCardsPos = new HashMap<>();
+        hasSelectedBonus = false;
 
         try {
             // Ensure these paths match your project structure
@@ -72,6 +80,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
         }
         abilityType = activationCard.getBirdInfo().getBehavior().describe();
         addKeyListener(this);
+        addMouseListener(this);
     }
 
     public void drawAbilityUI(Graphics g) // draw UI prompting the player for input if needed for the ability. If no input is needed, directly use executePower here
@@ -82,6 +91,20 @@ public class AbilityPanel extends JPanel implements KeyListener{
             g.setColor(Color.WHITE);
             g.drawString("Cache the food if avaliable?", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g.drawString("(Press 'y' or 'n')", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("BonusCardBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            String s = "Click one of the bonus cards to keep it";
+            if (hasSelectedBonus)
+                s = "Press 'c' to confirm";
+            g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+            for(BonusCard c: bonusCardsPos.keySet())
+            {
+                Pair p = bonusCardsPos.get(c);
+                g.drawImage(c.getImage(), p.getX(), p.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+            }
         }
         else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
         {
@@ -126,6 +149,13 @@ public class AbilityPanel extends JPanel implements KeyListener{
             g.setFont(new Font("Arial", Font.BOLD, 15));
             g.setColor(Color.WHITE);
             g.drawString("Successfully cached 1 wheat token", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
+        }
+        else if (abilityType.equals("BonusCardBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            g.setColor(Color.WHITE);
+            g.drawString("Added Bonus Card to hand", 1600, 300 + CARD_HEIGHT * 2 + 25);
             g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
     }
@@ -243,6 +273,7 @@ public class AbilityPanel extends JPanel implements KeyListener{
             }
         }
         //draw player's hand
+        
         int leftEnd;
         if(player.getHand().size() % 2 == 0){
             leftEnd = Math.max(getWidth()/2 - (5 + CARD_WIDTH) - ((player.getHand().size()/2 - 1) * (CARD_WIDTH + 10)), 350);
@@ -266,8 +297,15 @@ public class AbilityPanel extends JPanel implements KeyListener{
 		Font newFont = new Font("Arial", Font.BOLD, 25);
 		g2d.setFont(newFont);
 		g2d.drawString("Activating Power", 1690, 50);
-
-        g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        //displayed card
+        if (hasActivated && !hasExecuted && abilityType.equals("BonusCardBehavior") && hasSelectedBonus)
+        {
+            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        }
+        else
+        {
+            g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        }
         Pair pos = cardPositions.get(activationCard);
         if (activationCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
         {
@@ -396,6 +434,11 @@ public class AbilityPanel extends JPanel implements KeyListener{
             {
                 hasActivated = true;
                 hasExecuted = false;
+                if (abilityType.equals("BonusCardBehavior"))
+                {
+                    bonusCardsPos.put(GameState.cardManager.getRandomBonusCard(), new Pair(getWidth() / 2 - HAND_CARD_WIDTH, getHeight() - HAND_CARD_HEIGHT));
+                    bonusCardsPos.put(GameState.cardManager.getRandomBonusCard(), new Pair(getWidth() / 2 + 25, getHeight() - HAND_CARD_HEIGHT));
+                }
             }
         }
         else if (hasActivated && !hasExecuted)
@@ -412,6 +455,15 @@ public class AbilityPanel extends JPanel implements KeyListener{
                 {
                     GameState.choseToCache = false;
                     actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+                    hasExecuted = true;
+                }
+            }
+            if (abilityType.equals("BonusCardBehavior") && hasSelectedBonus)
+            {
+                if (c == 'c')
+                {
+                    GameState.selectedBonusCard = chosenBonusCard;
+                    activationCard.getBirdInfo().getBehavior().executePower();
                     hasExecuted = true;
                 }
             }
@@ -465,5 +517,45 @@ public class AbilityPanel extends JPanel implements KeyListener{
         }
         getParent().repaint();
         getParent().remove(this);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        if (hasActivated && !hasExecuted)
+        {
+            for(BonusCard c: bonusCardsPos.keySet())
+            {
+                Pair p = bonusCardsPos.get(c);
+                if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                {
+                    hasSelectedBonus = true;
+                    displayedCard = c.getImage();
+                    chosenBonusCard = c;
+                }
+            }
+        }
+        repaint();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        
     }
 }

@@ -8,6 +8,7 @@ import wingspan.cards.*;
 import wingspan.enums.Food;
 import java.awt.Color;
 import wingspan.utils.Pair;
+import wingspan.cards.bonusCards.*;
 
 public class GameState {
 	//these are initialized in WingspanRunner's main method
@@ -31,6 +32,7 @@ public class GameState {
 	public static boolean activePlayerTuckedCard;
 	public static Card selectedCard; 
 	public static boolean choseToCache; //Used for: FoodCacheBehavior
+	public static BonusCard selectedBonusCard; //Used for :BonusCardBehavior
 
 	//variables used for paint method
 	public static HashMap<Player, Color> actionCubeColors;
