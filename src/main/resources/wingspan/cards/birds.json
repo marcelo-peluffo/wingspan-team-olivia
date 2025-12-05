@@ -2293,30 +2293,11 @@
     "wingSpan" : 56,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": false
     },
     "image" : "GreaterRoadrunner.jpg"
-  },
-
-  {
-    "name": "Green Heron",
-    "habitats" : [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE", "FISH"
-      ]
-    ],
-    "victoryPoints" : 4,
-    "nestType" : "PLATFORM",
-    "maxEggs" : 3 ,
-    "wingSpan" : 66,
-    "color" : "BROWN",
-    "behavior" : {
-
-    },
-    "image" : "GreenHeron.jpg"
   },
 
   {
