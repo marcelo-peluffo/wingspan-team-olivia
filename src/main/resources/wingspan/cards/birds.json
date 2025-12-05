@@ -292,7 +292,7 @@
     "nestType": "GROUND",
     "maxEggs": 2,
     "wingSpan": 46,
-    w"WHITE",
+    "color": "WHITE",
     "behavior": {
       "type": "TEMPLATE_BEHAVIOR"
     },
@@ -343,7 +343,7 @@
     "nestType": "CAVITY",
     "maxEggs": 4,
     "wingSpan": 30,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "LAY_EGG",
       "numEggs": 1,
@@ -371,7 +371,7 @@
     "nestType": "STAR",
     "maxEggs": 1,
     "wingSpan": 53,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
@@ -424,7 +424,7 @@
     "nestType": "PLATFORM",
     "maxEggs": 1,
     "wingSpan": 203,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "GAIN_FOOD",
       "typeOfFood": "FISH",
@@ -580,7 +580,7 @@
     "nestType": "STAR",
     "maxEggs": 2,
     "wingSpan": 18,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2,
@@ -836,7 +836,7 @@
     "nestType": "GROUND",
     "maxEggs": 2,
     "wingSpan": 74,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2
@@ -936,7 +936,7 @@
     "nestType": "BOWL",
     "maxEggs": 2,
     "wingSpan": 20,
-    w"WHITE",
+    "color" : "WHITE",
     "behavior": {
       "type": "TEMPLATE_BEHAVIOR"
     },
@@ -2356,7 +2356,7 @@
         "INVERTEBRATE"
       ],
       [
-        "Fish"
+        "FISH"
       ]
     ],
     "victoryPoints" : 5,
@@ -2387,7 +2387,7 @@
     "nestType" : "BOWL",
     "maxEggs" : 3,
     "wingSpan" : 18,
-    "color" : "",
+    "color" : "WHITE",
     "behavior" : {
 
     },
@@ -2470,10 +2470,10 @@
     ],
     "food": [
       [
-        "Wheat"
+        "WHEAT"
       ],
       [
-        "Wheat"
+        "WHEAT"
       ]
     ],
     "victoryPoints" : 2,
@@ -2497,7 +2497,7 @@
         "INVERTEBRATE"
       ],
       [
-        "Wheat"
+        "WHEAT"
       ],
       [
         "BERRY"
@@ -2507,7 +2507,7 @@
     "nestType" : "BOWL",
     "maxEggs" : 3,
     "wingSpan" : 20,
-    "color" : "",
+    "color" : "WHITE",
     "behavior" : {
 
     },
@@ -2569,7 +2569,7 @@
         "INVERTEBRATE"
       ],
       [
-        "Fish"
+        "FISH"
       ],
       [
         "ANY"
@@ -3102,7 +3102,7 @@
     "nestType" : "CAVITY",
     "maxEggs" : 4,
     "wingSpan" : 23,
-    "color" : "",
+    "color" : "WHITE",
     "behavior" : {
 
 
