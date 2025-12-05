@@ -25,8 +25,8 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
 		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
-		Card testCard = GameState.cardManager.getSpecifiedCard("Atlantic Puffin");
-		GameState.activePlayer.addCard(testCard);
+		Card testCard = GameState.cardManager.getSpecifiedCard("American Kestrel");
+		GameState.activePlayer.getGameBoard().addCard(testCard, Habitat.FOREST);
 		GameState.activePlayer.addFood(Food.FISH, 9999);
 		System.out.println(testCard.getBirdInfo().getBehavior().describe());
 		//----------------------------------------------------------------------------------------------------------------------------

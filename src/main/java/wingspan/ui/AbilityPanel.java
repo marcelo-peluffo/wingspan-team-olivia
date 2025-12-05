@@ -16,6 +16,7 @@ import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.*;
+import wingspan.food.*;
 
 public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private BufferedImage boardImage;
@@ -105,6 +106,21 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 Pair p = bonusCardsPos.get(c);
                 g.drawImage(c.getImage(), p.getX(), p.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
             }
+        }
+        else if (abilityType.equals("RollDiceBehavior"))
+        {
+            g.setColor(new Color(19,175,87));
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.fillRect(1600, 300 + CARD_HEIGHT * 2 + 25, 250, 50);
+            g.setColor(Color.WHITE);
+            g.drawString("Roll Dice", 1675, 300 + CARD_HEIGHT * 2 + 50);
+            ArrayList<FoodDice> discardedDice = GameState.foodManager.getUsedDice();
+            int xPos = 1600;
+            for(FoodDice fd: discardedDice)
+            {
+                g.drawImage(fd.getImage(), xPos, 300 + CARD_HEIGHT * 2 + 100, 50, 50, null);
+            }
+
         }
         else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
         {
@@ -525,14 +541,25 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         int y = e.getY();
         if (hasActivated && !hasExecuted)
         {
-            for(BonusCard c: bonusCardsPos.keySet())
+            if (abilityType.equals("BonusCardBehavior"))
             {
-                Pair p = bonusCardsPos.get(c);
-                if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                for(BonusCard c: bonusCardsPos.keySet())
                 {
-                    hasSelectedBonus = true;
-                    displayedCard = c.getImage();
-                    chosenBonusCard = c;
+                    Pair p = bonusCardsPos.get(c);
+                    if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        hasSelectedBonus = true;
+                        displayedCard = c.getImage();
+                        chosenBonusCard = c;
+                    }
+                }
+            }
+            else if (abilityType.equals("RollDiceBehavior"))
+            {
+                // g.fillRect(1600, 300 + CARD_HEIGHT * 2 + 25, 250, 50);
+                if (x > 1600 && x < 1850 && y > 300 + CARD_HEIGHT * 2 && y < 300 + CARD_HEIGHT * 2 + 75)
+                {
+                    
                 }
             }
         }
