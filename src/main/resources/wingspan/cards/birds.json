@@ -529,8 +529,8 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCk_CARD",
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image": "BarredOwl.jpg"
   },
@@ -1766,9 +1766,8 @@
     "wingSpan": 79,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image": "CoopersHawk.jpg"
   },
@@ -2106,12 +2105,8 @@
     "wingSpan": 201,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 100
     },
     "image": "GoldenEagle.jpg"
   },
@@ -2232,12 +2227,8 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 100
     },
     "image": "GreatHornedOwl.jpg"
   },

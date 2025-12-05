@@ -23,6 +23,7 @@ public class BehaviorParameters {
     public boolean rotatePlayers;
     public String type;
     public BehaviorParameters secondBehavior;
+    public int wingSpan;
 
     public BehaviorParameters()
     {

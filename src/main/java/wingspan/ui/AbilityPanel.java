@@ -16,6 +16,7 @@ import wingspan.cards.goals.Goal;
 import wingspan.core.GameState;
 import wingspan.core.Player;
 import wingspan.enums.*;
+import wingspan.food.*;
 
 public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private BufferedImage boardImage;
@@ -106,6 +107,29 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 g.drawImage(c.getImage(), p.getX(), p.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
             }
         }
+        else if (abilityType.equals("RollDiceBehavior"))
+        {
+            g.setColor(new Color(19,175,87));
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            g.fillRect(1600, 300 + CARD_HEIGHT * 2 + 25, 250, 50);
+            g.setColor(Color.WHITE);
+            g.drawString("Roll Dice", 1675, 300 + CARD_HEIGHT * 2 + 50);
+            ArrayList<FoodDice> discardedDice = GameState.foodManager.getUsedDice();
+            int xPos = 1600;
+            for(FoodDice fd: discardedDice)
+            {
+                g.drawImage(fd.getImage(), xPos, 300 + CARD_HEIGHT * 2 + 100, 50, 50, null);
+                xPos += 50;
+            }
+        }
+        else if (abilityType.equals("WingspanBehavior"))
+        {
+            GameState.wingspanCard = GameState.cardManager.getRandomCard();
+            displayedCard = GameState.wingspanCard.getCardImage();
+            actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+            hasExecuted = true;
+            repaint();
+        }
         else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
         {
             activationCard.getBirdInfo().getBehavior().executePower();
@@ -116,10 +140,10 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
 
     public void drawAbilityEndUI(Graphics g)
     {
+        g.setFont(new Font("Arial", Font.BOLD, 15));
+        g.setColor(Color.WHITE);
         if (abilityType.equals("FoodCacheBehavior"))
         {
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.setColor(Color.WHITE);
             String s = "";
             if (!actionWasSuccessful)
                 s = "Bird feeder didn't have any wheat";
@@ -128,36 +152,44 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             else
                 s = "Gained 1 wheat token";
             g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
-            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
         else if (abilityType.equals("GainFoodAllBehavior"))
         {
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.setColor(Color.WHITE);
             g.drawString("All players gained 1 food", 1600, 300 + CARD_HEIGHT * 2 + 25);
-            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
         else if (abilityType.equals("GainFoodBehavior"))
         {
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.setColor(Color.WHITE);
             g.drawString("You gained 1 food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
-            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
         else if (abilityType.equals("CacheBehavior"))
         {
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.setColor(Color.WHITE);
             g.drawString("Successfully cached 1 wheat token", 1600, 300 + CARD_HEIGHT * 2 + 25);
-            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
         else if (abilityType.equals("BonusCardBehavior"))
         {
-            g.setFont(new Font("Arial", Font.BOLD, 15));
-            g.setColor(Color.WHITE);
             g.drawString("Added Bonus Card to hand", 1600, 300 + CARD_HEIGHT * 2 + 25);
-            g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
         }
+        else if (abilityType.equals("RollDiceBehavior"))
+        {
+            int xPos = 1600;
+            for(FoodDice fd: GameState.foodManager.getUsedDice())
+            {
+                g.drawImage(fd.getImage(), xPos, 300 + CARD_HEIGHT * 2 + 100, 50, 50, null);
+                xPos += 50;
+            }
+            if (actionWasSuccessful)
+                g.drawString("Cached 1 food token on this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("Aw man :(", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("WingspanBehavior"))
+        {
+            if (actionWasSuccessful)
+                g.drawString("Successfully tucked this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("Unfortunate", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
     }
 
     public void paint(Graphics g)
@@ -302,6 +334,10 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         {
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
+        else if (hasActivated && hasExecuted && abilityType.equals("WingspanBehavior"))
+        {
+            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        }
         else
         {
             g.drawImage(activationCard.getCardImage(), 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
@@ -378,6 +414,9 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         if (cards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
                         {
                             activationCard = cards.get(i);
+                            abilityType = activationCard.getBirdInfo().getBehavior().describe();
+                            hasExecuted = false;
+                            hasActivated = false;
                             repaint();
                             return;
                         }
@@ -463,6 +502,13 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 if (c == 'c')
                 {
                     GameState.selectedBonusCard = chosenBonusCard;
+                    for(BonusCard card: bonusCardsPos.keySet())
+                    {
+                        if (!card.equals(GameState.selectedBonusCard))
+                        {
+                            CardManager.bonusCards.add(card);
+                        }
+                    }
                     activationCard.getBirdInfo().getBehavior().executePower();
                     hasExecuted = true;
                 }
@@ -525,14 +571,26 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         int y = e.getY();
         if (hasActivated && !hasExecuted)
         {
-            for(BonusCard c: bonusCardsPos.keySet())
+            if (abilityType.equals("BonusCardBehavior"))
             {
-                Pair p = bonusCardsPos.get(c);
-                if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                for(BonusCard c: bonusCardsPos.keySet())
                 {
-                    hasSelectedBonus = true;
-                    displayedCard = c.getImage();
-                    chosenBonusCard = c;
+                    Pair p = bonusCardsPos.get(c);
+                    if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT)
+                    {
+                        hasSelectedBonus = true;
+                        displayedCard = c.getImage();
+                        chosenBonusCard = c;
+                    }
+                }
+            }
+            else if (abilityType.equals("RollDiceBehavior"))
+            {
+                // g.fillRect(1600, 300 + CARD_HEIGHT * 2 + 25, 250, 50);
+                if (x > 1600 && x < 1850 && y > 300 + CARD_HEIGHT * 2 && y < 300 + CARD_HEIGHT * 2 + 75)
+                {
+                    actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+                    hasExecuted = true;
                 }
             }
         }
