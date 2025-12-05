@@ -24,6 +24,17 @@ public class GameBoard {
 		grasslands = new ArrayList<>();
 		wetlands = new ArrayList<>();
 	}
+
+	public boolean removeCard(Habitat h)
+	{
+		switch (h)
+		{
+			case FOREST: forest.remove(forest.size()-1); break;
+			case GRASSLANDS: grasslands.remove(grasslands.size()-1); break;
+			case WETLANDS: wetlands.remove(wetlands.size()-1); break;
+		}
+		return true;
+	}
 	
 	public boolean addCard(Card c, Habitat habitat)
 	{

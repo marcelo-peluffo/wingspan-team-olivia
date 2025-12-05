@@ -35,6 +35,8 @@ public class BehaviorFactory {
                 return new BonusCardBehavior(params);
             case "WINGSPAN":
                 return new WingspanBehavior(params);
+            case "MOVE_CARD":
+                return new MoveCardBehavior(params);
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

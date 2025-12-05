@@ -21,7 +21,7 @@
     "wingSpan": 46,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "FOOD_CACHE",
       "numFood": 1,
       "typeOfFood": "WHEAT",
       "isFromFeeder": true,
@@ -637,7 +637,7 @@
     "wingSpan": 18,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "MOVE_CARD"
     },
     "image": "BewicksWren.jpg"
   },
@@ -2848,7 +2848,7 @@
     "wingSpan" : 109,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "WINGSPAN"
     },
     "image" : "NorthernHarrier.jpg"
   },
@@ -3341,10 +3341,7 @@
     "wingSpan" : 43,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "FOOD_CACHE"
     },
     "image" : "Red-headedWoodpecker.jpg"
   },

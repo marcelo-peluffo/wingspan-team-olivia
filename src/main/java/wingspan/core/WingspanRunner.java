@@ -29,9 +29,8 @@ public class WingspanRunner {
 		{
 			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
 		}
-		Card testCard = GameState.cardManager.getSpecifiedCard("Atlantic Puffin");
+		Card testCard = GameState.cardManager.getSpecifiedCard("Bewick's Wren");
 		GameState.activePlayer.getGameBoard().addCard(testCard, Habitat.FOREST);
-		GameState.activePlayer.addCard(testCard);
 		GameState.activePlayer.addFood(Food.FISH, 9999);
 		System.out.println(testCard.getBirdInfo().getBehavior().describe());
 		//----------------------------------------------------------------------------------------------------------------------------

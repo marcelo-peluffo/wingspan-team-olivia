@@ -13,10 +13,9 @@ import java.util.*;
 import wingspan.utils.Pair;
 import wingspan.cards.*;
 import wingspan.cards.goals.Goal;
-import wingspan.core.GameState;
-import wingspan.core.Player;
 import wingspan.enums.*;
 import wingspan.food.*;
+import wingspan.core.*;
 
 public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private BufferedImage boardImage;
@@ -43,6 +42,8 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private HashMap<BonusCard, Pair> bonusCardsPos;
     private boolean hasSelectedBonus;
     private BonusCard chosenBonusCard;
+    private HashMap<Habitat, Pair> availableTilePos;
+    private Habitat[] habitats = {Habitat.FOREST, Habitat.GRASSLANDS, Habitat.WETLANDS};
 
     public AbilityPanel(Player p, Card activationCard, Habitat cardHabitat)
     {
@@ -56,6 +57,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             System.out.println("Error loading board image");
         }
         GameState.activeCard = activationCard;
+        GameState.activeCardHabitat = cardHabitat;
         cardPositions = new HashMap<Card, Pair>();
         displayedCard = null;
         getPlayerCards(GameState.activePlayer);
@@ -68,6 +70,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         goals = GameState.goalBoard.getGoals();
         bonusCardsPos = new HashMap<>();
         hasSelectedBonus = false;
+        availableTilePos = new HashMap<>();
 
         try {
             // Ensure these paths match your project structure
@@ -86,6 +89,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
 
     public void drawAbilityUI(Graphics g) // draw UI prompting the player for input if needed for the ability. If no input is needed, directly use executePower here
     {
+        g.setColor(Color.WHITE);
         if (abilityType.equals("FoodCacheBehavior"))
         {
             g.setFont(new Font("Arial", Font.BOLD, 20));
@@ -129,6 +133,29 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
             hasExecuted = true;
             repaint();
+        }
+        else if (abilityType.equals("MoveCardBehavior"))
+        {
+            GameBoard playerGameBoard = player.getGameBoard();
+            for(Habitat h: habitats)
+            {
+                if (playerGameBoard.getCardsInHabitat(h).size() < 5 && h != cardHabitat)
+                {
+                    int xPos = 610 + GameState.activePlayer.getGameBoard().getCardsInHabitat(h).size() * 175;
+                    int yPos = 0;
+                    switch (h)
+                    {
+                        case FOREST: yPos = 210; break;
+                        case GRASSLANDS: yPos = 425; break;
+                        case WETLANDS: yPos = 640; break;
+                    }
+                    Graphics2D g2d = (Graphics2D)g;
+                    g2d.setStroke(new BasicStroke(10));
+                    g2d.setColor(new Color(19,175,87));
+                    g.drawRect(xPos, yPos, CARD_WIDTH, CARD_HEIGHT);
+                    availableTilePos.put(h, new Pair(xPos, yPos));
+                }
+            }
         }
         else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
         {
@@ -189,12 +216,20 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             else
                 g.drawString("Unfortunate", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
+        else if (abilityType.equals("MoveCardBehavior"))
+        {
+            if (actionWasSuccessful)
+                g.drawString("Successfully moved this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("This card is unable to be moved", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
         g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
     }
 
     public void paint(Graphics g)
     {
         super.paint(g);
+        System.out.println(abilityType);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
         //draw game board
         cardPositions.clear();
@@ -409,6 +444,10 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     player.getGameBoard().setActiveHabitat(cardHabitat);
                     List<Card> cards = player.getGameBoard().getActiveHabitat();
                     int index = cards.indexOf(activationCard) - 1;
+                    if (abilityType.equals("MoveCardBehavior"))
+                    {
+                        index = cards.size() - 1;
+                    }
                     for(int i=index; i>=0; i--)
                     {
                         if (cards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
@@ -477,6 +516,26 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 {
                     bonusCardsPos.put(GameState.cardManager.getRandomBonusCard(), new Pair(getWidth() / 2 - HAND_CARD_WIDTH, getHeight() - HAND_CARD_HEIGHT));
                     bonusCardsPos.put(GameState.cardManager.getRandomBonusCard(), new Pair(getWidth() / 2 + 25, getHeight() - HAND_CARD_HEIGHT));
+                }
+                if (abilityType.equals("MoveCardBehavior"))
+                {
+                    boolean hasSpace = false;
+                    boolean isOnRight = false;
+                    List<Card> habitat = player.getGameBoard().getCardsInHabitat(cardHabitat);
+                    if (habitat.indexOf(activationCard) == habitat.size() - 1)
+                    {
+                        isOnRight = true;
+                    }
+                    for(Habitat h: habitats)
+                    {
+                        if (cardHabitat != h && player.getGameBoard().getCardsInHabitat(h).size() < 5)
+                            hasSpace = true;
+                    }
+                    if (!isOnRight || !hasSpace)
+                    {
+                        hasExecuted = true;
+                        actionWasSuccessful = false;
+                    }
                 }
             }
         }
@@ -591,6 +650,20 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 {
                     actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
                     hasExecuted = true;
+                }
+            }
+            else if (abilityType.equals("MoveCardBehavior"))
+            {
+                for(Habitat h: availableTilePos.keySet())
+                {
+                    Pair p = availableTilePos.get(h);
+                    if (x > p.getX() && x < p.getX() + CARD_WIDTH && y > p.getY() && y < p.getY() + CARD_HEIGHT)
+                    {
+                        GameState.chosenHabitat = h;
+                        actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+                        hasExecuted = true;
+                        break;
+                    }
                 }
             }
         }
