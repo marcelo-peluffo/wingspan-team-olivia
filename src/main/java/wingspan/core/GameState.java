@@ -33,6 +33,7 @@ public class GameState {
 	public static Card selectedCard; 
 	public static boolean choseToCache; //Used for: FoodCacheBehavior
 	public static BonusCard selectedBonusCard; //Used for :BonusCardBehavior
+	public static Card wingspanCard; //Used for: WingspanBehavior
 
 	//variables used for paint method
 	public static HashMap<Player, Color> actionCubeColors;

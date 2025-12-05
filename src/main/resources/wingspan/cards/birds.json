@@ -529,8 +529,8 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCk_CARD",
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image": "BarredOwl.jpg"
   },

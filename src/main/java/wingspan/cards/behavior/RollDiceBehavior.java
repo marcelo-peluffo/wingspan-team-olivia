@@ -5,40 +5,27 @@ import java.util.*;
 import wingspan.enums.Food;
 
 public class RollDiceBehavior implements PowerBehavior {
-    private int numDice;
-    private boolean onlyOutsideFeeder;
     private Food targetFood;
 
     public RollDiceBehavior(BehaviorParameters params) {
-        this.numDice = params.numDice;
-        this.onlyOutsideFeeder = params.onlyOutsideFeeder; 
-        this.targetFood = params.typeOfFood;
+        this.targetFood = params.targetFood;
     }
 
     @Override
     public boolean executePower() {
         // roll dice behavior
-        if (onlyOutsideFeeder)
+        for(FoodDice fd: GameState.foodManager.getUsedDice())
         {
-            ArrayList<Food> results = new ArrayList<Food>();
-            for (FoodDice fd: GameState.foodManager.getUsedDice())
-            {
-                fd.rerollDice();
-                results.add(fd.getFood());
-            }
-            if (results.contains(targetFood))
+            fd.rerollDice();
+        }
+        for(FoodDice fd: GameState.foodManager.getUsedDice())
+        {
+            if (fd.getFood() == targetFood)
             {
                 GameState.activeCard.addFoodToken(targetFood);
+                return true;
             }
         }
-        return true;
-    }
-
-    public int getNumDice() {
-        return numDice;
-    }
-
-    public boolean isOnlyOutsideFeeder() {
-        return onlyOutsideFeeder;
+        return false;
     }
 }
