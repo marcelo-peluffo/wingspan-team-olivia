@@ -2,7 +2,7 @@ package wingspan.cards.behavior;
 
 public class BehaviorFactory {
     public static PowerBehavior createBehavior(BehaviorParameters params) {
-        if (params == null) return null;
+        if (params == null || params.type == null) return null;
         
         switch (params.type.toUpperCase()) {
             case "TUCK_CARD":
