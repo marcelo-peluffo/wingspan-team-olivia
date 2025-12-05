@@ -73,5 +73,24 @@
       "numPowers": 1
     },
     "image": "GrayCatbird.jpg"
+  },
+  {
+    "name": "Green Heron",
+    "habitats" : [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "FISH"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "PLATFORM",
+    "maxEggs" : 3 ,
+    "wingSpan" : 66,
+    "color" : "BROWN",
+    "behavior" : {
+    },
+    "image" : "GreenHeron.jpg"
   }
 ]
