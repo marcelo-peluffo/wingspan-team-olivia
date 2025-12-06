@@ -214,5 +214,28 @@
       "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "Loggerhead.jpg"
+  },
+  {
+    "name": "Pileated Woodpeaker",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "CAVITY",
+    "maxEggs" : 2,
+    "wingSpan" : 74,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": 
+    },
+    "image" : "PileatedWoodpecker.jpg"
   }
 ]
