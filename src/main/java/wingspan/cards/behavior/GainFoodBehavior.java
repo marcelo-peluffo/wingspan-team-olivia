@@ -8,7 +8,9 @@ import wingspan.core.GameState;
 
 public class GainFoodBehavior implements PowerBehavior {
     private Food typeOfFood;
+    private int numFood;
     PowerBehavior secondBehavior;
+    BehaviorParameters params;
 
     public GainFoodBehavior(BehaviorParameters params)
     {
@@ -16,12 +18,21 @@ public class GainFoodBehavior implements PowerBehavior {
         if (params.secondBehavior != null) {
             this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
+        this.numFood = 1;
+        this.params = params;
     }
 
     @Override
     public boolean executePower()
     {
-        GameState.activePlayer.addFood(typeOfFood, 1);
+        if (GameState.activeCard.getBirdInfo().getPowerColor() == PowerColor.WHITE)
+        {
+            GameState.activePlayer.addFood(typeOfFood, params.numFood);
+        }
+        else
+        {
+            GameState.activePlayer.addFood(typeOfFood, 1);
+        }
         return true;
     }
     public PowerBehavior getSecondBehavior() {
@@ -29,6 +40,6 @@ public class GainFoodBehavior implements PowerBehavior {
     }
     @Override
     public BehaviorParameters getBehaviorParams() {
-        return null;
+        return params;
     }
 }

@@ -399,7 +399,8 @@
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
+      "nestType": "STAR",
       "numEggs": 1
     },
     "image": "BairdsSparrow.jpg"

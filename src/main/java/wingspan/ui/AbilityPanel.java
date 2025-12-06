@@ -273,7 +273,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         }
         else if (abilityType.equals("GainFoodBehavior"))
         {
-            g.drawString("You gained 1 food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("You gained " + activationCard.getBirdInfo().getBehavior().getBehaviorParams().numFood + " food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         else if (abilityType.equals("CacheBehavior"))
         {
@@ -730,7 +730,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                             }
                         }
                     }
-                    if (activationCard.getCurrentEggs() == 0)
+                    if (activationCard.getCurrentEggs() == 0 && activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
                         canPlaceEgg = false;
                     if (!canPlaceEgg)
                     {
@@ -848,7 +848,11 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 if (chosenCard != null && c == 'c')
                 {
                     chosenCard.addEggs(1);
-                    activationCard.triggerPower();
+                    if (activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
+                    {
+                        activationCard.removeEggs(1);
+                        activationCard.triggerPower();
+                    }
                     actionWasSuccessful = true;
                     hasExecuted = true;
                 }
