@@ -180,7 +180,10 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             for(Card c: faceUpCardPos.keySet())
             {
                 Pair pos = faceUpCardPos.get(c);
-                g.drawImage(c.getCardImage(), pos.getX(), pos.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                if (c != null)
+                {
+                    g.drawImage(c.getCardImage(), pos.getX(), pos.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+                }
             }
             String s = "Click one of the 3 face up cards";
             if (chosenCard != null)
@@ -638,6 +641,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         if (cards.get(i).getBirdInfo().getPowerColor() == PowerColor.BROWN)
                         {
                             activationCard = cards.get(i);
+                            abilityType = activationCard.getBirdInfo().getBehavior().describe();
                             repaint();
                             return;
                         }

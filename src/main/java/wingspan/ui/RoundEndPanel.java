@@ -188,6 +188,10 @@ public class RoundEndPanel extends JPanel implements MouseListener, KeyListener 
                 GameState.roundNum++;
                 GameState.goalBoardPositions.add(actionCubePos);
                 GameState.cardManager.faceUpCards.clear();
+                for(int i=0; i<3; i++)
+                {
+                    GameState.cardManager.faceUpCards.add(null);
+                }
                 GameState.cardManager.refillVisibleCards();
                 for(Player p: GameState.players)
                 {
