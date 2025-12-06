@@ -3053,10 +3053,8 @@
     "wingSpan" : 28,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "ALL_GAIN_FOOD",
+      "typeOfFood": "WHEAT"
     },
     "image" : "RedCrossbill.jpg"
   },
@@ -3078,14 +3076,14 @@
     "wingSpan" : 41,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "GAIN_FOOD",
+      "typeOfFood": "WHEAT",
+      "secondBehavior": {
+        "type": "FOOD_CACHE"
+      }
     },
-    "image" : "Red-BelledWoodpecker.jpg"
+    "image" : "Red-belledWoodpecker.jpg"
   },
-
 
   {
     "name": "Red-Breasted Nuthatch",
@@ -3103,14 +3101,10 @@
     "wingSpan" : 23,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "CACHE"
     },
     "image" : "RedBreastedNutHatch.jpg"
   },
-
 
   {
     "name": "Red-Cockaded Woodpecker",
@@ -3131,14 +3125,10 @@
     "wingSpan" : 36,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "BONUS_CARD"
     },
     "image" : "Red-CockadedWoodpecker.jpg"
   },
-
 
   {
     "name": "Red-Eyed Vireo",
@@ -3156,15 +3146,11 @@
     "wingSpan" : 25,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "PLAY_BIRD"
     },
     "image" : "Red-EyedVireo.jpg"
   },
-
-
+  
   {
     "name": "Red-Headed Woodpecker",
     "habitats" : [
@@ -3187,15 +3173,15 @@
     "wingSpan" : 43,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "GAIN_FOOD",
+      "typeOfFood": "WHEAT",
+      "secondBehavior": {
+        "type": "FOOD_CACHE"
+      }
     },
     "image" : "Red-headedWoodpecker.jpg"
   },
-
-
+  
   {
     "name": "Red-Shouldered Hawk",
     "habitats" : [
@@ -3212,15 +3198,16 @@
     "wingSpan" : 102,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": false,
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
     },
     "image" : "Red-ShoulderedHawk.jpg"
   },
-
-
+  
   {
     "name": "Red-Tailed Hawk",
     "habitats" : [
@@ -3240,14 +3227,15 @@
     "wingSpan" : 124,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": false,
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
     },
     "image" : "Red-tailedHawk.jpg"
   },
-
 
   {
     "name": "Red-Winged Blackbird",
@@ -3265,10 +3253,14 @@
     "wingSpan" : 33,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior": {
+        "type": "LAY_EGG",
+        "numEggs": 1,
+        "onThisBird": true
+      }
     },
     "image" : "Red-WingedBlackBird.jpg"
   },
@@ -3293,43 +3285,15 @@
     "wingSpan" : 122,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior": {
+        "type": "DRAW_CARD",
+        "numCards": 1
+      }
     },
     "image" : "Ring-BilledGull.jpg"
-  },
-
-
-  {
-    "name": "Rose-Breasted Grosbeak",
-    "habitats" : [
-    "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "WHEAT"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints" : 6,
-    "nestType" : "BOWL",
-    "maxEggs" : 3,
-    "wingSpan" : 33,
-    "color" : "BROWN",
-    "behavior" : {
-
-
-
-
-    },
-    "image" : "RoseBreastedGrosbeak.jpg"
   },
 
 
@@ -3355,10 +3319,7 @@
     "wingSpan" : 127,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "BONUS_CARD"
     },
     "image" : "RoseateSpoonbill.jpg"
   },
@@ -3380,37 +3341,9 @@
     "wingSpan" : 20,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "PLAY_BIRD"
     },
     "image" : "Ruby-CrownedKinglet.jpg"
-  },
-
-
-  {
-    "name": "Ruby-throated Hummingbird",
-    "habitats" : [
-    "GRASSLANDS", "WETLANDS", "FOREST"
-    ],
-    "food": [
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints" : 4,
-    "nestType" : "BOWL",
-    "maxEggs" : 2,
-    "wingSpan" : 10,
-    "color" : "BROWN",
-    "behavior" : {
-
-
-
-
-    },
-    "image" : "Ruby-ThroatedHummingbird.jpg"
   },
 
 
@@ -3430,10 +3363,11 @@
     "wingSpan" : 48,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "DRAW_CARD",
+      "numCards": 2,
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
     },
     "image" : "RuddyDuck.jpg"
   },
@@ -3459,10 +3393,13 @@
     "wingSpan" : 196,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "DISCARD_FOOD",
+      "typeOfFood": "WHEAT",
+      "secondBehavior": {
+        "type": "TUCK_CARD",
+        "numCards": 2,
+        "fromHand": false
+      }
     },
     "image" : "SandHillCrane.jpg"
   },
@@ -3484,10 +3421,7 @@
     "wingSpan" : 18,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "PLAY_BIRD"
     },
     "image" : "SavannahSparrow.jpg"
   },
@@ -3515,10 +3449,9 @@
     "wingSpan" : 33,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "nestType": "BOWL"
     },
     "image" : "SaysPhoebe.jpg"
   },
@@ -3540,10 +3473,9 @@
     "wingSpan" : 36,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "LAY_EGG",
+      "numEggs": 1,
+      "onThisBird": true
     },
     "image" : "ScaledQuail.jpg"
   },
@@ -3571,10 +3503,8 @@
     "wingSpan" : 38,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "ALL_GAIN_FOOD",
+      "typeOfFood": "INVERTEBRATE"
     },
     "image" : "Scissor-TailedFlycatcher.jpg"
   },
@@ -3596,10 +3526,8 @@
     "wingSpan" : 104,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "ROLL_DICE",
+      "targetFood": "FISH"
     },
     "image" : "SnowyEgret.jpg"
   },
@@ -3621,10 +3549,7 @@
     "wingSpan" : 20,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "MOVE_CARD"
     },
     "image" : "SongSparrow.jpg"
   },
@@ -3649,10 +3574,7 @@
     "wingSpan" : 102,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "BONUS_CARD"
     },
     "image" : "SpottedOwl.jpg"
   },
@@ -3673,10 +3595,7 @@
     "wingSpan" : 38,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "DRAW_CARDS_ALL"
     },
     "image" : "SpottedSandpiper.jpg"
   },
@@ -3697,10 +3616,8 @@
     "wingSpan" : 28,
     "color" : "BROWN",
     "behavior" : {
-
-
-
-
+      "type": "GAIN_FOOD",
+      "typeOfFood": "WHEAT"
     },
     "image" : "SpottedTowhee.jpg"
   },
@@ -3724,10 +3641,7 @@
     "wingSpan" : 25,
     "color" : "WHITE",
     "behavior" : {
-
-
-
-
+      "type": "BONUS_CARD"
     },
     "image" : "SpraguesPipit.jpg"
   }
