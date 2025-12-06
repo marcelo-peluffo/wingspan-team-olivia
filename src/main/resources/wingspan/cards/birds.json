@@ -22,10 +22,10 @@
     "color": "BROWN",
     "behavior": {
       "type": "GAIN_FOOD",
-      "numFood": 1,
       "typeOfFood": "WHEAT",
-      "isFromFeeder": true,
-      "isCacheable": true
+      "secondBehavior": {
+        "type": "FOOD_CACHE"
+      }
     },
     "image": "AcornWoodpecker.jpg"
   },
@@ -57,33 +57,6 @@
       "nestType": "GROUND"
     },
     "image": "AmericanAvocet.jpg"
-  },
-  {
-    "name": "American Bittern",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "FISH"
-      ],
-      [
-        "RODENT"
-      ]
-    ],
-    "victoryPoints": 7,
-    "nestType": "PLATFORM",
-    "maxEggs": 2,
-    "wingSpan": 107,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 1
-    },
-    "image": "AmericanBittern.jpg"
   },
   {
     "name": "American Coot",
@@ -163,7 +136,6 @@
       "type": "GAIN_FOOD",
       "numFood": 3,
       "typeOfFood": "WHEAT",
-      "isFromFeeder": false
     },
     "image": "AmericanGoldfinch.jpg"
   },
@@ -187,36 +159,9 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "AmericanKestrel.jpg"
-  },
-  {
-    "name": "American Redstart",
-    "habitats": [
-      "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints": 4,
-    "nestType": "BOWL",
-    "maxEggs": 2,
-    "wingSpan": 20,
-    "color": "BROWN",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "ANY",
-      "isFromFeeder": true
-    },
-    "image": "AmericanRedstart.jpg"
   },
   {
     "name": "American Robin",
@@ -292,7 +237,7 @@
     "nestType": "GROUND",
     "maxEggs": 2,
     "wingSpan": 46,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "TEMPLATE_BEHAVIOR"
     },
@@ -318,7 +263,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "FISH"
     },
     "image": "Anhinga.jpg"
@@ -373,10 +317,7 @@
     "wingSpan": 53,
     "color": "",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "AtlanticPuffin.jpg"
   },
@@ -426,9 +367,8 @@
     "wingSpan": 203,
     "color": "",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "FISH",
-      "isFromFeeder": true
+      "type": "GAIN_ALL_BIRDFEEDER",
+      "typeOfFood": "FISH"
     },
     "image": "BaldEagle.jpg"
   },
@@ -454,11 +394,8 @@
     "wingSpan": 30,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "BERRY",
-      "rotatePlayers": true,
-      "isFromFeeder": false
+      "type": "ALL_GAIN_FOOD",
+      "typeOfFood": "BERRY"
     },
     "image": "BaltimoreOriole.jpg"
   },
@@ -482,7 +419,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "BarnOwl.jpg"
@@ -529,8 +465,8 @@
     "wingSpan": 107,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCk_CARD",
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image": "BarredOwl.jpg"
   },
@@ -582,10 +518,7 @@
     "wingSpan": 18,
     "color": "",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "BellsVired.jpg"
   },
@@ -637,7 +570,7 @@
     "wingSpan": 18,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "MOVE_CARD"
     },
     "image": "BewicksWren.jpg"
   },
@@ -661,7 +594,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "FISH"
     },
     "image": "BlackSkimmer.jpg"
@@ -683,28 +615,12 @@
     "color": "BROWN",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 1
+      "numCards": 1,
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
     },
     "image": "BlackTern.jpg"
-  },
-  {
-    "name": "Black Vulture",
-    "habitats": [
-      "FOREST"
-    ],
-    "food": [],
-    "victoryPoints": 2,
-    "nestType": "CAVITY",
-    "maxEggs": 1,
-    "wingSpan": 150,
-    "color": "PINK",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "ANY",
-      "isFromFeeder": true
-    },
-    "image": "BlackVulture.jpg"
   },
   {
     "name": "Black-Bellied Whistling-Duck",
@@ -737,32 +653,6 @@
     "image": "Black-BelliedWhistling-Duck.jpg"
   },
   {
-    "name": "Black-Billed Magpie",
-    "habitats": [
-      "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "ANY"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 3,
-    "nestType": "STAR",
-    "maxEggs": 3,
-    "wingSpan": 64,
-    "color": "PINK",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "ANY",
-      "isFromFeeder": true
-    },
-    "image": "Black-BilledMagpie.jpg"
-  },
-  {
     "name": "Black-Chinned Hummingbird",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
@@ -778,11 +668,8 @@
     "wingSpan": 8,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "BERRY",
-      "numFood": 1,
-      "isFromFeeder": false,
-      "rotatePlayers": true
+      "type": "ALL_GAIN_FOOD",
+      "typeOfFood": "BERRY"
     },
     "image": "Black-ChinnedHummingbird.jpg"
   },
@@ -865,7 +752,7 @@
     "wingSpan": 28,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "MOVE_CARD"
     },
     "image": "BlueGrosbeak.jpg"
   },
@@ -890,9 +777,9 @@
     "behavior": {
       "type": "GAIN_FOOD",
       "typeOfFood": "WHEAT",
-      "numFood": 1,
-      "isFromFeeder": true,
-      "isCacheable": true
+      "secondBehavior": {
+        "type": "FOOD_CACHE"
+      }
     },
     "image": "BlueJay.jpg"
   },
@@ -913,9 +800,7 @@
     "color": "BROWN",
     "behavior": {
       "type": "GAIN_FOOD",
-      "numFood": 1,
       "typeOfFood": "INVERTEBRATE",
-      "isFromFeeder": false
     },
     "image": "Blue-GrayGnatcatcher.jpg"
   },
@@ -936,7 +821,7 @@
     "nestType": "BOWL",
     "maxEggs": 2,
     "wingSpan": 20,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "TEMPLATE_BEHAVIOR"
     },
@@ -989,8 +874,7 @@
     "wingSpan": 114,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 3
+      "type": "DRAW_FACE_UP"
     },
     "image": "Brant.jpg"
   },
@@ -1041,7 +925,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "Broad-WingedHawk.jpg"
@@ -1093,7 +976,6 @@
       "type": "GAIN_FOOD",
       "numFood": 3,
       "typeOfFood": "FISH",
-      "isFromFeeder": false
     },
     "image": "BrownPelican.jpg"
   },
@@ -1139,7 +1021,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "BurrowingOwl.jpg"
@@ -1186,10 +1067,7 @@
     "wingSpan": 277,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "CaliforniaCondor.jpg"
   },
@@ -1269,9 +1147,7 @@
     "wingSpan": 82,
     "color": "BROWN",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 1,
-      "rotatePlayers": true
+      "type": "DRAW_CARDS_ALL"
     },
     "image": "Canvasback.jpg"
   },
@@ -1291,11 +1167,7 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "WHEAT",
-      "isCacheable": true,
-      "isFromFeeder": false
+      "type": "CACHE"
     },
     "image": "CarolinaChickadee.jpg"
   },
@@ -1339,10 +1211,7 @@
     "wingSpan": 30,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "CassinsFinch.jpg"
   },
@@ -1420,10 +1289,7 @@
     "wingSpan": 20,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "CeruleanWarbler.jpg"
   },
@@ -1449,10 +1315,7 @@
     "wingSpan": 25,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "Chestnut-CollaredLongspur.jpg"
   },
@@ -1508,7 +1371,7 @@
     "wingSpan": 36,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "MOVE_CARD"
     },
     "image": "ChimneySwift.jpg"
   },
@@ -1552,11 +1415,7 @@
       "type": "DRAW_CARD",
       "numCards": 1,
       "secondBehavior": {
-        "type": "DRAW_CARD",
-        "numCards": 1,
-        "secondBehavior": {
-          "type": "TEMPLATE_BEHAVIOR"
-        }
+        "type": "DISCARD_CARD"
       }
     },
     "image": "ClarksGrebe.jpg"
@@ -1585,9 +1444,9 @@
     "behavior": {
       "type": "GAIN_FOOD",
       "typeOfFood": "WHEAT",
-      "numFood": 1,
-      "isFromFeeder": true,
-      "isCacheable": true
+      "secondBehavior": {
+        "type": "FOOD_CACHE"
+      }
     },
     "image": "ClarksNutcracker.jpg"
   },
@@ -1622,30 +1481,6 @@
     "image": "CommonGrackle.jpg"
   },
   {
-    "name": "Common Loon",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "FISH"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 6,
-    "nestType": "GROUND",
-    "maxEggs": 1,
-    "wingSpan": 117,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 1
-    },
-    "image": "CommonLoon.jpg"
-  },
-  {
     "name": "Common Merganser",
     "habitats": [
       "WETLANDS"
@@ -1665,7 +1500,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "FISH"
     },
     "image": "CommonMerganser.jpg"
@@ -1689,7 +1523,7 @@
     "wingSpan": 56,
     "color": "BROWN",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "MOVE_CARD"
     },
     "image": "CommonNighthawk.jpg"
   },
@@ -1745,7 +1579,7 @@
       "type": "DRAW_CARD",
       "numCards": 2,
       "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
+        "type": "DISCARD_CARD"
       }
     },
     "image": "CommonYellowthroat.jpg"
@@ -1766,9 +1600,8 @@
     "wingSpan": 79,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image": "CoopersHawk.jpg"
   },
@@ -1882,7 +1715,7 @@
     "wingSpan": 30,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_BIRD"
     },
     "image": "DownyWoodpecker.jpg"
   },
@@ -1905,7 +1738,7 @@
     "wingSpan": 33,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_BIRD"
     },
     "image": "EasternBluebird.jpg"
   },
@@ -1948,11 +1781,8 @@
     "wingSpan": 28,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
+      "type": "ALL_GAIN_FOOD",
       "typeOfFood": "INVERTEBRATE",
-      "isFromFeeder": false,
-      "rotatePlayers": true
     },
     "image": "EasternPhoebe.jpg"
   },
@@ -1973,7 +1803,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "EasternScreech-Owl.jpg"
@@ -1998,7 +1827,6 @@
     "color": "BROWN",
     "behavior": {
       "type": "ROLL_DICE",
-      "onlyOutsideFeeder": true,
       "targetFood": "RODENT"
     },
     "image": "FerruginousHawk.jpg"
@@ -2052,7 +1880,7 @@
       "type": "DRAW_CARD",
       "numCards": 1,
       "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
+        "type": "DISCARD_CARD"
       }
     },
     "image": "ForstersTern.jpg"
@@ -2106,12 +1934,8 @@
     "wingSpan": 201,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 100
     },
     "image": "GoldenEagle.jpg"
   },
@@ -2154,7 +1978,7 @@
     "wingSpan": 183,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_BIRD"
     },
     "image": "GreatBlueHeron.jpg"
   },
@@ -2206,7 +2030,7 @@
     "wingSpan": 130,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_BIRD"
     },
     "image": "GreatEgret.jpg"
   },
@@ -2232,12 +2056,8 @@
     "wingSpan": 112,
     "color": "BROWN",
     "behavior": {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 100
     },
     "image": "GreatHornedOwl.jpg"
   },
@@ -2263,10 +2083,7 @@
     "wingSpan": 71,
     "color": "WHITE",
     "behavior": {
-      "type": "DRAW_CARD",
-      "numCards": 2,
-      "isBonusCard": true,
-      "cardsToKeep": 1
+      "type": "BONUS_CARD"
     },
     "image": "GreaterPrairie-Chicken.jpg"
   },
@@ -2293,9 +2110,8 @@
     "wingSpan" : 56,
     "color" : "BROWN",
     "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false
+      "type": "WINGSPAN",
+      "wingSpan": 50
     },
     "image" : "GreaterRoadrunner.jpg"
   },
