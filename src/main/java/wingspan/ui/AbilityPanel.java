@@ -273,7 +273,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         }
         else if (abilityType.equals("GainFoodBehavior"))
         {
-            g.drawString("You gained " + activationCard.getBirdInfo().getBehavior().getBehaviorParams().numFood + " food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Successfully gained food", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         else if (abilityType.equals("CacheBehavior"))
         {
@@ -312,10 +312,17 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         }
         else if (abilityType.equals("LayEggBehavior"))
         {
-            if (actionWasSuccessful)
-                g.drawString("Added 1 egg to this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            if (activationCard.getBirdInfo().getPowerColor() == PowerColor.WHITE)
+            {
+                g.drawString("Added 1 egg to all the cards", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            }
             else
-                g.drawString("Card was at max egg capacity", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            {
+                if (actionWasSuccessful)
+                    g.drawString("Added 1 egg to this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+                else
+                    g.drawString("Card was at max egg capacity", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            }
         }
         else if (abilityType.equals("DrawCardsAllBehavior"))
         {
@@ -335,10 +342,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         }
         else if (abilityType.equals("DiscardFoodBehavior"))
         {
-            if (actionWasSuccessful)
-                g.drawString("Successfully tucked 2 cards", 1600, 300 + CARD_HEIGHT * 2 + 25);
-            else
-                g.drawString("You don't have the required food", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("Activated this ability", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         else if (abilityType.equals("PlayCardBehavior"))
         {
@@ -570,6 +574,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         {
             if (hasExecuted)
             {
+                onSecondBehavior = false;
                 boolean end = false;
                 if (activationCard.getBirdInfo().getPowerColor() == PowerColor.WHITE || activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
                 {
@@ -580,7 +585,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     player.getGameBoard().setActiveHabitat(cardHabitat);
                     List<Card> cards = player.getGameBoard().getActiveHabitat();
                     int index = cards.indexOf(activationCard) - 1;
-                    if (abilityType.equals("MoveCardBehavior"))
+                    if (abilityType.equals("MoveCardBehavior") && actionWasSuccessful)
                     {
                         index = cards.size() - 1;
                     }

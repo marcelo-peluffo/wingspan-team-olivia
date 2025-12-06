@@ -21,11 +21,7 @@
     "wingSpan": 46,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "WHEAT",
-      "secondBehavior": {
-        "type": "FOOD_CACHE"
-      }
+      "type": "FOOD_CACHE"
     },
     "image": "AcornWoodpecker.jpg"
   },
@@ -88,33 +84,6 @@
     "image": "AmericanCoot.jpg"
   },
   {
-    "name": "American Crow",
-    "habitats": [
-      "WETLANDS", "FOREST", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 4,
-    "nestType": "PLATFORM",
-    "maxEggs": 2,
-    "wingSpan": 99,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "onThisBird": false,
-      "secondBehavior": {
-        "type": "GAIN_FOOD",
-        "numFood": 1,
-        "typeOfFood": "ANY",
-        "isFromFeeder": false
-      }
-    },
-    "image": "AmericanCrow.jpg"
-  },
-  {
     "name": "American Goldfinch",
     "habitats": [
       "GRASSLANDS"
@@ -131,11 +100,11 @@
     "nestType": "BOWL",
     "maxEggs": 3,
     "wingSpan": 23,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "GAIN_FOOD",
       "numFood": 3,
-      "typeOfFood": "WHEAT",
+      "typeOfFood": "WHEAT"
     },
     "image": "AmericanGoldfinch.jpg"
   },
@@ -287,7 +256,7 @@
     "nestType": "CAVITY",
     "maxEggs": 4,
     "wingSpan": 30,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "LAY_EGG",
       "numEggs": 1,
@@ -315,7 +284,7 @@
     "nestType": "STAR",
     "maxEggs": 1,
     "wingSpan": 53,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "BONUS_CARD"
     },
@@ -345,33 +314,6 @@
       "numEggs": 1
     },
     "image": "BairdsSparrow.jpg"
-  },
-  {
-    "name": "Bald Eagle",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "FISH"
-      ],
-      [
-        "FISH"
-      ],
-      [
-        "RODENT"
-      ]
-    ],
-    "victoryPoints": 9,
-    "nestType": "PLATFORM",
-    "maxEggs": 1,
-    "wingSpan": 203,
-    "color": "",
-    "behavior": {
-      "type": "GAIN_ALL_BIRDFEEDER",
-      "typeOfFood": "FISH"
-    },
-    "image": "BaldEagle.jpg"
   },
   {
     "name": "Baltimore Oriole",
@@ -493,7 +435,7 @@
     "wingSpan": 71,
     "color": "PINK",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
       "numEggs": 1,
       "onThisBird": false,
       "nestType": "CAVITY"
@@ -517,37 +459,11 @@
     "nestType": "STAR",
     "maxEggs": 2,
     "wingSpan": 18,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "BONUS_CARD"
     },
     "image": "BellsVired.jpg"
-  },
-  {
-    "name": "Belted Kingfisher",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "FISH"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 4,
-    "nestType": "STAR",
-    "maxEggs": 4,
-    "wingSpan": 53,
-    "color": "PINK",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "FISH",
-      "isFromFeeder": false
-    },
-    "image": "BeltedKingfisher.jpg"
   },
   {
     "name": "Bewick's Wren",
@@ -675,39 +591,6 @@
     "image": "Black-ChinnedHummingbird.jpg"
   },
   {
-    "name": "Black-Crowned Night-Heron",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "FISH"
-      ],
-      [
-        "RODENT"
-      ]
-    ],
-    "victoryPoints": 9,
-    "nestType": "PLATFORM",
-    "maxEggs": 2,
-    "wingSpan": 112,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "onThisBird": false,
-      "secondBehavior": {
-        "type": "GAIN_FOOD",
-        "numFood": 1,
-        "typeOfFood": "ANY",
-        "isFromFeeder": false
-      }
-    },
-    "image": "Black-CrownedNight-Heron.jpg"
-  },
-  {
     "name": "Black-Necked Stilt",
     "habitats": [
       "WETLANDS"
@@ -724,7 +607,7 @@
     "nestType": "GROUND",
     "maxEggs": 2,
     "wingSpan": 74,
-    "color": "",
+    "color": "WHITE",
     "behavior": {
       "type": "DRAW_CARD",
       "numCards": 2
@@ -776,11 +659,7 @@
     "wingSpan": 41,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "WHEAT",
-      "secondBehavior": {
-        "type": "FOOD_CACHE"
-      }
+      "type": "FOOD_CACHE"
     },
     "image": "BlueJay.jpg"
   },
@@ -801,7 +680,7 @@
     "color": "BROWN",
     "behavior": {
       "type": "GAIN_FOOD",
-      "typeOfFood": "INVERTEBRATE",
+      "typeOfFood": "INVERTEBRATE"
     },
     "image": "Blue-GrayGnatcatcher.jpg"
   },
@@ -855,29 +734,6 @@
       "nestType": "GROUND"
     },
     "image": "Bobolink.jpg"
-  },
-  {
-    "name": "Brant",
-    "habitats": [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "WHEAT"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 3,
-    "nestType": "GROUND",
-    "maxEggs": 2,
-    "wingSpan": 114,
-    "color": "WHITE",
-    "behavior": {
-      "type": "DRAW_FACE_UP"
-    },
-    "image": "Brant.jpg"
   },
   {
     "name": "Brewer's Blackbird",
@@ -949,7 +805,7 @@
     "wingSpan": 36,
     "color": "PINK",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
       "numEggs": 1,
       "nestType": "BOWL"
     },
@@ -976,7 +832,7 @@
     "behavior": {
       "type": "GAIN_FOOD",
       "numFood": 3,
-      "typeOfFood": "FISH",
+      "typeOfFood": "FISH"
     },
     "image": "BrownPelican.jpg"
   },
@@ -996,7 +852,7 @@
     "wingSpan": 30,
     "color": "PINK",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
       "numEggs": 1,
       "nestType": "BOWL"
     },
@@ -1235,7 +1091,8 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
+      "nestType": "STAR",
       "numEggs": 1
     },
     "image": "CassinsSparrow.jpg"
@@ -1321,39 +1178,6 @@
     "image": "Chestnut-CollaredLongspur.jpg"
   },
   {
-    "name": "Chihuahuan Raven",
-    "habitats": [
-      "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "RODENT"
-      ],
-      [
-        "ANY"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 4,
-    "nestType": "PLATFORM",
-    "maxEggs": 3,
-    "wingSpan": 112,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "onThisBird": false,
-      "secondBehavior": {
-        "type": "GAIN_FOOD",
-        "numFood": 2,
-        "typeOfFood": "ANY",
-        "isFromFeeder": false
-      }
-    },
-    "image": "ChihuahuanRaven.jpg"
-  },
-  {
     "name": "Chimney Swift",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
@@ -1392,7 +1216,8 @@
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
+      "nestType": "STAR",
       "numEggs": 1
     },
     "image": "ChippingSparrow.jpg"
@@ -1443,11 +1268,7 @@
     "wingSpan": 61,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "WHEAT",
-      "secondBehavior": {
-        "type": "FOOD_CACHE"
-      }
+      "type": "FOOD_CACHE"
     },
     "image": "ClarksNutcracker.jpg"
   },
@@ -1527,39 +1348,6 @@
       "type": "MOVE_CARD"
     },
     "image": "CommonNighthawk.jpg"
-  },
-  {
-    "name": "Common Raven",
-    "habitats": [
-      "WETLANDS", "FOREST", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "RODENT"
-      ],
-      [
-        "ANY"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 5,
-    "nestType": "PLATFORM",
-    "maxEggs": 2,
-    "wingSpan": 135,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "onThisBird": false,
-      "secondBehavior": {
-        "type": "GAIN_FOOD",
-        "numFood": 2,
-        "typeOfFood": "ANY",
-        "isFromFeeder": false
-      }
-    },
-    "image": "CommonRaven.jpg"
   },
   {
     "name": "Common Yellowthroat",
@@ -1716,7 +1504,7 @@
     "wingSpan": 30,
     "color": "WHITE",
     "behavior": {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image": "DownyWoodpecker.jpg"
   },
@@ -1744,29 +1532,6 @@
     "image": "EasternBluebird.jpg"
   },
   {
-    "name": "Eastern Kingbird",
-    "habitats": [
-      "WETLANDS", "FOREST", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE", "BERRY"
-      ]
-    ],
-    "victoryPoints": 2,
-    "nestType": "BOWL",
-    "maxEggs": 2,
-    "wingSpan": 38,
-    "color": "PINK",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "INVERTEBRATE",
-      "isFromFeeder": false
-    },
-    "image": "EasternKingbird.jpg"
-  },
-  {
     "name": "Eastern Phoebe",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
@@ -1783,7 +1548,7 @@
     "color": "BROWN",
     "behavior": {
       "type": "ALL_GAIN_FOOD",
-      "typeOfFood": "INVERTEBRATE",
+      "typeOfFood": "INVERTEBRATE"
     },
     "image": "EasternPhoebe.jpg"
   },
@@ -1833,36 +1598,6 @@
     "image": "FerruginousHawk.jpg"
   },
   {
-    "name": "Fish Crow",
-    "habitats": [
-      "WETLANDS", "FOREST", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "FISH"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 6,
-    "nestType": "PLATFORM",
-    "maxEggs": 2,
-    "wingSpan": 91,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "onThisBird": false,
-      "secondBehavior": {
-        "type": "GAIN_FOOD",
-        "numFood": 1,
-        "typeOfFood": "ANY",
-        "isFromFeeder": false
-      }
-    },
-    "image": "FishCrow.jpg"
-  },
-  {
     "name": "Forster's Tern",
     "habitats": [
       "WETLANDS"
@@ -1885,33 +1620,6 @@
       }
     },
     "image": "ForstersTern.jpg"
-  },
-  {
-    "name": "Franklin's Gull",
-    "habitats": [
-      "WETLANDS", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "FISH"
-      ],
-      [
-        "ANY"
-      ]
-    ],
-    "victoryPoints": 3,
-    "nestType": "STAR",
-    "maxEggs": 2,
-    "wingSpan": 91,
-    "color": "BROWN",
-    "behavior": {
-      "type": "DISCARD_EGGS",
-      "secondBehavior": {
-        "type": "DRAW_CARD",
-        "numCards": 2
-      }
-    },
-    "image": "FranklinsGull.jpg"
   },
   {
     "name": "Golden Eagle",
@@ -1955,7 +1663,8 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
+      "nestType": "STAR",
       "numEggs": 1
     },
     "image": "GrasshopperSparrow.jpg"
@@ -1979,35 +1688,9 @@
     "wingSpan": 183,
     "color": "WHITE",
     "behavior": {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image": "GreatBlueHeron.jpg"
-  },
-  {
-    "name": "Great Crested Flycatcher",
-    "habitats": [
-      "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints": 5,
-    "nestType": "CAVITY",
-    "maxEggs": 3,
-    "wingSpan": 33,
-    "color": "BROWN",
-    "behavior": {
-      "type": "GAIN_FOOD",
-      "numFood": 1,
-      "typeOfFood": "INVERTEBRATE",
-      "isFromFeeder": true
-    },
-    "image": "GreatCrestedFlycatcher.jpg"
   },
   {
     "name": "Great Egret",
@@ -2031,7 +1714,7 @@
     "wingSpan": 130,
     "color": "WHITE",
     "behavior": {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image": "GreatEgret.jpg"
   },
@@ -2116,35 +1799,6 @@
     },
     "image" : "GreaterRoadrunner.jpg"
   },
-
-  {
-    "name": "Hermit Thrush",
-    "habitats" : [
-      "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "BERRY"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints" : 7,
-    "nestType" : "STAR",
-    "maxEggs" : 2,
-    "wingSpan" : 30,
-    "color" : "BROWN",
-    "behavior" : {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "ANY"
-    },
-    "image" : "HermitThrush.jpg"
-  },
-
   {
     "name": "Hooded Warbler",
     "habitats" : [
@@ -2168,34 +1822,7 @@
     },
     "image" : "HoodedWarbler.jpg"
   },
-
   {
-    "name": "Horned Lark",
-    "habitats" : [
-      "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "WHEAT"
-      ]
-    ],
-    "victoryPoints" : 5,
-    "nestType" : "GROUND",
-    "maxEggs" : 4,
-    "wingSpan" : 30,
-    "color" : "PINK",
-    "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": true
-    },
-    "image" : "HornedLark.jpg"
-  },
-
-{
     "name": "House Finch",
     "habitats" : [
       "WETLANDS", "GRASSLANDS", "FOREST"
@@ -2241,7 +1868,7 @@
     "wingSpan" : 15,
     "color" : "WHITE",
     "behavior" : {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image" : "HouseWren.jpg"
   },
@@ -2265,7 +1892,7 @@
     "wingSpan" : 28,
     "color" : "WHITE",
     "behavior" : {
-      "type": LAY_EGG",
+      "type": "LAY_EGG",
       "numEggs": 1,
       "nestType": "PLATFORM"
     },
@@ -2295,32 +1922,6 @@
     },
     "image" : "JuniperTitmouse.jpg"
   },
-
-  {
-    "name": "Killdeer",
-    "habitats" : [
-      "WETLANDS", "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE", "WHEAT"
-      ]
-    ],
-    "victoryPoints" : 1,
-    "nestType" : "GROUND",
-    "maxEggs" : 3,
-    "wingSpan" : 46,
-    "color" : "BROWN",
-    "behavior" : {
-      "type": "DISCARD_EGGS",
-      "secondBehavior": {
-        "type": "DRAW_CARD",
-        "numCards": 2
-      }
-    },
-    "image" : "Killdeer.jpg"
-  },
-
   {
     "name": "King rail",
     "habitats" : [
@@ -2435,7 +2036,7 @@
     "wingSpan" : 36,
     "color" : "WHITE",
     "behavior" : {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image" : "MountainBluebird.jpg"
   },
@@ -2539,28 +2140,6 @@
   },
 
   {
-    "name": "Northern Flicker",
-    "habitats" : [
-      "GRASSLANDS", "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE", "WHEAT", "BERRY"
-      ]
-    ],
-    "victoryPoints" : 2,
-    "nestType" : "CAVITY",
-    "maxEggs" : 4,
-    "wingSpan" : 51,
-    "color" : "WHITE",
-    "behavior" : {
-      "type": "ALL_GAIN_FOOD",
-      "typeOfFood": "INVERTEBRATE"
-    },
-    "image" : "NorthernFlicker.jpg"
-  },
-
-  {
     "name": "Northern Harrier",
     "habitats" : [
       "WETLANDS", "GRASSLANDS"
@@ -2576,12 +2155,8 @@
     "wingSpan" : 109,
     "color" : "BROWN",
     "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "DISCARD_CARD"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image" : "NorthernHarrier.jpg"
   },
@@ -2703,12 +2278,8 @@
     "wingSpan" : 104,
     "color" : "BROWN",
     "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "DISCARD_CARD"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 100
     },
     "image" : "PeregrineFalcon.jpg"
   },
@@ -2893,11 +2464,7 @@
     "wingSpan" : 41,
     "color" : "BROWN",
     "behavior" : {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "WHEAT",
-      "secondBehavior": {
-        "type": "FOOD_CACHE"
-      }
+      "type": "FOOD_CACHE"
     },
     "image" : "Red-belledWoodpecker.jpg"
   },
@@ -2963,7 +2530,7 @@
     "wingSpan" : 25,
     "color" : "WHITE",
     "behavior" : {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image" : "Red-EyedVireo.jpg"
   },
@@ -2990,11 +2557,7 @@
     "wingSpan" : 43,
     "color" : "BROWN",
     "behavior" : {
-      "type": "GAIN_FOOD",
-      "typeOfFood": "WHEAT",
-      "secondBehavior": {
-        "type": "FOOD_CACHE"
-      }
+      "type": "FOOD_CACHE"
     },
     "image" : "Red-HeadedWoodpecker.jpg"
   },
@@ -3015,12 +2578,8 @@
     "wingSpan" : 102,
     "color" : "BROWN",
     "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "DISCARD_CARD"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image" : "Red-ShoulderedHawk.jpg"
   },
@@ -3044,12 +2603,8 @@
     "wingSpan" : 124,
     "color" : "BROWN",
     "behavior" : {
-      "type": "TUCK_CARD",
-      "numCards": 1,
-      "fromHand": false,
-      "secondBehavior": {
-        "type": "DISCARD_CARD"
-      }
+      "type": "WINGSPAN",
+      "wingSpan": 75
     },
     "image" : "Red-tailedHawk.jpg"
   },
@@ -3158,7 +2713,7 @@
     "wingSpan" : 20,
     "color" : "WHITE",
     "behavior" : {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image" : "Ruby-CrownedKinglet.jpg"
   },
@@ -3238,7 +2793,7 @@
     "wingSpan" : 18,
     "color" : "WHITE",
     "behavior" : {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image" : "SavannahSparrow.jpg"
   },
@@ -3461,5 +3016,524 @@
       "type": "BONUS_CARD"
     },
     "image" : "SpraguesPipit.jpg"
+  },
+
+  {
+    "name": "Steller's Jay",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "BOWL",
+    "maxEggs" : 2,
+    "wingSpan" : 48,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "FOOD_CACHE"
+    },
+    "image" : "StellarsJay.jpg"
+  },
+  {
+    "name": "Yellow-Bellied Sapsucker",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "BERRY"
+      ],
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints" : 3,
+    "nestType" : "CAVITY",
+    "maxEggs" : 3,
+    "wingSpan" : 41,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD",
+      "typeOfFood": "INVERTEBRATE"
+    },
+    "image" : "Yellow-BelliedSapsucker.jpg"
+  },
+  {
+    "name": "White-Breasted Nuthatch",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "WHEAT", "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "CAVITY",
+    "maxEggs" : 3,
+    "wingSpan" : 28,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "CACHE"
+    },
+    "image" : "White-BreastedNuthatch.jpg"
+  },
+  {
+    "name": "Wood Duck",
+    "habitats" : [
+    "FOREST", "WETLANDS"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "CAVITY",
+    "maxEggs" : 4,
+    "wingSpan" : 76,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "DRAW_CARD",
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
+    },
+    "image" : "WoodDuck.jpg"
+  },
+  {
+    "name": "Wilson's Snipe",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "GROUND",
+    "maxEggs" : 2,
+    "wingSpan" : 41,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "DRAW_CARDS_ALL"
+    },
+    "image" : "WilsonsSnipe.jpg"
+  },
+  {
+    "name": "Tree Swallow",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 3,
+    "nestType" : "CAVITY",
+    "maxEggs" : 4,
+    "wingSpan" : 38,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "secondBehavior": {
+        "type": "DRAW_CARD"
+      }
+    },
+    "image" : "TreeSwallow.jpg"
+  },
+  {
+    "name": "Violet-Green Swallow",
+    "habitats" : [
+    "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints" : 3,
+    "nestType" : "CAVITY",
+    "maxEggs" : 3,
+    "wingSpan" : 36,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "secondBehavior": {
+        "type": "DRAW_CARD"
+      }
+    },
+    "image" : "Violet-GreenSwallow.jpg"
+  },
+  {
+    "name": "Yellow-Rumped Warbler",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT", "BERRY"
+      ]
+    ],
+    "victoryPoints" : 1,
+    "nestType" : "BOWL",
+    "maxEggs" : 4,
+    "wingSpan" : 23,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "secondBehavior": {
+        "type": "DRAW_CARD"
+      }
+    },
+    "image" : "Yellow-RumpedWarbler.jpg"
+  },
+  {
+    "name": "Yellow-Headed Blackbird",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "BOWL",
+    "maxEggs" : 3,
+    "wingSpan" : 38,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "secondBehavior": {
+        "type": "LAY_EGG"
+      }
+    },
+    "image" : "Yellow-headedBlackbird.jpg"
+  },
+  {
+    "name": "Vaux's Swift",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "CAVITY",
+    "maxEggs" : 3,
+    "wingSpan" : 31,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "typeOfFood": "INVERTEBRATE"
+      }
+    },
+    "image" : "VauxsSwift.jpg"
+  },
+  {
+    "name": "White-Faced Ibis",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints" : 8,
+    "nestType" : "PLATFORM",
+    "maxEggs" : 2,
+    "wingSpan" : 91,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "ROLL_DICE",
+      "targetFood": "FISH"
+    },
+    "image" : "White-FacedIbis.jpg"
+  },
+  {
+    "name": "Willet",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "FISH"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "GROUND",
+    "maxEggs" : 2,
+    "wingSpan" : 66,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "ROLL_DICE",
+      "targetFood": "FISH"
+    },
+    "image" : "Willet.jpg"
+  },
+  {
+    "name": "Swainson's Hawk",
+    "habitats" : [
+    "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "PLATFORM",
+    "maxEggs" : 2,
+    "wingSpan" : 130,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "WINGSPAN",
+      "wingSpan": 75
+    },
+    "image" : "SwainsonsHawk.jpg"
+  },
+  {
+    "name": "White-Crowned Sparrow",
+    "habitats" : [
+    "WETLANDS", "GRASSLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "GROUND",
+    "maxEggs" : 5,
+    "wingSpan" : 25,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "MOVE_CARD"
+    },
+    "image" : "White-CrownedSparrow.jpg"
+  },
+  {
+    "name": "Yellow-Breasted Chat",
+    "habitats" : [
+    "WETLANDS", "GRASSLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "BOWL",
+    "maxEggs" : 3,
+    "wingSpan" : 25,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "MOVE_CARD"
+    },
+    "image" : "Yellow-BrestedChat.jpg"
+  },
+  {
+    "name": "Whooping Crane",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 6,
+    "nestType" : "GROUND",
+    "maxEggs" : 1,
+    "wingSpan" : 221,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "BONUS_CARD"
+    },
+    "image" : "WhoopingCrane.jpg"
+  },
+  {
+    "name": "Wood Stork",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 6,
+    "nestType" : "PLATFORM",
+    "maxEggs" : 2,
+    "wingSpan" : 155,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "BONUS_CARD"
+    },
+    "image" : "WoodStork.jpg"
+  },
+  {
+    "name": "Tufted Titmouse",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "BERRY", "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "CAVITY",
+    "maxEggs" : 3,
+    "wingSpan" : 25,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "PLAY_CARD"
+    },
+    "image" : "TuftedTitmouse.jpg"
+  },
+  {
+    "name": "Trumpeter Swan",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 9,
+    "nestType" : "GROUND",
+    "maxEggs" : 2,
+    "wingSpan" : 203,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "TrumpeterSwan.jpg"
+  },
+  {
+    "name": "Wild Turkey",
+    "habitats" : [
+    "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 8,
+    "nestType" : "GROUND",
+    "maxEggs" : 5,
+    "wingSpan" : 135,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "WildTurkey.jpg"
+  },
+  
+  {
+    "name": "Yellow-Billed Cuckoo",
+    "habitats" : [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "PLATFORM",
+    "maxEggs" : 2,
+    "wingSpan" : 46,
+    "color" : "PINK",
+    "behavior" : {
+      "type": "LAY_EGG_ANY",
+      "nestType": "BOWL",
+      "onThisBird": false
+    },
+    "image" : "Yellow-BilledCuckoo.jpg"
   }
 ]

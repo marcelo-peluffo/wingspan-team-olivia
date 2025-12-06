@@ -73,7 +73,7 @@
     "behavior": {
       "type": "GAIN_FOOD",
       "numFood": 1,
-      "typeOfFood": "ANY",
+      "typeOfFood": "ANY"
     },
     "image": "AmericanRedstart.jpg"
   },
@@ -357,7 +357,7 @@
     "wingSpan" : 74,
     "color" : "BROWN",
     "behavior" : {
-      "type": 
+      "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "PileatedWoodpecker.jpg"
   },
@@ -452,5 +452,412 @@
       "type": "GAIN_FOOD"
     },
     "image" : "Ruby-ThroatedHummingbird.jpg"
+  },
+  {
+    "name": "Northern Flicker",
+    "habitats" : [
+      "GRASSLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT", "BERRY"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "CAVITY",
+    "maxEggs" : 4,
+    "wingSpan" : 51,
+    "color" : "WHITE",
+    "behavior" : {
+      "type": "ALL_GAIN_FOOD",
+      "typeOfFood": "INVERTEBRATE"
+    },
+    "image" : "NorthernFlicker.jpg"
+  },
+    {
+    "name": "American Crow",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 99,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
+    },
+    "image": "AmericanCrow.jpg"
+  },
+    {
+    "name": "Belted Kingfisher",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "STAR",
+    "maxEggs": 4,
+    "wingSpan": 53,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "FISH",
+      "isFromFeeder": false
+    },
+    "image": "BeltedKingfisher.jpg"
+  },
+    {
+    "name": "Black-Crowned Night-Heron",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 9,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 112,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
+    },
+    "image": "Black-CrownedNight-Heron.jpg"
+  },
+    {
+    "name": "Chihuahuan Raven",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "RODENT"
+      ],
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "PLATFORM",
+    "maxEggs": 3,
+    "wingSpan": 112,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 2,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
+    },
+    "image": "ChihuahuanRaven.jpg"
+  },
+    {
+    "name": "Eastern Kingbird",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "BERRY"
+      ]
+    ],
+    "victoryPoints": 2,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 38,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": false
+    },
+    "image": "EasternKingbird.jpg"
+  },
+    {
+    "name": "Fish Crow",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 6,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 91,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 1,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
+    },
+    "image": "FishCrow.jpg"
+  },
+    {
+    "name": "Great Crested Flycatcher",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "CAVITY",
+    "maxEggs": 3,
+    "wingSpan": 33,
+    "color": "BROWN",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "INVERTEBRATE",
+      "isFromFeeder": true
+    },
+    "image": "GreatCrestedFlycatcher.jpg"
+  },
+  
+  {
+    "name": "Hermit Thrush",
+    "habitats" : [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 7,
+    "nestType" : "STAR",
+    "maxEggs" : 2,
+    "wingSpan" : 30,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD",
+      "typeOfFood": "ANY"
+    },
+    "image" : "HermitThrush.jpg"
+  },
+    {
+    "name": "Franklin's Gull",
+    "habitats": [
+      "WETLANDS", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "STAR",
+    "maxEggs": 2,
+    "wingSpan": 91,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "secondBehavior": {
+        "type": "DRAW_CARD",
+        "numCards": 2
+      }
+    },
+    "image": "FranklinsGull.jpg"
+  },
+   {
+    "name": "Killdeer",
+    "habitats" : [
+      "WETLANDS", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE", "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 1,
+    "nestType" : "GROUND",
+    "maxEggs" : 3,
+    "wingSpan" : 46,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "DISCARD_EGGS",
+      "secondBehavior": {
+        "type": "DRAW_CARD",
+        "numCards": 2
+      }
+    },
+    "image" : "Killdeer.jpg"
+  },
+  {
+    "name": "Common Raven",
+    "habitats": [
+      "WETLANDS", "FOREST", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "RODENT"
+      ],
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 5,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 135,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DISCARD_EGGS",
+      "onThisBird": false,
+      "secondBehavior": {
+        "type": "GAIN_FOOD",
+        "numFood": 2,
+        "typeOfFood": "ANY",
+        "isFromFeeder": false
+      }
+    },
+    "image": "CommonRaven.jpg"
+  },
+    {
+    "name": "Bald Eagle",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 9,
+    "nestType": "PLATFORM",
+    "maxEggs": 1,
+    "wingSpan": 203,
+    "color": "WHITE",
+    "behavior": {
+      "type": "GAIN_ALL_BIRDFEEDER",
+      "typeOfFood": "FISH"
+    },
+    "image": "BaldEagle.jpg"
+  },
+    {
+    "name": "Brant",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "WHEAT"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "GROUND",
+    "maxEggs": 2,
+    "wingSpan": 114,
+    "color": "WHITE",
+    "behavior": {
+      "type": "DRAW_FACE_UP"
+    },
+    "image": "Brant.jpg"
+  },
+  
+  {
+    "name": "Horned Lark",
+    "habitats" : [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "GROUND",
+    "maxEggs" : 4,
+    "wingSpan" : 30,
+    "color" : "PINK",
+    "behavior" : {
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true
+    },
+    "image" : "HornedLark.jpg"
   }
 ]
