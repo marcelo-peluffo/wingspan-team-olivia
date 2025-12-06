@@ -75,6 +75,25 @@
     "image": "AnnasHummingbird.jpg"
   },
   {
+    "name": "Black Vulture",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [],
+    "victoryPoints": 2,
+    "nestType": "CAVITY",
+    "maxEggs": 1,
+    "wingSpan": 150,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
+    },
+    "image": "BlackVulture.jpg"
+  },
+  {
     "name": "Gray Catbird",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
