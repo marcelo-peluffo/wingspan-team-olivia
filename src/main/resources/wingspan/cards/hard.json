@@ -356,5 +356,30 @@
       "type": "GAIN_FOOD"
     },
     "image" : "Ruby-ThroatedHummingbird.jpg"
+  },
+  {
+    "name": "American Redstart",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 20,
+    "color": "BROWN",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+    },
+    "image": "AmericanRedstart.jpg"
   }
 ]
