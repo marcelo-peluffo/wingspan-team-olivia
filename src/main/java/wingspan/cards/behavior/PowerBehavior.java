@@ -7,4 +7,5 @@ public interface PowerBehavior {
     }
     
     PowerBehavior getSecondBehavior();
+    BehaviorParameters getBehaviorParams();
 }

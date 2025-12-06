@@ -447,6 +447,30 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                         return;
                     }
                 }
+                for(Player p: GameState.players)
+                {
+                    if (!p.equals(GameState.activePlayer))
+                    {
+                        for(Card card: p.getGameBoard().returnAllCards())
+                        {
+                            if (card.getBirdInfo().getPowerColor() == PowerColor.PINK && card.getBirdInfo().getBehavior().describe().equals("LayEggAnyBehavior") && !card.hasActivatedPower())
+                            {
+                                Habitat h;
+                                if (p.getGameBoard().getForest().indexOf(card) > -1)
+                                    h = Habitat.FOREST;
+                                else if (p.getGameBoard().getGrasslands().indexOf(card) > -1)
+                                    h = Habitat.GRASSLANDS;
+                                else
+                                    h = Habitat.WETLANDS;
+                                setVisible(false);
+                                getParent().add(new AbilityPanel(p, card, h));
+                                getParent().repaint();
+                                getParent().remove(this);
+                                return;
+                            }
+                        }
+                    }
+                }
                 boolean roundEnd = false;
                 GameState.activePlayer.decreaseActionsRemaining();
                 int playerIndex = GameState.players.indexOf(GameState.activePlayer);

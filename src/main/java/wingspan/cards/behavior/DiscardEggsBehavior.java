@@ -46,4 +46,8 @@ public class DiscardEggsBehavior implements PowerBehavior {
     public NestType getNestType() {
         return nestType;
     }
+    @Override
+    public BehaviorParameters getBehaviorParams() {
+        return null;
+    }
 }

@@ -59,4 +59,8 @@ public class TuckCardBehavior implements PowerBehavior {
     public boolean isFromHand() {
         return fromHand;
     }
+    @Override
+    public BehaviorParameters getBehaviorParams() {
+        return null;
+    }
 }

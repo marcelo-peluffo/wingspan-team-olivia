@@ -51,7 +51,7 @@
     "wingSpan": 107,
     "color": "PINK",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
       "numEggs": 1,
       "onThisBird": false,
       "nestType": "GROUND"
@@ -1907,7 +1907,7 @@
     "wingSpan": 33,
     "color": "WHITE",
     "behavior": {
-      "type": "TEMPLATE_BEHAVIOR"
+      "type": "PLAY_CARD"
     },
     "image": "EasternBluebird.jpg"
   },
