@@ -24,21 +24,6 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
         GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
-		// ----------------- all code between these lines are for testing and should be removed before the game is finalized----------
-		for(int i=0; i<4; i++)
-		{
-			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
-			GameState.activePlayer.getGameBoard().getCardsInHabitat(Habitat.FOREST).get(i).addEggs(1);
-		}
-		Card testCard = GameState.cardManager.getSpecifiedCard("Ash-Throated Flycatcher");
-		//GameState.activePlayer.getGameBoard().addCard(testCard, Habitat.FOREST);
-		GameState.activePlayer.addFood(Food.FISH, 9999);
-		GameState.activePlayer.addCard(testCard);
-		GameState.activePlayer.addCard(GameState.cardManager.getRandomCard());
-		GameState.players.get(1).getGameBoard().getForest().add(GameState.cardManager.getRandomCard());
-		GameState.players.get(2).getGameBoard().getForest().add(GameState.cardManager.getRandomCard());
-		System.out.println(testCard.getBirdInfo().getBehavior().describe());
-		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }
