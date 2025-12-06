@@ -1,5 +1,32 @@
 [
   {
+    "name": "American Bittern",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 7,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 107,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DRAW_CARD",
+      "numCards": 1
+    },
+    "image": "AmericanBittern.jpg"
+  },
+  {
     "name": "American Oystercatcher",
     "habitats": [
       "WETLANDS"
