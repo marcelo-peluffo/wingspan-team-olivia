@@ -283,5 +283,31 @@
       "type": "DRAW_CARD"
     },
     "image" : ""
+  },
+  {
+    "name": "Rose-Breasted Grosbeak",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 6,
+    "nestType" : "BOWL",
+    "maxEggs" : 3,
+    "wingSpan" : 33,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD"
+    },
+    "image" : "RoseBreastedGrosbeak.jpg"
   }
 ]
