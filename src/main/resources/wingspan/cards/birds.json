@@ -2322,33 +2322,10 @@
     "wingSpan" : 30,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "GAIN_FOOD",
+      "typeOfFood": "ANY"
     },
     "image" : "HermitThrush.jpg"
-  },
-
-  {
-    "name": "Hooded Merganser",
-    "habitats" : [
-      "WETLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "Fish"
-      ]
-    ],
-    "victoryPoints" : 5,
-    "nestType" : "CAVITY",
-    "maxEggs" : 4,
-    "wingSpan" : 61,
-    "color" : "BROWN",
-    "behavior" : {
-
-    },
-    "image" : "HoodedMerganser.jpg"
   },
 
   {
@@ -2368,9 +2345,9 @@
     "nestType" : "BOWL",
     "maxEggs" : 3,
     "wingSpan" : 18,
-    "color" : "",
+    "color" : "WHITE",
     "behavior" : {
-
+      "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "HoodedWarbler.jpg"
   },
@@ -2394,7 +2371,9 @@
     "wingSpan" : 30,
     "color" : "PINK",
     "behavior" : {
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true
     },
     "image" : "HornedLark.jpg"
   },
@@ -2418,7 +2397,13 @@
     "wingSpan" : 25,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "TUCK_CARD",
+      "numCards": 1,
+      "fromHand": true,
+      "secondBehavior": {
+        "type": "DRAW_CARD",
+        "numCards": 1
+      }
     },
     "image" : "HouseFinch.jpg"
   },
@@ -2439,7 +2424,7 @@
     "wingSpan" : 15,
     "color" : "WHITE",
     "behavior" : {
-
+      "type": "PLAY_BIRD"
     },
     "image" : "HouseWren.jpg"
   },
@@ -2451,10 +2436,10 @@
     ],
     "food": [
       [
-        "Wheat"
+        "WHEAT"
       ],
       [
-        "Wheat"
+        "WHEAT"
       ]
     ],
     "victoryPoints" : 2,
@@ -2463,36 +2448,11 @@
     "wingSpan" : 28,
     "color" : "WHITE",
     "behavior" : {
-
+      "type": LAY_EGG",
+      "numEggs": 1,
+      "nestType": "PLATFORM"
     },
     "image" : "IncaDove.jpg"
-  },
-
-  {
-    "name": "Indigo Bunting",
-    "habitats" : [
-      "GRASSLANDS", "FOREST"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "Wheat"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints" : 5,
-    "nestType" : "BOWL",
-    "maxEggs" : 3,
-    "wingSpan" : 20,
-    "color" : "",
-    "behavior" : {
-
-    },
-    "image" : "IndigoBunting.jpg"
   },
 
   {
@@ -2514,7 +2474,7 @@
     "wingSpan" : 23,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "CACHE"
     },
     "image" : "JuniperTitmouse.jpg"
   },
@@ -2535,7 +2495,11 @@
     "wingSpan" : 46,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "DISCARD_EGGS",
+      "secondBehavior": {
+        "type": "DRAW_CARD",
+        "numCards": 2
+      }
     },
     "image" : "Killdeer.jpg"
   },
@@ -2550,7 +2514,7 @@
         "INVERTEBRATE"
       ],
       [
-        "Fish"
+        "FISH"
       ],
       [
         "ANY"
@@ -2562,36 +2526,9 @@
     "wingSpan" : 51,
     "color" : "WHITE",
     "behavior" : {
-
+      "type": "BONUS_CARD"
     },
     "image" : "KingRail.jpg"
-  },
-
-  {
-    "name": "Lazuli Bunting",
-    "habitats" : [
-      "GRASSLANDS"
-    ],
-    "food": [
-      [
-        "INVERTEBRATE"
-      ],
-      [
-        "WHEAT"
-      ],
-      [
-        "BERRY"
-      ]
-    ],
-    "victoryPoints" : 4,
-    "nestType" : "BOWL",
-    "maxEggs" : 4,
-    "wingSpan" : 23,
-    "color" : "BROWN",
-    "behavior" : {
-
-    },
-    "image" : "LazuliBunting.jpg"
   },
 
   {
@@ -2613,13 +2550,13 @@
     "wingSpan" : 20,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "MOVE_CARD"
     },
     "image" : "LincolnsSparrow.jpg"
   },
 
   {
-    "name": "Loggerhead Shirke",
+    "name": "Loggerhead Shrike",
     "habitats" : [
       "WETLANDS", "GRASSLANDS"
     ],
@@ -2637,9 +2574,9 @@
     "wingSpan" : 30,
     "color" : "PINK",
     "behavior" : {
-
+      "type":
     },
-    "image" : "Loggerhead.jpg"
+    "image" : "LoggerheadShrike.jpg"
   },
 
   {
