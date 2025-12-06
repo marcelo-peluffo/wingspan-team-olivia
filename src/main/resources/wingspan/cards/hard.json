@@ -120,6 +120,30 @@
     "image": "Black-BilledMagpie.jpg"
   },
   {
+    "name": "Common Loon",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 6,
+    "nestType": "GROUND",
+    "maxEggs": 1,
+    "wingSpan": 117,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DRAW_CARD",
+      "numCards": 1
+    },
+    "image": "CommonLoon.jpg"
+  },
+  {
     "name": "Gray Catbird",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
