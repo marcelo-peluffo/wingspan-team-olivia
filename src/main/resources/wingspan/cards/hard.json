@@ -94,6 +94,32 @@
     "image": "BlackVulture.jpg"
   },
   {
+    "name": "Black-Billed Magpie",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "STAR",
+    "maxEggs": 3,
+    "wingSpan": 64,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
+    },
+    "image": "Black-BilledMagpie.jpg"
+  },
+  {
     "name": "Gray Catbird",
     "habitats": [
       "WETLANDS", "FOREST", "GRASSLANDS"
