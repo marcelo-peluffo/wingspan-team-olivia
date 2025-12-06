@@ -27,4 +27,8 @@ public class GainFoodAllBehavior implements PowerBehavior{
     public PowerBehavior getSecondBehavior() {
         return secondBehavior;
     }
+    @Override
+    public BehaviorParameters getBehaviorParams() {
+        return null;
+    }
 }

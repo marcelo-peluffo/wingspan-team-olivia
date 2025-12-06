@@ -65,8 +65,8 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         GameState.activeCardHabitat = cardHabitat;
         cardPositions = new HashMap<Card, Pair>();
         displayedCard = null;
-        getPlayerCards(GameState.activePlayer);
         player = p;
+        getPlayerCards(player);
         foodInventory = p.getFoodInventory();
         foodToImage = new HashMap<>();
         this.activationCard = activationCard;
@@ -191,19 +191,25 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 g.drawString("Or press 'r' to draw a random card", 1600, 300 + CARD_HEIGHT * 2 + 45);
             }
         }
-        else if (abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior"))
+        else if (abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior") || abilityType.equals("LayEggAnyBehavior"))
         {
             g.setFont(new Font("Arial", Font.BOLD, 15));
             String s = "Click on one of your cards to ";
             if (abilityType.equals("TuckCardBehavior"))
                 s += "tuck";
-            else
+            else if (abilityType.equals("DiscardCardsBehavior"))
                 s += "discard";
-            if (chosenCard != null)
+            else
+                s += "place an egg";
+            if (chosenCard != null) 
             {
                 s = "Press 'c' to confirm";
             }
-            g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString(s, 1575, 300 + CARD_HEIGHT * 2 + 25);
+            if (abilityType.equals("LayEggAnyBehavior") && chosenCard != null)
+            {
+                g.drawString("Eggs: " + chosenCard.getCurrentEggs() + "/" + chosenCard.getBirdInfo().getMaxEggs(), 1575, 300 + CARD_HEIGHT * 2 + 45);
+            }
         }
         else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior") || abilityType.equals("LayEggBehavior") || abilityType.equals("DrawCardsAllBehavior"))
         {
@@ -214,7 +220,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             hasExecuted = true;
             repaint();
         }
-        if (abilityType.equals("DiscardFoodBehavior"))
+        else if (abilityType.equals("DiscardFoodBehavior"))
         {
             if (!activationCard.getBirdInfo().getBehavior().executePower())
             {
@@ -229,6 +235,20 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 hasExecuted = true;
             }
             repaint();
+        }
+        else if (abilityType.equals("PlayCardBehavior"))
+        {
+            setVisible(false);
+            try
+            {
+                getParent().add(new AbilityPlayCardPanel(cardHabitat));
+            }
+            catch (Exception ex)
+            {
+                System.out.println("Failed to load play card panel");
+            }
+            getParent().repaint();
+            getParent().remove(this);
         }
     }
 
@@ -253,7 +273,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         }
         else if (abilityType.equals("GainFoodBehavior"))
         {
-            g.drawString("You gained 1 food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            g.drawString("You gained " + activationCard.getBirdInfo().getBehavior().getBehaviorParams().numFood + " food token", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         else if (abilityType.equals("CacheBehavior"))
         {
@@ -319,6 +339,21 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 g.drawString("Successfully tucked 2 cards", 1600, 300 + CARD_HEIGHT * 2 + 25);
             else
                 g.drawString("You don't have the required food", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("PlayCardBehavior"))
+        {
+            g.drawString("You don't have enough resources to play a card", 1550, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("EmptyBehavior"))
+        {
+            g.drawString("This card has no behavior", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("LayEggAnyBehavior"))
+        {
+            if (actionWasSuccessful)
+                g.drawString("Successfully placed 1 egg", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("Cannot execute this ability right now", 1575, 300 + CARD_HEIGHT * 2 + 25);
         }
         g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
     }
@@ -470,7 +505,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         {
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
-        else if (hasActivated && !hasExecuted && (abilityType.equals("DrawCardBehavior") || abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior")) && chosenCard != null)
+        else if (hasActivated && !hasExecuted && (abilityType.equals("DrawCardBehavior") || abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior") || abilityType.equals("LayEggAnyBehavior")) && chosenCard != null)
         {
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
@@ -646,6 +681,63 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         actionWasSuccessful = false;
                     }
                 }
+                if (abilityType.equals("PlayCardBehavior"))
+                {
+                    boolean hasSpace = false;
+                    boolean canPlayCard = false;
+                    boolean canPayEggs = false;
+                    if (GameState.activePlayer.getGameBoard().getCardsInHabitat(cardHabitat).size() < 5)
+                    {
+                        hasSpace = true;
+                    }
+                    for(Card card: player.getHand())
+                    {
+                        if (card.getBirdInfo().getHabitats().contains(cardHabitat) && card.couldPayFoodCost(player))
+                        {
+                            canPlayCard = true;
+                            break;
+                        }
+                    }
+                    int eggs = player.getTotalEggsAmount();
+                    if (eggs >= 2)
+                    {
+                        canPayEggs = true;
+                    }
+                    else if (eggs == 1 && player.getGameBoard().getCardsInHabitat(cardHabitat).size() <= 2)
+                    {
+                        canPayEggs = true;
+                    }
+                    if (!hasSpace || !canPlayCard || !canPayEggs)
+                    {
+                        hasExecuted = true;
+                    }
+                }
+                if (abilityType.equals("EmptyBehavior"))
+                {
+                    hasExecuted = true;
+                }
+                if (abilityType.equals("LayEggAnyBehavior"))
+                {
+                    boolean canPlaceEgg = false;
+                    NestType validNest = activationCard.getBirdInfo().getBehavior().getBehaviorParams().nestType;
+                    for(Card card: player.getGameBoard().returnAllCards())
+                    {
+                        if ((card.getBirdInfo().getNestType() == validNest || validNest == NestType.STAR) && !card.isAtMaxEggs())
+                        {
+                            if (!(card.equals(activationCard) && activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK))
+                            {
+                                canPlaceEgg = true;
+                            }
+                        }
+                    }
+                    if (activationCard.getCurrentEggs() == 0 && activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
+                        canPlaceEgg = false;
+                    if (!canPlaceEgg)
+                    {
+                        hasExecuted = true;
+                        actionWasSuccessful = false;
+                    }
+                }
             }
         }
         else if (hasActivated && !hasExecuted)
@@ -751,6 +843,21 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     }
                 }
             }
+            if (abilityType.equals("LayEggAnyBehavior"))
+            {
+                if (chosenCard != null && c == 'c')
+                {
+                    chosenCard.addEggs(1);
+                    if (activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
+                    {
+                        activationCard.removeEggs(1);
+                        activationCard.triggerPower();
+                    }
+                    actionWasSuccessful = true;
+                    hasExecuted = true;
+                }
+            }
+            
         }
         repaint();
     }
@@ -762,6 +869,33 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
 
     public void endAbilityPanel()
     {
+        if (cardHabitat == Habitat.GRASSLANDS && activationCard.getBirdInfo().getPowerColor() == PowerColor.BROWN)
+        {
+            for(Player p: GameState.players)
+            {
+                if (!p.equals(player))
+                {
+                    for(Card card: p.getGameBoard().returnAllCards())
+                    {
+                        if (card.getBirdInfo().getPowerColor() == PowerColor.PINK && card.getBirdInfo().getBehavior().describe().equals("LayEggAnyBehavior") && !card.hasActivatedPower())
+                        {
+                            Habitat h;
+                            if (p.getGameBoard().getForest().indexOf(card) > -1)
+                                h = Habitat.FOREST;
+                            else if (p.getGameBoard().getGrasslands().indexOf(card) > -1)
+                                h = Habitat.GRASSLANDS;
+                            else
+                                h = Habitat.WETLANDS;
+                            setVisible(false);
+                            getParent().add(new AbilityPanel(p, card, h));
+                            getParent().repaint();
+                            getParent().remove(this);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
         boolean roundEnd = false;
         GameState.activePlayer.decreaseActionsRemaining();
         int playerIndex = GameState.players.indexOf(GameState.activePlayer);
@@ -866,6 +1000,21 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     {
                         displayedCard = c.getCardImage();
                         chosenCard = c;
+                    }
+                }
+            }
+            else if (abilityType.equals("LayEggAnyBehavior"))
+            {
+                for(Card c: cardPositions.keySet())
+                {
+                    Pair p = cardPositions.get(c);
+                    if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT && player.getGameBoard().returnAllCards().contains(c) && (c.getBirdInfo().getNestType() == activationCard.getBirdInfo().getBehavior().getBehaviorParams().nestType || activationCard.getBirdInfo().getBehavior().getBehaviorParams().nestType == NestType.STAR) && !c.isAtMaxEggs())
+                    {
+                        if (!(c.equals(activationCard) && activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK))
+                        {
+                            displayedCard = c.getCardImage();
+                            chosenCard = c;
+                        }
                     }
                 }
             }

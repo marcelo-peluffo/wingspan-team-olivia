@@ -28,13 +28,17 @@ public class WingspanRunner {
 		for(int i=0; i<4; i++)
 		{
 			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
+			GameState.activePlayer.getGameBoard().getCardsInHabitat(Habitat.FOREST).get(i).addEggs(1);
 		}
-		Card testCard = GameState.cardManager.getSpecifiedCard("American White Pelican");
+		Card testCard = GameState.cardManager.getSpecifiedCard("Blue-Gray Gnatcatcher");
 		GameState.activePlayer.getGameBoard().addCard(testCard, Habitat.FOREST);
-		GameState.activePlayer.addFood(Food.FISH, 0);
+		GameState.activePlayer.addFood(Food.FISH, 9999);
+		//GameState.activePlayer.addCard(testCard);
 		GameState.activePlayer.addCard(GameState.cardManager.getRandomCard());
+		GameState.players.get(1).getGameBoard().getForest().add(GameState.cardManager.getRandomCard());
+		GameState.players.get(2).getGameBoard().getForest().add(GameState.cardManager.getRandomCard());
 		System.out.println(testCard.getBirdInfo().getBehavior().describe());
-		//------------------------------------------------------------------------------------fcf----------------------------------------
+		//----------------------------------------------------------------------------------------------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }

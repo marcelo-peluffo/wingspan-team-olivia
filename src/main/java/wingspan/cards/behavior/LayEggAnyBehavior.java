@@ -2,18 +2,18 @@ package wingspan.cards.behavior;
 import wingspan.enums.*;
 import wingspan.core.GameState;
 
-public class LayEggBehavior implements PowerBehavior {
-    private int numEggs;
+public class LayEggAnyBehavior implements PowerBehavior {
     private boolean onThisBird;
     private NestType nestType;
     PowerBehavior secondBehavior;
-    public LayEggBehavior(BehaviorParameters params) {
-        this.numEggs = params.numEggs;
+    BehaviorParameters behaviorParams;
+    public LayEggAnyBehavior(BehaviorParameters params) {
         this.onThisBird = params.onThisBird;
         this.nestType = params.nestType;
         if (params.secondBehavior != null) {
             this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
+        behaviorParams = params;
     }
 
     @Override
@@ -27,6 +27,6 @@ public class LayEggBehavior implements PowerBehavior {
     }
     @Override
     public BehaviorParameters getBehaviorParams() {
-        return null;
+        return behaviorParams;
     }
 }

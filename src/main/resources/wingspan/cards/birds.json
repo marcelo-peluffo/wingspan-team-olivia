@@ -51,7 +51,7 @@
     "wingSpan": 107,
     "color": "PINK",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
       "numEggs": 1,
       "onThisBird": false,
       "nestType": "GROUND"
@@ -340,7 +340,8 @@
     "wingSpan": 23,
     "color": "BROWN",
     "behavior": {
-      "type": "LAY_EGG",
+      "type": "LAY_EGG_ANY",
+      "nestType": "STAR",
       "numEggs": 1
     },
     "image": "BairdsSparrow.jpg"
@@ -1738,7 +1739,7 @@
     "wingSpan": 33,
     "color": "WHITE",
     "behavior": {
-      "type": "PLAY_BIRD"
+      "type": "PLAY_CARD"
     },
     "image": "EasternBluebird.jpg"
   },

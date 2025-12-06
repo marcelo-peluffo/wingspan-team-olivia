@@ -55,6 +55,13 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
     public MainPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
         activePlayer = GameState.activePlayer;
+        for(Card c: activePlayer.getGameBoard().returnAllCards())
+        {
+            if (c.getBirdInfo().getPowerColor() == PowerColor.PINK && c.hasActivatedPower())
+            {
+                c.triggerPower();
+            }
+        }
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
         background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));

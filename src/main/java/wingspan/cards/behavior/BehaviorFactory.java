@@ -41,10 +41,12 @@ public class BehaviorFactory {
                 return new DrawCardsAllBehavior(params);
             case "DISCARD_CARD":
                 return new DiscardCardsBehavior(params);
-
-            case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
-                return null;
-
+            case "PLAY_CARD":
+                return new PlayCardBehavior(params);
+            case "TEMPLATE_BEHAVIOR":
+                return new EmptyBehavior(params);
+            case "LAY_EGG_ANY":
+                return new LayEggAnyBehavior(params);
             default:
                 throw new IllegalArgumentException("Unknown behavior type: " + params.type);
         }

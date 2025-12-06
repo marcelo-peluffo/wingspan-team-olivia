@@ -19,18 +19,6 @@ public class DiscardEggsBehavior implements PowerBehavior {
     @Override
     public boolean executePower() {
         // lay egg behavior
-        if ((!onThisBird && GameState.selectedCard.equals(GameState.activeCard)) || GameState.selectedCard.hasNoEggs())
-        {
-            return false;
-        }
-        else
-        {
-            GameState.selectedCard.removeEggs(1);
-        }
-        if (this.secondPowerBehavior != null)
-        {
-            secondPowerBehavior.executePower();
-        }
         return true;
     }
 
@@ -45,5 +33,9 @@ public class DiscardEggsBehavior implements PowerBehavior {
 
     public NestType getNestType() {
         return nestType;
+    }
+    @Override
+    public BehaviorParameters getBehaviorParams() {
+        return null;
     }
 }

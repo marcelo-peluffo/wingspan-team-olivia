@@ -10,6 +10,7 @@ public class Card {
     private int currentEggs;
     private final List<Card> tuckedCards;
     private final List<Food> foodTokens;
+    private boolean hasExecutedPower;
 
     public Card(BirdInfo birdInfo, BufferedImage cardImage)
     {
@@ -27,10 +28,21 @@ public class Card {
         this.currentEggs = currentEggs;
         this.tuckedCards = tuckedCards;
         this.foodTokens = foodTokens;
+        this.hasExecutedPower = false;
     }
 
     public BirdInfo getBirdInfo() { return birdInfo; }
     public BufferedImage getCardImage() { return cardImage; }
+
+    public void triggerPower()
+    {
+        hasExecutedPower = !hasExecutedPower;
+    }
+
+    public boolean hasActivatedPower()
+    {
+        return hasExecutedPower;
+    }
 
     public int countAnyFood() //returns how many tokens of any food type this bird costs
     {
