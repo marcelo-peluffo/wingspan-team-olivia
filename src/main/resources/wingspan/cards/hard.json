@@ -165,8 +165,31 @@
     "wingSpan" : 23,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "LazuliBunting.jpg"
+  },
+  {
+    "name": "Northern Mockingbird",
+    "habitats" : [
+      "WETLANDS", "GRASSLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "BOWL",
+    "maxEggs" : 4,
+    "wingSpan" : 36,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "NorthernMockingbird.jpg"
   }
 ]
