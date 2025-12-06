@@ -90,7 +90,31 @@
     "wingSpan" : 66,
     "color" : "BROWN",
     "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "GreenHeron.jpg"
+  },
+  {
+    "name": "Hooded Merganser",
+    "habitats" : [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "Fish"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "CAVITY",
+    "maxEggs" : 4,
+    "wingSpan" : 61,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "HoodedMerganser.jpg"
   }
 ]
