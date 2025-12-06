@@ -799,6 +799,8 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     draw2.add("Red-Breasted Merganser");
                     draw2.add("Ruddy Duck");
                     draw2.add("Wood Duck");
+                    draw2.add("Black-Necked Stilt");
+                    draw2.add("Carolina Wren");
                     if (draw2.contains(activationCard.getBirdInfo().getName()) && !drewOnce)
                     {
                         drewOnce = true;
