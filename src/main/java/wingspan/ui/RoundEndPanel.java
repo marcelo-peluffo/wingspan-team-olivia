@@ -197,7 +197,10 @@ public class RoundEndPanel extends JPanel implements MouseListener, KeyListener 
                 {
                     p.resetActionsRemaining(GameState.roundNum);
                 }
-                GameState.activePlayer = GameState.players.get(GameState.roundNum - 1);
+				if (roundNum < 5)
+				{
+					GameState.activePlayer = GameState.players.get(GameState.roundNum - 1);
+				}
                 setVisible(false);
                 try
                 {
