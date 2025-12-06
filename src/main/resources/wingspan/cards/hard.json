@@ -237,5 +237,28 @@
       "type": 
     },
     "image" : "PileatedWoodpecker.jpg"
+  },
+  {
+    "name": "Pygmy Nuthatch",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ]
+    ],
+    "victoryPoints" : 2,
+    "nestType" : "CAVITY",
+    "maxEggs" : 4,
+    "wingSpan" : 20,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "PygmyNuthatch.jpg"
   }
 ]
