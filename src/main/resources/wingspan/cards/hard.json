@@ -1,5 +1,32 @@
 [
   {
+    "name": "American Bittern",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints": 7,
+    "nestType": "PLATFORM",
+    "maxEggs": 2,
+    "wingSpan": 107,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DRAW_CARD",
+      "numCards": 1
+    },
+    "image": "AmericanBittern.jpg"
+  },
+  {
     "name": "American Oystercatcher",
     "habitats": [
       "WETLANDS"
@@ -24,6 +51,33 @@
     },
     "image": "AmericanOystercatcher.jpg"
   },
+  
+  {
+    "name": "American Redstart",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints": 4,
+    "nestType": "BOWL",
+    "maxEggs": 2,
+    "wingSpan": 20,
+    "color": "BROWN",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+    },
+    "image": "AmericanRedstart.jpg"
+  },
+  
   {
     "name": "Anna's Hummingbird",
     "habitats": [
@@ -46,6 +100,75 @@
       "rotatePlayers": true
     },
     "image": "AnnasHummingbird.jpg"
+  },
+  {
+    "name": "Black Vulture",
+    "habitats": [
+      "FOREST"
+    ],
+    "food": [],
+    "victoryPoints": 2,
+    "nestType": "CAVITY",
+    "maxEggs": 1,
+    "wingSpan": 150,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
+    },
+    "image": "BlackVulture.jpg"
+  },
+  {
+    "name": "Black-Billed Magpie",
+    "habitats": [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "ANY"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 3,
+    "nestType": "STAR",
+    "maxEggs": 3,
+    "wingSpan": 64,
+    "color": "PINK",
+    "behavior": {
+      "type": "GAIN_FOOD",
+      "numFood": 1,
+      "typeOfFood": "ANY",
+      "isFromFeeder": true
+    },
+    "image": "Black-BilledMagpie.jpg"
+  },
+  {
+    "name": "Common Loon",
+    "habitats": [
+      "WETLANDS"
+    ],
+    "food": [
+      [
+        "FISH"
+      ],
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints": 6,
+    "nestType": "GROUND",
+    "maxEggs": 1,
+    "wingSpan": 117,
+    "color": "BROWN",
+    "behavior": {
+      "type": "DRAW_CARD",
+      "numCards": 1
+    },
+    "image": "CommonLoon.jpg"
   },
   {
     "name": "Gray Catbird",
@@ -260,5 +383,74 @@
       "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "PygmyNuthatch.jpg"
+  },
+  {
+    "name": "Red-Breasted Merganser",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints" : 3,
+    "nestType" : "GROUND",
+    "maxEggs" : 4,
+    "wingSpan" : 78,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "DRAW_CARD"
+    },
+    "image" : ""
+  },
+  {
+    "name": "Rose-Breasted Grosbeak",
+    "habitats" : [
+    "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 6,
+    "nestType" : "BOWL",
+    "maxEggs" : 3,
+    "wingSpan" : 33,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD"
+    },
+    "image" : "RoseBreastedGrosbeak.jpg"
+  },
+  {
+    "name": "Ruby-throated Hummingbird",
+    "habitats" : [
+    "GRASSLANDS", "WETLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "BOWL",
+    "maxEggs" : 2,
+    "wingSpan" : 10,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD"
+    },
+    "image" : "Ruby-ThroatedHummingbird.jpg"
   }
 ]
