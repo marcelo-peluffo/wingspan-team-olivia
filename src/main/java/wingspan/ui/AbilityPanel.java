@@ -857,7 +857,6 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     chosenCard.addEggs(1);
                     if (activationCard.getBirdInfo().getPowerColor() == PowerColor.PINK)
                     {
-                        activationCard.removeEggs(1);
                         activationCard.triggerPower();
                     }
                     actionWasSuccessful = true;
