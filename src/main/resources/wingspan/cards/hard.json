@@ -260,5 +260,28 @@
       "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "PygmyNuthatch.jpg"
+  },
+  {
+    "name": "Red-Breasted Merganser",
+    "habitats" : [
+    "WETLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "FISH"
+      ]
+    ],
+    "victoryPoints" : 3,
+    "nestType" : "GROUND",
+    "maxEggs" : 4,
+    "wingSpan" : 78,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "DRAW_CARD"
+    },
+    "image" : ""
   }
 ]
