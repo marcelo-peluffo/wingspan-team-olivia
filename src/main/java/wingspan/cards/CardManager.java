@@ -100,7 +100,9 @@ public class CardManager {
 	// returns and removes a card from faceUpCards based on a passed in index
 	public Card getVisibleCard(int index)
 	{
-		return faceUpCards.remove(index);
+		Card selectedCard = faceUpCards.get(index);
+		faceUpCards.set(index, null);
+		return selectedCard;
 	}
 	
 	//refills faceUpCards with randomly selected bird cards until there are 3 in the list
