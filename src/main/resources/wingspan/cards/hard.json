@@ -142,5 +142,31 @@
       "type": "GAIN_FOOD"
     },
     "image" : "IndigoBunting.jpg"
+  },
+  {
+    "name": "Lazuli Bunting",
+    "habitats" : [
+      "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "BOWL",
+    "maxEggs" : 4,
+    "wingSpan" : 23,
+    "color" : "BROWN",
+    "behavior" : {
+
+    },
+    "image" : "LazuliBunting.jpg"
   }
 ]
