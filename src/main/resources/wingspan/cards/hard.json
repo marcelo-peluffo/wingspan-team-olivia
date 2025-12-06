@@ -309,5 +309,25 @@
       "type": "GAIN_FOOD"
     },
     "image" : "RoseBreastedGrosbeak.jpg"
+  },
+  {
+    "name": "Ruby-throated Hummingbird",
+    "habitats" : [
+    "GRASSLANDS", "WETLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "ANY"
+      ]
+    ],
+    "victoryPoints" : 4,
+    "nestType" : "BOWL",
+    "maxEggs" : 2,
+    "wingSpan" : 10,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD"
+    },
+    "image" : "Ruby-ThroatedHummingbird.jpg"
   }
 ]
