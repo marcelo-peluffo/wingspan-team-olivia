@@ -116,5 +116,31 @@
       "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "HoodedMerganser.jpg"
+  },
+  {
+    "name": "Indigo Bunting",
+    "habitats" : [
+      "GRASSLANDS", "FOREST"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "WHEAT"
+      ],
+      [
+        "BERRY"
+      ]
+    ],
+    "victoryPoints" : 5,
+    "nestType" : "BOWL",
+    "maxEggs" : 3,
+    "wingSpan" : 20,
+    "color" : "BROWN",
+    "behavior" : {
+      "type": "GAIN_FOOD"
+    },
+    "image" : "IndigoBunting.jpg"
   }
 ]
