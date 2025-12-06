@@ -31,11 +31,12 @@ public class GameState {
 	public static Food foodChoice; 
 
 	public static boolean activePlayerTuckedCard;
-	public static Card selectedCard; 
+	public static Card selectedCard;
 	public static boolean choseToCache; //Used for: FoodCacheBehavior
 	public static BonusCard selectedBonusCard; //Used for :BonusCardBehavior
 	public static Card wingspanCard; //Used for: WingspanBehavior
 	public static Habitat chosenHabitat; //Used for: MoveCardBehavior
+	public static ArrayList<Card> chosenCards;
 	public static Habitat activeCardHabitat;
 
 	//variables used for paint method
@@ -67,6 +68,7 @@ public class GameState {
 		abilityPlayers.clear();
 		cardsToDraw.clear();
 		cardsToTuck.clear();
+		chosenCards = new ArrayList<>();
 
 		//action cube colors
 

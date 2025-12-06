@@ -8,6 +8,7 @@ public class TuckCardBehavior implements PowerBehavior {
     private int numCards;
     private boolean fromHand;
     private PowerBehavior secondBehavior;
+    public BehaviorParameters params;
 
     public TuckCardBehavior(BehaviorParameters params) {
         this.numCards = params.numCards;
@@ -15,6 +16,7 @@ public class TuckCardBehavior implements PowerBehavior {
         if (params.secondBehavior != null) {
             this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
+        this.params = params;
     }
 
     @Override

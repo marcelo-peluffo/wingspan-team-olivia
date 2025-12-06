@@ -7,9 +7,12 @@ import wingspan.cards.*;
 
 public class WingspanBehavior implements PowerBehavior {
     private int wingSpan;
-
+    PowerBehavior secondBehavior;
     public WingspanBehavior(BehaviorParameters params) {
         this.wingSpan = params.wingSpan;
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
     @Override
@@ -25,5 +28,9 @@ public class WingspanBehavior implements PowerBehavior {
             CardManager.birdCards.add(GameState.wingspanCard);
             return false;
         }
+    }
+
+    public PowerBehavior getSecondBehavior() {
+        return secondBehavior;
     }
 }

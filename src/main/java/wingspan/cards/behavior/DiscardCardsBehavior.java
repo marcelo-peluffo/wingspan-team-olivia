@@ -2,10 +2,10 @@ package wingspan.cards.behavior;
 import wingspan.enums.*;
 import wingspan.core.*;
 
-public class CacheBehavior implements PowerBehavior{
+public class DiscardCardsBehavior implements PowerBehavior{
 
     PowerBehavior secondBehavior;
-    public CacheBehavior(BehaviorParameters params) {
+    public DiscardCardsBehavior(BehaviorParameters params) {
         if (params.secondBehavior != null) {
             this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
@@ -13,7 +13,6 @@ public class CacheBehavior implements PowerBehavior{
 
     @Override
     public boolean executePower() {
-        GameState.activeCard.addFoodToken(Food.WHEAT); //card with this ability only take wheat
         return true;
     }
     

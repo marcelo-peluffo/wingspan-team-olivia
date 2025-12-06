@@ -34,6 +34,11 @@ public class DiscardEggsBehavior implements PowerBehavior {
         return true;
     }
 
+    @Override
+    public PowerBehavior getSecondBehavior() {
+        return secondPowerBehavior;
+    }
+
     public boolean isOnThisBird() {
         return onThisBird;
     }

@@ -6,12 +6,15 @@ public class FoodForEggBehavior implements PowerBehavior {
     private int numFood;
     private Food typeOfFood;
     private int numEggs;
-
+    PowerBehavior secondBehavior;
     // Constructor 1
     public FoodForEggBehavior(BehaviorParameters params) {
         this.numFood = params.numFood;
         this.typeOfFood = params.typeOfFood;
         this.numEggs = params.numEggs;
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
     @Override
@@ -30,5 +33,9 @@ public class FoodForEggBehavior implements PowerBehavior {
 
     public int getNumEggs() {
         return numEggs;
+    }
+
+    public PowerBehavior getSecondBehavior() {
+        return secondBehavior;
     }
 }

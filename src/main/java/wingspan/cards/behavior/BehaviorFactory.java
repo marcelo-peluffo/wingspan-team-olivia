@@ -24,7 +24,7 @@ public class BehaviorFactory {
             case "DISCARD_EGGS":
                 return new DiscardEggsBehavior(params);
             case "DISCARD_FOOD":
-                return null;
+                return new DiscardFoodBehavior(params);
             case "FOOD_CACHE":
                 return new FoodCacheBehavior(params);
             case "ALL_GAIN_FOOD":
@@ -37,6 +37,10 @@ public class BehaviorFactory {
                 return new WingspanBehavior(params);
             case "MOVE_CARD":
                 return new MoveCardBehavior(params);
+            case "DRAW_CARDS_ALL":
+                return new DrawCardsAllBehavior(params);
+            case "DISCARD_CARD":
+                return new DiscardCardsBehavior(params);
 
             case "TEMPLATE_BEHAVIOR": // for testing purposes; behaviors to be added to json later.
                 return null;

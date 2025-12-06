@@ -10,10 +10,13 @@ import wingspan.enums.PowerColor;
 public class PlayPreviousBrownBehavior implements PowerBehavior {
     private int numPowers;
     private boolean activateAll;
-
+    PowerBehavior secondBehavior;
     public PlayPreviousBrownBehavior(BehaviorParameters params) {
         this.numPowers = params.numPowers;
         this.activateAll = params.activateAll;
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
 
@@ -45,5 +48,9 @@ public class PlayPreviousBrownBehavior implements PowerBehavior {
 
     public boolean activateAll() {
         return activateAll;
+    }
+
+    public PowerBehavior getSecondBehavior() {
+        return secondBehavior;
     }
 }

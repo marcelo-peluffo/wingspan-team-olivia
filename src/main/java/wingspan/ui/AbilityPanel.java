@@ -43,7 +43,12 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
     private boolean hasSelectedBonus;
     private BonusCard chosenBonusCard;
     private HashMap<Habitat, Pair> availableTilePos;
+    private HashMap<Card, Pair> faceUpCardPos;
     private Habitat[] habitats = {Habitat.FOREST, Habitat.GRASSLANDS, Habitat.WETLANDS};
+    private boolean cannotSwitch;
+    private Card chosenCard;
+    private boolean drewOnce;
+    private boolean onSecondBehavior;
 
     public AbilityPanel(Player p, Card activationCard, Habitat cardHabitat)
     {
@@ -71,6 +76,11 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
         bonusCardsPos = new HashMap<>();
         hasSelectedBonus = false;
         availableTilePos = new HashMap<>();
+        faceUpCardPos = new HashMap<>();
+        cannotSwitch = false;
+        chosenCard = null;
+        drewOnce = false;
+        onSecondBehavior = false;
 
         try {
             // Ensure these paths match your project structure
@@ -157,10 +167,67 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 }
             }
         }
-        else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior"))
+        else if (abilityType.equals("DrawCardBehavior"))
         {
-            activationCard.getBirdInfo().getBehavior().executePower();
+            faceUpCardPos.clear();
+            int xPos = getWidth() / 2 - HAND_CARD_WIDTH - 50;
+            for(int i=0; i<GameState.cardManager.getFaceUpCards().size(); i++)
+            {
+                faceUpCardPos.put(GameState.cardManager.getFaceUpCards().get(i), new Pair(xPos, getHeight() - HAND_CARD_HEIGHT));
+                xPos += HAND_CARD_WIDTH + 25;
+            }
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            for(Card c: faceUpCardPos.keySet())
+            {
+                Pair pos = faceUpCardPos.get(c);
+                g.drawImage(c.getCardImage(), pos.getX(), pos.getY(), HAND_CARD_WIDTH, HAND_CARD_HEIGHT, null);
+            }
+            String s = "Click one of the 3 face up cards";
+            if (chosenCard != null)
+                s = "Press 'c' to confirm";
+            g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+            if (chosenCard == null)
+            {
+                g.drawString("Or press 'r' to draw a random card", 1600, 300 + CARD_HEIGHT * 2 + 45);
+            }
+        }
+        else if (abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior"))
+        {
+            g.setFont(new Font("Arial", Font.BOLD, 15));
+            String s = "Click on one of your cards to ";
+            if (abilityType.equals("TuckCardBehavior"))
+                s += "tuck";
+            else
+                s += "discard";
+            if (chosenCard != null)
+            {
+                s = "Press 'c' to confirm";
+            }
+            g.drawString(s, 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("GainFoodAllBehavior") || abilityType.equals("GainFoodBehavior") || abilityType.equals("CacheBehavior") || abilityType.equals("LayEggBehavior") || abilityType.equals("DrawCardsAllBehavior"))
+        {
+            if (!onSecondBehavior)
+                actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
+            else
+                actionWasSuccessful = activationCard.getBirdInfo().getBehavior().getSecondBehavior().executePower();
             hasExecuted = true;
+            repaint();
+        }
+        if (abilityType.equals("DiscardFoodBehavior"))
+        {
+            if (!activationCard.getBirdInfo().getBehavior().executePower())
+            {
+                hasExecuted = true;
+            }
+            else
+            {
+                for(int i=0; i<2; i++)
+                {
+                    activationCard.tuckCard(GameState.cardManager.getRandomCard());
+                }
+                hasExecuted = true;
+            }
             repaint();
         }
     }
@@ -222,6 +289,36 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                 g.drawString("Successfully moved this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
             else
                 g.drawString("This card is unable to be moved", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("LayEggBehavior"))
+        {
+            if (actionWasSuccessful)
+                g.drawString("Added 1 egg to this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("Card was at max egg capacity", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("DrawCardsAllBehavior"))
+        {
+            g.drawString("All players received 1 card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("DiscardCardsBehavior"))
+        {
+            g.drawString("Successfully drew + discarded", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("DrawCardBehavior"))
+        {
+            g.drawString("Successfully drew a card", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("TuckCardBehavior"))
+        {
+            g.drawString("You don't have any cards to tuck", 1600, 300 + CARD_HEIGHT * 2 + 25);
+        }
+        else if (abilityType.equals("DiscardFoodBehavior"))
+        {
+            if (actionWasSuccessful)
+                g.drawString("Successfully tucked 2 cards", 1600, 300 + CARD_HEIGHT * 2 + 25);
+            else
+                g.drawString("You don't have the required food", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         g.drawString("Press ENTER to proceed", 1600, 300 + CARD_HEIGHT * 2 + 50);
     }
@@ -340,22 +437,22 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             }
         }
         //draw player's hand
-        
-        int leftEnd;
-        if(player.getHand().size() % 2 == 0){
-            leftEnd = Math.max(getWidth()/2 - (5 + CARD_WIDTH) - ((player.getHand().size()/2 - 1) * (CARD_WIDTH + 10)), 350);
+        if (!(hasActivated && (abilityType.equals("BonusCardBehavior") || abilityType.equals("DrawCardBehavior"))))
+        {
+            int leftEnd;
+            if(player.getHand().size() % 2 == 0){
+                leftEnd = Math.max(getWidth()/2 - (5 + CARD_WIDTH) - ((player.getHand().size()/2 - 1) * (CARD_WIDTH + 10)), 350);
+            }
+            else {
+                leftEnd = Math.max(getWidth()/2 - CARD_WIDTH/2 - (((player.getHand().size() + 1)/2 - 1) * (CARD_WIDTH + 10)), 350);
+            }
+            x = leftEnd;
+            for(Card c: player.getHand()){
+                g.drawImage(c.getCardImage(), x, 890, CARD_WIDTH, CARD_HEIGHT, null);
+                cardPositions.put(c, new Pair(x, 890));
+                x += (10 + CARD_WIDTH) * ((40 - player.getHand().size()) / (50.0 - (20 - player.getHand().size())));
+            }
         }
-        else {
-            leftEnd = Math.max(getWidth()/2 - CARD_WIDTH/2 - (((player.getHand().size() + 1)/2 - 1) * (CARD_WIDTH + 10)), 350);
-        }
-
-        x = leftEnd;
-        for(Card c: player.getHand()){
-            g.drawImage(c.getCardImage(), x, 890, CARD_WIDTH, CARD_HEIGHT, null);
-            cardPositions.put(c, new Pair(x, 890));
-            x += (10 + CARD_WIDTH) * ((40 - player.getHand().size()) / (50.0 - (20 - player.getHand().size())));
-        }
-
         //top right text
         Graphics2D g2d = (Graphics2D)g;
         g2d.setColor(Color.LIGHT_GRAY);
@@ -370,6 +467,10 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
         else if (hasActivated && hasExecuted && abilityType.equals("WingspanBehavior"))
+        {
+            g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
+        }
+        else if (hasActivated && !hasExecuted && (abilityType.equals("DrawCardBehavior") || abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior")) && chosenCard != null)
         {
             g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
         }
@@ -537,6 +638,14 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         actionWasSuccessful = false;
                     }
                 }
+                if (abilityType.equals("TuckCardBehavior"))
+                {
+                    if (player.getHand().isEmpty())
+                    {
+                        hasExecuted = true;
+                        actionWasSuccessful = false;
+                    }
+                }
             }
         }
         else if (hasActivated && !hasExecuted)
@@ -570,6 +679,76 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                     }
                     activationCard.getBirdInfo().getBehavior().executePower();
                     hasExecuted = true;
+                }
+            }
+            if (abilityType.equals("DrawCardBehavior"))
+            {
+                if (c == 'r')
+                {
+                    chosenCard = GameState.cardManager.getRandomCard();
+                    displayedCard = chosenCard.getCardImage();
+                    cannotSwitch = true;
+                }
+                if (chosenCard != null && c == 'c')
+                {
+                    if (GameState.cardManager.getFaceUpCards().contains(chosenCard))
+                    {
+                        GameState.cardManager.getVisibleCard(GameState.cardManager.getFaceUpCards().indexOf(chosenCard));
+                    }
+                    GameState.chosenCards.add(chosenCard);
+                    ArrayList<String> draw2 = new ArrayList<>();
+                    draw2.add("Common Yellowthroat");
+                    draw2.add("Pied-Billed Grebe");
+                    draw2.add("Red-Breasted Merganser");
+                    draw2.add("Ruddy Duck");
+                    draw2.add("Wood Duck");
+                    if (draw2.contains(activationCard.getBirdInfo().getName()) && !drewOnce)
+                    {
+                        drewOnce = true;
+                        chosenCard = null;
+                        cannotSwitch = false;
+                    }
+                    else
+                    {
+                        GameState.cardManager.refillVisibleCards();
+                        if (onSecondBehavior)
+                            activationCard.getBirdInfo().getBehavior().getSecondBehavior().executePower();
+                        else
+                            activationCard.getBirdInfo().getBehavior().executePower();
+                        if (activationCard.getBirdInfo().getBehavior().getSecondBehavior() == null || onSecondBehavior)
+                        {
+                            hasExecuted = true;
+                        }
+                        else
+                        {
+                            abilityType = "DiscardCardsBehavior";
+                            chosenCard = null;
+                            cannotSwitch = false;
+                        }
+                    }
+                    
+                }
+            }
+            if (abilityType.equals("DiscardCardsBehavior"))
+            {
+                if (chosenCard != null && c == 'c')
+                {
+                    player.getHand().remove(chosenCard);
+                    hasExecuted = true;
+                }
+            }
+            if (abilityType.equals("TuckCardBehavior"))
+            {
+                if (chosenCard != null && c == 'c')
+                {
+                    player.getHand().remove(chosenCard);
+                    activationCard.tuckCard(chosenCard);
+                    if (!onSecondBehavior)
+                    {
+                        abilityType = activationCard.getBirdInfo().getBehavior().getSecondBehavior().describe();
+                        onSecondBehavior = true;
+                        chosenCard = null;
+                    }
                 }
             }
         }
@@ -663,6 +842,30 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         actionWasSuccessful = activationCard.getBirdInfo().getBehavior().executePower();
                         hasExecuted = true;
                         break;
+                    }
+                }
+            }
+            else if (abilityType.equals("DrawCardBehavior"))
+            {
+                for(Card c: faceUpCardPos.keySet())
+                {
+                    Pair p = faceUpCardPos.get(c);
+                    if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT && !cannotSwitch)
+                    {
+                        displayedCard = c.getCardImage();
+                        chosenCard = c;
+                    }
+                }
+            }
+            else if (abilityType.equals("DiscardCardsBehavior") || abilityType.equals("TuckCardBehavior"))
+            {
+                for(Card c: cardPositions.keySet())
+                {
+                    Pair p = cardPositions.get(c);
+                    if (x > p.getX() && x < p.getX() + HAND_CARD_WIDTH && y > p.getY() && y < p.getY() + HAND_CARD_HEIGHT && player.getHand().contains(c))
+                    {
+                        displayedCard = c.getCardImage();
+                        chosenCard = c;
                     }
                 }
             }

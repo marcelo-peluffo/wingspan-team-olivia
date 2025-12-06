@@ -3,9 +3,11 @@ import wingspan.enums.*;
 import wingspan.core.*;
 
 public class FoodCacheBehavior implements PowerBehavior{
-
+    PowerBehavior secondBehavior;
     public FoodCacheBehavior(BehaviorParameters params) {
-        //this class contains no variables because all cards with this power trade exactly 1 wheat token
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
     @Override
@@ -31,6 +33,11 @@ public class FoodCacheBehavior implements PowerBehavior{
             }
         }
         return true;
+        
+    }
+
+    public PowerBehavior getSecondBehavior() {
+        return secondBehavior;
     }
     
 }

@@ -683,7 +683,10 @@
     "color": "BROWN",
     "behavior": {
       "type": "DRAW_CARD",
-      "numCards": 1
+      "numCards": 1,
+      "secondBehavior": {
+        "type": "DISCARD_CARD"
+      }
     },
     "image": "BlackTern.jpg"
   },
@@ -1269,7 +1272,7 @@
     "wingSpan": 82,
     "color": "BROWN",
     "behavior": {
-      "type": "DRAW_CARD",
+      "type": "DRAW_CARDS_ALL",
       "numCards": 1,
       "rotatePlayers": true
     },
@@ -1291,7 +1294,7 @@
     "wingSpan": 20,
     "color": "BROWN",
     "behavior": {
-      "type": "GAIN_FOOD",
+      "type": "CACHE",
       "numFood": 1,
       "typeOfFood": "WHEAT",
       "isCacheable": true,
@@ -1745,7 +1748,7 @@
       "type": "DRAW_CARD",
       "numCards": 2,
       "secondBehavior": {
-        "type": "TEMPLATE_BEHAVIOR"
+        "type": "DISCARD_CARD"
       }
     },
     "image": "CommonYellowthroat.jpg"
@@ -2668,7 +2671,7 @@
     "wingSpan" : 89,
     "color" : "BROWN",
     "behavior" : {
-
+      "type": "DRAW_CARD"
     },
     "image" : "Mallard.jpg"
   },

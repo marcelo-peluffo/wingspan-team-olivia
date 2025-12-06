@@ -1,25 +1,21 @@
 package wingspan.cards.behavior;
+import wingspan.enums.*;
 import wingspan.core.*;
-import wingspan.enums.Food;
 
-public class GainFoodAllBehavior implements PowerBehavior{
-    private Food typeOfFood;
+public class DrawCardsAllBehavior implements PowerBehavior {
     PowerBehavior secondBehavior;
-
-    public GainFoodAllBehavior(BehaviorParameters params)
-    {
-        this.typeOfFood = params.typeOfFood;
+    public DrawCardsAllBehavior(BehaviorParameters params) {
         if (params.secondBehavior != null) {
             this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
         }
     }
 
-
     @Override
     public boolean executePower() {
+        // all players draw a card behavior
         for(Player p: GameState.players)
         {
-            p.addFood(typeOfFood, 1); //all cards involving this ability only add 1 food
+            p.addCard(GameState.cardManager.getRandomCard());
         }
         return true;
     }

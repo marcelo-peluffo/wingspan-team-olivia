@@ -29,11 +29,12 @@ public class WingspanRunner {
 		{
 			GameState.activePlayer.getGameBoard().addCard(GameState.cardManager.getRandomCard(), Habitat.FOREST);
 		}
-		Card testCard = GameState.cardManager.getSpecifiedCard("Bewick's Wren");
+		Card testCard = GameState.cardManager.getSpecifiedCard("American White Pelican");
 		GameState.activePlayer.getGameBoard().addCard(testCard, Habitat.FOREST);
-		GameState.activePlayer.addFood(Food.FISH, 9999);
+		GameState.activePlayer.addFood(Food.FISH, 0);
+		GameState.activePlayer.addCard(GameState.cardManager.getRandomCard());
 		System.out.println(testCard.getBirdInfo().getBehavior().describe());
-		//----------------------------------------------------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------fcf----------------------------------------
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }

@@ -1,12 +1,16 @@
 package wingspan.cards.behavior;
-import wingspan.core.*;
-import wingspan.enums.Food;
 
-public class GainFoodAllBehavior implements PowerBehavior{
+import wingspan.enums.*;
+
+import java.util.*;
+
+import wingspan.core.GameState;
+
+public class DiscardFoodBehavior implements PowerBehavior {
     private Food typeOfFood;
     PowerBehavior secondBehavior;
 
-    public GainFoodAllBehavior(BehaviorParameters params)
+    public DiscardFoodBehavior(BehaviorParameters params)
     {
         this.typeOfFood = params.typeOfFood;
         if (params.secondBehavior != null) {
@@ -14,13 +18,14 @@ public class GainFoodAllBehavior implements PowerBehavior{
         }
     }
 
-
     @Override
-    public boolean executePower() {
-        for(Player p: GameState.players)
+    public boolean executePower()
+    {
+        if (GameState.activePlayer.getFoodInventory().get(typeOfFood) == 0)
         {
-            p.addFood(typeOfFood, 1); //all cards involving this ability only add 1 food
+            return false;
         }
+        GameState.activePlayer.removeFood(typeOfFood, 1);
         return true;
     }
 

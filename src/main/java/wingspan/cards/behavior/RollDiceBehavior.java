@@ -6,9 +6,12 @@ import wingspan.enums.Food;
 
 public class RollDiceBehavior implements PowerBehavior {
     private Food targetFood;
-
+    PowerBehavior secondBehavior;
     public RollDiceBehavior(BehaviorParameters params) {
         this.targetFood = params.targetFood;
+        if (params.secondBehavior != null) {
+            this.secondBehavior = BehaviorFactory.createBehavior(params.secondBehavior);
+        }
     }
 
     @Override
@@ -27,5 +30,9 @@ public class RollDiceBehavior implements PowerBehavior {
             }
         }
         return false;
+    }
+
+    public PowerBehavior getSecondBehavior() {
+        return secondBehavior;
     }
 }
