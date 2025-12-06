@@ -191,5 +191,28 @@
       "type": "TEMPLATE_BEHAVIOR"
     },
     "image" : "NorthernMockingbird.jpg"
+  },
+  {
+    "name": "Loggerhead Shrike",
+    "habitats" : [
+      "WETLANDS", "GRASSLANDS"
+    ],
+    "food": [
+      [
+        "INVERTEBRATE"
+      ],
+      [
+        "RODENT"
+      ]
+    ],
+    "victoryPoints" :3,
+    "nestType" : "BOWL",
+    "maxEggs" : 4,
+    "wingSpan" : 30,
+    "color" : "PINK",
+    "behavior" : {
+      "type": "TEMPLATE_BEHAVIOR"
+    },
+    "image" : "Loggerhead.jpg"
   }
 ]
