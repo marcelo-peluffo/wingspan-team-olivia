@@ -297,7 +297,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
             if (actionWasSuccessful)
                 g.drawString("Cached 1 food token on this card", 1600, 300 + CARD_HEIGHT * 2 + 25);
             else
-                g.drawString("Aw man :(", 1600, 300 + CARD_HEIGHT * 2 + 25);
+                g.drawString("The target food didn't appear", 1600, 300 + CARD_HEIGHT * 2 + 25);
         }
         else if (abilityType.equals("WingspanBehavior"))
         {

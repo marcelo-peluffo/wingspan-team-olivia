@@ -102,6 +102,10 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
         g.setColor(Color.BLACK);
         g.setFont(new Font("Arial", Font.PLAIN, 15));
         g.drawString(headingText, getWidth() / 2 - 250, 80);
+        if (!exchanging)
+        {
+            g.drawString("WARNING: You may not change your selection once you select a card", getWidth() / 2 - 250, 100);
+        }
 
         //draw the 3 face up cards
         Graphics2D g2d = (Graphics2D)g;

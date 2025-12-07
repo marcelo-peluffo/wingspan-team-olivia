@@ -68,6 +68,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
     private Card passIntoAbilityPanel;
     private Habitat habitatPlacedInto;
     private ArrayList<Food> foodChoices;
+    private HashMap<Food, Integer> originalFoodInventory;
 
     public PlayCardPanel() throws IOException{
         goals = GameState.goalBoard.getGoals();
@@ -124,6 +125,11 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         tokenExchangeLimit = 2;
         eggsPaid = 0;
         foodChoices = new ArrayList<>();
+        originalFoodInventory = new HashMap<>();
+        for(Food f: GameState.activePlayer.getFoodInventory().keySet())
+        {
+            originalFoodInventory.put(f, GameState.activePlayer.getFoodInventory().get(f));
+        }
         initializeEmptyTilesPos();
     	addMouseListener(this);
         addKeyListener(this);
@@ -189,6 +195,8 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
                 g2d.drawString("- Once you have chosen " + tokenExchangeLimit + " tokens to trade", 30, getHeight() - 270);
                 g2d.drawString("and the token you want to receive,", 30, getHeight() - 250);
                 g2d.drawString("click '" + buttonText + "'", 30, getHeight() - 230);
+                g2d.drawString("- Press 'r' to revert your food inventory", 30, getHeight() - 210);
+                g2d.drawString("to its original state", 30, getHeight() - 195);
             }
             else
             {
@@ -727,6 +735,13 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
     @Override
     public void keyTyped(KeyEvent e) {
         char c = e.getKeyChar();
+        if (c == 'r' && choosingCard)
+        {
+            for(Food f: GameState.activePlayer.getFoodInventory().keySet())
+            {
+                GameState.activePlayer.getFoodInventory().put(f, originalFoodInventory.get(f));
+            }
+        }
         if (c == 't')
         {
             displayBonus = !displayBonus;

@@ -120,6 +120,7 @@ public class GameBoard {
 			case 2: return 3;
 			case 3: return 3;
 			case 4: return 4;
+			case 5: return 4;
 		}
 
 		return 0;

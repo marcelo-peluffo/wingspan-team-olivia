@@ -326,7 +326,7 @@ public class GainFoodPanel extends JPanel implements MouseListener, KeyListener 
         g.drawImage(displayedCard, 1600, 300, CARD_WIDTH * 2, CARD_HEIGHT * 2, null);
 
         //exchanging card for extra choice info
-        if (hasChoice && GameState.activePlayer.getHand().size() > 0)
+        if (hasChoice && GameState.activePlayer.getHand().size() > 0 && !choosingMulti)
         {
             g.setColor(Color.ORANGE);
             g.fillRect(30, getHeight() - 90, 300, 75);
