@@ -2341,7 +2341,7 @@
 
 
   {
-    "name": "Prothronotary Warbler",
+    "name": "Prothonotary Warbler",
     "habitats" : [
     "WETLANDS", "FOREST"
     ],
@@ -2364,7 +2364,7 @@
     "behavior" : {
       "type": "TEMPLATE_BEHAVIOR"
     },
-    "image" : "ProthonotaryWarbler"
+    "image" : "ProthonotaryWarbler.jpg"
   },
 
 
