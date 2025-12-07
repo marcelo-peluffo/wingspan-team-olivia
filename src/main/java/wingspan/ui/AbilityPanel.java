@@ -642,6 +642,7 @@ public class AbilityPanel extends JPanel implements KeyListener, MouseListener{
                         {
                             activationCard = cards.get(i);
                             abilityType = activationCard.getBirdInfo().getBehavior().describe();
+							chosenCard = null;
                             repaint();
                             return;
                         }
