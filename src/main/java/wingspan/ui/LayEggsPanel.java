@@ -59,6 +59,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
     private int cubeIndex;
     private BufferedImage displayedCard;
     private boolean atMaxCapacity;
+    private HashMap<Food, Pair> foodTokenPos;
 
     public LayEggsPanel() {
         gameBoard = GameState.activePlayer.getGameBoard();
@@ -69,7 +70,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         playerHandCardPositions = new HashMap<>();
         playerBonusCardPositions = new HashMap<>();
         int grasslandsSize = gameBoard.getCardsInHabitat(selectedHabitat).size();
-        cubeIndex = grasslandsSize < 5 ? grasslandsSize : 4;
+        cubeIndex = grasslandsSize;
         remainingChoices = gameBoard.numEggsAt(cubeIndex);
         rectX = 0;
         rectY = 0;
@@ -100,7 +101,23 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        foodTokenPos = new HashMap<>();
+        tokenPositions = new Pair[] {
+                new Pair(1570, 280),
+                new Pair(1670, 280),
+                new Pair(1770, 280),
+                new Pair(1620, 380),
+                new Pair(1720, 380)
+            };
+        int index = 0;
+        for(Food f: GameState.activePlayer.getFoodInventory().keySet())
+        {
+            if (GameState.activePlayer.getFoodInventory().get(f) > 0)
+            {
+                foodTokenPos.put(f, tokenPositions[index]);
+                index++;
+            }
+        }
         addMouseListener(this);
         addKeyListener(this);
     }
@@ -109,13 +126,6 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
         try {
     
             super.paint(g);
-            tokenPositions = new Pair[] {
-                new Pair(getWidth() - 350, getHeight() - 800),
-                new Pair(getWidth() - 250, getHeight() - 800),
-                new Pair(getWidth() - 150, getHeight() - 800),
-                new Pair(getWidth() - 300, getHeight() - 700),
-                new Pair(getWidth() - 200, getHeight() - 700)
-            };
 
             g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
             int playerIndex = GameState.players.indexOf(GameState.activePlayer);
@@ -320,21 +330,22 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             boolean hadTokensForExchange = false;
             //draw tokens
-            if (cubeIndex == 1 || cubeIndex == 3) {
+            if (cubeIndex == 1 || cubeIndex == 3 || cubeIndex == 5) {
                 Map<Food, Integer> foodInventory = GameState.activePlayer.getFoodInventory();
-                
                 int j = 0;
                 if (!confirmed) {
                     for (int i = 0; i < foods.length; i++) {
                         Food f = foods[i];
                         int count = foodInventory.get(f);
-                        
 
                         if (count > 0) { // only display token exchange for eggs if player actually has food tokens
-                            Pair p = tokenPositions[j++];
-                            g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_HEIGHT, TOKEN_WIDTH, null);
                             hadTokensForExchange = true;
                         }
+                    }
+                    for(Food f: foodTokenPos.keySet())
+                    {
+                        Pair p = foodTokenPos.get(f);
+                        g.drawImage(foodToImage.get(f), p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT, null);
                     }
                 }
             }
@@ -347,29 +358,14 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
 
             g.setColor(Color.GREEN);
             if (selectedToken != null) { // highlight selection. later add the 'c' to confirm
-                Pair p = null;
-                switch (selectedToken) {
-                    
-                    case BERRY: {
-                        p = tokenPositions[0]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
-                    } break;
-
-                    case WHEAT: {
-                        p = tokenPositions[1]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
-                    } break;
-
-                    case FISH: {
-                        p = tokenPositions[2]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
-                    } break;
-
-                    case RODENT: {
-                        p = tokenPositions[3]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
-                    } break;
-
-                    case INVERTEBRATE: {
-                        p = tokenPositions[4]; g.drawOval(p.getX(), p.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
-                    } break;
-
+                Pair p;
+                for(Food f: foodTokenPos.keySet())
+                {
+                    Pair pair = foodTokenPos.get(f);
+                    if (selectedToken == f)
+                    {
+                        g.drawOval(pair.getX(), pair.getY(), TOKEN_WIDTH, TOKEN_HEIGHT);
+                    }
                 }
                 // draw confirm button
                 p = tokenPositions[tokenPositions.length - 2];
@@ -535,16 +531,19 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
                 break;
             
             case KeyEvent.VK_ENTER:
-                Card selectedCard = gameBoard.getCardsInHabitat(selectedHabitat).get(selectedCardIndex);
-
-                if (remainingChoices > 0 && !selectedCard.isAtMaxEggs()) {
-                    selectedCard.addEggs(1);
-                    remainingChoices--;
-                }
-                if (GameState.activePlayer.isAtMaxEggs())
+                if (selectedCardIndex < gameBoard.getCardsInHabitat(selectedHabitat).size())
                 {
-                    atMaxCapacity = true;
-                    remainingChoices = 0;
+                    Card selectedCard = gameBoard.getCardsInHabitat(selectedHabitat).get(selectedCardIndex);
+
+                    if (remainingChoices > 0 && !selectedCard.isAtMaxEggs()) {
+                        selectedCard.addEggs(1);
+                        remainingChoices--;
+                    }
+                    if (GameState.activePlayer.isAtMaxEggs())
+                    {
+                        atMaxCapacity = true;
+                        remainingChoices = 0;
+                    }
                 }
                 break;
         }
@@ -615,24 +614,13 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             }
         }
         }
-        repaint();
-
-        for (int i = 0; i < foods.length; i++) {
-            Food food = foods[i];
-            Pair tokenPosition = tokenPositions[i];
-            int tokenX = tokenPosition.getX();
-            int tokenY = tokenPosition.getY();
-
-            boolean withinX = clickX >= tokenX && clickX <= tokenX + TOKEN_WIDTH;
-            boolean withinY = clickY >= tokenY && clickY <= tokenY + TOKEN_HEIGHT;
-            boolean withinBounds = withinX && withinY;
-
-            if (withinBounds) {
-                selectedToken = food;
-                if (lastToken != null && selectedToken == lastToken) {
-                    selectedToken = null;
-                }
-                lastToken = selectedToken;
+        for(Food f: foodTokenPos.keySet())
+        {
+            Pair p = foodTokenPos.get(f);
+            if (clickX >= p.getX() && clickX <= p.getX() + TOKEN_WIDTH && clickY >= p.getY() && clickY <= p.getY() + TOKEN_HEIGHT && !confirmed)
+            {
+                selectedToken = f;
+                break;
             }
         }
         boolean withinX = (clickX >= rectX && clickX <= rectX + RECT_WIDTH); 
@@ -645,7 +633,7 @@ public class LayEggsPanel extends JPanel implements KeyListener, MouseListener {
             Integer selectedTokenCount = foodInventory.get(selectedToken);
             foodInventory.replace(selectedToken, selectedTokenCount - 1);
         }
-
+        repaint();
     }
 
     @Override
