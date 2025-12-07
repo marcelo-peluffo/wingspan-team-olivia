@@ -35,9 +35,9 @@ public class RoundEndPanel extends JPanel implements MouseListener, KeyListener 
 	
 	public RoundEndPanel() {
 		try {
-			background = ImageIO.read(RoundEndPanel.class.getResource("/Images/backgroundImage2.jpeg"));
-			goalBoardImage = ImageIO.read(RoundEndPanel.class.getResource("/Images/GoalBoard.jpg"));
-            boardImage = ImageIO.read(RoundEndPanel.class.getResource("/Images/GameBoard.jpg"));
+			background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
+			goalBoardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GoalBoard.jpg"));
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
 			
 		}catch(Exception e) {
 			System.out.println("Error");

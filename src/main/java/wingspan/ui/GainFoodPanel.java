@@ -82,16 +82,16 @@ public class GainFoodPanel extends JPanel implements MouseListener, KeyListener 
         remainingChoices = numChoices;
         this.hasChoice = hasChoice;
         try {
-            background = ImageIO.read(GainFoodPanel.class.getResource("/Images/backgroundImage2.jpeg"));
+            background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
             
-            feederImage = ImageIO.read(GainFoodPanel.class.getResource("/Images/BirdFeederImage.png"));
+            feederImage = ImageIO.read(getClass().getResourceAsStream("/Images/BirdFeederImage.png"));
 
-            diceMulti = ImageIO.read(GainFoodPanel.class.getResource("/Images/MultiDice.jpg"));
-            diceInv = ImageIO.read(GainFoodPanel.class.getResource("/Images/InvertebrateDice.jpg"));
-            diceWheat = ImageIO.read(GainFoodPanel.class.getResource("/Images/WheatDice.jpg"));
-            diceRodent = ImageIO.read(GainFoodPanel.class.getResource("/Images/RodentDice.jpg"));
-            diceBerry = ImageIO.read(GainFoodPanel.class.getResource("/Images/BerryDice.jpg"));
-            diceFish = ImageIO.read(GainFoodPanel.class.getResource("/Images/FishDice.jpg"));
+            diceMulti = ImageIO.read(getClass().getResourceAsStream("/Images/MultiDice.jpg"));
+            diceInv = ImageIO.read(getClass().getResourceAsStream("/Images/InvertebrateDice.jpg"));
+            diceWheat = ImageIO.read(getClass().getResourceAsStream("/Images/WheatDice.jpg"));
+            diceRodent = ImageIO.read(getClass().getResourceAsStream("/Images/RodentDice.jpg"));
+            diceBerry = ImageIO.read(getClass().getResourceAsStream("/Images/BerryDice.jpg"));
+            diceFish = ImageIO.read(getClass().getResourceAsStream("/Images/FishDice.jpg"));
 
             tokenInv   = ImageIO.read(getClass().getResource("/Images/InvertebrateToken.png"));
             tokenWheat = ImageIO.read(getClass().getResource("/Images/WheatToken.png"));

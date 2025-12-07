@@ -20,9 +20,9 @@ public class IntroPanel extends JPanel implements MouseListener{
     public IntroPanel(){
     	try {
     		
-    		intro = ImageIO.read(IntroPanel.class.getResource("/Images/IntroImage.jpg"));
-    		playButton = ImageIO.read(IntroPanel.class.getResource("/Images/PlayButton.png"));
-    		WingspanImage = ImageIO.read(IntroPanel.class.getResource("/Images/LogoImage.png"));
+    		intro = ImageIO.read(getClass().getResourceAsStream("/Images/IntroImage.jpg"));
+    		playButton = ImageIO.read(getClass().getResourceAsStream("/Images/PlayButton.png"));
+    		WingspanImage = ImageIO.read(getClass().getResourceAsStream("/Images/LogoImage.png"));
     		
     		
     	}

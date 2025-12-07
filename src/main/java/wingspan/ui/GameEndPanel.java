@@ -44,10 +44,10 @@ public class GameEndPanel extends JPanel implements KeyListener, MouseListener {
 	
 	public GameEndPanel() {
 		try {
-			scoreSheetImage = ImageIO.read(GameEndPanel.class.getResource("/Images/ScoreSheet.jpg"));
-			background = ImageIO.read(GameEndPanel.class.getResource("/Images/backgroundImage2.jpeg"));
-            goalBoardImage = ImageIO.read(GameEndPanel.class.getResource("/Images/goalBoard.jpg"));
-            boardImage = ImageIO.read(GameEndPanel.class.getResource("/Images/GameBoard.jpg"));
+			scoreSheetImage = ImageIO.read(getClass().getResourceAsStream("/Images/ScoreSheet.jpg"));
+			background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
+            goalBoardImage = ImageIO.read(getClass().getResourceAsStream("/Images/goalBoard.jpg"));
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
 
 		}catch (Exception e) {
 			System.out.println("Error");

@@ -64,7 +64,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
         }
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
-        background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));
+        background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
         //check if player can play cards
         int totalEggs = GameState.activePlayer.getTotalEggsAmount();
         int forestEggCost;
@@ -114,11 +114,11 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
             foodToImage.put(Food.INVERTEBRATE, ImageIO.read(getClass().getResourceAsStream("/Images/InvertebrateToken.png")));
             foodToImage.put(Food.RODENT, ImageIO.read(getClass().getResourceAsStream("/Images/RodentToken.png")));
             foodToImage.put(Food.WHEAT, ImageIO.read(getClass().getResourceAsStream("/Images/WheatToken.png")));
-            birdFeederImage = ImageIO.read(MainPanel.class.getResource("/Images/BirdFeederImage.png"));
+            birdFeederImage = ImageIO.read(getClass().getResourceAsStream("/Images/BirdFeederImage.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
+        boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
         cardPositions = new HashMap<Card, Pair>();
         displayedCard = null;
         getPlayerCards(GameState.activePlayer);

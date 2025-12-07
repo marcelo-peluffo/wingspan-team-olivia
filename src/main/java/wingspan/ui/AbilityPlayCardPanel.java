@@ -76,7 +76,7 @@ public class AbilityPlayCardPanel extends JPanel implements MouseListener, KeyLi
         activePlayer = GameState.activePlayer;
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
-        background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));
+        background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
 
         setPreferredSize(new Dimension(150, 300));
 

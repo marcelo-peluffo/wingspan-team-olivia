@@ -50,12 +50,11 @@ public class DrawCardsPanel extends JPanel implements MouseListener, KeyListener
 	public DrawCardsPanel(int numChoices, boolean hasChoice) {
 		try {
 			
-			background = ImageIO.read(DrawCardsPanel.class.getResource("/Images/BackgroundImage2.jpeg"));
-            boardImage = ImageIO.read(DrawCardsPanel.class.getResource("/Images/GameBoard.jpg"));
+			background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
+            boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
 			
 		}catch(Exception e) {
 			System.out.println("Error");
-			return;
 		}
         faceUpCards = GameState.cardManager.getFaceUpCards();
         activePlayer = GameState.activePlayer;

@@ -74,7 +74,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         activePlayer = GameState.activePlayer;
         foodInventory = activePlayer.getFoodInventory();
         foodToImage = new HashMap<>();
-        background = ImageIO.read(MainPanel.class.getResource("/Images/backgroundImage2.jpeg"));
+        background = ImageIO.read(getClass().getResourceAsStream("/Images/backgroundImage2.jpeg"));
 
         setPreferredSize(new Dimension(150, 300));
 
@@ -88,7 +88,7 @@ public class PlayCardPanel extends JPanel implements MouseListener, KeyListener{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        boardImage = ImageIO.read(MainPanel.class.getResource("/Images/GameBoard.jpg"));
+        boardImage = ImageIO.read(getClass().getResourceAsStream("/Images/GameBoard.jpg"));
         cardPositions = new HashMap<Card, Pair>();
         displayedCard = null;
         getPlayerCards(GameState.activePlayer);
