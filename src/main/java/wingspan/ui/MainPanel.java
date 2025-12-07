@@ -453,7 +453,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
 	public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        if (x < 240 && y > getHeight() - 350)
+        if (x < 240 && y > getHeight() - 350 && playerAction == '0')
         {
             {
                 if (y < getHeight() - 233)
@@ -622,6 +622,7 @@ public class MainPanel extends JPanel implements MouseListener, KeyListener{
                     }
                 }
                 drawWarningText = false;
+				navigatorOption = "GameBoard";
                 playerIndex = GameState.players.indexOf(activePlayer);
                 playerAction = c;
                 break;
