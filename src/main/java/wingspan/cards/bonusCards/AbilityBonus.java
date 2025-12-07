@@ -21,7 +21,7 @@ public class AbilityBonus extends BonusCard{
         {
             behaviorTypes = new String[2];
             behaviorTypes[0] = "RollDiceBehavior";
-            behaviorTypes[1] = "LookDeckBehavior";
+            behaviorTypes[1] = "WingspanBehavior";
         }
     }
 
