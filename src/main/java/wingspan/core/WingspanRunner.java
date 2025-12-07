@@ -24,10 +24,6 @@ public class WingspanRunner {
         GameState.actionCubeColors.put(GameState.players.get(2), new Color(0, 89, 19));
         GameState.actionCubeColors.put(GameState.players.get(3), new Color(158, 140, 0));
 		GameState.activePlayer = GameState.players.get(0);
-		for(int i=0; i<5; i++)
-		{
-			GameState.activePlayer.getGameBoard().getGrasslands().add(GameState.cardManager.getRandomCard());
-		}
 		WingspanFrame game = new WingspanFrame("Wingspan");
 	}
 }
